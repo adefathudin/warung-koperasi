@@ -7,7 +7,20 @@ class Auth extends CI_Controller {
         $this->load->view('login');
     }
     
-    public function test(){
-        $this->load->view('index');
+    public function login(){
+        $this->load->view('login');
+    }
+
+    public function reg(){
+        $this->load->view('registrasi');
+    }
+    
+    public function logout(){
+        $this->load->library('session');
+        if ($this->session) {
+            $this->session->sess_destroy();
+        }
+
+        redirect(base_url('auth'));
     }
 }
