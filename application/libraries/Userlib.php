@@ -16,9 +16,9 @@ class Userlib extends Library {
     }
     
     public function login($username, $password){
-        $this->CI->load->model('t_users_m');
+        $this->CI->load->model('users_m');
         
-        $dt_user = $this->CI->t_users_m->get_by([
+        $dt_user = $this->CI->users_m->get_by([
             'user_name' => $username,
             'user_password' => $this->generate($password)
         ], TRUE);
