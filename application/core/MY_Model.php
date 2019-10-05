@@ -8,7 +8,6 @@
 
 
 class MY_Model extends CI_Model {
-    private $userLib;
     
     protected $_table_name = '';
     protected $_primary_key = 'id';
@@ -25,7 +24,6 @@ class MY_Model extends CI_Model {
     function __construct() {
         parent::__construct();
         
-        $this->userLib = new Userlib();
     }
     
     
@@ -195,7 +193,7 @@ class MY_Model extends CI_Model {
         
         // Set peoplestamp
         if($this->_peoplestamp){
-            $user_id = $this->userLib->get_userid();
+            $user_id = uniqid();
             if(isset($this->_peoplestamp_field[0])){
                 $data[$this->_peoplestamp_field[0]] = $user_id;
             }

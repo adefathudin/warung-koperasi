@@ -49,7 +49,7 @@
                           ?>
                       </div>
                   </div>
-                  <form class="user" method="POST" action="<?php echo base_url('auth/login/')?>">
+                  <form class="user" method="POST" action="<?php echo base_url('auth/cek_login')?>">
                     <div class="form-group">
                       <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                     </div>
@@ -79,7 +79,7 @@
                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="<?php echo base_url('auth/reg/')?>">Create an Account!</a>
+                    <a class="small" href="<?php echo base_url('auth/registrasi')?>">Create an Account!</a>
                   </div>
                 </div>
               </div>
