@@ -15,7 +15,7 @@ class Migration_add_table_users_detail extends MY_Migration {
         'id' => array(
             'type' => 'INT',
             'constraint' => 15,
-            'auto increment' => TRUE
+            'auto_increment' => TRUE
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
@@ -38,7 +38,7 @@ class Migration_add_table_users_detail extends MY_Migration {
             'constraint' => 30
         ),
         'tanggal_lahir' => array(
-            'type' => 'TIMESTAMP'
+            'type' => 'DATETIME'
         ),        
         'jenis_kelamin' => array(
             'type' => 'TEXT',
@@ -55,14 +55,6 @@ class Migration_add_table_users_detail extends MY_Migration {
         'alamat' => array(
             'type' => 'VARCHAR',
             'constraint' => 100
-        ),
-        'kecamatan' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 30
-        ),
-        'kota' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 30
         ),
         'ktp' => array(
             'type' => 'VARCHAR',

@@ -8,10 +8,5 @@ class Users_login_m extends MY_Model {
     protected $_timestamps = FALSE;
     protected $_timestamps_field = [];
 
-    /*
-    public function get($email){
-        $this->db->where('email', $email); // Untuk menambahkan Where Clause : username='$username'
-        $result = $this->db->get('users_login')->row(); // Untuk mengeksekusi dan mengambil data hasil query
-        return $result;
-    }*/
+    
 }

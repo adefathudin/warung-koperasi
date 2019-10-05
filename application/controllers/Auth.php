@@ -6,43 +6,41 @@ class Auth extends CI_Controller {
    // $this->load->model('users_detail_m','users_login_m');
   }
   public function index(){
-    if($this->session->userdata('authenticated')) // Jika user sudah login (Session authenticated ditemukan)
-      redirect('dashboard'); // Redirect ke page welcome
-    $this->load->view('login'); // Load view login.php
+    if($this->session->userdata('authenticated'))
+      redirect('dashboard');
+    $this->load->view('login');
   }
   public function cek_login(){
-    $this->load->model('users_login_m'); //Load model atau table users_login
-    $email = $this->input->post('email'); // Ambil isi dari inputan email pada form login
-    $password = password_hash($this->input->post('password'),PASSWORD_BCRYPT); // Ambil isi dari inputan password pada form login dan encrypt dengan md5
-    $user = $this->users_login_m->get($email); // Panggil fungsi get yang ada di users_login_m.php
-    if(empty($user) ){ // Jika hasilnya kosong / user tidak ditemukan
-      $this->session->set_flashdata('message', 'User tidak ditemukan'); // Buat session flashdata
-      redirect('auth'); // Redirect ke halaman login
-    }else{
-      if($password == $user->password){ // Jika password yang diinput sama dengan password yang didatabase
-        $session = array(
-          'authenticated'=>true, // Buat session authenticated dengan value true
-          'email'=>$user->email,  // Buat session email
-          'nama'=>$user->nama // Buat session authenticated
-        );
-        $this->session->set_userdata($session); // Buat session sesuai $session
-        redirect('dashboard'); // Redirect ke halaman welcome
-      }else{
-        $this->session->set_flashdata('message', 'E-Mail atau Password salah'); // Buat session flashdata
-        redirect('auth'); // Redirect ke halaman login
-      }
+    $this->load->model('users_login_m');
+    $this->load->model('users_detail_m');
+    $email = $this->input->post('email');
+    $password = password_hash($this->input->post('password'),PASSWORD_BCRYPT);
+    
+    if ($this->users_login_m->get_count(array('email'=>$email))>0){
+      $data = $this->users_detail_m->get_detail_user($email);
+      
+      $session = array(
+        'authenticated'=>true, 'nama_depan'=>$data->nama_depan,
+        'nama_belakang' =>$data->nama_belakang
+      );      
+      $this->session->set_userdata($session);
+      redirect('auth');
+    } else {
+      $this->session->set_flashdata('message', 'E-Mail atau Password salah'); 
+      redirect('auth');
     }
   }
 
 
+  //REGISTRASI PAGE
   public function registrasi(){
     $this->load->view('registrasi');
   }
 
-
+  //LOGOUT
   public function logout(){
-    $this->session->sess_destroy(); // Hapus semua session
-    redirect('auth'); // Redirect ke halaman login
+    $this->session->sess_destroy();
+    redirect('auth');
   }
 
 
@@ -68,7 +66,7 @@ class Auth extends CI_Controller {
     } else {
       $str = hash ( "sha256", $str );
       $data_login = array(
-        'user_id' => $user_id, 'password' => password_hash($password, PASSWORD_BCRYPT)
+        'user_id' => $user_id, 'password' => password_hash($password, PASSWORD_BCRYPT), 'email' => $email
       );
       $this->users_login_m->save($data_login);
 
