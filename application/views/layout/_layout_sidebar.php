@@ -28,8 +28,8 @@
   </a>
   <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="buttons.html">Transaksi</a>
-      <a class="collapse-item" href="cards.html">Mutasi</a>
+      <a class="collapse-item" href="<?php echo base_url('rekeningku/topup')?>">Top-Up</a>
+      <a class="collapse-item" href="<?php echo base_url('rekeningku/mutasi')?>">Mutasi</a>
       <a class="collapse-item" href="cards.html">Pembukuan</a>
   </div>
 </li>
