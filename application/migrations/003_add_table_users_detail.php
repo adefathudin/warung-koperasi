@@ -38,8 +38,7 @@ class Migration_add_table_users_detail extends MY_Migration {
             'constraint' => 30
         ),
         'tanggal_lahir' => array(
-            'type' => 'TIMESTAMP',
-            'constraint' => 6
+            'type' => 'TIMESTAMP'
         ),        
         'jenis_kelamin' => array(
             'type' => 'TEXT',

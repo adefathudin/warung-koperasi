@@ -9,15 +9,16 @@ class Migration_add_table_users_login extends MY_Migration {
     protected $_fields = array(
         'id' => array (
             'type' => 'INT',
-            'constraint' => 11
+            'constraint' => 11,            
+            'auto increment' => TRUE
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
             'constraint' => 15
         ),
         'password' => array(
-            'type' => 'INT',
-            'constraint' => 11
+            'type' => 'VARCHAR',
+            'constraint' => 360
         )
     );
 

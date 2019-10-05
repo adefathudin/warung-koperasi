@@ -11,9 +11,9 @@ class Auth extends CI_Controller {
     $this->load->view('login'); // Load view login.php
   }
   public function cek_login(){
-    $this->load->model('users_login_m');
+    $this->load->model('users_login_m'); //Load model atau table users_login
     $email = $this->input->post('email'); // Ambil isi dari inputan email pada form login
-    $password = md5($this->input->post('password')); // Ambil isi dari inputan password pada form login dan encrypt dengan md5
+    $password = password_hash($this->input->post('password'),PASSWORD_BCRYPT); // Ambil isi dari inputan password pada form login dan encrypt dengan md5
     $user = $this->users_login_m->get($email); // Panggil fungsi get yang ada di users_login_m.php
     if(empty($user) ){ // Jika hasilnya kosong / user tidak ditemukan
       $this->session->set_flashdata('message', 'User tidak ditemukan'); // Buat session flashdata
@@ -66,8 +66,9 @@ class Auth extends CI_Controller {
       echo "email sudah terdaftar";
       $output['message'] = 'Email '.$email.' sudah terdaftar';
     } else {
+      $str = hash ( "sha256", $str );
       $data_login = array(
-        'user_id' => $user_id, 'password' => $password
+        'user_id' => $user_id, 'password' => password_hash($password, PASSWORD_BCRYPT)
       );
       $this->users_login_m->save($data_login);
 
@@ -79,9 +80,9 @@ class Auth extends CI_Controller {
       );
 
       if ($this->users_detail_m->save($data_user_detail)){
-        $output = ['message' => 'Registrasi berhasil'];
+        redirect('dashboard');
       } else {
-        $output = ['message' => 'ada yang salah'];
+        echo "false";
       }
 
     }
