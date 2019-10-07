@@ -43,9 +43,9 @@
   </a>
   <div id="koperasi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="buttons.html">Buat Grup Koperasi</a>
-      <a class="collapse-item" href="cards.html">Mutasi</a>
-      <a class="collapse-item" href="cards.html">Pembukuan</a>
+      <a class="collapse-item" href="<?php echo base_url('koperasi/create_group')?>">Buat Grup Koperasi</a>
+      <hr>
+      <a class="collapse-item" href="<?php echo base_url('koperasi/group')?>">Koperasi Saloome</a>
   </div>
 </li>
 
