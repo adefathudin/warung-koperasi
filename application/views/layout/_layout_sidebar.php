@@ -49,32 +49,6 @@
   </div>
 </li>
 
-<li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#simpan" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-table"></i>
-    <span>Simpan</span>
-  </a>
-  <div id="simpan" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="buttons.html">Buat Grup Koperasi</a>
-      <a class="collapse-item" href="cards.html">Mutasi</a>
-      <a class="collapse-item" href="cards.html">Pembukuan</a>
-  </div>
-</li>
-
-<li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pinjam" aria-expanded="true" aria-controls="collapseTwo">
-    <i class="fas fa-fw fa-folder"></i>
-    <span>Pinjam</span>
-  </a>
-  <div id="pinjam" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-    <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="buttons.html">Buat Grup Koperasi</a>
-      <a class="collapse-item" href="cards.html">Mutasi</a>
-      <a class="collapse-item" href="cards.html">Pembukuan</a>
-  </div>
-</li>
-
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 

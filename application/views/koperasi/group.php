@@ -1,6 +1,4 @@
 <div class="row">
-
-
 <div class="col-lg-12">
 <!-- Dropdown Card Example -->
 <div class="card shadow mb-4">
@@ -11,10 +9,30 @@
     
   </div>
   <!-- Card Body -->
-  <div class="card-body py-3 d-flex flex-row align-items-center justify-content-between">
-  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="<?php echo base_url('assets/img/baner_grup_koperasi/baner_grup.jpg')?>" alt="">
-  Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu. 
-  </div>
+  <table with="100%">
+    <tr>
+        <td width="25%" colspan="3" rowspan="4" >
+          <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 100%;" src="<?php echo base_url('assets/img/baner_grup_koperasi/baner_grup.jpg')?>" alt="">
+        </td>
+    </tr>
+    <tr>
+        <td width="10%">
+            Deskripsi
+        </td>
+        <td width="1%">:</td>
+        <td>Ini adalah deskripsi grup</td>
+    </tr>
+    <tr>
+        <td>Member</td>
+        <td>:</td>
+        <td>31 orang</td>
+    </tr>
+    <tr>
+        <td>Created</td>
+        <td>:</td>
+        <td>27 Maret 2019</td>
+    </tr>
+</table>
 </div>
 
 <!-- Collapsable Card Example -->
@@ -33,44 +51,30 @@
 
 </div>
 
- <div class="col-xl-12 col-lg-7">
+<div class="col-lg-12">
+    <!-- Dropdown Card Example -->
     <div class="card shadow mb-4">
-      <div class="card-body">
-        <button  class="btn btn-primary">Join Group</button>
-      </div>
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <div class="m-0 font-weight-bold text-primary">
+            <button type="submit" class="btn btn-secondary mb-2">Buat Grup</button>
+            <button type="submit" class="btn btn-secondary mb-2">Simpan</button>
+            <button type="submit" class="btn btn-secondary mb-2">Pinjam</button>
+        </div>
+        <div class="dropdown no-arrow">
+        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Keluar Group</a>
+            <a class="dropdown-item" href="#">Laporkan</a>
+        </div>
+        </div>
     </div>
-  </div>
-
-</div>
-
-<div class="row">
-
-  <!-- Area Chart -->
-  <div class="col-xl-12 col-lg-7">
-    <div class="card shadow mb-4">
-      <!-- Card Body -->
-      <div class="card-body">
-      
-        <form method="POST">
-        <div class="form-group mx-sm-3 mb-2">
-        <div class="form-group">
-          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Nama Grup Koperasi">    
-        </div>
-        <div class="form-group">
-          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">    
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" placeholder="Deskripsi..."></textarea>
-        </div>
-        <div class="form-group" align="right">
-            <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
-        </div>       
-        </div>   
-        </form>
-      </div>
+    
+    <!-- Card Body -->
+    <div class="card-body">
+        Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
     </div>
-  </div>
+    </div>
 </div>
-<!-- /.container-fluid -->
-</div>
-<!-- End of Main Content -->
