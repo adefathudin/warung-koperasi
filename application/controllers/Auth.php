@@ -14,23 +14,25 @@ class Auth extends CI_Controller {
     $this->load->model('users_login_m');
     $this->load->model('users_detail_m');
     $email = $this->input->post('email');
-    $password = password_hash($this->input->post('password'),PASSWORD_BCRYPT);
-    
-    if ($this->users_login_m->get_count(array('email'=>$email))>0){
-      $data = $this->users_detail_m->get_detail_user($email);
-      
-      $session = array(
-        'authenticated'=>true, 'nama_depan'=>$data->nama_depan,
-        'nama_belakang' =>$data->nama_belakang
-      );      
-      $this->session->set_userdata($session);
-      redirect('auth');
+    $password = md5($this->input->post('password'));
+    if ($this->users_login_m->get_count(array('email'=>$email)) == 1){
+      if ($this->users_login_m->get_count(array('password'=>$password))==1){
+        $data= $this->users_detail_m->get_detail_user($email);
+        $session = array(
+        'authenticated'=>true, 'email' => $email, 'password' => $password, 'nama_depan'=>$data->nama_depan, 'nama_belakang'=>$data->nama_belakang,'type'=>$data->type,
+        'user_id'=>$data->user_id,'alamat'=>$data->alamat,'tempat_lahir'=>$data->tempat_lahir,'tanggal_lahir'=>$data->tanggal_lahir
+        );      
+        $this->session->set_userdata($session);
+        redirect('dashboard');
     } else {
-      $this->session->set_flashdata('message', 'E-Mail atau Password salah'); 
-      redirect('auth');
+        $this->session->set_flashdata('message', 'E-Mail atau Password salah'); 
+        redirect('auth');
+      }} else {
+        $this->session->set_flashdata('message', 'E-Mail atau Password salah'); 
+        redirect('auth');
+      }
     }
-  }
-
+   
 
   //REGISTRASI PAGE
   public function registrasi(){
@@ -45,6 +47,7 @@ class Auth extends CI_Controller {
 
 
   public function save_registrasi(){
+    
     $this->load->model('users_detail_m');
     $this->load->model('users_login_m');
     $output = ['status' => FALSE, 'message' => ''];
@@ -64,9 +67,8 @@ class Auth extends CI_Controller {
       echo "email sudah terdaftar";
       $output['message'] = 'Email '.$email.' sudah terdaftar';
     } else {
-      $str = hash ( "sha256", $str );
       $data_login = array(
-        'user_id' => $user_id, 'password' => password_hash($password, PASSWORD_BCRYPT), 'email' => $email
+        'user_id' => $user_id, 'password' => md5($password), 'email' => $email
       );
       $this->users_login_m->save($data_login);
 
@@ -74,7 +76,7 @@ class Auth extends CI_Controller {
         'user_id'=>$user_id, 'nama_depan' => $nama_depan,
         'nama_belakang' => $nama_belakang, 'tempat_lahir' => $tempat_lahir,
         'email' => $email, 'nomor_hp' => $nomor_hp,
-        'alamat' => $alamat
+        'alamat' => $alamat, 'type'=> 'Basic Member'
       );
 
       if ($this->users_detail_m->save($data_user_detail)){
@@ -83,16 +85,7 @@ class Auth extends CI_Controller {
         echo "false";
       }
 
-    }
-
-
-    
-  /*$filename = 'ktp_'.date('YmdHis') . '.jpeg';
-  $url = '';
-  if( move_uploaded_file($_FILES['webcam']['tmp_name'],'upload/'.$filename) ){
-  $url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']) . '/upload/' . $filename;
+  
   }
-
-echo $url;*/
-  }
+}
 }

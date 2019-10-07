@@ -8,5 +8,8 @@ class Users_login_m extends MY_Model {
     protected $_timestamps = FALSE;
     protected $_timestamps_field = [];
 
-    
+    public function cek_user($email){
+        $this->db->where('email', $email);
+        $result = $this->db->cek_user('user_login')->row();
+        return $result;    }
 }

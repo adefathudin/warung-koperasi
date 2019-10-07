@@ -29,10 +29,6 @@ class Migration_add_table_users_detail extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 30
         ),
-        'nomor_ktp' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 30
-        ),
         'tempat_lahir' => array(
             'type' => 'VARCHAR',
             'constraint' => 30
@@ -61,6 +57,10 @@ class Migration_add_table_users_detail extends MY_Migration {
             'constraint' => 30
         ),
         'profil' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 30
+        ),
+        'type' => array(
             'type' => 'VARCHAR',
             'constraint' => 30
         )

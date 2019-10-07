@@ -158,11 +158,10 @@
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-          <?php
-
+              <?php
                $sesi = $this->session;
                echo $sesi->userdata('nama_depan')." ".$sesi->userdata('nama_belakang');
-                          ?>
+              ?>
           </span>
           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
         </a>
@@ -192,3 +191,11 @@
 
   </nav>
   <!-- End of Topbar -->
+ <!-- Begin Page Content -->
+<div class="container-fluid">
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800"><?php echo $this->data['title']?></h1>
+</div>
+<hr>

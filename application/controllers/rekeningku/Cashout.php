@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Cashout extends CI_Controller {
     public function index()
     {
-        $this->data['title'] = 'Warung Koperasi Solusi Masyarakat Sejahtera';
-        $this->data['subview'] = 'dashboard/index';
+        $this->data['title'] = 'Tarik Saldo Rekening';
+        $this->data['subview'] = 'rekeningku/cashout';
         $this->load->view('_layout_main', $this->data);
     }
 
