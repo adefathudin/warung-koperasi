@@ -2,18 +2,20 @@
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url()?>">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
   <div class="sidebar-brand-text mx-3">WarKop Mas-Jali</div>
 </a>
 
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
 <li class="nav-item active">
-  <a class="nav-link" href="<?php echo base_url('profile')."/".$this->session->userdata('user_id');?>">
+  <a class="nav-link" href="<?php echo base_url('user')."/".$this->session->userdata('user_id');?>">
     <span>
     <?php
       $sesi = $this->session;
-      echo $sesi->userdata('nama_depan')." ".$sesi->userdata('nama_belakang').
-    
+      echo $sesi->userdata('nama_lengkap').   
     "<small> (".$sesi->userdata('type').")</small>"
     ?>
     </span>

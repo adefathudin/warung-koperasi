@@ -15,7 +15,7 @@
     <!-- Topbar Search -->
     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
       <div class="input-group">
-        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="<?php echo $this->data['title']?>" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <button class="btn btn-primary" type="button">
             <i class="fas fa-search fa-sm"></i>
@@ -160,7 +160,7 @@
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">
               <?php
                $sesi = $this->session;
-               echo $sesi->userdata('nama_depan')." ".$sesi->userdata('nama_belakang');
+               echo $sesi->userdata('nama_lengkap');
               ?>
           </span>
           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
@@ -195,9 +195,22 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<!--
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-  <h1 class="h3 mb-0 text-gray-800">titile</h1>
-</div>
-<hr>
--->
+
+<?php 
+$email = $this->session->userdata('email');
+$nomor_hp = $this->session->userdata('nomor_hp');
+if ($this->session->userdata('verifikasi_email') == 0){
+  echo "<div class='alert alert-danger alert-dismissible'>
+        <strong>Peringatan!</strong> Email anda belum diverifikasi. Link verifikasi sudah terkirim ke email <strong>".
+        str_repeat("*", strlen($email)-15) . substr($email, -15)." </strong>
+        </div>";
+        }
+
+if ($this->session->userdata('verifikasi_nomor_hp') == 0){
+  echo "<div class='alert alert-danger alert-dismissible'>
+        <strong>Peringatan!</strong> Nomor HP anda belum diverifikasi. 
+        <a href='verifikasi_hp' class='alert-link'>Klik disini</a> untuk mengirim kode verifikasi ke nomor <strong>".
+        str_repeat("*", strlen($nomor_hp)-4) . substr($nomor_hp, -4)." </strong>
+        </div>";
+        }
+?>

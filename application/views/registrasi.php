@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Register</title>
+  <title>Registrasi Akun Warung Koperasi</title>
 
   <!-- Custom fonts for this template-->
   <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
@@ -35,11 +35,20 @@
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                          <?php
+                          // Cek apakah terdapat session nama message
+                          if($this->session->flashdata('message')){ // Jika ada
+                            echo "
+                            <div class='alert alert-danger alert-dismissible'>
+                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                            .$this->session->flashdata('message')."</div>";
+                            }
+                          ?>
               </div>
               <form id="form_Registrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
                 <div class="form-group row">
                   <div class="col-sm-6">
-                    <input type="text" name='nama_depan' class="form-control form-control-user" id="nama_depan" placeholder="Nama Depan">
+                    <input type="text" name='nama_depan' class="form-control form-control-user" id="nama_depan" placeholder="Nama Depan" required autofocus>
                   </div>
                   <div class="col-sm-6">
                     <input type="text" name='nama_belakang' class="form-control form-control-user" id="nama_belakang" placeholder="Nama Belakang">
@@ -47,45 +56,51 @@
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
-                    <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir">
+                    <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" required >
                   </div>
                   <div class="col-sm-6">
-                    <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir">
+                    <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" required >
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address">
+                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required >
                 </div>
                 <div class="form-group">
-                  <input type="number" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP">
+                  <input type="number" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required >
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap"></textarea>
+                  <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ></textarea>
                 </div>
+                <div class="form-group">
+                  <select name="jenis_kelamin" class="form-control" required>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
+                </div>
+
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password" required >
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" name="password" class="form-control form-control-user" id="repassword" placeholder="Repeat Password">
+                    <input type="password" name="password" class="form-control form-control-user" id="repassword" placeholder="Repeat Password" required >
                   </div>
                 </div>  
                 <hr>
                 <div class="form-group">
-                      <div class="custom-control custom-checkbox small">
+                      <!--<div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
-                    </div>
-                <hr>
+                    </div>-->
                 <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-submit" onclick="saveSnap()">
                   Register Account
                 </button>
               </form>
-              <hr>
+              <hr><!--
               <div class="text-center">
                 <a class="small" href="forgot-password.html">Forgot Password?</a>
-              </div>
+              </div>-->
               <div class="text-center">
                 <a class="small" href="<?php echo base_url('auth')?>">Already have an account? Login!</a>
               </div>

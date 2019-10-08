@@ -57,9 +57,10 @@
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <div class="m-0 font-weight-bold text-primary">
-            <button type="submit" class="btn btn-secondary mb-2">Buat Grup</button>
-            <button type="submit" class="btn btn-secondary mb-2">Simpan</button>
-            <button type="submit" class="btn btn-secondary mb-2">Pinjam</button>
+            <button type="submit" class="btn btn-light mb-2">Dashboard</button>
+            <button type="submit" class="btn btn-light mb-2">Simpan</button>
+            <button type="submit" class="btn btn-light mb-2">Pinjam</button>
+            <button type="submit" class="btn btn-light mb-2">tes</button>
         </div>
         <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,7 +75,7 @@
     
     <!-- Card Body -->
     <div class="card-body">
-        Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
+    ini adalah dashboard grup ini adalah dashboard grup ini adalah dashboard grup ini adalah dashboard grup ini adalah dashboard grup ini adalah dashboard grup 
     </div>
     </div>
 </div>

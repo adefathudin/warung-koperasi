@@ -15,4 +15,10 @@ class Users_detail_m extends MY_Model {
         $result = $this->db->get('users_detail')->row();
         return $result;
     }
+
+    public function get_user($user_id){
+        $this->db->where('user_id', $user_id);
+        $result = $this->db->get('users_detail')->row();
+        return $result;
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
+        
           <!-- Content Row -->
           <?php $this->load->view('layout/module/_layout_dashboard'); ?>
           <!-- Content Row -->

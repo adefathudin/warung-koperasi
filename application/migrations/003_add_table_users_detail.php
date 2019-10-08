@@ -21,11 +21,7 @@ class Migration_add_table_users_detail extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 20
         ),
-        'nama_depan' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 30
-        ),
-        'nama_belakang' => array(
+        'nama_lengkap' => array(
             'type' => 'VARCHAR',
             'constraint' => 30
         ),
@@ -63,6 +59,12 @@ class Migration_add_table_users_detail extends MY_Migration {
         'type' => array(
             'type' => 'VARCHAR',
             'constraint' => 30
+        ),
+        'verifikasi_email' => array(
+            'type' => 'BOOLEAN'
+        ),
+        'verifikasi_nomor_hp' => array(
+            'type' => 'BOOLEAN'
         )
     );
 
