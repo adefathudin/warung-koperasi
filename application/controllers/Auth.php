@@ -111,18 +111,17 @@ function kirim_email (){
       'charset' => 'iso-8859-1',
       'wordwrap' => TRUE
      );
-$email = "ade.fathudin@bsminsbroker.com";
 $message =  "
 <html>
 <head>
 <title>Verification Code</title>
 </head>
 <body>
-<h2>Terima kasih telah bergabung dengan WarKop</h2>
+<h4>Terima kasih telah bergabung dengan WarKop</h4>
 <p>Your Account:</p>
 <p>Email: ".$email."</p>
 <p>Please click the link below to activate your account.</p>
-<h4><a href='".base_url()."user/activate/".$code."'>Activate My Account</a></h4>
+<h4><a href='".base_url()."auth/aktivasi/".$user_id."/".$code."'>".base_url()."auth/aktivasi/".$user_id."/".$code."</a></h4>
 </body>
 </html>
 ";
@@ -142,8 +141,6 @@ $message =  "
     $this->session->set_flashdata('message', $this->email->print_debugger());
     
    }
-
-   redirect('register');
   }
 
 }
