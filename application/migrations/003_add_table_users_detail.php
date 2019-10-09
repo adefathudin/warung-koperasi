@@ -65,6 +65,10 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'verifikasi_nomor_hp' => array(
             'type' => 'BOOLEAN'
+        ),
+        'kode_unik' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 15
         )
     );
 

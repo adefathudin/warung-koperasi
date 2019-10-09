@@ -69,9 +69,6 @@
                   <input type="number" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required >
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ></textarea>
-                </div>
-                <div class="form-group">
                   <select name="jenis_kelamin" class="form-control" required>
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>

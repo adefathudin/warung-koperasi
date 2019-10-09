@@ -40,7 +40,7 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome...</h1>
-                      <?php
+                    <?php
                           // Cek apakah terdapat session nama message
                           if($this->session->flashdata('message')){ // Jika ada
                             echo "
