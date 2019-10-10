@@ -1,5 +1,21 @@
               
+                <div class="form-group">
+                  <select name="jenis_kelamin" class="form-control" required>
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
+                </div>
+
                
+                
+                <div class="form-group row">
+                  <div class="col-sm-6">
+                    <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" required >
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" required >
+                  </div>
+                </div>
                 <div class="form-group">
                   <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ></textarea>
                 </div>

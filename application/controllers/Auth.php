@@ -6,10 +6,12 @@ class Auth extends MY_Controller {
    // $this->load->model('users_detail_m','users_login_m');
   }
   public function index(){
-    if($this->session->userdata('email'))
-      redirect('dashboard');
+    if($this->session->userdata('akses') == TRUE){
+      redirect('dashboard'); }
+      else {
     $this->load->view('login');
-  }
+  }}
+
   public function cek_login(){
     $this->load->model('users_login_m');
     $this->load->model('users_detail_m');
@@ -17,17 +19,16 @@ class Auth extends MY_Controller {
     $password = md5($this->input->post('password'));
     if ($this->users_login_m->get_count(array('email'=>$email)) == 1){
       if ($this->users_login_m->get_count(array('password'=>$password))==1){
-        $data_user = $this->users_detail_m->get_detail_user($email);
         $session = array(
-        'email' => $email, 'password' => $password
+          'akses' => TRUE,  'email' => $email, 'password' => $password
         );      
         $this->session->set_userdata($session);
         redirect('dashboard');
     } else {
         $this->session->set_flashdata('message', 'email atau password anda salah'); 
-      }} else {
-        $this->session->set_flashdata('message', 'email belum terdaftar'); 
-      }      
+    }}else {$this->session->set_flashdata('message', 'email belum terdaftar'); 
+      } 
+      print_r($password);     
       redirect('auth');
     }
    
@@ -50,11 +51,8 @@ class Auth extends MY_Controller {
     $this->load->model('users_login_m');
 
     $user_id = uniqid();
-    $nama_lengkap = $this->input->post('nama_depan')." ".$this->input->post('nama_belakang');
-    $tempat_lahir = $this->input->post('tempat_lahir');
-    $tanggal_lahir = $this->input->post('tanggal_lahir');
+    $nama_lengkap = $this->input->post('nama_lengkap');
     $email = $this->input->post('email');
-    $jenis_kelamin = $this->input->post('jenis_kelamin');
     $nomor_hp = $this->input->post('nomor_hp');
     $password = $this->input->post('password');
     $repassword = $this->input->post('repassword');
@@ -76,8 +74,7 @@ class Auth extends MY_Controller {
       $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $code = substr(str_shuffle($set), 0, 12);
       $data_user_detail =  array(
-        'user_id'=>$user_id, 'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir,
-        'tanggal_lahir' => $tanggal_lahir, 'jenis_kelamin' => $jenis_kelamin,
+        'user_id'=>$user_id, 'nama_lengkap' => $nama_lengkap, 
         'email' => $email, 'nomor_hp' => $nomor_hp, 'type'=> 'Basic Member', 'verifikasi_email' => 0, 'verifikasi_nomor_hp' => 0,'kode_unik'=>$code
       );
       
@@ -154,13 +151,15 @@ public function aktivasi(){
 
   //if code matches
   if($user->kode_unik == $code){
+   $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+   $code = substr(str_shuffle($set), 0, 12);
    //update user active status
    $data['verifikasi_email'] = 1;
+   $data['kode_unik'] = $code;
    $query = $this->users_detail_m->save($data, $user_id);
 
    if($query){
     $this->session->set_flashdata('message', 'Email anda berhasil diverifikasi');
-    $this->session->set_userdata('verifikasi_email', 1);
    }
    else{
     $this->session->set_flashdata('message', 'Ada sesuatu yang salah saat verifikasi');

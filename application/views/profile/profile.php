@@ -43,7 +43,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                      <a class='nav-link' href='#' data-toggle='modal' data-target='#settingUserModal'>
+                      <a class='nav-link' href='#' data-toggle="modal" data-target="#logoutModal">
                           <i class="mdi mdi-calendar"></i>
                           Agenda
                         </a>
@@ -94,3 +94,7 @@
               </div>
             </div>
           </div>
+
+
+
+

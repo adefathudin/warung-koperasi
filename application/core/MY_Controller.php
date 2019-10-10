@@ -10,6 +10,13 @@ class MY_Controller extends CI_Controller {
         $email = $this->session->userdata('email');
         //$data_user = $this->users_detail_m->get_detail_user($email);
         $this->data['data_user'] = $this->users_detail_m->get_detail_user($email); 
+        
+        if(!$this->session){
+            $this->load->library('session');
+        }
+        if($this->session->userdata('akses' != FALSE)){
+            redirect('auth');
+        } 
     }
     
     protected function get_breadcumbs(){

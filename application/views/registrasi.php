@@ -46,35 +46,15 @@
                           ?>
               </div>
               <form id="form_Registrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <input type="text" name='nama_depan' class="form-control form-control-user" id="nama_depan" placeholder="Nama Depan" required autofocus>
+                  <div class="form-group">
+                    <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus>
                   </div>
-                  <div class="col-sm-6">
-                    <input type="text" name='nama_belakang' class="form-control form-control-user" id="nama_belakang" placeholder="Nama Belakang">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-6">
-                    <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" required >
-                  </div>
-                  <div class="col-sm-6">
-                    <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" required >
-                  </div>
-                </div>
                 <div class="form-group">
                   <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required >
                 </div>
                 <div class="form-group">
                   <input type="number" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required >
                 </div>
-                <div class="form-group">
-                  <select name="jenis_kelamin" class="form-control" required>
-                    <option value="L">Laki-laki</option>
-                    <option value="P">Perempuan</option>
-                  </select>
-                </div>
-
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password" required >

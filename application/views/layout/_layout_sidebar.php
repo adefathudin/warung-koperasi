@@ -19,6 +19,7 @@
       <a class="collapse-item" href="<?php echo base_url('rekeningku/topup')?>">Top-Up</a>
       <a class="collapse-item" href="<?php echo base_url('rekeningku/cashout')?>">Cash Out</a>
       <a class="collapse-item" href="<?php echo base_url('rekeningku/mutasi')?>">Mutasi</a>
+    </div>
   </div>
 </li>
 
@@ -32,6 +33,7 @@
       <a class="collapse-item" href="#" data-toggle="modal" data-target="#createGroupModal">Buat Grup Koperasi</a>
       <hr>
       <a class="collapse-item" href="<?php echo base_url('koperasi/group')?>">Koperasi Saloome</a>
+    </div>
   </div>
 </li>
 

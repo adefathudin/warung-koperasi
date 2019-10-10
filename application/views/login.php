@@ -49,6 +49,10 @@
                             .$this->session->flashdata('message')."</div>";
                             }
                           ?>
+                           <?php
+                          // Cek apakah terdapat session nama message
+                          echo $this->session->flashdata('akses');
+                          ?>
                   </div>
                   <form class="user" method="POST" action="<?php echo base_url('auth/cek_login')?>">
                     <div class="form-group">

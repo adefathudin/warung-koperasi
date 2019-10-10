@@ -158,7 +158,7 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">
               <?php
-              echo $data_user->nama_lengkap."<small><div>".$data_user->type ?></small></div>
+              echo $data_user->nama_lengkap."<small><div>".$data_user->type ?></div></small>
           </span>
           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
         </a>
@@ -202,7 +202,7 @@ echo "<div class='alert alert-info alert-dismissible'>
 if ($data_user->verifikasi_email == 0){
   $email = $this->session->userdata('email');
   echo "<div class='alert alert-warning alert-dismissible'>
-        <strong>Peringatan!</strong> Email anda belum diverifikasi. Link verifikasi sudah terkirim ke email <strong>".
+        <strong>Peringatan!</strong> Email anda belum diverifikasi, link verifikasi sudah terkirim ke email <strong>".
         str_repeat("*", strlen($email)-15) . substr($email, -15)." </strong>
         </div>";
         }
