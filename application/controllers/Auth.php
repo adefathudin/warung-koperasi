@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Auth extends CI_Controller {
+class Auth extends MY_Controller {
   public function __construct(){
     parent::__construct();
    // $this->load->model('users_detail_m','users_login_m');
   }
   public function index(){
-    if($this->session->userdata('$email'))
+    if($this->session->userdata('email'))
       redirect('dashboard');
     $this->load->view('login');
   }
@@ -17,20 +17,18 @@ class Auth extends CI_Controller {
     $password = md5($this->input->post('password'));
     if ($this->users_login_m->get_count(array('email'=>$email)) == 1){
       if ($this->users_login_m->get_count(array('password'=>$password))==1){
-        $data= $this->users_detail_m->get_detail_user($email);
+        $data_user = $this->users_detail_m->get_detail_user($email);
         $session = array(
-        'sesi'=> true, 'email' => $email, 'nomor_hp' =>$data->nomor_hp, 'password' => $password, 'nama_lengkap'=>$data->nama_lengkap,'type'=>$data->type,
-        'user_id'=>$data->user_id,'tempat_lahir'=>$data->tempat_lahir,'tanggal_lahir'=>$data->tanggal_lahir, 'verifikasi_email' => $data->verifikasi_email, 'verifikasi_nomor_hp' => $data->verifikasi_nomor_hp
+        'email' => $email, 'password' => $password
         );      
         $this->session->set_userdata($session);
         redirect('dashboard');
     } else {
         $this->session->set_flashdata('message', 'email atau password anda salah'); 
-        redirect('auth');
       }} else {
         $this->session->set_flashdata('message', 'email belum terdaftar'); 
-        redirect('auth');
-      }
+      }      
+      redirect('auth');
     }
    
 
@@ -77,7 +75,6 @@ class Auth extends CI_Controller {
         //generate simple random code
       $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $code = substr(str_shuffle($set), 0, 12);
-      //SIMPAN DATA KE TABLE USERS_lOGIN
       $data_user_detail =  array(
         'user_id'=>$user_id, 'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir,
         'tanggal_lahir' => $tanggal_lahir, 'jenis_kelamin' => $jenis_kelamin,
@@ -87,7 +84,7 @@ class Auth extends CI_Controller {
       if ($this->users_detail_m->save($data_user_detail)){        
         $this->users_login_m->save($data_login);
         $this->session->set_userdata($data_user_detail);
-        $this->session->set_userdata('sesi' == true);
+        $this->session->set_userdata('sesi' == true,'email' == $email, 'password' == $password);
         //KIRIM EMAIL
   //set up email
   $config = array(

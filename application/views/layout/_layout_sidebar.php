@@ -5,19 +5,6 @@
   <div class="sidebar-brand-text mx-3">WarungKoperasi.com</div>
 </a>
 
-<!-- Divider -->
-<hr class="sidebar-divider my-0">
-<li class="nav-item active">
-  <a class="nav-link" href="<?php echo base_url('user')."/".$this->session->userdata('user_id');?>">
-    <span>
-    <?php
-      $sesi = $this->session;
-      echo $sesi->userdata('nama_lengkap').   
-    "<small> (".$sesi->userdata('type').")</small>"
-    ?>
-    </span>
-    </a>
-</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -42,7 +29,7 @@
   </a>
   <div id="koperasi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="<?php echo base_url('koperasi/create_group')?>">Buat Grup Koperasi</a>
+      <a class="collapse-item" href="#" data-toggle="modal" data-target="#createGroupModal">Buat Grup Koperasi</a>
       <hr>
       <a class="collapse-item" href="<?php echo base_url('koperasi/group')?>">Koperasi Saloome</a>
   </div>

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Group extends CI_Controller {
+class Group extends MY_Controller {
     public function index()
     {
         $this->data['title'] = 'Koperasi Saloome';

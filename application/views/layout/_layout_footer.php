@@ -38,6 +38,71 @@
     </div>
   </div>
 
+  
+  <!-- Create Group Modal-->
+  <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Buat Group Koperasi</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- MODAL ADD GROUP -->
+        <form method="POST">
+        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
+          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
+        </div>
+        <div class="form-group">
+          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">    
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Deskripsi..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
+        </div>
+        </div>   
+        </form>        
+      </div>
+    </div>
+  </div>
+  
+  <!-- Create Group Modal-->
+  <div class="modal fade" id="settingUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Buat Group Koperasi</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- MODAL ADD GROUP -->
+        <form method="POST">
+        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
+          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
+        </div>
+        <div class="form-group">
+          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">    
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" placeholder="Deskripsi..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
+        </div>
+        </div>   
+        </form>        
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>

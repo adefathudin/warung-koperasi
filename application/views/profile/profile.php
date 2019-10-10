@@ -5,9 +5,9 @@
                   <div class="border-bottom text-center pb-4">
                     <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="profile" class="img-lg rounded-circle mb-3">
                     <div class="mb-3">
-                      <h3><?= $nama_lengkap ?></h3>
+                      <h3><?php echo $data_user->nama_lengkap ?></h3>
                       <div class="d-flex align-items-center justify-content-center">
-                        <h5 class="mb-0 mr-2 text-muted">Canada</h5>
+                        <h5 class="mb-0 mr-2 text-muted"><?php echo $data_user->type ?></h5>
                         <div class="br-wrapper br-theme-css-stars"><select id="profile-rating" name="rating" autocomplete="off" style="display: none;">
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -20,15 +20,13 @@
                     <p class="w-75 mx-auto mb-3">Bureau Oberhaeuser is a design bureau focused on Information- and Interface Design. </p>
                    </div>
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                   <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
-                    <!--
                     <div class="text-center mt-4 mt-md-0">
                       <button class="btn btn-outline-primary">Message</button>
-                      <button class="btn btn-primary">Request</button>
+                      <button class="btn btn-primary">Follow</button>
                       <button class="btn btn-success">Simpan Perubahan</button>
                     </div>
-        -->
                   </div>
                   <div class="mt-4 py-2 border-top border-bottom">
                     <ul class="nav profile-navbar">
@@ -45,17 +43,21 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">
+                      <a class='nav-link' href='#' data-toggle='modal' data-target='#settingUserModal'>
                           <i class="mdi mdi-calendar"></i>
                           Agenda
                         </a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">
-                          <i class="mdi mdi-attachment"></i>
+                      <?php
+                      if ($data_user->email == $this->session->userdata('email')){
+                        echo "
+                      <li class='nav-item'>
+                        <a class='nav-link' href='#' data-toggle='modal' data-target='#settingUserModal'>
+                          <i class='mdi mdi-attachment'></i>
                           Setting
                         </a>
-                      </li>
+                      </li>";
+                      } ?>
                     </ul>
                   </div>
                   <div class="profile-feed">   
@@ -63,42 +65,26 @@
                   <div class="py-4">
                     <p class="clearfix">
                       <span class="float-left">
-                        Status
+                        Joined
                       </span>
                       <span class="float-right text-muted">
-                        Active
+                      <?php echo $data_user->joined ?>
                       </span>
                     </p>
                     <p class="clearfix">
                       <span class="float-left">
-                        Phone
+                        No. HP
                       </span>
                       <span class="float-right text-muted">
-                        006 3435 22
+                      <?php echo $data_user->nomor_hp ?>
                       </span>
                     </p>
                     <p class="clearfix">
                       <span class="float-left">
-                        Mail
+                        Alamat
                       </span>
                       <span class="float-right text-muted">
-                        Jacod@testmail.com
-                      </span>
-                    </p>
-                    <p class="clearfix">
-                      <span class="float-left">
-                        Facebook
-                      </span>
-                      <span class="float-right text-muted">
-                        <a href="#">David Grey</a>
-                      </span>
-                    </p>
-                    <p class="clearfix">
-                      <span class="float-left">
-                        Twitter
-                      </span>
-                      <span class="float-right text-muted">
-                        <a href="#">@davidgrey</a>
+                      <?php echo $data_user->alamat ?>
                       </span>
                     </p>
                   </div>

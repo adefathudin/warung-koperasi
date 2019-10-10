@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Topup extends CI_Controller {
+class Topup extends MY_Controller {
     public function index()
     {
         $this->data['title'] = 'Top-Up Saldo';

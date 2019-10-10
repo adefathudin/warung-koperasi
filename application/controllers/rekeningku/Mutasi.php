@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Mutasi extends CI_Controller {
+class Mutasi extends MY_Controller {
     public function index()
     {
         $this->data['title'] = 'Posisi Mutasi Saldo';

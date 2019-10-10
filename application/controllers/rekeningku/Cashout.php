@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Cashout extends CI_Controller {
+class Cashout extends MY_Controller {
     public function index()
     {
         $this->data['title'] = 'Tarik Saldo Rekening';
