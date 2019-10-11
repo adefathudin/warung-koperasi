@@ -59,37 +59,16 @@
             Pemberitahuan
           </h6>
           <a class="dropdown-item d-flex align-items-center" href="#">
-            <div class="mr-3">
-              <div class="icon-circle bg-primary">
-                <i class="fas fa-file-alt text-white"></i>
-              </div>
-            </div>
             <div>
               <div class="small text-gray-500">December 12, 2019</div>
               <span class="font-weight-bold">A new monthly report is ready to download!</span>
             </div>
           </a>
           <a class="dropdown-item d-flex align-items-center" href="#">
-            <div class="mr-3">
-              <div class="icon-circle bg-success">
-                <i class="fas fa-donate text-white"></i>
-              </div>
-            </div>
             <div>
               <div class="small text-gray-500">December 7, 2019</div>
               $290.29 has been deposited into your account!
             </div>
-          </a>
-          <a class="dropdown-item d-flex align-items-center" href="#">
-            <div class="mr-3">
-              <div class="icon-circle bg-warning">
-                <i class="fas fa-exclamation-triangle text-white"></i>
-              </div>
-            </div>
-            <div>
-              <div class="small text-gray-500">December 2, 2019</div>
-              <span class="font-weight-bold">Verifikasi nomor HP anda</span>
-             </div>
           </a>
           <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
         </div>
@@ -160,7 +139,7 @@
               <?php
               echo $data_user->nama_lengkap."<small><div>".$data_user->type ?></div></small>
           </span>
-          <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+          <img class="img-profile rounded-circle" src="<?= base_url('assets/img/profil/'.$data_user->profil.'')?>">
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -168,7 +147,7 @@
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             Profile
           </a>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item"  href='#' data-toggle='modal' data-target='#settingUserModal'>
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
             Settings
           </a>

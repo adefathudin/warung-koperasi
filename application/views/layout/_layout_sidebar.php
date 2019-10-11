@@ -2,13 +2,21 @@
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url()?>">
-  <div class="sidebar-brand-text mx-3">WarungKoperasi.com</div>
+  <div class="sidebar-brand-text mx-3">WarungKoperasi</div>
 </a>
 
 
 <!-- Divider -->
 <hr class="sidebar-divider">
 <!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+  <a class="nav-link collapsed" href="<?php echo base_url('dashboard')?>">
+    <i class="fas fa-fw fa-home"></i>
+    <span>Dashboard</span>
+  </a>
+</li>
+
+
 <li class="nav-item">
   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#rekeningku" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-chart-area"></i>

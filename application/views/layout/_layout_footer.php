@@ -1,12 +1,4 @@
- <!-- Footer 
- <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-       End of Footer -->
+
 
     </div>
     <!-- End of Content Wrapper -->
@@ -38,6 +30,24 @@
     </div>
   </div>
 
+  <!-- Notifikasi Modal-->
+  <div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="<?php echo base_url('auth/logout')?>">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
   
   <!-- Create Group Modal-->
   <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -71,9 +81,8 @@
       </div>
     </div>
   </div>
-
   <!-- setting User -->
-  <div class="modal fade" id="settingUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="settingUserModal" tabindex="-1" role="dialog" ia-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -82,58 +91,33 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-      <form method="POST">
+      <form id="updateIdentitas" method="POST" action="<?php echo base_url('user/update_identitas')?>">
+      <input type="hidden" name="user_id" value="<?= $this->session->userdata('user_id') ?>">
       <div class="form-group mx-sm-3 mb-2">
       <div class="form-group">
         <input type="text" name="nama_lengkap" class="form-control" id="nominal_topup" placeholder="Nama Lengkap" value="<?= $data_user->nama_lengkap ?>">    
       </div>
       <div class="form-group row">
       <div class="col-sm-6">
-        <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" required >
+        <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" value="<?= $data_user->tempat_lahir ?>" required >
       </div>
       <div class="col-sm-6">
-        <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" required >
+        <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" value="<?= $data_user->tanggal_lahir ?>" required >
       </div>
       </div>
       <div class="form-group">
-        <select name="jenis_kelamin" class="form-control" id="jenis_kelamin">
+        <select name="jenis_kelamin" class="form-control" id="jenis_kelamin" required>
+                      <option value="<?= $data_user->jenis_kelamin ?>"><?= $data_user->jenis_kelamin ?></option>
                       <option value="L">Laki-laki</option>
                       <option value="P">Perempuan</option>
         </select>
       </div>
       <div class="form-group">
-        <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ></textarea>
+        <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ><?= $data_user->alamat ?></textarea>
       </div>
-      <div id="frm_UploadKTP" class="form-group">                  
-          <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadKTP" value="Upload Foto Identitas (KTP/SIM/Kartu Pelajar)"/>
-      </div>
-      <div id="frm_OpenKamera" class="form-group" align="center">
-          <div id="kamera"></div>
-          <br>
-          <input type=button class="btn btn-info" value="Capture" id="btn_capture">
-      </div>
-      <div id="frm_HasilKamera" class="form-group" align="center">    
-          <div id="hasilKamera" ></div>
-          Foto Kartu Identitas
-          <br>
-          <input type=button class="btn" title="Capture Ulang" value="&#10062" id="btn_recapture"/>
-          <input type=button class="btn" title="Simpan" value="&#9989" id="btn_save_capture"/>
-      </div>               
-      
-      <div id="frm_UploadProfile" class="form-group">                  
-          <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadProfile" value="Upload Foto Profile"/>
-      </div>
-      <div id="frm_OpenKameraProfile" class="form-group" align="center">
-          <div id="kameraProfile"></div>
-          <br>
-          <input type=button class="btn btn-info" value="Capture" id="btn_captureProfile">
-      </div>
-      <div id="frm_HasilKameraProfile" class="form-group" align="center">    
-          <div id="hasilKameraProfile" ></div>
-          Foto Profile
-          <br>
-          <input type=button class="btn" title="Capture Ulang" value="&#10062" id="btn_recaptureProfile"/>
-          <input type=button class="btn" title="Simpan" value="&#9989" id="btn_save_captureProfile"/>
+      <hr>
+      <div class="form-group">
+        <textarea class="form-control form-control-user" name="about" placeholder="About me" required ><?= $data_user->about ?></textarea>
       </div>
         <div class="modal-footer">
           <div class="form-group text-right">
@@ -145,10 +129,39 @@
       </div>
     </div>
   </div>
+  <script>
+    var AF = {
+      init: function(){
+        var _this = this;
+        $('#updateIdentitas').validate({
+          rules:{
+            //
+          },
+          submitHandler: function(form){
+            var $btn = $(form).find('[type="submit"]');
+            $(form).ajaxSubmit({
+              beforeSubmit: function(){
+                if (!confirm('Update identitas?')){
+                  return false;
+                }
+              },
+              success: function(data){
+                if (data.status){
+                  alert('Update identitas berhasil');
+                } else {
+                  alert(data.message);
+                }
+              }
+            });
+          }
+        });
+
+      }
+    }
   
-  <script type="text/javascript" src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
   <!-- Configure a few settings and attach camera -->
-<script type="text/javaScript">
+<script type="text/javascript">
 	$(document).ready(function(){
     
     $('#frm_OpenKamera').hide();
@@ -243,23 +256,8 @@
     $('#btn_save_captureProfile').click(function(){
       $('#btn_recaptureProfile').hide();
       $('#btn_save_captureProfile').hide();
-    }),    
-
-    //UPLOAD FORM DAN KTP
-     var password = document.getElementById("password"),
-      repassword = document.getElementById("repassword");
-      function validatePassword(){
-        if(password.value != repassword.value) {
-          repassword.setCustomValidity("Password tidak sama");
-          } else {
-          repassword.setCustomValidity('');
-          }
-        }
-        password.onchange = validatePassword;
-        repassword.onkeyup = validatePassword;
-
-  });
-
+    })
+  }
 </script>
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
@@ -278,6 +276,5 @@
   <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
   <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
 
-</body>
-
+</body> 
 </html>

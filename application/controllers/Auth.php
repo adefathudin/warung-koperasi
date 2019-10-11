@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Auth extends MY_Controller {
+class Auth extends CI_Controller {
   public function __construct(){
     parent::__construct();
    // $this->load->model('users_detail_m','users_login_m');
   }
   public function index(){
-    if($this->session->userdata('akses') == TRUE){
+    if($this->session->userdata('akses')){
       redirect('dashboard'); }
       else {
     $this->load->view('login');
@@ -16,11 +16,12 @@ class Auth extends MY_Controller {
     $this->load->model('users_login_m');
     $this->load->model('users_detail_m');
     $email = $this->input->post('email');
+    $user_id = md5($this->input->post('email'));
     $password = md5($this->input->post('password'));
-    if ($this->users_login_m->get_count(array('email'=>$email)) == 1){
-      if ($this->users_login_m->get_count(array('password'=>$password))==1){
+    if ($this->users_login_m->get_count(array('email'=>$email)) > 0){
+      if ($this->users_login_m->get_count(array('password'=>$password)) >0){
         $session = array(
-          'akses' => TRUE,  'email' => $email, 'password' => $password
+          'akses' => TRUE,  'user_id' => $user_id, 'email' => $email, 'password' => $password
         );      
         $this->session->set_userdata($session);
         redirect('dashboard');
@@ -50,7 +51,7 @@ class Auth extends MY_Controller {
     $this->load->model('users_detail_m');
     $this->load->model('users_login_m');
 
-    $user_id = uniqid();
+    $user_id = md5($this->input->post('email'));
     $nama_lengkap = $this->input->post('nama_lengkap');
     $email = $this->input->post('email');
     $nomor_hp = $this->input->post('nomor_hp');
@@ -81,7 +82,7 @@ class Auth extends MY_Controller {
       if ($this->users_detail_m->save($data_user_detail)){        
         $this->users_login_m->save($data_login);
         $this->session->set_userdata($data_user_detail);
-        $this->session->set_userdata('sesi' == true,'email' == $email, 'password' == $password);
+        $this->session->set_userdata('akses' == true,'data_user' == $data_user, 'password' == $password);
         //KIRIM EMAIL
   //set up email
   $config = array(
@@ -98,18 +99,18 @@ class Auth extends MY_Controller {
 $message =  "
 <html>
 <head>
-<title>Verifikasi E-Mail Warung Koperasi</title>
+<title>Verifikasi E-Mail WarungKoperasi</title>
 </head>
 <body>
 <p>
 Selamat datang <b>".$nama_lengkap."</b>,
-<br><br>Terima kasih telah bergabung dengan <a href='".base_url()."' target='_blank'><strong>Warung Koperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
+<br><br>Terima kasih telah bergabung dengan <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
 klik link dibawah ini untuk mengaktifkannya:<br><br>
 
 <a href='".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."'>".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."</a>
 <br><br>
 Jika anda tidak merasa melakukan registrasi, silahkan abaikan email ini.
-<br>Terima kasih atas perhatian dan kerjasamanya
+<br>Terima kasih
 <br><br><br>
 Best Regards,
 <br>Warung Koperasi Team</p>
@@ -121,7 +122,7 @@ Best Regards,
    $this->email->set_newline("\r\n");
    $this->email->from($config['smtp_user'], 'WarungKoperasi');
    $this->email->to($email);
-   $this->email->subject('Selamat Datang di Warung Koperasi');
+   $this->email->subject('Selamat Datang di WarungKoperasi');
    $this->email->message($message);
 
       //sending email
@@ -166,7 +167,7 @@ public function aktivasi(){
    }
   }
   else{
-   $this->session->set_flashdata('message', 'Link verifikasi tidak valid');
+   $this->session->set_flashdata('message', 'Link verifikasi email tidak valid');
   }
   redirect('dashboard');
  }

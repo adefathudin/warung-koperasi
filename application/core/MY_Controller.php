@@ -14,7 +14,8 @@ class MY_Controller extends CI_Controller {
         if(!$this->session){
             $this->load->library('session');
         }
-        if($this->session->userdata('akses' != FALSE)){
+        if(!$this->session->userdata('akses')){
+            $this->session->set_flashdata('message','Anda harus login terlebih dahulu');
             redirect('auth');
         } 
     }

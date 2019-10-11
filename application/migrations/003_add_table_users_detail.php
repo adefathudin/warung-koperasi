@@ -19,7 +19,7 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 20
+            'constraint' => 32
         ),
         'nama_lengkap' => array(
             'type' => 'VARCHAR',
@@ -48,27 +48,39 @@ class Migration_add_table_users_detail extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 100
         ),
+        'about' => array(
+            'type' => 'VARCHAR',
+            'constraint' => '100',
+            'default' => 'Hai, saya telah bergabung dengan WarungKoperasi :)'
+        ),
         'ktp' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default' => 'default.png'
         ),
         'profil' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default' => 'default.png'
         ),
         'type' => array(
             'type' => 'VARCHAR',
             'constraint' => 30
         ),
         'verifikasi_email' => array(
-            'type' => 'BOOLEAN'
+            'type' => 'BOOLEAN',
+            'default' => 0
         ),
         'verifikasi_nomor_hp' => array(
-            'type' => 'BOOLEAN'
+            'type' => 'BOOLEAN',
+            'default' => 0
         ),
         'kode_unik' => array(
             'type' => 'VARCHAR',
             'constraint' => 15
+        ),
+        'joined' => array(
+            'type' => 'TIMESTAMP'
         )
     );
 
