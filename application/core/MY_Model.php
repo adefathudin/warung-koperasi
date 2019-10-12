@@ -178,27 +178,8 @@ class MY_Model extends CI_Model {
     }
     
     
-    public function save($data, $id = NULL){
-		
-        // Set timestamps
-        if ($this->_timestamps == TRUE) {
-            $now = time();
-            if (isset($this->_timestamps_field[0])){
-                $id || $data[$this->_timestamps_field[0]] = $now;
-            }
-            if (isset($this->_timestamps_field[1])){
-                $data[$this->_timestamps_field[1]] = $now;
-            }
-        }
-        
-        // Set peoplestamp
-        if($this->_peoplestamp){
-            $user_id = uniqid();
-            if(isset($this->_peoplestamp_field[0])){
-                $data[$this->_peoplestamp_field[0]] = $user_id;
-            }
-        }
-        
+    public function save($data, $user_id = NULL){
+		       
         // Insert
         if (!$id) {
             if ($this->_primary_filter != 'strval'){
@@ -220,9 +201,9 @@ class MY_Model extends CI_Model {
         // Update
         else {
             $filter = $this->_primary_filter;
-            $id = $filter($id);
+            $id = $filter($user_id);
             $this->db->set($data);
-            $this->db->where($this->_primary_key, $id);
+            $this->db->where($this->_primary_key, $user_id);
             if (!$this->db->update($this->_table_name)){
                 $error = $this->db->error();
                 $this->_last_message = $error['message'];

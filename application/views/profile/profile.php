@@ -3,8 +3,8 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="border-bottom text-center pb-4">
-                    <img src="<?php echo base_url('assets/img/profil/'.$data_user_tmp->profil) ?>" alt="profile" class="img-thumbnail">
-                    <div class="mb-3">
+                    <img src="<?php echo base_url('assets/img/profil/'.$data_user_tmp->profil) ?>" alt="profile" class="img-responsive" width="50%">
+                    <div class="mb-3"><br>
                       <h3><?php echo $data_user_tmp->nama_lengkap ?></h3>
                       <div class="d-flex align-items-center justify-content-center">
                         <h5 class="mb-0 mr-2 text-muted"><?php echo $data_user_tmp->type ?></h5>
@@ -25,8 +25,7 @@
                 <div class="col-lg-6">
                   <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
                     <div class="text-center mt-4 mt-md-0">
-                      <?php 
-                      
+                      <?php                       
                       if ($data_user_tmp->user_id != $data_user->user_id){
                         echo"
                       <button class='btn btn-outline-primary'>Message</button>
@@ -58,6 +57,37 @@
                       <?php echo $data_user_tmp->nomor_hp ?>
                       </span>
                     </p>
+                    <?php                       
+                      if ($data_user_tmp->user_id == $data_user->user_id){
+                        echo"                        
+                    <p class='clearfix'>
+                    <span class='float-left'>
+                      E-Mail
+                    </span>
+                    <span class='float-right text-muted'>".
+                    $data_user_tmp->email."
+                    </span>
+                    </p>
+
+                    <p class='clearfix'>
+                    <span class='float-left'>
+                      Tempat dan Tanggal Lahir
+                    </span>
+                    <span class='float-right text-muted'>".
+                    $data_user_tmp->tempat_lahir.", ".$data_user_tmp->tanggal_lahir."
+                    </span>
+                    </p>
+
+                    <p class='clearfix'>
+                    <span class='float-left'>
+                      Jenis Kelamin
+                    </span>
+                    <span class='float-right text-muted'>".
+                    $data_user_tmp->jenis_kelamin."
+                    </span>
+                    </p>
+                    ";}
+                  ?>
                     <p class="clearfix">
                       <span class="float-left">
                         Alamat

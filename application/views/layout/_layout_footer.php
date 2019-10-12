@@ -131,7 +131,7 @@
   </div>
   <script>
     var AF = {
-      init: function(){
+      init: function(){ 
         var _this = this;
         $('#updateIdentitas').validate({
           rules:{

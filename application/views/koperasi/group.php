@@ -5,41 +5,45 @@
   <!-- Card Header - Dropdown -->
   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">    
     <h6 class="m-0 font-weight-bold text-primary"><?php echo $this->data['title']?></h6>
-    <div class="text-left text-warning"> 4.6 (190)<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-    
+    <div class="text-left text-warning"> 4.6 (190)<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>    
   </div>
   <!-- Card Body -->
-  <table with="100%">
-    <tr>
-        <td width="25%" colspan="3" rowspan="4" >
-          <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 100%;" src="<?php echo base_url('assets/img/baner_grup_koperasi/baner_grup.jpg')?>" alt="">
-        </td>
-    </tr>
-    <tr>
-        <td width="10%">
-            Deskripsi
-        </td>
-        <td width="1%">:</td>
-        <td>Ini adalah deskripsi grup</td>
-    </tr>
-    <tr>
-        <td>Member</td>
-        <td>:</td>
-        <td>31 orang</td>
-    </tr>
-    <tr>
-        <td>Created</td>
-        <td>:</td>
-        <td>27 Maret 2019</td>
-    </tr>
-</table>
+  <div class="card-body">    
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="text-left">
+            <img src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="profile" class="img-responsive" width="100%">
+          </div>
+        </div>
+        <div class="col-lg-4" style="border-left: 1px solid;">
+          <div class="profile-feed">  
+              <p class="clearfix">
+                <span class="float-left">
+                  Joined
+                </span>
+                <span class="float-right text-muted">
+                2019-10-12 00:09:37                      </span>
+              </p>
+          </div>
+        </div>
+        
+        <div style="border-left: 1px solid;" class="col-lg-4">
+          <div class="profile-feed">
+            <form class="form-inline">
+              <div class="form-group mx-sm-3 mb-2">
+                <input type="password" class="form-control" id="inputPassword2" placeholder="Invite members">
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Invite</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>
-
 <!-- Collapsable Card Example -->
 <div class="card shadow mb-4">
-  <!-- Card Header - Accordion -->
   <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample">
-    <div class="m-0 text-primary">About this group</div>
+  <div class="m-0 text-primary">About this group</div>
   </a>
   <!-- Card Content - Collapse -->
   <div class="collapse" id="collapseCardExample">
@@ -57,10 +61,27 @@
     <!-- Card Header - Dropdown -->
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <div class="m-0 font-weight-bold text-primary">
-            <button type="submit" class="btn btn-light mb-2">Dashboard</button>
-            <button type="submit" class="btn btn-light mb-2">Simpan</button>
-            <button type="submit" class="btn btn-light mb-2">Pinjam</button>
-            <button type="submit" class="btn btn-light mb-2">tes</button>
+          <button class="btn btn-light" type="button" id="">
+            Dashboard
+          </button>
+          <div class="btn-group">
+            <button class="btn btn-light dropdown-toggle dropdown-toggle-split" type="button" id="dropSimpanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Simpanan
+            </button>
+              <div class="dropdown-menu animated--fade-in" aria-labelledby="dropSimpanan">
+                <a class="dropdown-item" href="#">Setoran Tunai</a>
+                <a class="dropdown-item" href="#">Penarikan Tunai</a>
+              </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-light dropdown-toggle dropdown-toggle-split" type="button" id="dropSimpanan" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Simpanan
+            </button>
+              <div class="dropdown-menu animated--fade-in" aria-labelledby="dropSimpanan">
+                <a class="dropdown-item" href="#">Setoran Tunai</a>
+                <a class="dropdown-item" href="#">Penarikan Tunai</a>
+              </div>
+          </div>
         </div>
         <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

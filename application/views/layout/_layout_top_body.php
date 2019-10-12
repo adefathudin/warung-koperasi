@@ -188,6 +188,7 @@ if ($data_user->verifikasi_email == 0){
 
 if ($data_user->verifikasi_nomor_hp == 0){
   echo "<div class='alert alert-warning alert-dismissible'>
+        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
         <strong>Peringatan!</strong> Nomor HP anda belum diverifikasi. 
         <a href='verifikasi_hp' class='alert-link'>Klik disini</a> untuk mengirim kode verifikasi ke nomor <strong>".
         str_repeat("*", strlen($data_user->nomor_hp)-4) . substr($data_user->nomor_hp, -4)." </strong>
