@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Description of 004_add_table_rekeningku
+ * Description of 004_add_table_notifikasi
  * 
  * Created On Oct 3, 2019, 11:03:58 AM
  * @author adefathudin
  */
-class Migration_add_table_rekeningku extends MY_Migration {
+class Migration_add_table_user_grup extends MY_Migration {
 
-    protected $_table_name = 'rekeningku';
+    protected $_table_name = 'user_grup';
     protected $_primary_key = 'id';
     //protected $_index_keys = array('user_name');
     protected $_fields = array(
@@ -19,19 +19,19 @@ class Migration_add_table_rekeningku extends MY_Migration {
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 20
+            'constraint' => 32
         ),
-        'nomor_rekening' => array(
+        'admin_grup' => array(
             'type' => 'VARCHAR',
-            'constraint' => 20
+            'constraint' => 10000
         ),
-        'saldo_awal' => array(
+        'basic_grup' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 10000
         ),
-        'saldo_akhir' => array(
+        'request_grup' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 1000
         )
     );
 

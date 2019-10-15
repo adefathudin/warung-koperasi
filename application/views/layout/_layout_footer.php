@@ -129,35 +129,6 @@
       </div>
     </div>
   </div>
-  <script>
-    var AF = {
-      init: function(){ 
-        var _this = this;
-        $('#updateIdentitas').validate({
-          rules:{
-            //
-          },
-          submitHandler: function(form){
-            var $btn = $(form).find('[type="submit"]');
-            $(form).ajaxSubmit({
-              beforeSubmit: function(){
-                if (!confirm('Update identitas?')){
-                  return false;
-                }
-              },
-              success: function(data){
-                if (data.status){
-                  alert('Update identitas berhasil');
-                } else {
-                  alert(data.message);
-                }
-              }
-            });
-          }
-        });
-
-      }
-    }
   
 <script type="text/javascript" src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
   <!-- Configure a few settings and attach camera -->
@@ -275,6 +246,14 @@
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
   <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
+
+  <!-- Page level plugins -->
+  <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
+
 
 </body> 
 </html>

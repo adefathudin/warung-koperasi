@@ -18,9 +18,6 @@ class User extends MY_Controller {
     { 
 
         $this->load->model('users_detail_m');
-        //$this->load->library('session');
-        //$email = $this->session->userdata('email');
-        //$data_user = $this->users_detail_m->get_detail_user($email);
         $user_id =  $this->uri->segment(2);
         $this->data['data_user_tmp'] = $this->users_detail_m->get_user($user_id); 
         $this->data['title'] = '';

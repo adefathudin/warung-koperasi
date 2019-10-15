@@ -1,8 +1,8 @@
 <?php
 
-class Rekeningku_m extends MY_Model {
+class Rekening_m extends MY_Model {
 
-    protected $_table_name = 'rekeningku';
+    protected $_table_name = 'rekening';
     protected $_primary_key = 'id';
     protected $_primary_filter = 'strval';
     protected $_order_by = '';
@@ -12,7 +12,7 @@ class Rekeningku_m extends MY_Model {
     
     public function get_saldo($user_id){
         $this->db->where('user_id', $user_id);
-        $result = $this->db->get('rekeningku')->row();
+        $result = $this->db->get('rekening')->row();
         return $result;
     }
 }

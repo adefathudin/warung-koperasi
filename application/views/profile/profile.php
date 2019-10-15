@@ -3,9 +3,12 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="border-bottom text-center pb-4">
-                    <img src="<?php echo base_url('assets/img/profil/'.$data_user_tmp->profil) ?>" alt="profile" class="img-responsive" width="50%">
+                    <img src="<?php echo base_url('assets/img/profil/'.$data_user_tmp->profil) ?>" alt="profile" class="img-thumbnail img-responsive" width="50%">
                     <div class="mb-3"><br>
-                      <h3><?php echo $data_user_tmp->nama_lengkap ?></h3>
+                      <h3><?php echo $data_user_tmp->nama_lengkap;
+                            if ($data_user->type == 'Full Service') {
+                            echo " <i class='far fa-fw fa-check-circle text-primary'></i>";} ?>
+                      </h3>
                       <div class="d-flex align-items-center justify-content-center">
                         <h5 class="mb-0 mr-2 text-muted"><?php echo $data_user_tmp->type ?></h5>
                         <div class="br-wrapper br-theme-css-stars"><select id="profile-rating" name="rating" autocomplete="off" style="display: none;">
@@ -33,7 +36,7 @@
                       else {
                         echo"
                       <a href='#' data-toggle='modal' data-target='#settingUserModal'>
-                      <button class='btn btn-outline-secondary'>Setting</button></a>";
+                      <button class='btn btn-outline-secondary'><i class='fas fa-fw fa-cog'></i> Setting</button></a>";
                       } ?>
                     </div>
                   </div>
@@ -43,6 +46,7 @@
                   <div class="py-4">
                     <p class="clearfix">
                       <span class="float-left">
+                        <i class="fas fa-fw fa-user"></i>
                         Joined
                       </span>
                       <span class="float-right text-muted">
@@ -51,6 +55,7 @@
                     </p>
                     <p class="clearfix">
                       <span class="float-left">
+                        <i class="fas fa-fw fa-phone"></i>
                         No. HP
                       </span>
                       <span class="float-right text-muted">
@@ -62,6 +67,7 @@
                         echo"                        
                     <p class='clearfix'>
                     <span class='float-left'>
+                      <i class='fas fa-fw fa-envelope'></i>
                       E-Mail
                     </span>
                     <span class='float-right text-muted'>".
@@ -71,6 +77,7 @@
 
                     <p class='clearfix'>
                     <span class='float-left'>
+                      <i class='fas fa-fw fa-calendar'></i>
                       Tempat dan Tanggal Lahir
                     </span>
                     <span class='float-right text-muted'>".
@@ -80,6 +87,7 @@
 
                     <p class='clearfix'>
                     <span class='float-left'>
+                      <i class='fas fa-fw fa-male'></i>
                       Jenis Kelamin
                     </span>
                     <span class='float-right text-muted'>".
@@ -90,6 +98,7 @@
                   ?>
                     <p class="clearfix">
                       <span class="float-left">
+                        <i class="fas fa-fw fa-map-marker"></i>
                         Alamat
                       </span>
                       <span class="float-right text-muted">

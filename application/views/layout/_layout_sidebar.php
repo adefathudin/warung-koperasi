@@ -18,20 +18,20 @@
 
 
 <li class="nav-item">
-  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#rekeningku" aria-expanded="true" aria-controls="collapseTwo">
+  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#rekening" aria-expanded="true" aria-controls="collapseTwo">
     <i class="fas fa-fw fa-chart-area"></i>
-    <span>Rekeningku</span>
+    <span>Rekening</span>
   </a>
-  <div id="rekeningku" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+  <div id="rekening" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
     <div class="bg-white py-2 collapse-inner rounded">
-      <a class="collapse-item" href="<?php echo base_url('rekeningku/topup')?>">
+      <a class="collapse-item" href="<?php echo base_url('rekening/topup')?>">
         <i class="fas fa-fw fa-plus"></i>  
         Top-Up
       </a>
-      <a class="collapse-item" href="<?php echo base_url('rekeningku/cashout')?>">
+      <a class="collapse-item" href="<?php echo base_url('rekening/cashout')?>">
         <i class="fas fa-fw fa-minus"></i>
         Cash Out</a>
-      <a class="collapse-item" href="<?php echo base_url('rekeningku/mutasi')?>">
+      <a class="collapse-item" href="<?php echo base_url('rekening/mutasi')?>">
         <i class="fas fa-fw fa-file"></i>
         Laporan Mutasi
       </a>
@@ -50,11 +50,56 @@
         <i class="fas fa-fw fa-plus"></i>  
         Buat Grup Koperasi
       </a>
-      <h6 class="collapse-header">Groups you manage</h6>
-      <a class="collapse-item" href="<?php echo base_url('koperasi/group')?>">Koperasi Saloome</a>
-      
-      <h6 class="collapse-header">Groups you're in</h6>
-      <a class="collapse-item" href="<?php echo base_url('koperasi/group')?>">Koperasi Ade Fathudin</a>
+      <!-- ADMIN GROUP -->
+      <div class="collapse-header"><i class="fas fa-fw fa-users-cog"></i> Groups you manage</div>
+      <?php
+      if (strpos($user_grup->admin_grup, "|")){
+      $detail_grup = explode("|", $user_grup->admin_grup);
+      $count = count($detail_grup);
+      $i = 0;
+      while ($i < $count){
+        foreach ($list_grup as $grup){
+          if ($grup->grup_id == $detail_grup[$i]){
+            echo "<a class='collapse-item' href='".base_url('grup')."/".$detail_grup[$i]."'>".$grup->nama_grup."</a>";
+            //echo $grup->nama_grup;
+            $i++;
+          }
+        }  
+      }
+    } else {
+      foreach ($list_grup as $grup){
+        if ($grup->grup_id == $user_grup->admin_grup){
+          echo "<a class='collapse-item' href='".base_url('grup')."/".$user_grup->admin_grup."'>".$grup->nama_grup."</a>";
+          //echo $grup->nama_grup;
+        }
+      }
+    }
+    ?>
+      <!-- BASIC GROUP -->
+      <div class="collapse-header"><i class="fas fa-fw fa-users"></i> Groups you're in</div>
+      <?php
+      if (strpos($user_grup->basic_grup, "|")){
+      $detail_grup = explode("|", $user_grup->basic_grup);
+      $count = count($detail_grup);
+      $i = 0;
+      while ($i < $count){
+        foreach ($list_grup as $grup){
+          if ($grup->grup_id == $detail_grup[$i]){
+            echo "<a class='collapse-item' href='".base_url('grup')."/".$detail_grup[$i]."'>".$grup->nama_grup."</a>";
+            //echo $grup->nama_grup;
+            $i++;
+          }
+        }  
+      }
+    } else {
+      foreach ($list_grup as $grup){
+        if ($grup->grup_id == $user_grup->basic_grup){
+          echo "<a class='collapse-item' href='".base_url('grup')."/".$user_grup->basic_grup."'>".$grup->nama_grup."</a>";
+          //echo $grup->nama_grup;
+        }
+      }
+    }
+    ?>
     </div>
   </div>
 </li>

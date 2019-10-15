@@ -6,10 +6,14 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
         
         $this->load->model('users_detail_m');
+        $this->load->model('user_grup_m');
+        $this->load->model('grup_m');
         $this->load->library('session');
-        $email = $this->session->userdata('email');
-        //$data_user = $this->users_detail_m->get_detail_user($email);
-        $this->data['data_user'] = $this->users_detail_m->get_detail_user($email); 
+        date_default_timezone_set("Asia/Jakarta");
+        $user_id = $this->session->userdata('user_id');
+        $this->data['user_grup'] = $this->user_grup_m->get_user_grup($user_id);
+        $this->data['data_user'] = $this->users_detail_m->get_user($user_id); 
+        $this->data['list_grup'] = $this->grup_m->get_list_grup();
         
         if(!$this->session){
             $this->load->library('session');

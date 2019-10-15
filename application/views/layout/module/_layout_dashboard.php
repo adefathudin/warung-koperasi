@@ -6,7 +6,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Saldo</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 10.000.000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_akhir, 0, ".", ".") ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -23,7 +23,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Saldo Koperasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 4.300.000</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_koperasi, 0, ".", ".") ?></div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
