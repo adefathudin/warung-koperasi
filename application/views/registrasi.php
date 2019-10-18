@@ -45,7 +45,7 @@
                             }
                           ?>
               </div>
-              <form id="form_Registrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
+              <form id="FormRegistrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
                   <div class="form-group">
                     <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus>
                   </div>
@@ -70,8 +70,8 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>-->
-                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-submit" onclick="saveSnap()">
-                  Register Account
+                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-submit">
+                  Register Account <i class="fas fa-fw fa-sign-in-alt"></i>
                 </button>
               </form>
               <hr><!--
@@ -86,7 +86,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <!-- Bootstrap core JavaScript-->
@@ -113,6 +112,35 @@
         }
         password.onchange = validatePassword;
         repassword.onkeyup = validatePassword;
+</script>
+
+
+<script>
+    var JS = {
+        init: function(){
+            var _this = this;
+            
+            $('#FormRegistrasi').validate({
+                rules: {
+                    //nomor_peserta:'required'
+                },
+                submitHandler: function(form){
+                    var $btn = $(form).find('[type="submit"]');
+                    
+                    $(form).ajaxSubmit({
+                        beforeSubmit: function(){
+                            $btn.find('i').removeClass('fa-sign-in-alt').addClass('fa-spinner fa-spin');
+                        },
+                        success: function(data){                            
+                            $btn.find('i').removeClass('fa-spinner fa-spin').addClass('fa-sign-in-alt');
+                        } 
+                    });
+                }
+            });
+        }};
+    $(document).ready(function(){
+        JS.init();
+    });
 </script>
 </body>
 

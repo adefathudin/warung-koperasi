@@ -81,6 +81,55 @@
       </div>
     </div>
   </div>
+
+  <!-- Create Group Modal-->
+  <div class="modal fade" id="upgrade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upgrade Full Service Member</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="closeKamera()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- MODAL ADD GROUP -->
+          <div class="form-group mx-sm-3 mb-2">
+                <div id="frm_UploadKTP" class="form-group">             
+                    <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadKTP" value="Upload Foto Identitas"/>
+                </div>
+                <div id="frm_OpenKamera" class="form-group" align="center">
+                    <div id="kamera"></div>
+                    Foto Kartu Identitas
+                    <br>
+                    <button class="btn"><i class="fas fa-fw fa-camera" id="btn_capture"></i></button>
+                </div>
+                <div id="frm_HasilKamera" class="form-group" align="center">    
+                    <div id="hasilKamera" ></div>
+                    Foto Kartu Identitas
+                    <br>
+                    <button class="btn"><i class="fas fa-fw fa-undo-alt" id="btn_recapture"></i></button>
+                </div>               
+                
+                <div id="frm_UploadProfile" class="form-group">                  
+                    <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadProfile" value="Upload Foto Profile"/>
+                </div>
+                <div id="frm_OpenKameraProfile" class="form-group" align="center">
+                    <div id="kameraProfile"></div>
+                    Foto Profile
+                    <br>
+                    <button class="btn" id="btn_captureProfile"><i class="fas fa-fw fa-camera"></i></button>
+                </div>
+                <div id="frm_HasilKameraProfile" class="form-group" align="center">    
+                    <div id="hasilKameraProfile" ></div>
+                    Foto Profile
+                    <br>
+                    <button class="btn" id="btn_recaptureProfile"><i class="fas fa-fw fa-undo-alt"></i></button>
+                </div>  
+            </div>
+      </div>
+    </div>
+  </div>
+
   <!-- setting User -->
   <div class="modal fade" id="settingUserModal" tabindex="-1" role="dialog" ia-hidden="true">
     <div class="modal-dialog" role="document">
@@ -130,11 +179,33 @@
     </div>
   </div>
   
-<script type="text/javascript" src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
+
+  <!-- Page level plugins -->
+  <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
+
+  <!-- Page level plugins -->
+  <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
   <!-- Configure a few settings and attach camera -->
-<script type="text/javascript">
-	$(document).ready(function(){
-    
+<script>
     $('#frm_OpenKamera').hide();
     $('#frm_HasilKamera').hide();
     $('#frm_OpenKameraProfile').hide();
@@ -227,33 +298,14 @@
     $('#btn_save_captureProfile').click(function(){
       $('#btn_recaptureProfile').hide();
       $('#btn_save_captureProfile').hide();
-    })
-  }
+    })    
+  
 </script>
-  <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
-
-  <!-- Page level plugins -->
-  <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
-
-  <!-- Page level plugins -->
-  <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
-
+<script>
+function closeKamera(){
+      Webcam.reset();
+    }
+    </script>
 
 </body> 
 </html>

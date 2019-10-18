@@ -1,6 +1,6 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h5 class="m-0 font-weight-bold text-primary">Laporan Mutasi Rekening s/d <?= $curdate ?></h5>
+      <div class="m-0 text-primary">Laporan Mutasi Rekening s/d <?= $curdate ?></div>
     </div>
     <div class="card-body">
       <div class="table-responsive">

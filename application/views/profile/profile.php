@@ -10,7 +10,10 @@
                             echo " <i class='far fa-fw fa-check-circle text-primary'></i>";} ?>
                       </h3>
                       <div class="d-flex align-items-center justify-content-center">
-                        <h5 class="mb-0 mr-2 text-muted"><?php echo $data_user_tmp->type ?></h5>
+                        <h5 class="mb-0 mr-2 text-muted"><?php echo $data_user_tmp->type ?>
+                        <?php if ($data_user->type != 'Full Service') {
+                        echo "<br><a href='#' data-toggle='modal' data-target='#upgrade'><u>Click here to upgrade</u></a>";} ?>
+                        </h5>
                         <div class="br-wrapper br-theme-css-stars"><select id="profile-rating" name="rating" autocomplete="off" style="display: none;">
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -36,7 +39,7 @@
                       else {
                         echo"
                       <a href='#' data-toggle='modal' data-target='#settingUserModal'>
-                      <button class='btn btn-outline-secondary'><i class='fas fa-fw fa-cog'></i> Setting</button></a>";
+                      <button class='btn btn-outline-secondary'><i class='fas fa-fw fa-user-edit'></i> Setting</button></a>";
                       } ?>
                     </div>
                   </div>
@@ -112,7 +115,3 @@
               </div>
             </div>
           </div>
-
-
-
-
