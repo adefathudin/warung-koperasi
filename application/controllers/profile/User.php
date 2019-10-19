@@ -24,22 +24,5 @@ class User extends MY_Controller {
         $this->data['subview'] = 'profile/profile';
         $this->load->view('_layout_main', $this->data);
     }
-
-    public function udate_identitas($user_id = null){
-        $this->load->model('users_detail_m');
-        $user_id = $this->post('user_id');
-        $nama_lengkap = $this->post('nama_lengkap');
-        $tempat_lahir = $this->post('tempat_lahir');
-        $tanggal_lahir = $this->post('tanggal_lahir');
-        $jenis_kelamin = $this->post('jenis_kelamin');
-        $alamat = $this->post('alamat');
-        $about = $this->post('about');
-        $data = array(
-            'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir,
-            'tanggal_lahir' => $tanggal_lahir, 'jenis_kelamin' => $jenis_kelamin,
-            'alamat' => $alamat, 'about' => $about
-        );
-        $this->users_detail_m->save($data, $user_id);
-    }
 }
 

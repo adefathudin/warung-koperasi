@@ -101,13 +101,13 @@
                     <div id="kamera"></div>
                     Foto Kartu Identitas
                     <br>
-                    <button class="btn"><i class="fas fa-fw fa-camera" id="btn_capture"></i></button>
+                    <button class="btn" id="btn_capture"><i class="fas fa-fw fa-camera"></i></button>
                 </div>
                 <div id="frm_HasilKamera" class="form-group" align="center">    
                     <div id="hasilKamera" ></div>
                     Foto Kartu Identitas
                     <br>
-                    <button class="btn"><i class="fas fa-fw fa-undo-alt" id="btn_recapture"></i></button>
+                    <button class="btn" id="btn_recapture"><i class="fas fa-fw fa-undo-alt"></i></button>
                 </div>               
                 
                 <div id="frm_UploadProfile" class="form-group">                  
@@ -115,7 +115,7 @@
                 </div>
                 <div id="frm_OpenKameraProfile" class="form-group" align="center">
                     <div id="kameraProfile"></div>
-                    Foto Profile
+                    Foto Profile (Pastikan wajah anda terlihat dengan jelas)
                     <br>
                     <button class="btn" id="btn_captureProfile"><i class="fas fa-fw fa-camera"></i></button>
                 </div>
@@ -124,8 +124,15 @@
                     Foto Profile
                     <br>
                     <button class="btn" id="btn_recaptureProfile"><i class="fas fa-fw fa-undo-alt"></i></button>
-                </div>  
-            </div>
+                </div>              
+                <form method="POST" action="<?php echo base_url('profile/identitas/lampiran')?>">    
+                <div id="frm_submit" class="form-group">      
+                    <input type="hidden" id="value_ktp" name="value_ktp">  
+                    <input type="hidden" id="value_profile" name="value_profile">  
+                    <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload"/>
+                </div>
+                </form>
+          </div>
       </div>
     </div>
   </div>
@@ -140,7 +147,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-      <form id="updateIdentitas" method="POST" action="<?php echo base_url('user/update_identitas')?>">
+      <form id="updateIdentitas" method="POST" action="<?php echo base_url('profile/identitas/data')?>">
       <input type="hidden" name="user_id" value="<?= $this->session->userdata('user_id') ?>">
       <div class="form-group mx-sm-3 mb-2">
       <div class="form-group">
@@ -210,6 +217,9 @@
     $('#frm_HasilKamera').hide();
     $('#frm_OpenKameraProfile').hide();
     $('#frm_HasilKameraProfile').hide();
+    $('#frm_UploadProfile').hide();
+    $('#frm_submit').hide();
+
 
     //BUTTON UPLOAD KTP
 		$('#btn_UploadKTP').click(function(){
@@ -226,6 +236,7 @@
 
     //BUTTON CAPTURE
     $('#btn_capture').click(function(){
+      $('#frm_UploadProfile').show();
       $('#frm_HasilKamera').show();
       Webcam.snap( function(data_uri) {
       document.getElementById('hasilKamera').innerHTML = '<img id="imageprevKTP" src="'+data_uri+'"/>';
@@ -273,6 +284,7 @@
 
     //BUTTON CAPTURE
     $('#btn_captureProfile').click(function(){
+      $('#frm_submit').show();
       $('#frm_HasilKameraProfile').show();
       Webcam.snap( function(data_uri) {
       document.getElementById('hasilKameraProfile').innerHTML = '<img id="imageprevProfile" src="'+data_uri+'"/>';
@@ -292,16 +304,18 @@
       Webcam.attach('#kameraProfile');
       $('#frm_OpenKameraProfile').show();
       $('#frm_HasilKameraProfile').hide();
-    }),
-
-    //BUTTON CAPTURE SAVE
-    $('#btn_save_captureProfile').click(function(){
-      $('#btn_recaptureProfile').hide();
-      $('#btn_save_captureProfile').hide();
-    })    
-  
+    })
 </script>
 <script>
+
+
+function upload(){
+ // Get base64 value from <img id='imageprev'> source
+    var foto_ktp = document.getElementById("imageprevKTP").src;
+    var foto_profile = document.getElementById("imageprevProfile").src;
+    document.getElementById("value_ktp").value = foto_ktp;
+    document.getElementById("value_profile").value = foto_profile;
+}
 function closeKamera(){
       Webcam.reset();
     }

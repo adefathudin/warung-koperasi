@@ -181,16 +181,16 @@ class MY_Model extends CI_Model {
     public function save($data, $user_id = NULL){
 		       
         // Insert
-        if (!$id) {
+        if (!$user_id) {
             if ($this->_primary_filter != 'strval'){
                 !isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
             }
             $this->db->set($data);
             if ($this->db->insert($this->_table_name)){
                 if ($this->_primary_filter != 'strval'){
-                    $id = $this->db->insert_id($this->_table_name.'_'.$this->_primary_key.'_seq');
+                    $user_id = $this->db->insert_id($this->_table_name.'_'.$this->_primary_key.'_seq');
                 }else{
-                    $id = isset($data[$this->_primary_key]) ? $data[$this->_primary_key] : 'string';
+                    $user_id = isset($data[$this->_primary_key]) ? $data[$this->_primary_key] : 'string';
                 }
             }else{
                 $error = $this->db->error();
@@ -201,7 +201,7 @@ class MY_Model extends CI_Model {
         // Update
         else {
             $filter = $this->_primary_filter;
-            $id = $filter($user_id);
+            $user_id = $filter($user_id);
             $this->db->set($data);
             $this->db->where($this->_primary_key, $user_id);
             if (!$this->db->update($this->_table_name)){
@@ -212,7 +212,7 @@ class MY_Model extends CI_Model {
         }
         
         
-        return $id;
+        return $user_id;
     }
     
     public function save_where($data, $where){

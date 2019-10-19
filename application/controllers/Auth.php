@@ -82,7 +82,7 @@ class Auth extends CI_Controller {
       if ($this->users_detail_m->save($data_user_detail)){        
         $this->users_login_m->save($data_login);
         $this->session->set_userdata($data_user_detail);
-        $this->session->set_userdata('akses' == true,'data_user' == $data_user, 'password' == $password);
+        $this->session->set_userdata('akses','data_user' == $data_user, 'password' == $password);
         //KIRIM EMAIL
   //set up email
   $config = array(

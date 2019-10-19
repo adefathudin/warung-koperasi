@@ -55,12 +55,12 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'ktp' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30,
+            'constraint' => 32,
             'default' => 'default.png'
         ),
         'profil' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30,
+            'constraint' => 32,
             'default' => 'default.png'
         ),
         'type' => array(
