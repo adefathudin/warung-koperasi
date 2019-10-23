@@ -110,8 +110,11 @@
                     <span class='float-right text-muted'>";
                     if ($data_user_tmp->jenis_kelamin == "L"){
                       $jk = "<i class='fas text-primary fa-fw fa-mars'></i> Laki-laki";}
-                      else {
+                      elseif ($data_user_tmp->jenis_kelamin == "P"){
                         $jk = "<i class='fas text-danger fa-fw fa-venus'></i> Perempuan";}
+                        else {
+                          $jk = "-";
+                        }
                     echo $jk."
                     </span>
                     </p>

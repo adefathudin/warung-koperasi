@@ -60,16 +60,24 @@
           </button>
         </div>
         <!-- MODAL ADD GROUP -->
-        <form method="POST">
+        <form id="updateIdentitas" method="POST" action="<?php echo base_url('koperasi/grup/new')?>">
         <div class="form-group mx-sm-3 mb-2">
         <div class="form-group">
-          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
+          <input type="text" name="nama_grup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
         </div>
         <div class="form-group">
-          <input type="text" name="nominal_topup" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">    
+          <input type="text" name="wilayah" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">
         </div>
         <div class="form-group">
-            <textarea class="form-control" placeholder="Deskripsi..."></textarea>
+          <select class="form-control" name="kategori">
+            <option value="utensils"">Keluarga</option>
+            <option value="briefcase">Tempat Kerja</option>
+            <option value="graduation-cap">Sekolah</option>
+            <option value="people-carry">Lingkungan</option>
+          </select>            
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
         </div>
         <div class="modal-footer">
           <div class="form-group text-right">

@@ -33,13 +33,25 @@ class Migration_add_table_grup extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 1000
         ),
-        'admin' => array(
+        'kategori' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 15
+        ),
+        'wilayah' => array(
             'type' => 'VARCHAR',
             'constraint' => 50
         ),
+        'admin' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 1000
+        ),
         'member' => array(
             'type' => 'VARCHAR',
-            'constraint' => 50
+            'constraint' => 1000
+        ),
+        'request' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 1000
         ),
         'banner' => array(
             'type' => 'VARCHAR',

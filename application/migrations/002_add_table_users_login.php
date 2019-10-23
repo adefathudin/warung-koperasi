@@ -14,7 +14,7 @@ class Migration_add_table_users_login extends MY_Migration {
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 15
+            'constraint' => 32
         ),
         'email' => array(
             'type' => 'VARCHAR',

@@ -21,4 +21,10 @@ class Users_detail_m extends MY_Model {
         $result = $this->db->get('users_detail')->row();
         return $result;
     }
+
+    
+    public function get_data_all_user(){
+        $result = $this->db->get('users_detail')->result();
+        return $result;
+    }
 }

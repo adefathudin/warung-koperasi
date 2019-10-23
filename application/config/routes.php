@@ -52,5 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['user/(:any)'] = '/profile/user/id/$1';
 $route['grup/(:any)'] = '/koperasi/grup/id/$1';
+$route['grup/(:any)/(:any)'] = '/koperasi/grup/id/$1/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

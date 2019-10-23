@@ -6,7 +6,7 @@ class Auth extends CI_Controller {
    // $this->load->model('users_detail_m','users_login_m');
   }
   public function index(){
-    if($this->session->userdata('akses')){
+    if(!empty($this->session->userdata('user_id'))){
       redirect('dashboard'); }
       else {
     $this->load->view('login');
@@ -21,7 +21,7 @@ class Auth extends CI_Controller {
     if ($this->users_login_m->get_count(array('email'=>$email)) > 0){
       if ($this->users_login_m->get_count(array('password'=>$password)) >0){
         $session = array(
-          'akses' => TRUE,  'user_id' => $user_id, 'email' => $email, 'password' => $password
+          'user_id' => $user_id, 'email' => $email, 'password' => $password
         );      
         $this->session->set_userdata($session);
         redirect('dashboard');
@@ -50,9 +50,10 @@ class Auth extends CI_Controller {
     
     $this->load->model('users_detail_m');
     $this->load->model('users_login_m');
+    $this->load->model('rekening_m');
 
     $user_id = md5($this->input->post('email'));
-    $nama_lengkap = $this->input->post('nama_lengkap');
+    $nama_lengkap = ucwords($this->input->post('nama_lengkap'));
     $email = $this->input->post('email');
     $nomor_hp = $this->input->post('nomor_hp');
     $password = $this->input->post('password');
@@ -70,7 +71,7 @@ class Auth extends CI_Controller {
       $data_login = array(
         'user_id' => $user_id, 'password' => md5($password), 'email' => $email
       );
-      
+       
         //generate simple random code
       $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $code = substr(str_shuffle($set), 0, 12);
@@ -80,9 +81,9 @@ class Auth extends CI_Controller {
       );
       
       if ($this->users_detail_m->save($data_user_detail)){        
-        $this->users_login_m->save($data_login);
-        $this->session->set_userdata($data_user_detail);
-        $this->session->set_userdata('akses','data_user' == $data_user, 'password' == $password);
+        $this->users_login_m->save($data_login);       
+        $this->rekening_m->save(array('user_id' => $user_id));
+        $this->session->set_userdata($data_login);
         //KIRIM EMAIL
   //set up email
   $config = array(

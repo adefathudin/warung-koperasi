@@ -27,35 +27,43 @@ class Migration_add_table_rekening extends MY_Migration {
         ),
         'saldo_awal' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'saldo_akhir' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ), 
         'saldo_koperasi' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'saldo_beku' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'total_nominal_cash_in' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'total_cash_in' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'total_nominal_cash_out' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         ),
         'total_cash_out' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 30,
+            'default'   => 0
         )
     );
 

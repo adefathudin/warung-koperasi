@@ -164,6 +164,7 @@ echo "<div class='alert alert-info alert-dismissible'>
 if ($data_user->verifikasi_email == 0){
   $email = $this->session->userdata('email');
   echo "<div class='alert alert-warning alert-dismissible'>
+  <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
         <strong>Peringatan!</strong> Email anda belum diverifikasi, link verifikasi sudah terkirim ke email <strong>".
         str_repeat("*", strlen($email)-15) . substr($email, -15)." </strong>
         </div>";

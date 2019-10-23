@@ -34,7 +34,7 @@
             <!-- Nested Row within Card Body -->
             <div class="row">
               <div class="col-lg-6 d-none d-lg-block">
-                <img src="<?php echo base_url('assets/img/logo.png')?>"/>
+                <img height="100%" width="100%" class="img-responsive" src="<?php echo base_url('assets/img/logo.png')?>"/>
               </div>
               <div class="col-lg-6">
                 <div class="p-5">

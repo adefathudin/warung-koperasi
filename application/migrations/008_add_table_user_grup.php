@@ -32,6 +32,11 @@ class Migration_add_table_user_grup extends MY_Migration {
         'request_grup' => array(
             'type' => 'VARCHAR',
             'constraint' => 1000
+        ),
+        'total_grup' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 10,
+            'default' => 0
         )
     );
 

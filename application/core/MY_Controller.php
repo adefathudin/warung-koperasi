@@ -11,14 +11,17 @@ class MY_Controller extends CI_Controller {
         $this->load->library('session');
         date_default_timezone_set("Asia/Jakarta");
         $user_id = $this->session->userdata('user_id');
+        //AMBIL USER YANG MEMEPUNYAI GRUP
         $this->data['user_grup'] = $this->user_grup_m->get_user_grup($user_id);
+        //AMBIL DATA USER
         $this->data['data_user'] = $this->users_detail_m->get_user($user_id); 
+        //TAMPILKAN GRUP BESERTA DATANYA
         $this->data['list_grup'] = $this->grup_m->get_list_grup();
         
         if(!$this->session){
             $this->load->library('session');
         }
-        if(!$this->session->userdata('akses')){
+        if(empty($this->session->userdata('user_id'))){
             $this->session->set_flashdata('message','Anda harus login terlebih dahulu');
             redirect('auth');
         } 
@@ -30,3 +33,4 @@ class MY_Controller extends CI_Controller {
         return $url_array;
     }
 }
+ 

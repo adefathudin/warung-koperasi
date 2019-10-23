@@ -10,11 +10,11 @@ class Grup_m extends MY_Model {
     protected $_timestamps_field = [];
 
     
-    public function get_detail_grup($grup_id){
+    /*public function get_detail_grup($grup_id){
         $this->db->where('grup_id', $grup_id);
         $result = $this->db->get('grup')->row();
         return $result;
-    }
+    }*/
 
     public function get_list_grup(){
         $result = $this->db->get('grup')->result();

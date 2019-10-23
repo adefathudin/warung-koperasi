@@ -28,8 +28,8 @@
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block">              
-          <img src="<?php echo base_url('assets/img/logo.png')?>"/>
+          <div class="col-lg-5 d-none d-lg-block">        
+                <img height="80%" width="100%" class=" shadow img-responsive" src="<?php echo base_url('assets/img/logo.png')?>"/>
           </div>
           <div class="col-lg-7">
             <div class="p-5">
