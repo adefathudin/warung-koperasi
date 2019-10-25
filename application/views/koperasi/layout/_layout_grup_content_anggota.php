@@ -1,47 +1,3 @@
-<?php 
-/*
-      if ($data_grup_tmp->admin != 0){
-      echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i> Groups you manage</div>";
-      
-      if (strpos($data_grup_tmp->admin, "|")){
-      $detail_grup = explode("|", $data_grup_tmp->admin);
-      $count = count($detail_grup);
-      $i = 0;
-      while ($i < $count){
-        foreach ($data_grup_tmp as $grup){
-          if ($grup->grup_id == $detail_grup[$i]){
-            
-          echo $data_user->nama_lengkap;
-            $i++;
-          }
-        }  
-      }
-    } else {
-      foreach ($data_grup_tmp as $grup){
-        if ($grup->admin == $data_user->user_id){
-          echo $data_user->nama_lengkap;
-        }
-      }
-    }
-  }*/
-    if (!empty($data_grup_tmp->member)){
-      if (strpos($data_grup_tmp->member, "|")){
-        $member_grup = explode("|", $data_grup_tmp->member);
-        $count = count($member_grup);
-        $i=0;
-        while ($i < $count){
-          foreach ($list_data_all_user as $user){
-            if ($data_grup_tmp->member == $member_grup[$i]){
-              echo $user->nama_lengkap;
-              echo "<br>";
-            }
-          }
-        }
-      }
-    }
-  
-?>
-
 <div class="card-body">
 <form class="form-row">
   <div class="form-group col-md-8">
@@ -58,54 +14,63 @@
   <div class="font-weight-bold">Admin</div>
   <hr align="left" width="10%">
     <div class="row">
-      <div class="col-md-1">
       <?php 
-      if ($data_grup_tmp->admin == $data_user->user_id){ ?>
-      <a href='<?= base_url('user/'.$data_user->user_id)?>'>
-        <img src='<?= base_url('assets/img/user/profile/'.$data_user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">                   
+        foreach ($list_data_all_user as $user){
+          if ($data_grup_tmp->admin == $user->user_id){ ?>
+      <div class="col-md-1">
+          <a href='<?= base_url('user/'.$user->user_id)?>'>
+            <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">
+          </a>                   
       </div>
       <div class="col-md-8">
-        <?= $data_user->nama_lengkap ?>
-      </a>
-      <?php } ?>
+        <a href='<?= base_url('user/'.$user->user_id)?>'>
+          <?= $user->nama_lengkap ?>
+        </a>
       </div>
       <div class="col-md-3 text-right">
         <button class="btn btn-default"><i class="fas fa-fw fa-user-plus"></i></button>
         <button class="btn btn-default"><i class="fas fa-fw fa-comment-dots"></i></button>
         <button class="btn btn-default"><i class="fas fa-fw fa-ban"></i></button>
-      </a>
       </div>
+      <?php }} ?>
     </div>
     <hr>
   <div class="font-weight-bold">Member</div>
   <hr align="left" width="10%">
     <div class="row">
-      <div class="col-md-1">
       <?php 
-      if ($data_grup_tmp->member == $data_user->user_id){ ?>
-      <a href='<?= base_url('user/'.$data_user->user_id)?>'>
-        <img src='<?= base_url('assets/img/user/profile/'.$data_user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">                   
-      </div>
-      <div class="col-md-8">
-        <?= $data_user->nama_lengkap ?>
-      </a>
-      <?php } ?>
-      </div>
-      <div class="col-md-3 text-right">
-        <button class="btn btn-default"><i class="fas fa-fw fa-user-plus"></i></button>
-        <button class="btn btn-default"><i class="fas fa-fw fa-comment-dots"></i></button>
-        <button class="btn btn-default"><i class="fas fa-fw fa-ban"></i></button>
-      </a>
-      </div>
+        if (!empty($data_grup_tmp)){
+          if (strpos($data_grup_tmp->member,"|")){
+            $member = explode("|", $data_grup_tmp->member);
+            $count_member = count($member);
+            $i = 0;
+            while ($i < $count_member){              
+              foreach ($list_data_all_user as $user){
+              if ($user->user_id == $member[$i]){ 
+                ?>
+              <div class="col-md-1">
+                <a href='<?= base_url('user/'.$user->user_id)?>'>
+                  <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">
+                </a>                   
+              </div>
+              <div class="col-md-8">
+                <a href='<?= base_url('user/'.$user->user_id)?>'>
+                  <?= $user->nama_lengkap ?>
+                </a>
+              </div>
+              <div class="col-md-3 text-right">
+                <button class="btn btn-default"><i class="fas fa-fw fa-user-plus"></i></button>
+                <button class="btn btn-default"><i class="fas fa-fw fa-comment-dots"></i></button>
+                <button class="btn btn-default"><i class="fas fa-fw fa-ban"></i></button>
+              </div>
+            <?php 
+                $i++;
+              } 
+            }
+          }
+        }
+      }
+      ?>
     </div>
     <hr>
 </div>
-
-
-  <script>
-        // membuat objek elemen
-        var hasil = document.getElementById("konten");
-
-        // menampilkan output ke elemen hasil
-        hasil.innerHTML = "<p>Ini adalah lapak</p>";
-    </script>

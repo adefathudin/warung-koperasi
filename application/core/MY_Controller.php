@@ -17,6 +17,8 @@ class MY_Controller extends CI_Controller {
         $this->data['data_user'] = $this->users_detail_m->get_user($user_id); 
         //TAMPILKAN GRUP BESERTA DATANYA
         $this->data['list_grup'] = $this->grup_m->get_list_grup();
+
+        $this->data['user_id'] = $user_id;
         
         if(!$this->session){
             $this->load->library('session');

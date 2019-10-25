@@ -165,11 +165,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
       </div>
       <div class="card-body">
         <div class="row">
+
+        <?php
+        foreach ($list_grup as $grup){  
+        ?>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-70">          
             <div class="card-header">
               <div class="card-title">
-                <a href="#">Wijaya Kusuma
+                <a href="#"><?= $grup->nama_grup;?>
                 </a>
               </div>
             </div>
@@ -181,40 +185,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
             </div>
           </div>
         </div>
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-70">          
-            <div class="card-header">
-              <div class="card-title">
-                <a href="#">Item One
-                </a>
-              </div>
-            </div>
-            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
-            </a>
-            <div class="card-body">
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-70">          
-            <div class="card-header">
-              <div class="card-title">
-                <a href="#">Item One
-                </a>
-              </div>
-            </div>
-            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
-            </a>
-            <div class="card-body">
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-            </div>
-          </div>
-        </div>
+        <?php } ?>
 
       </div>
       <div class="card-footer">

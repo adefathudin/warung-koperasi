@@ -1,6 +1,5 @@
 </div>
 </div>
-
 <div class="col-lg-3 mb-4">
   <!--//JIKA HALAMAN SELAIN HOME DIBUKA-->
   <?php 
@@ -49,11 +48,12 @@
       </form>
       </div>
     </div>
-    <?php } ?>
-
+    <?php } 
+    if ($data_grup_tmp->admin != $user_id){ ?>
   <div class=" shadow mb-4 small">
     <button width="100%" class="btn btn-primary btn-md btn-block"><i class="fas fa-fw fa-plus"></i> Join grup</button> 
   </div>
+    <?php } ?>
 
  <!--JIKA HALAMAN ANGGOTA DIBUKA-->
  <?php 
@@ -97,16 +97,6 @@
     <input class="form-control input-sm" type="text">
     </div>
   </div>
-  
-  <div class="card shadow mb-4">
-    <div class="card-body small">
-    <div class=" font-weight-bold"><i class="fas fa-fw fa-user-plus"></i> Invite members</div><br>
-    <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-    </div>
-  </div>
-
     <?php } ?>
 
 </div>

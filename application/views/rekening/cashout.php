@@ -13,7 +13,7 @@
        Form Cash Out
       </div>
       <div class="card-body">  
-        <div class="font-weight-bold">Nominal Saldo</div><br>
+        <div class="font-weight-bold disabled">Nominal Saldo</div><br>
         <button value="50000" class="btn btn-secondary" onClick="getCashOut(this)">50.000</button>
         <button value="100000" class="btn btn-secondary" onClick="getCashOut(this)">100.000</button>
         <button value="250000" class="btn btn-secondary" onClick="getCashOut(this)">250.000</button>

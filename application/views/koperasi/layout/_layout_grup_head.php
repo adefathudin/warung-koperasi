@@ -1,6 +1,5 @@
 <!-- Content Row -->
 <div class="row">
-
 <!-- Content Column -->
 <div class="col-lg-9 mb-4">
   <?php 
@@ -23,7 +22,8 @@
           <i class="fas fa-fw fa-home"></i> Home
         </a>
       </div>
-
+      <?php
+      if (strpos($data_grup_tmp->admin, $user_id) == false){?>
       <div class="btn-group">
         <a href="lapak" class="btn btn-sm btn-light">
           <i class="fas fa-fw fa-shopping-cart"></i> Lapak
@@ -83,4 +83,5 @@
           <a class="dropdown-item text-danger" href="#">Leave Grup</a>
         </div>
       </div>
+      <?php } ?>
     </div>
