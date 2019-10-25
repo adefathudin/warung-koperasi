@@ -41,7 +41,7 @@
                   <tr>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='far fa-fw fa-arrow-alt-circle-down text-danger'></i>
-                    ".$mutasi->keterangan_trx."</td>
+                    Tarik Tunai</td>
                     <td></td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
                     <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>

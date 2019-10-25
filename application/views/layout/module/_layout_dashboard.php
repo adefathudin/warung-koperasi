@@ -9,7 +9,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_akhir, 0, ".", ".") ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -26,7 +26,7 @@
                       <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_koperasi, 0, ".", ".") ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-coins fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -66,10 +66,10 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Group Koperasi</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $user_grup->total_grup ?></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php if (empty($user_grup->total_grup) or empty($user_grup)) { echo 0;} else echo $user_grup->total_grup; ?></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
+                      <i class="fas fa-users fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>

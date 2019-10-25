@@ -53,7 +53,7 @@ class Auth extends CI_Controller {
     $this->load->model('rekening_m');
 
     $user_id = md5($this->input->post('email'));
-    $nama_lengkap = ucwords($this->input->post('nama_lengkap'));
+    $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
     $email = $this->input->post('email');
     $nomor_hp = $this->input->post('nomor_hp');
     $password = $this->input->post('password');
@@ -88,11 +88,11 @@ class Auth extends CI_Controller {
   //set up email
   $config = array(
     'protocol' => 'smtp',
-      'smtp_host' => 'smtp.adefathudin.com',
-      'smtp_port' => 25,
-      'smtp_user' => 'mail@adefathudin.com',
-      'smtp_pass' => 'evVyMxM(3',
-      'smtp_username' => 'mail@adefathudin.com',
+      'smtp_host' => 'mail.warungkoperasi.my.id',
+      'smtp_port' => 587,
+      'smtp_user' => 'no-reply@warungkoperasi.my.id',
+      'smtp_pass' => 'hancamacul',
+      'smtp_username' => 'no-reply@warungkoperasi.my.id',
       'mailtype' => 'html',
       'charset' => 'iso-8859-1',
       'wordwrap' => TRUE

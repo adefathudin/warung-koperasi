@@ -1,82 +1,87 @@
 <div class="row">
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Durasi Cash In s/d <?= $curdate ?></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $saldo->total_cash_in ?> kali</div>
-                    </div>
-                  </div>
-                </div>
+  <div class="col-lg-8 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        <div class="text-center font-weight-bold text-primary">Topup Saldo Rekening</div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Total Cash In
+                </a>
               </div>
             </div>
-           
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Cash In s/d <?= $curdate ?></div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->total_nominal_cash_in, 0, ".", ".") ?></div>
-                    </div>
-                  </div>
-                </div>
+            <div class="card-body">
+                <div class="small">s/d <?= $curdate ?></div>
+                <h6 class="font-weight-bold"><?= number_format($saldo->total_cash_in, 0, ".", ".") ?> kali</h6>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Nominal Cash In
+                </a>
               </div>
             </div>
-            
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-4 col-md-6 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Saldo</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_akhir, 0, ".", ".") ?></div>
-                    </div>
-                  </div>
-                </div>
+            <div class="card-body">
+                <div class="small">s/d <?= $curdate ?></div>
+                <h6 class="font-weight-bold"><?= number_format($saldo->total_nominal_cash_in, 0, ".", ".") ?></h6>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Total Saldo
+                </a>
               </div>
             </div>
+            <div class="card-body">
+                <div class="small">s/d <?= $curdate ?></div>
+                <h6 class="font-weight-bold"><?= number_format($saldo->saldo_akhir, 0, ".", ".") ?></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
 </div>
 
-<div class="row">
-
-  <!-- Area Chart -->
-  <div class="col-xl-12 col-lg-7">
-    <div class="card shadow mb-4">
-      <!-- Card Body -->
-      <div class="card-body">
-      
-  <form class="form-inline">
-        <a href="#" class="btn btn-light btn-icon-split" data-value="10000" name="a"><span class="icon text-gray-800">Rp. 10.0000</span></a>
-        <a href="#" class="btn btn-light btn-icon-split"data-value="25000"><span class="icon text-gray-800">Rp. 25.0000</span></a>
-        <a href="#" class="btn btn-light btn-icon-split"data-value="50000"><span class="icon text-gray-800">Rp. 50.0000</span></a>
-        <a href="#" class="btn btn-light btn-icon-split"data-value="100000"><span class="icon text-gray-800">Rp. 100.0000</span></a>
-        <a href="#" class="btn btn-light btn-icon-split"data-value="250000"><span class="icon text-gray-800">Rp. 250.0000</span></a>
-        <a href="#" class="btn btn-light btn-icon-split"data-value="500000"><span class="icon text-gray-800">Rp. 500.0000</span></a>
-  <div class="form-group mx-sm-3 mb-2">
-    <input type="number" name="nominal_topup" class="form-control" id="nominal_topup" onClick="getText()" placeholder="Nominal">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">next</button>
-</form>
-
-      
-      </div>
+<div class="col-lg-4 mb-4">
+  <div class="card shadow mb-4">
+    <div class="card-header">
+       Form Top Up
+    </div>
+    <div class="card-body">  
+        <div class="font-weight-bold">Nominal Saldo</div><br>
+        <button value="10000" class="btn btn-secondary" onClick="getTopup(this)">10.000</button>
+        <button value="50000" class="btn btn-secondary" onClick="getTopup(this)">50.000</button>
+        <button value="100000" class="btn btn-secondary" onClick="getTopup(this)">100.000</button>
+        <button value="500000" class="btn btn-secondary" onClick="getTopup(this)">500.000</button>
+        <br><br>            
+      <form class="form-group">
+          <input type="number" min="10000" id="nominalTopup" name="nominalTopup" class="form-control" placeholder="Minimal Rp10.000"> 
+          <hr>
+          <div class="small">*saldo akan otomatis bertambah. Jika mengalami kendala, silahkan hubungi tim support kami
+          <hr>
+        <button class="btn btn-primary form-control"><i class="fas fa-fw fa-money-bill-wave"></i> Top Up</button>
+      </form>
     </div>
   </div>
 </div>
-<!-- /.container-fluid -->
 
-</div>
-<!-- End of Main Content -->
+</div><!--END ROW-->
+
 <script>
-  function getText() {
-    var result = document.getElementById('a').value;
-    if (!isNaN(result)) {
-     document.getElementById('nominal_topup').value = result;
-           }
-        }
+function getTopup(objButton){
+        document.getElementById("nominalTopup").value = objButton.value;
+}
 </script>

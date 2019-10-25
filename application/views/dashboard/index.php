@@ -1,204 +1,256 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-        
-          <!-- Content Row -->
-          <?php $this->load->view('layout/module/_layout_dashboard'); ?>
-          <!-- Content Row -->
+defined('BASEPATH') OR exit('No direct script access allowed');?>
 
-          <div class="row">
+<?php $this->load->view('layout/module/_layout_dashboard'); ?>
 
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-                </div>
+<div class="row">
+  <div class="col-lg-9 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        <h5 class="text-center font-weight-bold text-primary">Belanja murah meriah</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-8">
+            <form class="form-group">
+              <input type="text" placeholder="Cari barang kesukaan anda disini..." class="form-control">    
+            </form>
+            <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+              </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
               </div>
             </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body">
-                  <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                  <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                  <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Color System -->
-              <div class="row">
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                      Primary
-                      <div class="text-white-50 small">#4e73df</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                      Success
-                      <div class="text-white-50 small">#1cc88a</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                      Info
-                      <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                      Warning
-                      <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                      Danger
-                      <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                      Secondary
-                      <div class="text-white-50 small">#858796</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="col-lg-6 mb-4">
-
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                  <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
-                  </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
-                </div>
-              </div>
-
-              <!-- Approach -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                  <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce CSS bloat and poor page performance. Custom CSS classes are used to create custom components and custom utility classes.</p>
-                  <p class="mb-0">Before working with this theme, you should become familiar with the Bootstrap framework, especially the utility classes.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
         </div>
-        <!-- /.container-fluid -->
+      </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="">
+            </a>
+            <div class="card-body">
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Item One
+                </a>
+              </h4>
+              <h5>$24.99</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Item One
+                </a>
+              </h4>
+              <h5>$24.99</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt="">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">Item One
+                </a>
+              </h4>
+              <h5>$24.99</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <a href="#" class="btn btn-primary btn-block"><i class="fas fa-fw fa-shopping-cart"></i> Lihat semua barang</a>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<div class="col-lg-3 mb-4">
+  <div class="card shadow mb-4">
+    <div class="card-header">
+       Filter by
+    </div>
+    <div class="card-body small">      
+      <form class="form-group">
+        <div class="font-weight-bold">Pencarian Barang</div><br>
+          <input type="text" class="form-control form-control-sm" placeholder="Nama barang yang dicari"> 
+          <hr>
+          <div class="font-weight-bold">Kondisi Barang</div><br>
+            <input type="checkbox"> Baru<br>
+            <input type="checkbox"> Bekas
+          <hr>
+          <div class="font-weight-bold">Harga</div><br>
+            <input type="number" class="form-control form-control-sm" placeholder="Min"><br>
+            <input type="number" class="form-control form-control-sm" placeholder="Max">
+          <hr>
+          <div class="font-weight-bold">Rating</div><br>
+            <input type="range" min="1" max="5" class="form-control" value="3" id="filterstar" placeholder="Min">
+            Star <p><span id="star"></span></p>        
+          <hr>
+        <div class="font-weight-bold">Penawaran</div><br>
+          <input type="checkbox"> Diskon<br>
+          <input type="checkbox"> Gratis Ongkir
+        <hr>
+        <button class="btn btn-primary form-control"><i class="fas fa-fw fa-search"></i> Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div><!--END ROW-->
+
+
+
+<hr>
+
+
+
+
+
+<!-- BATAS BARANG DAN GROUP -->
+<div class="row">
+  <div class="col-lg-9 mb-4">
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        <h5 class="text-center font-weight-bold text-primary">Gabung bersama grup Koperasi supaya tambah untung!</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Wijaya Kusuma
+                </a>
+              </div>
+            </div>
+            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
+            </a>
+            <div class="card-body">
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Item One
+                </a>
+              </div>
+            </div>
+            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
+            </a>
+            <div class="card-body">
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-70">          
+            <div class="card-header">
+              <div class="card-title">
+                <a href="#">Item One
+                </a>
+              </div>
+            </div>
+            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
+            </a>
+            <div class="card-body">
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
 
       </div>
-      <!-- End of Main Content -->
+      <div class="card-footer">
+        <a href="#" class="btn btn-primary btn-block"><i class="fas fa-fw fa-users"></i> Lihat semua grup</a>
+      </div>
+    </div> 
+  </div>
+</div>
 
-     
+<div class="col-lg-3 mb-4">
+  <div class="card shadow mb-4">
+    <div class="card-header">
+       Filter by
+    </div>
+    <div class="card-body small">      
+      <form class="form-group">
+        <div class="font-weight-bold">Pencarian Grup</div><br>
+          <input type="text" class="form-control form-control-sm" placeholder="Masukan nama grup"> 
+          <hr>
+          <div class="font-weight-bold">Minimal Simpanan Pokok</div><br>
+            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+          <hr>
+          <div class="font-weight-bold">Minimal Simpanan Wajib</div><br>
+            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+          <hr>
+          <div class="font-weight-bold">Minimal Pinjaman</div><br>
+            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+          <hr>
+          <div class="font-weight-bold">Rating</div><br>
+            <input type="range" min="1" max="5" class="form-control" value="3" id="filterstar" placeholder="Min">
+            Star <p><span id="star"></span></p>        
+          <hr>
+        <button class="btn btn-primary form-control"><i class="fas fa-fw fa-search"></i> Search</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div><!--END ROW-->

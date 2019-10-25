@@ -17,13 +17,9 @@ class Migration_add_table_mutasi_rekening extends MY_Migration {
             'constraint' => 15,
             'auto_increment' => TRUE
         ),
-        'nomor_rekening' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 20
-        ),
         'user_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 15
+            'constraint' => 32
         ),
         'jenis_trx' => array(
             'type' => 'INT',

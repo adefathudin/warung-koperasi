@@ -3,7 +3,7 @@
 class Rekening_m extends MY_Model {
 
     protected $_table_name = 'rekening';
-    protected $_primary_key = 'id';
+    protected $_primary_key = 'user_id';
     protected $_primary_filter = 'strval';
     protected $_order_by = '';
     protected $_timestamps = FALSE;

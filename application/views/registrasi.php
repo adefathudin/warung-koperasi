@@ -12,6 +12,7 @@
   <title>Registrasi Akun - WarungKoperasi</title>
 
   <!-- Custom fonts for this template-->
+  <link rel="icon" href="<?php echo base_url('assets/img/favicon.png')?>" type="image/x-icon">
   <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
@@ -50,10 +51,10 @@
                     <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus>
                   </div>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required >
+                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required>
                 </div>
                 <div class="form-group">
-                  <input type="number" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required >
+                  <input type="number" min="10" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
@@ -112,35 +113,6 @@
         }
         password.onchange = validatePassword;
         repassword.onkeyup = validatePassword;
-</script>
-
-
-<script>
-    var JS = {
-        init: function(){
-            var _this = this;
-            
-            $('#FormRegistrasi').validate({
-                rules: {
-                    //nomor_peserta:'required'
-                },
-                submitHandler: function(form){
-                    var $btn = $(form).find('[type="submit"]');
-                    
-                    $(form).ajaxSubmit({
-                        beforeSubmit: function(){
-                            $btn.find('i').removeClass('fa-sign-in-alt').addClass('fa-spinner fa-spin');
-                        },
-                        success: function(data){                            
-                            $btn.find('i').removeClass('fa-spinner fa-spin').addClass('fa-sign-in-alt');
-                        } 
-                    });
-                }
-            });
-        }};
-    $(document).ready(function(){
-        JS.init();
-    });
 </script>
 </body>
 

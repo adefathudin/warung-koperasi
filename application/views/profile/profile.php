@@ -59,6 +59,9 @@
                   </div>
                   <hr>
                   <div class="profile-feed">   
+                  <div class="text-primary">
+                    <i class="fas fa-fw fa-lock"></i> Semua identitas yang bersifat rahasia, tidak akan dipublikasikan.
+                  </div>
                 <!-- DATA INFORMASI -->                   
                   <div class="py-4">
                     <p class="clearfix">
@@ -127,6 +130,15 @@
                       </span>
                       <span class="float-right text-muted">
                       <?php echo $data_user_tmp->alamat ?>
+                      </span>
+                    </p>
+                  <p class="clearfix">
+                      <span class="float-left">
+                        <i class="fas fa-fw fa-money-check-alt"></i>
+                        Nomor Rekening
+                      </span>
+                      <span class="float-right text-muted">
+                      <?= $data_user->nomor_rekening." (". $data_user->nama_bank.")"; ?>
                       </span>
                     </p>
                     <?php 

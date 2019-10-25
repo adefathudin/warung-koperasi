@@ -38,10 +38,12 @@ class Identitas extends MY_Controller {
         $jenis_kelamin = $this->input->post('jenis_kelamin');
         $alamat = $this->input->post('alamat');
         $about = $this->input->post('about');
+        $nomor_rekening = $this->input->post('nomor_rekening');
+        $nama_bank = $this->input->post('nama_bank');
         $data = array(
             'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir,
             'tanggal_lahir' => $tanggal_lahir, 'jenis_kelamin' => $jenis_kelamin,
-            'alamat' => $alamat, 'about' => $about
+            'alamat' => $alamat, 'about' => $about, 'nomor_rekening' => $nomor_rekening, 'nama_bank' => $nama_bank
         );
         $this->users_detail_m->save($data, $user_id);  
         $this->session->set_flashdata('pesan_data','Profil berhasil diperbarui');       

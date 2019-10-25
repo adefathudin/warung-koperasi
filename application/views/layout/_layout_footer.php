@@ -29,26 +29,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Notifikasi Modal-->
-  <div class="modal fade" id="test" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="<?php echo base_url('auth/logout')?>">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+ 
   <!-- Create Group Modal-->
   <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -100,7 +81,6 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <!-- MODAL ADD GROUP -->
           <div class="form-group mx-sm-3 mb-2">
                 <div id="frm_UploadKTP" class="form-group">             
                     <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadKTP" value="Upload Foto Identitas"/>
@@ -171,13 +151,26 @@
       </div>
       <div class="form-group">
         <select name="jenis_kelamin" class="form-control" id="jenis_kelamin" required>
-                      <option value="<?= $data_user->jenis_kelamin ?>"><?= $data_user->jenis_kelamin ?></option>
-                      <option value="L">Laki-laki</option>
-                      <option value="P">Perempuan</option>
+          <option value="">Jenis Kelamin</option>
+          <option value="<?= $data_user->jenis_kelamin ?>"><?= $data_user->jenis_kelamin ?></option>
+          <option value="L">Laki-laki</option>
+          <option value="P">Perempuan</option>
         </select>
       </div>
       <div class="form-group">
         <textarea class="form-control form-control-user" name="alamat" placeholder="Alamat lengkap" required ><?= $data_user->alamat ?></textarea>
+      </div>
+      <div class="form-group">
+        <input type="text" name="nomor_rekening" class="form-control" id="nomor_rekening" placeholder="Nomor Rekening" value="<?= $data_user->nomor_rekening ?>">
+      </div>
+      <div class="form-group">
+        <select class="form-control" name="nama_bank">
+          <option value="">Pilih Jenis Bank</option>
+          <option value="BRI"">BRI</option>
+          <option value="BCA">BCA</option>
+          <option value="Mandiri">Mandiri</option>
+          <option value="BNI">BNI</option>
+        </select>            
       </div>
       <hr>
       <div class="form-group">
@@ -227,6 +220,7 @@
     $('#frm_HasilKameraProfile').hide();
     $('#frm_UploadProfile').hide();
     $('#frm_submit').hide();
+    $('#konfirmasiCashout').hide();
 
 
     //BUTTON UPLOAD KTP
@@ -328,6 +322,16 @@ function closeKamera(){
       Webcam.reset();
     }
     </script>
+    
+<script>
+function getCashOut(objButton){  
+  $('#konfirmasiCashout').show();
+  document.getElementById("nominalCashout").value = objButton.value;
+}   
+function getTopup(objButton){  
+  document.getElementById("nominalTopup").value = objButton.value;
+}   
 
+</script>
 </body> 
 </html>
