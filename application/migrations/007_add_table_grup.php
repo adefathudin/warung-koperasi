@@ -55,7 +55,23 @@ class Migration_add_table_grup extends MY_Migration {
         ),
         'banner' => array(
             'type' => 'VARCHAR',
-            'constraint' => 50
+            'constraint' => 50,
+            'default' => 'nobanner.jpg'
+        ),
+        'minimal_pokok' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => '0'
+        ),
+        'minimal_wajib' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => '0'
+        ),
+        'maksimal_pinjaman' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => '0'
         ),
         'created' => array(
             'type' => 'TIMESTAMP'

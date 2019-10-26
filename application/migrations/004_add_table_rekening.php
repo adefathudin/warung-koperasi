@@ -21,10 +21,6 @@ class Migration_add_table_rekening extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 32
         ),
-        'nomor_rekening' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 20
-        ),
         'saldo_awal' => array(
             'type' => 'VARCHAR',
             'constraint' => 30,

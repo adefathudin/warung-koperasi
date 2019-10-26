@@ -11,7 +11,7 @@
       <div class="text-left text-warning small"> 4.6 (190)<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i  class="fa fa-star"></i><i class="fa fa-star"></i>
       </div>    
     </div>
-      <img src="<?php echo base_url('assets/img/grup_koperasi/baner_grup.jpg')?>"  alt="profile" class="img-responsive" height="350px" width="100%"> 
+      <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" height="350px" width="100%"> 
   </div>
     <?php } ?>
 
@@ -53,13 +53,17 @@
           <i class="fas fa-fw fa-chart-line"></i> Laporan
         </a>
       </div>
-
+  
       <?php
       if ($data_grup_tmp->admin == $data_user->user_id){?>
       <div class="btn-group">
-        <a href="pengaturan" class="btn btn-sm btn-light">
+        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i> Pengaturan
-        </a>
+        </button>
+        <div class="dropdown-menu">        
+          <a class="dropdown-item" data-toggle="modal" data-target="#settingIdentitasGrup" href="#">Identitas Grup</a>
+          <a class="dropdown-item" data-toggle="modal" data-target="#settingFinanceGrup" href="#">Finance</a>
+        </div>
       </div>
       <?php } ?>
 

@@ -155,7 +155,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 
 
-
 <!-- BATAS BARANG DAN GROUP -->
 <div class="row">
   <div class="col-lg-9 mb-4">
@@ -167,29 +166,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
         <div class="row">
 
         <?php
-        foreach ($list_grup as $grup){  
+        foreach ($list_grup_limit_3 as $grup){  
         ?>
         <div class="col-lg-4 col-md-6 mb-4">
           <div class="card h-70">          
             <div class="card-header">
               <div class="card-title">
-                <a href="#"><?= $grup->nama_grup;?>
+                <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><?= $grup->nama_grup;?>
                 </a>
               </div>
             </div>
-            <a href="#"><img class="card-img-top" src="http://localhost/warkop/assets/img/grup_koperasi/baner_grup.jpg" alt="">
+            <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="150px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
             </a>
             <div class="card-body">
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                <p class="card-text"><?= $grup->about;?></p>
                 <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
             </div>
           </div>
         </div>
-        <?php } ?>
+        <?php 
+        } ?>
 
       </div>
       <div class="card-footer">
-        <a href="#" class="btn btn-primary btn-block"><i class="fas fa-fw fa-users"></i> Lihat semua grup</a>
+        <a href="<?= base_url('koperasi/grup/search') ?>" class="btn btn-primary btn-block"><i class="fas fa-fw fa-users"></i> Lihat semua grup</a>
       </div>
     </div> 
   </div>
@@ -201,18 +201,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
        Filter by
     </div>
     <div class="card-body small">      
-      <form class="form-group">
+      <form class="form-group" action="" method="POST">
         <div class="font-weight-bold">Pencarian Grup</div><br>
-          <input type="text" class="form-control form-control-sm" placeholder="Masukan nama grup"> 
+          <input type="text" name="nama_grup" class="form-control form-control-sm" placeholder="Masukan nama grup"> 
+          <hr>
+        <div class="font-weight-bold">Area Coverage</div><br>
+          <input type="text" name="wilayah" class="form-control form-control-sm" placeholder="Wilayah"> 
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Pokok</div><br>
-            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" name="nominal_pokok" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Wajib</div><br>
-            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" nama="nominal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Minimal Pinjaman</div><br>
-            <input type="number" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" name="nominal_pinjaman" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Rating</div><br>
             <input type="range" min="1" max="5" class="form-control" value="3" id="filterstar" placeholder="Min">

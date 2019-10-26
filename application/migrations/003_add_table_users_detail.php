@@ -58,6 +58,16 @@ class Migration_add_table_users_detail extends MY_Migration {
             'constraint' => 50,
             'default' => 'default.png'
         ),
+        'nomor_rekening' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => '-'
+        ),
+        'nama_bank' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => '-'
+        ),
         'profil' => array(
             'type' => 'VARCHAR',
             'constraint' => 50,

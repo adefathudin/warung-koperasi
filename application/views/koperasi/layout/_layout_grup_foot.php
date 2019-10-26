@@ -11,7 +11,7 @@
       <div class="text-left text-warning small"> 4.6 (190)<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i  class="fa fa-star"></i><i class="fa fa-star"></i>
       </div>    
     </div>
-      <img src="<?php echo base_url('assets/img/grup_koperasi/baner_grup.jpg')?>"  alt="profile" class="img-responsive" width="100%"> 
+      <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" width="100%"> 
   </div>
     <?php } ?>
 
@@ -101,6 +101,154 @@
 
 </div>
 </div>
+
+
+<!-- SETTING IDENTITAS GROUP -->
+<div class="modal fade" id="settingIdentitasGrup" tabindex="-1" role="dialog" aria-labelledby="settingIdentitasGrup" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingIdentitasGrup">Setting Identitas Grup</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form id="updateIdentitas" method="POST" enctype="multipart/form-data" action="<?php echo base_url('koperasi/grup/update_identitas')?>">
+        <div class="form-group mx-sm-3 mb-2">
+        <input type="hidden" name="grup_id" value="<?= $data_grup_tmp->grup_id ?>"> 
+        <div class="form-group">
+          <div class="small">Banner Grup</div>
+          <input type="file" class="form-control" name="banner" accept=".jpg,.jpeg">
+        </div>
+        <div class="form-group">
+          <div class="small">Nama Grup</div>
+          <input type="text" name="nama_grup" class="form-control" id="nominal_topup" placeholder="Nama Grup" value="<?= $data_grup_tmp->nama_grup ?>">    
+        </div>
+        <div class="form-group">
+          <div class="small">Coverage</div>
+          <input type="text" name="wilayah" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)" value="<?= $data_grup_tmp->wilayah ?>"> 
+        </div>
+        <div class="form-group">
+          <div class="small">Kategori</div>
+          <select class="form-control" name="kategori">
+            <option value="utensils"">Keluarga</option>
+            <option value="briefcase">Tempat Kerja</option>
+            <option value="graduation-cap">Sekolah</option>
+            <option value="people-carry">Lingkungan</option>
+          </select>            
+        </div>
+        <div class="form-group">
+          <div class="small">Desksripsi Singkat</div>
+          <textarea class="form-control" name="about" placeholder="Deskripsi grup..."><?= $data_grup_tmp->about ?></textarea>
+        </div>
+        <div class="form-group">
+          <div class="small">Deskripsi</div>
+          <textarea class="form-control" name="deskripsi" placeholder="Deskripsi grup..."><?= $data_grup_tmp->deskripsi ?></textarea>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group text-right">         
+          <?php 
+            if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
+              } else { ?>
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
+              <?php } ?>
+          </div>
+        </div>   
+        </div>
+        </form>     
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- SETTING SIMPAN GROUP -->
+<div class="modal fade" id="settingFinanceGrup" tabindex="-1" role="dialog" aria-labelledby="settingFinanceGrup" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingFinanceGrup">Setting Nominal</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- MODAL ADD GROUP -->
+        <form id="updateIdentitas" method="POST" action="<?php echo base_url('koperasi/grup/update_finance')?>">
+        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
+          <input type="hidden" name="grup_id" value="<?= $data_grup_tmp->grup_id ?>"> 
+          <input type="number" name="minimal_pokok" class="form-control" id="nominal_topup" placeholder="Minimal Simpanan Pokok">    
+        </div>
+        <div class="form-group">
+          <input type="number" name="minimal_wajib" class="form-control" id="nominal_topup" placeholder="Minimal Simpanan Wajib">
+        </div>
+        <div class="form-group">
+          <input type="number" name="maksimal_pinjaman" class="form-control" id="nominal_topup" placeholder="Maksimal Pinjaman">
+        </div>
+        <div class="modal-footer">
+          <div class="form-group text-right">         
+          <?php 
+            if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
+              } else { ?>
+            <button type="submit" class="btn btn-primary mb-2">Update</button>
+              <?php } ?>
+          </div>
+        </div>   
+        </div>
+        </form>     
+      </div>
+    </div>
+  </div>
+
+  
+<!-- SETTING SIMPAN GROUP -->
+  <div class="modal fade" id="settingPinjamGrup" tabindex="-1" role="dialog" aria-labelledby="settingPinjamGrup" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="settingPinjamGrup">Buat Group Koperasi</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <!-- MODAL ADD GROUP -->
+        <form id="updateIdentitas" method="POST" action="<?php echo base_url('koperasi/grup/new')?>">
+        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group">
+          <input type="text" name="nama_grup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
+        </div>
+        <div class="form-group">
+          <input type="text" name="wilayah" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">
+        </div>
+        <div class="form-group">
+          <select class="form-control" name="kategori">
+            <option value="utensils"">Keluarga</option>
+            <option value="briefcase">Tempat Kerja</option>
+            <option value="graduation-cap">Sekolah</option>
+            <option value="people-carry">Lingkungan</option>
+          </select>            
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <div class="form-group text-right">         
+          <?php 
+            if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
+              } else { ?>
+            <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
+              <?php } ?>
+          </div>
+        </div>   
+        </div>
+        </form>     
+      </div>
+    </div>
+  </div>
+
 <script>
           var slider = document.getElementById("filterstar");
           var output = document.getElementById("star");

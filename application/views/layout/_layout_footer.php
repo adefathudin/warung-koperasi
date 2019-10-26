@@ -31,6 +31,7 @@
   </div>
  
   <!-- Create Group Modal-->
+  
   <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -61,12 +62,17 @@
             <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
         </div>
         <div class="modal-footer">
-          <div class="form-group text-right">
+          <div class="form-group text-right">         
+          <?php 
+            if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
+              } else { ?>
             <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
+              <?php } ?>
           </div>
         </div>   
         </div>
-        </form>        
+        </form>     
       </div>
     </div>
   </div>
