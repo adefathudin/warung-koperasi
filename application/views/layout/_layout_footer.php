@@ -36,42 +36,42 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Buat Group Koperasi</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Buat Group Koperasi
+          </h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <!-- MODAL ADD GROUP -->
         <form id="updateIdentitas" method="POST" action="<?php echo base_url('koperasi/grup/new')?>">
-        <div class="form-group mx-sm-3 mb-2">
-        <div class="form-group">
-          <input type="text" name="nama_grup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
-        </div>
-        <div class="form-group">
-          <input type="text" name="wilayah" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">
-        </div>
-        <div class="form-group">
-          <select class="form-control" name="kategori">
-            <option value="utensils"">Keluarga</option>
-            <option value="briefcase">Tempat Kerja</option>
-            <option value="graduation-cap">Sekolah</option>
-            <option value="people-carry">Lingkungan</option>
-          </select>            
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
+          <div class="form-group mx-sm-3 mb-2">
+            <div class="form-group">
+              <input type="text" name="nama_grup" class="form-control" id="nominal_topup" placeholder="Nama Grup">    
+            </div>
+            <div class="form-group">
+              <input type="text" name="wilayah" class="form-control" id="nominal_topup" placeholder="Area Coverage (mis. nama kota atau daerah)">
+            </div>
+            <div class="form-group">
+              <select class="form-control" name="kategori">
+                <option value="utensils">Keluarga</option>
+                <option value="briefcase">Tempat Kerja</option>
+                <option value="graduation-cap">Sekolah</option>
+                <option value="people-carry">Lingkungan</option>
+              </select>            
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
+            </div>
         </div>
         <div class="modal-footer">
-          <div class="form-group text-right">         
-          <?php 
-            if ($data_user->type != "Full Service"){
-              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
+            <div class="form-group text-right">         
+              <?php 
+              if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile</div>";
               } else { ?>
-            <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
+              <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
               <?php } ?>
-          </div>
-        </div>   
-        </div>
+            </div>
+          </div> 
         </form>     
       </div>
     </div>
@@ -172,7 +172,7 @@
       <div class="form-group">
         <select class="form-control" name="nama_bank">
           <option value="">Pilih Jenis Bank</option>
-          <option value="BRI"">BRI</option>
+          <option value="BRI">BRI</option>
           <option value="BCA">BCA</option>
           <option value="Mandiri">Mandiri</option>
           <option value="BNI">BNI</option>
@@ -197,6 +197,7 @@
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/jquery/jquery.validate.min.js')?>"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery-easing/jquery.easing.min.js')?>"></script>
@@ -214,122 +215,44 @@
   <!-- Page level plugins -->
   <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
   <script src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
-  <!-- Configure a few settings and attach camera -->
+  <!-- Configure a few settings and attach camera -->  
+  <script src="<?php echo base_url('assets/js/getWebcam.js')?>"></script>
+
+  <script>
+  var JS = {
+    init: function(){
+      $('#formCashOut').submit(function(){
+        var $submit = $('#btnKonfirmasiCashout');
+          if (!confirm("Apakah anda melakukan cashout?")){
+          return false;
+      }
+      $submit.find('i').removeClass('fa-money-bill-wave').addClass('fa-circle-notch fa-spin');
+      $submit.attr('disabled', 'true');     
+      });
+    }
+  }
+  $(document).ready(function(){
+    JS.init();
+  });
+  </script>
+
 <script>
-    $('#frm_OpenKamera').hide();
-    $('#frm_HasilKamera').hide();
-    $('#frm_OpenKameraProfile').hide();
-    $('#frm_HasilKameraProfile').hide();
-    $('#frm_UploadProfile').hide();
-    $('#frm_submit').hide();
-    $('#konfirmasiCashout').hide();
-
-
-    //BUTTON UPLOAD KTP
-		$('#btn_UploadKTP').click(function(){
-      $('#frm_OpenKamera').show();
-      Webcam.set({
-      width: 320,
-      height: 240,
-      image_format: 'jpeg',
-      jpeg_quality: 90
-      });
-      Webcam.attach('#kamera');
-      $('#frm_UploadKTP').hide();
-      }),		
-
-    //BUTTON CAPTURE
-    $('#btn_capture').click(function(){
-      $('#frm_UploadProfile').show();
-      $('#frm_HasilKamera').show();
-      Webcam.snap( function(data_uri) {
-      document.getElementById('hasilKamera').innerHTML = '<img id="imageprevKTP" src="'+data_uri+'"/>';
-      });
-      Webcam.reset();
-      $('#frm_OpenKamera').hide();
-    }),
-
-    //BUTTON RECAPTURE
-    $('#btn_recapture').click(function(){
-      Webcam.set({
-      width: 320,
-      height: 240,
-      image_format: 'jpeg',
-      jpeg_quality: 90
-      });
-      Webcam.attach('#kamera');
-      $('#frm_OpenKamera').show();
-      $('#frm_HasilKamera').hide();
-    }),
-
-    //BUTTON CAPTURE SAVE
-    
-    $('#btn_save_capture').click(function(){
-      $('#btn_recapture').hide();
-      $('#btn_save_capture').hide();
-      Webcam.snap( function(data_uri) {
-        Webcam.upload(data_uri, 'http://localhost/warkop/auth/save_registrasi', function(code, text) {} );
-     } )
-    }),
-
-
-    //BUTTON UPLOAD PROFILE
-		$('#btn_UploadProfile').click(function(){
-      $('#frm_OpenKameraProfile').show();
-      Webcam.set({
-      width: 320,
-      height: 240,
-      image_format: 'jpeg',
-      jpeg_quality: 90
-      });
-      Webcam.attach('#kameraProfile');
-      $('#frm_UploadProfile').hide();
-      }),		
-
-    //BUTTON CAPTURE
-    $('#btn_captureProfile').click(function(){
-      $('#frm_submit').show();
-      $('#frm_HasilKameraProfile').show();
-      Webcam.snap( function(data_uri) {
-      document.getElementById('hasilKameraProfile').innerHTML = '<img id="imageprevProfile" src="'+data_uri+'"/>';
-      });
-      Webcam.reset();
-      $('#frm_OpenKameraProfile').hide();
-    }),
-
-    //BUTTON RECAPTURE
-    $('#btn_recaptureProfile').click(function(){
-      Webcam.set({
-      width: 320,
-      height: 240,
-      image_format: 'jpeg',
-      jpeg_quality: 90
-      });
-      Webcam.attach('#kameraProfile');
-      $('#frm_OpenKameraProfile').show();
-      $('#frm_HasilKameraProfile').hide();
-    })
-</script>
-<script>
-
-
-function upload(){
- // Get base64 value from <img id='imageprev'> source
+  function upload(){
     var foto_ktp = document.getElementById("imageprevKTP").src;
     var foto_profile = document.getElementById("imageprevProfile").src;
     document.getElementById("value_ktp").value = foto_ktp;
     document.getElementById("value_profile").value = foto_profile;
 }
-function closeKamera(){
-      Webcam.reset();
+  function closeKamera(){
+    Webcam.reset();
     }
-    </script>
-    
-<script>
+
 function getCashOut(objButton){  
   $('#konfirmasiCashout').show();
   document.getElementById("nominalCashout").value = objButton.value;
@@ -337,7 +260,23 @@ function getCashOut(objButton){
 function getTopup(objButton){  
   document.getElementById("nominalTopup").value = objButton.value;
 }   
-
+</script>
+<script>
+function joinGrup() {
+    $.ajax({
+        type: 'POST',
+        url: '<?= base_url("auth/test")?>',
+        data: {
+            id: 1
+        },
+        success: function (data) {
+            $("#joinGrup").html("<i class='fas fa-fw fa-clock'></i> Requested");
+        },
+        error: function (data) {
+            $("#joinGrup").html("Error");
+        }
+    });
+}
 </script>
 </body> 
 </html>

@@ -201,7 +201,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
        Filter by
     </div>
     <div class="card-body small">      
-      <form class="form-group" action="" method="POST">
+      <form class="form-group" action="<?= base_url('koperasi/grup/search') ?>" method="POST">
         <div class="font-weight-bold">Pencarian Grup</div><br>
           <input type="text" name="nama_grup" class="form-control form-control-sm" placeholder="Masukan nama grup"> 
           <hr>
@@ -209,13 +209,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
           <input type="text" name="wilayah" class="form-control form-control-sm" placeholder="Wilayah"> 
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Pokok</div><br>
-            <input type="number" name="nominal_pokok" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" name="minimal_pokok" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Wajib</div><br>
-            <input type="number" nama="nominal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" name="minimal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Minimal Pinjaman</div><br>
-            <input type="number" name="nominal_pinjaman" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" name="maksimal_pinjaman" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Rating</div><br>
             <input type="range" min="1" max="5" class="form-control" value="3" id="filterstar" placeholder="Min">

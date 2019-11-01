@@ -114,6 +114,22 @@
         password.onchange = validatePassword;
         repassword.onkeyup = validatePassword;
 </script>
+<script>
+var JS = {
+  init: function(){
+    $('form').submit(function(){
+      var $submit = $('#btn-submit');
+      $submit.find('i').removeClass('fa-sign-in-alt').addClass('fa-circle-notch fa-spin');
+      $submit.attr('disabled', 'true');
+    });
+  }
+};
+
+$(document).ready(function(){
+  JS.init();
+});
+
+</script>
 </body>
 
 </html>

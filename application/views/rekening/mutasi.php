@@ -4,30 +4,39 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Tgl</th>
+              <th>No.</th>
+              <th>Tanggal</th>
               <th>Keterangan</th>
               <th>Cash In</th>
               <th>Cash Out</th>
-              <th>Saldo</th>
+              <th>Saldo Akhir</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
-              <th colspan='2' class="text-center">Total</th>
-              <th><?= number_format($saldo->total_nominal_cash_in, 0, ".", "."); ?></th>
-              <th><?= number_format($saldo->total_nominal_cash_out, 0, ".", "."); ?></th>
-              <th><?= number_format($saldo->saldo_akhir, 0, ".", "."); ?></th>
+              <td colspan="2">Total Top Up</td>
+              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_in, 0, ".", "."); ?></td>
+            </tr>
+            <tr>
+              <td colspan="2">Total Tarik Tunai</td>
+              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_out, 0, ".", "."); ?></td>
+            </tr>
+            <tr>
+              <th colspan="2">Sisa Saldo</th>
+              <th colspan="4">Rp<?= number_format($saldo->saldo_akhir, 0, ".", "."); ?></th>
             </tr>
           </tfoot>
           <tbody>
             <?php 
+              $no = 1;
               foreach ($laporan_mutasi as $mutasi){
                 if ($mutasi->jenis_trx == 1){
                   echo "
                   <tr>
+                    <td>".$no++."</td>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='far fa-fw fa-arrow-alt-circle-up text-success'></i>
                     ".$mutasi->keterangan_trx." via ".$mutasi->merchant_trx."</td>
@@ -39,6 +48,7 @@
                   elseif ($mutasi->jenis_trx == 2){
                     echo "
                   <tr>
+                    <td>".$no++."</td>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='far fa-fw fa-arrow-alt-circle-down text-danger'></i>
                     Tarik Tunai</td>
@@ -50,6 +60,7 @@
                   elseif ($mutasi->jenis_trx == 3){
                       echo "
                   <tr>
+                    <td>".$no++."</td>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='fas fa-fw fa-angle-double-left text-info'></i>
                     ".$mutasi->keterangan_trx."</td>
@@ -61,6 +72,7 @@
                     elseif ($mutasi->jenis_trx == 4){
                     echo "
                   <tr>
+                    <td>".$no++."</td>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='fas fa-fw fa-angle-double-right text-warning'></i>
                     ".$mutasi->keterangan_trx."</td>

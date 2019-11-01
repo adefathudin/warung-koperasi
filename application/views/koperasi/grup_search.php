@@ -28,8 +28,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
             <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="150px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
             </a>
             <div class="card-body">
-                <p class="card-text"><?= $grup->about;?></p>
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                <p class="card-text">
+                <table class="table-responsive">
+                <tr><td colspan="3">
+                <?= $grup->about;?>
+                </td></tr>
+                <tr><td>Simpanan Pokok</td><td>:</td><td>
+                <b><?= number_format($grup->minimal_pokok) ?></b>
+                </td></tr>
+                <tr><td>Simpanan Wajib</td><td>:</td><td>
+                <b><?= number_format($grup->minimal_pokok) ?></b>
+                </td></tr>
+                <tr><td>Maksimal Pinjaman</td><td>:</td><td>
+                <b><?= number_format($grup->minimal_pokok) ?></b>
+                </td></tr>
+                </table>
+                </p>
+                <small class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
             </div>
           </div>
         </div>

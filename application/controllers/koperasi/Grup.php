@@ -25,10 +25,24 @@ class Grup extends MY_Controller {
     }
 
     public function id($grup_id = null )
-    { 
-        
+    {         
         $this->load->model('grup_m');
         $this->load->model('users_detail_m');
+        $this->load->model('rekening_m');
+        $user_id = $this->session->userdata('user_id');
+
+        //JIKA HALAMAN SIMPAN DI GRUP DIBUKA
+        if ($this->uri->segment(3) == 'simpan'){
+            $grup_id = $this->uri->segment(2);
+            $this->load->model('simpan_grup_m');
+            $this->data['simpanan_grup'] = $this->simpan_grup_m->get_simpanan_grup($user_id,$grup_id);
+            //cek periode pinjaman
+            $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
+            $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
+        }
+        //
+        $this->data['grup_id'] = $this->uri->segment(2);
+        $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
         $this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();
         $this->data['data_grup_tmp'] = $this->grup_m->get($grup_id); 
         $this->data['title'] = ucwords($this->grup_m->get($grup_id)->nama_grup);
@@ -37,7 +51,7 @@ class Grup extends MY_Controller {
         
     }
 
-
+    //BUAT GRUP BARU
     public function new(){
         $this->load->model('grup_m');
         $this->load->model('user_grup_m');
@@ -82,7 +96,7 @@ class Grup extends MY_Controller {
         redirect ('grup/'.$grup_id.'/index');
     }
     
-    
+    //UPDATE  DATA PROFIL
     public function update_identitas(){
         $this->load->model('grup_m');
         $grup_id = $this->input->post('grup_id');  
@@ -106,6 +120,7 @@ class Grup extends MY_Controller {
         }
     }
 
+    //Setting nominal minimal pinjaman dan simpanan
     public function update_finance(){
         $this->load->model('grup_m');         
         $grup_id = $this->input->post('grup_id');  
@@ -116,7 +131,51 @@ class Grup extends MY_Controller {
             'minimal_pokok' => $minimal_pokok, 'minimal_wajib' => $minimal_wajib, 'maksimal_pinjaman' => $maksimal_pinjaman
             );  
         if ($this->grup_m->save($update_finance_grup, $grup_id)){
-            redirect ('grup/'.$grup_id.'/index');
+            redirect ('grup/'.$grup_id.'/simpan');
         }
+    }
+
+    public function proses_pembayaran_simpan(){
+        $this->load->model('simpan_grup_m');
+        $this->load->model('rekening_m');
+        $this->load->model('mutasi_rekening_m');
+        $user_id = $this->session->userdata('user_id');
+        $grup_id = $this->input->post('grup_id');
+        $grup_name = $this->input->post('grup_name');
+        $jenis_simpanan = $this->input->post('jenis_simpanan');
+        $nominal_simpanan = $this->input->post('nominal_simpanan');
+        $periode = $this->input->post('periode_simpanan');        
+        $rek = $this->rekening_m->get($user_id);
+        //jika simpanan pokok, maka mengecek apakah simpanan pokok sudah pernah dibayar atau tidak
+        if ($jenis_simpanan == "Pokok"){
+            $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
+        //jika simpanan wajib
+        } elseif ($jenis_simpanan == "Wajib"){
+            $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
+        } elseif ($jenis_simpanan == "null"){
+            
+        }
+        if ($cek_simpanan == 0){
+        $update_saldo = array (
+            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir - $nominal_simpanan),
+            'saldo_koperasi' => ($rek->saldo_koperasi + $nominal_simpanan)
+        );
+        $data_simpanan = array(
+            'user_id' => $user_id, 'grup_id' => $grup_id,
+            'jenis_simpanan' => $jenis_simpanan, 'periode' => $periode, 'nominal' => $nominal_simpanan
+        );
+        $insert_mutasi = array (
+            'user_id' => $user_id, 'jenis_trx' => '4', 'nominal' => $nominal_simpanan,
+            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir + $nominal_simpanan),
+            'keterangan_trx' => 'Simpanan '.$jenis_simpanan.' '.$grup_name
+        );
+        if ($this->simpan_grup_m->save($data_simpanan)){     
+            $this->rekening_m->save($update_saldo,$user_id);
+            $this->mutasi_rekening_m->save($insert_mutasi);
+            }
+        } else {
+            $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
+        }
+        redirect ('grup/'.$grup_id.'/simpan');
     }
 }

@@ -5,17 +5,19 @@
                   <div class="border-bottom text-center pb-4">
                     <img src="<?php echo base_url('assets/img/user/profile/'.$data_user_tmp->profil) ?>" alt="profile" class="img-thumbnail img-responsive">
                     <div class="mb-3"><br>
-                      <h3><?php echo $data_user_tmp->nama_lengkap;
-                            if ($data_user->type == 'Full Service') {
-                            echo " <i class='far fa-fw fa-check-circle text-primary'></i>";} ?>
+                      <h3>
+                        <?php echo $data_user_tmp->nama_lengkap;
+                            if ($data_user_tmp->type == 'Full Service') {
+                            echo " <i class='far fa-fw fa-check-circle text-primary'></i>";} 
+                        ?>
                       </h3>
                       <div class="d-flex align-items-center justify-content-center">
                         <h5 class="mb-0 mr-2 text-muted">
                         <?php 
                         echo "<div class='small'>".$data_user_tmp->type."</div>";
-                        if ($data_user->type != 'Full Service' and $data_user->ktp == "default.png") {
+                        if ($data_user->type != 'Full Service' and $data_user->ktp == "default.png" and $data_user_tmp->user_id == $user_id) {
                         echo "<br><a href='#' data-toggle='modal' data-target='#upgrade'><u>Click here to upgrade</u></a>";}
-                        elseif ($data_user->type != 'Full Service' and $data_user->ktp != "") {
+                        elseif ($data_user->type != 'Full Service' and $data_user->ktp != "" and $data_user_tmp->user_id == $user_id){
                           echo "<br><i>(Menunggu Persetujuan)</i>";}
                         ?>
                         </h5>
@@ -46,10 +48,10 @@
                   <div class="d-block d-md-flex justify-content-between mt-4 mt-md-0">
                     <div class="text-center mt-4 mt-md-0">
                       <?php                       
-                      if ($data_user_tmp->user_id != $data_user->user_id){
+                      if ($data_user_tmp->user_id != $user_id){
                         echo"
                       <button class='btn btn-outline-primary'>Message</button>
-                      <button class='btn btn-primary'>Add Friend</button>";}
+                      <button class='btn btn-outline-primary'>Follow</button>";}
                       else {
                         echo"
                       <a href='#' data-toggle='modal' data-target='#settingUserModal'>
@@ -59,9 +61,12 @@
                   </div>
                   <hr>
                   <div class="profile-feed">   
+                  <?php                       
+                      if ($data_user_tmp->user_id == $user_id){ ?>
                   <div class="text-primary">
                     <i class="fas fa-fw fa-lock"></i> Semua identitas yang bersifat rahasia, tidak akan dipublikasikan.
                   </div>
+                  <?php } ?>
                 <!-- DATA INFORMASI -->                   
                   <div class="py-4">
                     <p class="clearfix">
@@ -73,18 +78,19 @@
                       <?php echo $data_user_tmp->joined ?>
                       </span>
                     </p>
-                    <p class="clearfix">
-                      <span class="float-left">
-                        <i class="fas fa-fw fa-phone"></i>
+                    <?php                       
+                      if ($data_user_tmp->user_id == $user_id){
+                        echo"    
+                        
+                    <p class='clearfix'>
+                      <span class='float-left'>
+                        <i class='fas fa-fw fa-phone'></i>
                         No. HP
                       </span>
-                      <span class="float-right text-muted">
-                      <?php echo $data_user_tmp->nomor_hp ?>
+                      <span class='float-right text-muted'>
+                       ".$data_user_tmp->nomor_hp."
                       </span>
-                    </p>
-                    <?php                       
-                      if ($data_user_tmp->user_id == $data_user->user_id){
-                        echo"                        
+                    </p>                    
                     <p class='clearfix'>
                     <span class='float-left'>
                       <i class='fas fa-fw fa-envelope'></i>
@@ -121,7 +127,7 @@
                     echo $jk."
                     </span>
                     </p>
-                    ";}
+                    ";
                   ?>
                     <p class="clearfix">
                       <span class="float-left">
@@ -148,6 +154,7 @@
                           <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
                           .$this->session->flashdata('pesan_data')."</div>";
                           }
+                        }
                   ?>
                   
                   </div>

@@ -19,7 +19,7 @@
         <button value="250000" class="btn btn-secondary" onClick="getCashOut(this)">250.000</button>
         <button value="500000" class="btn btn-secondary" onClick="getCashOut(this)">500.000</button>
         <br><br>       
-        <form method="POST" action="<?php echo base_url('rekening/cashout/proses')?>" class="form-group">
+        <form method="POST" action="<?php echo base_url('rekening/cashout/proses')?>" class="form-group" id="formCashOut">
           <div class="form-group">
             <input readonly required type="number" id="nominalCashout" name="nominalCashout" min="50000" max="<?= $saldo->saldo_akhir ?>" class="form-control" placeholder="Minimal Rp50.000">
           </div>
@@ -40,7 +40,7 @@
             <button class='btn btn-primary form-control' disabled ><i class='fas fa-fw fa-donate'></i> Cash Out</button>";
             } else {
             echo "
-            <button type='submit' class='btn btn-primary form-control'><i class='fas fa-fw fa-money-bill-wave'></i> Cash Out</button>";
+            <button type='submit' id='btnKonfirmasiCashout' class='btn btn-primary form-control'><i class='fas fa-fw fa-money-bill-wave'></i> Cash Out</button>";
             } ?>
         </form>
     </div>

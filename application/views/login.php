@@ -4,7 +4,7 @@
 <html>
     
 <head>
-  <title>Bootstrap Login Form | Web Dev Trick</title>
+  <title>Login - WarungKoperasi</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -100,7 +100,7 @@ a {
               <div class="input-group-append">
                 <span class="input-group-text"><i class="fas fa-user"></i></span>
               </div>
-              <input type="text" name="email" class="form-control input_user" required placeholder="email">
+              <input type="text" name="email" id="email" class="form-control input_user" required placeholder="e.g mail@warungkoperasi.my.id">
             </div>
             <div class="input-group mb-2">
               <div class="input-group-append">
@@ -125,7 +125,7 @@ a {
             </div>
         </div>
         <div class="d-flex justify-content-center mt-3 login_container">
-          <button type="submit" name="button" class="btn login_btn">Login</button>
+          <button type="submit" name="button" id="btn-login" class="btn login_btn">Login <i class="fas fa-fw fa-sign-in-alt"></i></button>
         </div>
           </form>        
         <div class="mt-4">
@@ -146,6 +146,21 @@ a {
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
+  <script>
+  var JS = {
+    init: function(){
 
+     $('form').submit(function(){
+      var $submit = $('#btn-login');
+        $submit.find('i').removeClass('fa-sign-in-alt').addClass('fa-circle-notch fa-spin');
+        $submit.attr('disabled', 'true');     
+     });
+    }
+  };
+
+  $(document).ready(function(){
+    JS.init();
+  });
+  </script>
 </body>
 </html>

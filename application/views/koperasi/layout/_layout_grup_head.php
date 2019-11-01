@@ -23,7 +23,12 @@
         </a>
       </div>
       <?php
-      if (strpos($data_grup_tmp->admin, $user_id) == false){?>
+      //mengecek data grup, apakah user ini sudah masuk grup atau belum
+      if (!empty($user_grup)){       
+          if (strpos($user_grup->basic_grup, $grup_id) !== false or $data_grup_tmp->admin == $user_id){
+            //jika ada, maka akan ditampilkan menu
+            ?>
+      
       <div class="btn-group">
         <a href="lapak" class="btn btn-sm btn-light">
           <i class="fas fa-fw fa-shopping-cart"></i> Lapak
@@ -55,7 +60,9 @@
       </div>
   
       <?php
-      if ($data_grup_tmp->admin == $data_user->user_id){?>
+          } 
+      //cek apakah user tersebut sebagai admin
+      if ($data_grup_tmp->admin == $user_id){?>
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i> Pengaturan
@@ -65,7 +72,9 @@
           <a class="dropdown-item" data-toggle="modal" data-target="#settingFinanceGrup" href="#">Finance</a>
         </div>
       </div>
-      <?php } ?>
+      <?php
+      } 
+ ?>
 
       <!--<div class="btn-group">
         <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
