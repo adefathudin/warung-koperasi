@@ -19,6 +19,7 @@
   <!-- Custom styles for this template-->
   <link rel="icon" href="<?php echo base_url('assets/img/favicon.png')?>" type="image/x-icon">
   <link href="<?php echo base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
+  <link href="<?php echo base_url('assets/css/star-rating-svg.css')?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.css')?>" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 

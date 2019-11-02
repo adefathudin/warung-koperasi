@@ -151,8 +151,8 @@ a {
     init: function(){
 
      $('form').submit(function(){
-      var $submit = $('#btn-login');
-        $submit.find('i').removeClass('fa-sign-in-alt').addClass('fa-circle-notch fa-spin');
+      var $submit = $('#btn-login');   
+        $submit.find('i').removeClass('fa-sign-in-alt').addClass('fa-circle-notch fa-spin');  
         $submit.attr('disabled', 'true');     
      });
     }

@@ -209,8 +209,8 @@
               <input type="number" name="minimal_wajib" class="form-control" id="nominal_topup" placeholder="Minimal Simpanan Wajib"value="<?= $data_grup_tmp->minimal_wajib ?>">
             </div>
             <div class="form-group"> 
-              <small>Maksima pinjaman</small>
-              <input type="number" name="maksimal_pinjaman" class="form-control" id="nominal_topup" placeholder="Maksimal Pinjaman"value="<?= $data_grup_tmp->maksimal_pinjaman ?>">
+              <small>Maksimal pinjaman</small>
+              <input type="number" name="maksimal_pinjaman" class="form-control" max="100" id="nominal_topup" placeholder="%"value="<?= $data_grup_tmp->maksimal_pinjaman ?>"><small> <i class="fas fa-fw fa-info-circle"></i> Maksmimal pinjaman dalam bentuk % dari total pinjaman</small>
             </div>
             
             <div class="modal-footer">
@@ -271,7 +271,6 @@
       </div>
     </div>
   </div>
-
 <script>
           var slider = document.getElementById("filterstar");
           var output = document.getElementById("star");

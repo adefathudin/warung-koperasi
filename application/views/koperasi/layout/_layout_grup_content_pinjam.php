@@ -7,7 +7,9 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-capitalize mb-1">Sisa Limit Pinjaman</div>
-                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_koperasi, 0, ".", ".") ?></div>
+                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format(($saldo->saldo_koperasi * $data_grup_tmp->maksimal_pinjaman)/100, 0, ".", ".") ?>                                              
+                  <small>(<?= $data_grup_tmp->maksimal_pinjaman ?>% dr total simpanan)</small>
+                </div>
               </div>
             </div>
           </div>
@@ -52,24 +54,42 @@
 
   <div class="card mb-4">    
     <div class="card-body">
-      <form method="POST" action="">
-        <div class="form-row align-items-center py-3 d-flex flex-row justify-content-between">        
+      <form method="POST" action="<?= base_url('koperasi/pinjaman/proses_pengajuan_pinjaman') ?>">
+        <div class="form-row align-items-center d-flex flex-row justify-content-between">        
+          <div class="col my-1">
+            <input type="hidden" name="grup_name" value="<?= $data_grup_tmp->nama_grup ?>">
+            <input type="hidden" name="grup_id" value="<?= $grup_id ?>">
+            <input type="number" name="nominal_pinjaman" id="nominal_pinjaman" class="form-control" placeholder="Nominal" max="<?= ($saldo->saldo_koperasi * $data_grup_tmp->maksimal_pinjaman)/100?>" required>
+          </div>
           <div class="col-auto my-1">
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-              <option selected>Pilih Jenis Simpanan</option>
-              <option value="1">Simpanan Pokok</option>
-              <option value="2">Simpanan Wajib</option>
-              <option value="3">Simpanan Sukarela</option>
+            <select class="custom-select mr-sm-2" name="tenor" id="tenor" required>
+              <option selected value="null">Tenor</option>
+              <option value="1">1 bulan</option>
+              <option value="3">3 bulan</option>
+              <option value="6">6 bulan</option>
+              <option value="12">12 bulan</option>
             </select>
           </div>
-          <div class="col-auto my-1">
-            <input type="number" class="form-control" placeholder="Nominal">
+          <div class="col my-1">
+            <input type="text" class="form-control" id="kalkulasi_cicilan" value="Akumulasi cicilan perbulan" readonly>
           </div>
-          <div class="col-auto my-1">
-            <input type="text" class="form-control" value="<?= date('Y-m') ?>" readonly>
+        </div>                   
+        <div class="form-row">          
+          <div class="col my-1">
+            <textarea name="tujuan_pinjaman" class="form-control" placeholder="Tujuan mengajukan pinjaman"></textarea>
           </div>
+        </div>   
+        <div class="form-check form-row">          
           <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-wallet"></i> Simpan</button>
+            <input class="form-check-input" type="checkbox" id="inlineFormCheck" required>
+              <label class="form-check-label" for="inlineFormCheck">
+              Saya telah membaca dan telah menyutujui <a data-toggle="modal" data-target="#syaratPinjaman" href="#">syarat dan ketentuan pinjaman <?= $data_grup_tmp->nama_grup ?></a>
+              </label>
+          </div>
+        </div>      
+        <div class="form-row">          
+          <div class="col-auto my-1">
+            <button type="submit" id="btn-pinjam" class="btn btn-primary" disabled><i class="fas fa-fw fa-dollar-sign"></i> Ajukan Pinjaman</button>
           </div>
         </div>
       </form>

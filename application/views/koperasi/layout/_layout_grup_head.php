@@ -8,8 +8,7 @@
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">    
       <div class="m-0 font-weight-bold text-capitalize text-primary"><?= $data_grup_tmp->nama_grup ?>
       </div>
-      <div class="text-left text-warning small"> 4.6 (190)<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i  class="fa fa-star"></i><i class="fa fa-star"></i>
-      </div>    
+      <div class="my-rating jq-stars"></div>
     </div>
       <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" height="350px" width="100%"> 
   </div>
@@ -75,17 +74,6 @@
       <?php
       } 
  ?>
-
-      <!--<div class="btn-group">
-        <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fas fa-fw fa-money-bill-wave-alt"></i> Pinjam
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-            <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </div>-->
       
       <div class="dropdown no-arrow">
         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

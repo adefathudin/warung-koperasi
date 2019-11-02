@@ -58,11 +58,17 @@
     
   <div class="card mb-4">    
     <div class="card-body">
+      <?php if ($saldo->saldo_akhir < $data_grup_tmp->minimal_pokok or $saldo->saldo_akhir < $data_grup_tmp->minimal_wajib or $saldo->saldo_akhir == 0){
+        echo "<div class='text-danger text-center'>Saldo Rekening anda tidak mencukupi untuk melakukan pembayaran</div><br>";
+      }?>
       <form method="POST" action="<?= base_url('koperasi/grup/proses_pembayaran_simpan') ?>">
         <div class="form-row align-items-center d-flex flex-row justify-content-between">        
-          <div class="col-auto my-1">
+          <div class="col my-1">
             <input type="hidden" name="grup_name" value="<?= $data_grup_tmp->nama_grup ?>">
             <input type="hidden" name="grup_id" value="<?= $grup_id ?>">
+            <input type="hidden" name="minimal_pokok" value="<?= $data_grup_tmp->minimal_pokok ?>">
+            <input type="hidden" name="minimal_wajib" value="<?= $data_grup_tmp->minimal_wajib ?>">
+            <input type="hidden" name="periode" value="<?= date('Y-m') ?>">
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jenis_simpanan" required>
               <option value="null" selected required>Pilih Jenis Simpanan</option>              
               <?php if ($cek_periode_pinjaman_pokok == 0){ ?>
@@ -75,16 +81,11 @@
               <option value="Sukarela">Simpanan Sukarela</option>
             </select>
           </div>
-          <div class="col-auto my-1">
+          <div class="col my-1">
             <input type="number" class="form-control" name="nominal_simpanan" placeholder="Nominal" required>
           </div>
-          <?php if ($cek_periode_pinjaman_wajib == 0){ ?>
           <div class="col-auto my-1">
-            <input type="date" class="form-control" min="2019-11-01" max="2020-01-31" name="periode_simpanan" required>
-          </div>          
-          <?php } ?>
-          <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-fw fa-wallet"></i> Simpan</button>
+            <button type="submit" class="btn btn-primary" <?php if ($saldo->saldo_akhir < $data_grup_tmp->minimal_pokok or $saldo->saldo_akhir < $data_grup_tmp->minimal_wajib or $saldo->saldo_akhir == 0){ echo"disabled";} ?>><i class="fas fa-fw fa-wallet"></i> Simpan</button>
           </div>
         </div>
       </form>

@@ -29,6 +29,28 @@
       </div>
     </div>
   </div>
+
+  <!-- Syarat dan ketentuan pinjaman-->
+  <div class="modal fade" id="syaratPinjaman" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Syarat dan ketentuan pengajuan pinjaman <?= $data_grup_tmp->nama_grup ?></h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          1. 1% dari total nominal pengajuan pinjaman digunakan untuk kas koperasi<br>
+          2. Limit kredit pinjaman <?= $data_grup_tmp->maksimal_pinjaman ?> dari total simpanan koperasi aktif<br>
+          3. Pengajuan pinjaman akan diverifikasi terlebih dahulu oleh pengurus koperasi dan selanjutnya bila disetujui, akan masuk ke saldo rekening
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" data-dismiss="modal">Saya setuju</button>
+        </div>
+      </div>
+    </div>
+  </div>
  
   <!-- Create Group Modal-->
   
@@ -193,9 +215,14 @@
     </div>
   </div>
   
-
+  <script>
+   $(function(){
+     $('.stars').stars();
+    });
+  </script>
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/jquery/jquery.rating.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.validate.min.js')?>"></script>
 
@@ -215,8 +242,9 @@
   <!-- Page level plugins -->
   <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/touch-rating.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/jquery.star-rating-svg.js')?>"></script>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
@@ -227,6 +255,8 @@
   <script>
   var JS = {
     init: function(){
+
+      //jika tombol cashout diklik
       $('#formCashOut').submit(function(){
         var $submit = $('#btnKonfirmasiCashout');
           if (!confirm("Apakah anda melakukan cashout?")){
@@ -234,7 +264,20 @@
       }
       $submit.find('i').removeClass('fa-money-bill-wave').addClass('fa-circle-notch fa-spin');
       $submit.attr('disabled', 'true');     
-      });
+      }),
+      
+      //jika checkbox dicentang
+      $('#inlineFormCheck').click(function(){
+          $('#btn-pinjam').attr('disabled', !this.checked);
+      }),
+
+      //auto kalkulasi cicilan pembayaran
+      $("#tenor").change(function() {
+        var $tenor = $("#tenor option:selected").val();
+        var $nominal = $("#nominal_pinjaman").val();
+        var $cicilan = $nominal / $tenor;
+          $("#kalkulasi_cicilan").val("Rp. "+Math.ceil($cicilan)+ " per bulan");
+        });
     }
   }
   $(document).ready(function(){

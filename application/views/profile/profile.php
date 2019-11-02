@@ -21,14 +21,7 @@
                           echo "<br><i>(Menunggu Persetujuan)</i>";}
                         ?>
                         </h5>
-                        <div class="br-wrapper br-theme-css-stars"><select id="profile-rating" name="rating" autocomplete="off" style="display: none;">
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>  
-                          <option value="5">5</option>
-                        </select><div class="br-widget"><a href="#" data-rating-value="1" data-rating-text="1" class="br-selected br-current"></a><a href="#" data-rating-value="2" data-rating-text="2"></a><a href="#" data-rating-value="3" data-rating-text="3"></a><a href="#" data-rating-value="4" data-rating-text="4"></a><a href="#" data-rating-value="5" data-rating-text="5"></a></div></div>
-                      </div>
+                        </div>     
                     </div>
                     <p class="w-75 mx-auto mb-3">
                     <?php 
@@ -155,8 +148,7 @@
                           .$this->session->flashdata('pesan_data')."</div>";
                           }
                         }
-                  ?>
-                  
+                  ?>                  
                   </div>
                   <!-- END DATA INFORMASI -->
                   </div>
