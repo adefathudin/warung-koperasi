@@ -1,52 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<!--Code by Web Dev Trick ( https://webdevtrick.com )-->
+<!--For More Source Code visit  https://webdevtrick.com -->
+<html>
+    
 <head>
+  <title>Login - WarungKoperasi</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <style>
+      body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-image: url("http://localhost/warkop/assets/img/background.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    .user_card {
+      height: 600px;
+      width: 550px;
+      margin-top: auto;
+      margin-bottom: auto;
+      background: #4e7f8a73;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius: 5px;
 
-  <title>Registrasi Akun - WarungKoperasi</title>
-
-  <!-- Custom fonts for this template-->
-  <link rel="icon" href="<?php echo base_url('assets/img/favicon.png')?>" type="image/x-icon">
-  <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="<?php echo base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
-
+    }
+    .brand_logo_container {
+      position: absolute;
+      height: 170px;
+      width: 170px;
+      top: -75px;
+      border-radius: 50%;
+      background: #0006;
+      padding: 10px;
+      text-align: center;
+    }
+    .brand_logo {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+    .form_container {
+      margin-top: 100px;
+    }
+    .login_btn {
+      width: 100%;
+      background: #4d4d4d !important;
+      color: white !important;
+    }
+    .login_btn:focus {
+      box-shadow: none !important;
+      outline: 0px !important;
+    }
+    .login_container {
+      padding: 0 2rem;
+    }
+    .input-group-text {
+      background: #4d4d4d  !important;
+      color: white !important;
+      border: 0 !important;
+      border-radius: 0.25rem 0 0 0.25rem !important;
+    }
+    .input_user,
+    .input_pass:focus {
+      box-shadow: none !important;
+      outline: 0px !important;
+    }
+    .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+      background-color: #4d4d4d !important;
+    }
+a {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+</style>
 </head>
-
-<body class="bg-gradient-info">
-
-  <div class="container">
-
-    <div class="card o-hidden border-0 shadow-lg my-5">
-      <div class="card-body p-0">
-        <!-- Nested Row within Card Body -->
-        <div class="row">
-          <div class="col-lg-5 d-none d-lg-block">        
-                <img height="80%" width="100%" class=" shadow img-responsive" src="<?php echo base_url('assets/img/logo.png')?>"/>
+<body>
+  <div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+      <div class="user_card">
+        <div class="d-flex justify-content-center">
+          <div class="brand_logo_container">
+            <img src="<?php echo base_url('assets/img/logo.png')?>" class="brand_logo" alt="Logo">
           </div>
-          <div class="col-lg-7">
-            <div class="p-5">
-              <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                          <?php
-                          // Cek apakah terdapat session nama message
-                          if($this->session->flashdata('message')){ // Jika ada
-                            echo "
-                            <div class='alert alert-danger alert-dismissible'>
-                            <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-                            .$this->session->flashdata('message')."</div>";
-                            }
-                          ?>
-              </div>
-              <form id="FormRegistrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
+        </div>
+        <div class="d-flex justify-content-center form_container">
+        <form id="FormRegistrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
                   <div class="form-group">
                     <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus>
                   </div>
@@ -71,18 +123,13 @@
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>-->
-                <button type="submit" class="btn btn-primary btn-user btn-block" id="btn-submit">
+                <button type="submit" class="btn btn-light btn-user btn-block" id="btn-submit">
                   Register Account <i class="fas fa-fw fa-sign-in-alt"></i>
                 </button>
-              </form>
-              <hr><!--
-              <div class="text-center">
-                <a class="small" href="forgot-password.html">Forgot Password?</a>
-              </div>-->
-              <div class="text-center">
-                <a class="small" href="<?php echo base_url('auth')?>">Already have an account? Login!</a>
-              </div>
-            </div>
+              </form>      
+        <div class="mt-4">
+          <div class="d-flex justify-content-center links">
+            Don't have an account? <a href="<?php echo base_url('auth')?>" class="ml-2">Already have an account? Login!</a>
           </div>
         </div>
       </div>
@@ -90,8 +137,7 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>  
-  <script src="<?php echo base_url('assets/vendor/jquery/jquery.validate.min.js')?>"></script>
+  <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
 
   <!-- Core plugin JavaScript-->
@@ -99,8 +145,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
-  <!-- Configure a few settings and attach camera -->
-<script type="text/javaScript">
+  <script type="text/javaScript">
     //UPLOAD FORM DAN KTP
      var password = document.getElementById("password"),
       repassword = document.getElementById("repassword");
@@ -131,5 +176,4 @@ $(document).ready(function(){
 
 </script>
 </body>
-
 </html>

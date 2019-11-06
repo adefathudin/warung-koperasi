@@ -9,20 +9,23 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 
-  <style>
+ <style>
       body,
     html {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #C8C3C3 !important;
+      background-image: url("http://localhost/warkop/assets/img/background.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     .user_card {
       height: 400px;
       width: 350px;
       margin-top: auto;
       margin-bottom: auto;
-      background: #2ab1ce;
+      background: #4e7f8a73;
       position: relative;
       display: flex;
       justify-content: center;
@@ -38,7 +41,7 @@
       width: 170px;
       top: -75px;
       border-radius: 50%;
-      background: #C8C3C3;
+      background: #0006;
       padding: 10px;
       text-align: center;
     }
