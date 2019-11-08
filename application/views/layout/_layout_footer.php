@@ -244,7 +244,7 @@
   <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
   <script src="<?php echo base_url('assets/js/touch-rating.js')?>"></script>
   <script src="<?php echo base_url('assets/js/jquery.star-rating-svg.js')?>"></script>
-  
+
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
   <script src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
@@ -268,6 +268,12 @@
       //jika checkbox dicentang
       $('#inlineFormCheck').click(function(){
           $('#btn-pinjam').attr('disabled', !this.checked);
+      }),
+
+      //JIka pencarian grup tanpa bintang dicentang
+      $('#cari_tanpa_bintang').click(function(){
+        $('#filterstar').attr('disabled', this.checked);
+        $('#filterstar').valu('', this.checked);
       }),
 
       //auto kalkulasi cicilan pembayaran

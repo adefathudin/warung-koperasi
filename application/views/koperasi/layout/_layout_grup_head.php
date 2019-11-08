@@ -7,8 +7,26 @@
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">    
       <div class="m-0 font-weight-bold text-capitalize text-primary"><?= $data_grup_tmp->nama_grup ?>
+      </div>      
+      <div class="small text-warning">
+      <a href="" class="text-secondary">(<?= $data_grup_tmp->rate_akumulatif."/".$data_grup_tmp->rate_person?>)</a>
+      <?php 
+                $starNumber = $data_grup_tmp->rate_akumulatif;                
+                for( $x = 0; $x < 5; $x++ ){
+                  if( floor( $starNumber )-$x >= 1 )
+                  { 
+                    echo '<i class="fas fa-fw fa-star"></i>'; 
+                  }
+                  elseif( $starNumber-$x > 0 )
+                  { 
+                    echo '<i class="fas fa-fw fa-star-half-alt"></i>';
+                  }
+                  else { 
+                    echo '<i class="far fa-fw fa-star"></i>'; 
+                  }
+                }
+                ?>
       </div>
-      <div class="my-rating jq-stars"></div>
     </div>
       <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" height="350px" width="100%"> 
   </div>

@@ -91,19 +91,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
           <div class="font-weight-bold">Minimal Simpanan Wajib</div><br>
             <input type="number" name="minimal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
-          <div class="font-weight-bold">Minimal Pinjaman</div><br>
-            <input type="number" name="maksimal_pinjaman" class="form-control form-control-sm" placeholder="Masukan nominal">
+          <div class="font-weight-bold">Maksimal Pinjaman</div><br>
+            <input type="number" name="maksimal_pinjaman" min="1" max="100" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <small>bentuk % dari total pinjaman
           <hr>
-          <div class="font-weight-bold">Bintang <span id="star">1</span></div><br>
-          <div class="text-warning py-3 d-flex flex-row align-items-center justify-content-between">
+          <div class="font-weight-bold" id="total_rate">Bintang <span id="star">1</span></div><br>
+          <div class="text-warning d-flex flex-row align-items-center justify-content-between" id="bintang">
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>
-            <br>            
           </div>
             <input type="range" name="rate" value="1" class="custom-range" min="1" max="5" id="filterstar">
+          <div class="form-check form-row">
+            <div class="col-auto my-1">
+              <input class="form-check-input" type="checkbox" id="cari_tanpa_bintang">
+                <label class="form-check-label" for="cari_tanpa_bintang">
+                  Cari tanpa bintang
+                </label>
+            </div>
+          </div>      
           <hr>
         <button class="btn btn-primary form-control"><i class="fas fa-fw fa-search"></i> Search</button>
       </form>
