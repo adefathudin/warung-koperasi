@@ -11,9 +11,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
       <div class="card-header">
         <h5 class="text-center font-weight-bold text-primary">Grup Koperasi<small> (<?= count($list_grup_search)?> grup)</small></h5>
       </div>
-      <div class="card-body">
-        <div class="row">
-
+      <div class="card-body">                
+        <form class="form-group" action="" method="GET">
+          <input type="text" value="<?= $this->input->get('nama_grup')?>" name="nama_grup" class="form-control form-control-sm" placeholder="Nama grup apa yang ingin anda cari?">
+        </form>
+        <div class="row">    
         <?php
         foreach ($list_grup_search as $grup){  
         ?>
@@ -83,16 +85,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
           <input type="text" value="<?= $this->input->get('nama_grup')?>" name="nama_grup" class="form-control form-control-sm" placeholder="Masukan nama grup"> 
           <hr>
         <div class="font-weight-bold">Area Coverage</div><br>
-          <input type="text" <?= $this->input->get('wilayah')?> name="wilayah" class="form-control form-control-sm" id="wilayah" placeholder="Wilayah"> 
+          <input type="text" value="<?= $this->input->get('wilayah')?>" name="wilayah" class="form-control form-control-sm" id="wilayah" placeholder="Wilayah"> 
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Pokok</div><br>
-            <input type="number" <?= $this->input->get('minimal_pokok')?> name="minimal_pokok" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" value="<?= $this->input->get('minimal_pokok')?>" name="minimal_pokok" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Minimal Simpanan Wajib</div><br>
-            <input type="number" name="minimal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" value="<?= $this->input->get('minimal_wajib')?>" name="minimal_wajib" class="form-control form-control-sm" placeholder="Masukan nominal">
           <hr>
           <div class="font-weight-bold">Maksimal Pinjaman</div><br>
-            <input type="number" name="maksimal_pinjaman" min="1" max="100" class="form-control form-control-sm" placeholder="Masukan nominal">
+            <input type="number" value="<?= $this->input->get('maksimal_pinjaman')?>" name="maksimal_pinjaman" min="1" max="100" class="form-control form-control-sm" placeholder="Masukan nominal">
             <small>bentuk % dari total pinjaman
           <hr>
           <div class="font-weight-bold" id="total_rate">Bintang <span id="star">1</span></div><br>
@@ -103,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>
           </div>
-            <input type="range" name="rate" value="1" class="custom-range" min="1" max="5" id="filterstar">
+            <input type="range" name="rate" value="<?= $this->input->get('rate')?>" class="custom-range" min="1" max="5" id="filterstar">
           <div class="form-check form-row">
             <div class="col-auto my-1">
               <input class="form-check-input" type="checkbox" id="cari_tanpa_bintang">

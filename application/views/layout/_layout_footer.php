@@ -143,9 +143,17 @@
                 </div>              
                 <form method="POST" action="<?php echo base_url('profile/identitas/lampiran')?>">    
                 <div id="frm_submit" class="form-group">      
+                <div class="form-check form-row">          
+                  <div class="col-auto my-1">
+                    <input class="form-check-input" type="checkbox" id="konfirmasi_upgrade_member" required>
+                    <label class="form-check-label" for="konfirmasi_upgrade_member">
+                      Saya sudah melengengkapi identitas pribadi. Termasuk mengkonfirmasi email, nomor hp, mengisi alamat rumah, nomor rekening, dll.
+                    </label>
+                  </div>
+                </div>      
                     <input type="hidden" id="value_ktp" name="value_ktp">  
                     <input type="hidden" id="value_profile" name="value_profile">  
-                    <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload"/>
+                    <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload" disabled/>
                 </div>
                 </form>
           </div>
@@ -265,7 +273,7 @@
       $submit.attr('disabled', 'true');     
       }),
       
-      //jika checkbox dicentang
+      //jika checkbox pinjam dicentang
       $('#inlineFormCheck').click(function(){
           $('#btn-pinjam').attr('disabled', !this.checked);
       }),

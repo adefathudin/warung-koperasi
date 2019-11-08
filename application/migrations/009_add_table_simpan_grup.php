@@ -29,7 +29,7 @@ class Migration_add_table_simpan_grup extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 50
         ),
-        'period' => array(
+        'periode' => array(
             'type' => 'VARCHAR',
             'constraint' => 7
         ),
