@@ -116,7 +116,7 @@
         callback(xmlHttp.responseText);
       }
     }
-    xmlHttp.open("post", "http://warungkoperasi.my.id/checkout.php");
+    xmlHttp.open("post", "<?= base_url('payment/checkout.php')?>");
     xmlHttp.send(JSON.stringify(requestBody));
   }
 </script>

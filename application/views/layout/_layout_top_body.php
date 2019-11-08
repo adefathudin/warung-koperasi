@@ -170,7 +170,7 @@ if ($data_user->verifikasi_email == 0){
         </div>";
         }
 
-if ($data_user->verifikasi_nomor_hp == 0){
+if ($data_user->verifikasi_nomor_hp != 0){
   echo "<div class='alert alert-warning alert-dismissible'>
         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
         <strong>Peringatan!</strong> Nomor HP anda belum diverifikasi. 
@@ -178,4 +178,12 @@ if ($data_user->verifikasi_nomor_hp == 0){
         str_repeat("*", strlen($data_user->nomor_hp)-4) . substr($data_user->nomor_hp, -4)." </strong>
         </div>";
         }
+
+        if ($data_user->type != 'Full Service') {
+          echo "<div class='alert alert-info alert-dismissible'>
+          <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+          <a href='".base_url('user/'.$user_id)."'><li class='fas fa-fw fa-trophy faa-tada animated'></li>
+          Upgrade akun anda menjadi akun premium dan dapatkan saldo sebesar <strong>Rp. 100.000</strong></a>
+          </div>";
+        } 
 ?>

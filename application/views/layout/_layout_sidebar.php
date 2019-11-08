@@ -51,7 +51,7 @@
         <i class="fas fa-fw fa-plus"></i>  
         Buat Grup Koperasi
       </a>
-      <a class="collapse-item" href="#" data-toggle="modal" data-target="#createGroupModal">
+      <a class="collapse-item" href="<?php echo base_url('koperasi/grup')?>">
         <i class="fas fa-fw fa-search"></i>  
         Explore Grup Koperasi
       </a>

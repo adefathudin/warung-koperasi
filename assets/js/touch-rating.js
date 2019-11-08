@@ -1,8 +1,7 @@
 $(function() {
-
   // basic use comes with defaults values
   $(".my-rating").starRating({
-    initialRating: 4.4,
+    initialRating: 0,
     starSize: 20 
   });
 

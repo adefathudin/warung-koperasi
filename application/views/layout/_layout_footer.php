@@ -81,7 +81,7 @@
               </select>            
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="tentang" placeholder="Deskripsi grup..."></textarea>
+              <textarea class="form-control" maxlength="75" name="tentang" placeholder="Deskripsi singkat."></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -245,7 +245,6 @@
   <script src="<?php echo base_url('assets/js/touch-rating.js')?>"></script>
   <script src="<?php echo base_url('assets/js/jquery.star-rating-svg.js')?>"></script>
   
-
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('assets/js/demo/datatables-demo.js')?>"></script>
   <script src="<?php echo base_url('assets/js/webcam.min.js')?>"></script>
@@ -277,7 +276,13 @@
         var $nominal = $("#nominal_pinjaman").val();
         var $cicilan = $nominal / $tenor;
           $("#kalkulasi_cicilan").val("Rp. "+Math.ceil($cicilan)+ " per bulan");
-        });
+      }),
+
+      //jika range bintang dipilih
+      $("#filterstar").on('input', function(){
+        $("#star").html($(this).val());
+      });
+
     }
   }
   $(document).ready(function(){

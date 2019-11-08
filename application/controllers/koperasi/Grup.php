@@ -2,23 +2,24 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Grup extends MY_Controller {
-    public function index()
+    public function index1()
     {
         $this->data['title'] = 'Koperasi Saloome';
         $this->data['subview'] = 'koperasi/group';
         $this->load->view('_layout_main', $this->data);
     }
     
-    public function search()
+    public function index()
     {
         $this->load->model('grup_m');
         
-        $nama_grup = $this->input->post('nama_grup');  
-        $wilayah = $this->input->post('wilayah');      
-        $minimal_pokok = $this->input->post('minimal_pokok');      
-        $minimal_wajib = $this->input->post('minimal_wajib');      
-        $minimal_pinjaman = $this->input->post('minimal_pinjaman'); 
-        $this->data['list_grup_search'] = $this->grup_m->get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$minimal_pinjaman);
+        $nama_grup = $this->input->get('nama_grup');  
+        $wilayah = $this->input->get('wilayah');      
+        $minimal_pokok = $this->input->get('minimal_pokok');      
+        $minimal_wajib = $this->input->get('minimal_wajib');      
+        $minimal_pinjaman = $this->input->get('minimal_pinjaman');   
+        $rate = $this->input->get('rate'); 
+        $this->data['list_grup_search'] = $this->grup_m->get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$minimal_pinjaman,$rate);
         $this->data['title'] = 'Koperasi Saloome';
         $this->data['subview'] = 'koperasi/grup_search';
         $this->load->view('_layout_main', $this->data);

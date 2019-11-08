@@ -25,7 +25,7 @@
       width: 550px;
       margin-top: auto;
       margin-bottom: auto;
-      background: #4e7f8a73;
+      background: #ccfff573;
       position: relative;
       display: flex;
       justify-content: center;
