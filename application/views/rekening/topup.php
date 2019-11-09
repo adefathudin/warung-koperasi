@@ -80,6 +80,20 @@
 
 </div><!--END ROW-->
 
+<?php
+if (isset($_GET['order_id'])){
+  $order_id = $_GET['order_id'];
+  $status = $_GET['status_code'];
+    if (!empty($order_id and !empty($status))){
+      if ($status == 200){
+        
+        echo "Top-up Saldo berhasil dilakukan";
+
+      }      
+    }
+  }
+?>
+
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
 <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-yXauJI1zHbAPH4dl"></script>
@@ -92,8 +106,10 @@
     {
       transaction_details: {
         gross_amount: document.getElementById('nominalTopup').value,
-        deskripsi: 'Top Up',
-        order_id: 'T-'+Math.round((new Date()).getTime() / 1000) 
+        deskripsi: 'Top Up',        
+        //order_id: 'WARKOP-'+Math.round((new Date()).getTime() / 1000) 
+        order_id: '<?= uniqid() ?>'
+        
       }
     }
     
