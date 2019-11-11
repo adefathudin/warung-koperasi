@@ -73,6 +73,21 @@ class Migration_add_table_grup extends MY_Migration {
             'constraint' => 50,
             'default' => '0'
         ),
+        'rate_total' => array(
+            'type' => 'INT',
+            'constraint' => 50,
+            'default' => '0'
+        ),
+        'rate_person' => array(
+            'type' => 'INT',
+            'constraint' => 50,
+            'default' => '0'
+        ),
+        'rate_akumulatif' => array(
+            'type' => 'FLOAT',
+            'constraint' => 50,
+            'default' => '0'
+        ),
         'created' => array(
             'type' => 'TIMESTAMP'
         )

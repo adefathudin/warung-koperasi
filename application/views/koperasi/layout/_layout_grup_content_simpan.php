@@ -47,7 +47,7 @@
           <div class="card-body">
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
-                <div class="text-xs font-weight-bold text-capitalize mb-1">Total Simpanan</div>
+                <div class="text-xs font-weight-bold text-capitalize mb-1">Total Simpanan Koperasi</div>
                 <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_koperasi,0,".", "."); ?></div>
               </div>
             </div>

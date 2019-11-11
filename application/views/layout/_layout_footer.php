@@ -354,7 +354,8 @@
 
 function getCashOut(objButton){  
   $('#konfirmasiCashout').show();
-  document.getElementById("nominalCashout").value = objButton.value;
+  document.getElementById("nominalCashout").value = objButton.value;  
+  $('#btnKonfirmasiCashout').prop("disabled", false);
 }   
 function getTopup(objButton){  
   document.getElementById("nominalTopup").value = objButton.value;

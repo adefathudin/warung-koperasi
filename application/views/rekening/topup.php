@@ -10,8 +10,7 @@
           <div class="card h-70">          
             <div class="card-header">
               <div class="card-title">
-                <a href="#">Total Cash In
-                </a>
+                Total Cash In
               </div>
             </div>
             <div class="card-body">
@@ -25,8 +24,7 @@
           <div class="card h-70">          
             <div class="card-header">
               <div class="card-title">
-                <a href="#">Nominal Cash In
-                </a>
+                Nominal Cash In
               </div>
             </div>
             <div class="card-body">
@@ -40,8 +38,7 @@
           <div class="card h-70">          
             <div class="card-header">
               <div class="card-title">
-                <a href="#">Total Saldo
-                </a>
+                Total Saldo
               </div>
             </div>
             <div class="card-body">
