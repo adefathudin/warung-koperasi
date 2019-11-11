@@ -248,6 +248,7 @@
   <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
 
   <!-- Page level plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
   <script src="<?php echo base_url('assets/js/touch-rating.js')?>"></script>
@@ -264,14 +265,27 @@
     init: function(){
 
       //jika tombol cashout diklik
-      $('#formCashOut').submit(function(){
-        var $submit = $('#btnKonfirmasiCashout');
-          if (!confirm("Apakah anda melakukan cashout?")){
+      $('#formCashOut').on('submit',function(e) { 
+        var nominal = $('#nominalCashout').val();
+        if (!confirm("Anda yakin ingin melakukan tarik tunai sebesar "+nominal+"?")){
           return false;
-      }
-      $submit.find('i').removeClass('fa-money-bill-wave').addClass('fa-circle-notch fa-spin');
-      $submit.attr('disabled', 'true');     
-      }),
+        }
+          $('#btnKonfirmasiCashout').find('i').removeClass('fa-money-bill-wave').addClass('fa-circle-notch fa-spin');
+          $('#btnKonfirmasiCashout').prop('disabled', true);   
+        }),
+        
+      //Jika telah selesai topup
+      <?php if($this->session->flashdata('pesan_cashout')){ ?>
+        Swal.fire({
+          position: 'center',
+          title: 'Cash Out Sukses!',
+          icon: 'success',
+          showConfirmButton: true,
+          text: '<?= $this->session->flashdata('pesan_cashout') ?>'
+        }),
+      <?php } ?>
+
+      //----------------------------------------
       
       //jika checkbox pinjam dicentang
       $('#inlineFormCheck').click(function(){
@@ -291,6 +305,29 @@
         var $cicilan = $nominal / $tenor;
           $("#kalkulasi_cicilan").val("Rp. "+Math.ceil($cicilan)+ " per bulan");
       }),
+
+      //Ucapan Welcome ketika pertama kali daftar
+      <?php if($this->session->flashdata('welcome_new_member')){ ?>
+        Swal.fire({
+          title: 'Selamat Datang di WarungKoperasi',
+          text: '<?= $this->session->flashdata('welcome_new_member') ?> ',
+          imageUrl: '<?= base_url('assets/img/logo.png')?>',
+          imageWidth: 200,
+          imageHeight: 200,
+          imageAlt: 'WarungKoperasi',
+        }),
+      <?php } ?>
+
+      //Jika telah selesai update identitas diri
+      <?php if($this->session->flashdata('update_identitas')){ ?>
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          text: '<?= $this->session->flashdata('update_identitas') ?>',
+          showConfirmButton: false,
+          timer: 1900
+        });
+      <?php } ?>
 
       //jika range bintang dipilih
       $("#filterstar").on('input', function(){
@@ -339,6 +376,50 @@ function joinGrup() {
         }
     });
 }
+</script>
+<script>
+function verifikasi_email(){
+  Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: 'Your work has been saved',
+  showConfirmButton: false,
+  timer: 1500
+    });
+  };
+
+function upgrade_member(){
+  Swal.mixin({
+  input: 'html',
+  confirmButtonText: 'Next &rarr;',
+  showCancelButton: false,
+  progressSteps: ['1', '2']
+}).queue([
+  {
+    title: 'Update Data Identitas',
+    html: ''
+  },
+  'Question 2'
+]).then((result) => {
+  if (result.value) {
+    Swal.fire({
+      title: 'All done!',
+      html:
+        'Your answers: <pre><code>' +
+          JSON.stringify(result.value) +
+        '</code></pre>',
+      confirmButtonText: 'Lovely!'
+    })
+  }
+})
+};
+
+function welcome_message(){
+  Swal.fire({
+  title: 'Selamat Datang di WarungKoperasi'
+})
+  };
+
 </script>
 </body> 
 </html>

@@ -141,12 +141,6 @@
                       </span>
                     </p>
                     <?php 
-                        if($this->session->flashdata('pesan_data')){ // Jika ada
-                          echo "
-                          <br><div class='alert alert-info alert-dismissible' small>
-                          <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-                          .$this->session->flashdata('pesan_data')."</div>";
-                          }
                         }
                   ?>                  
                   </div>

@@ -77,6 +77,11 @@ class Migration_add_table_users_detail extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 30
         ),
+        'status_approve' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 2,
+            'default' => 0
+        ),
         'verifikasi_email' => array(
             'type' => 'BOOLEAN',
             'default' => 0

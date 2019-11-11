@@ -83,7 +83,8 @@ class Auth extends CI_Controller {
       if ($this->users_detail_m->save($data_user_detail)){        
         $this->users_login_m->save($data_login);       
         $this->rekening_m->save(array('user_id' => $user_id));
-        $this->session->set_userdata($data_login);
+        $this->session->set_userdata($data_login);        
+        $this->session->set_flashdata('welcome_new_member', 'Kami berharap, Anda dan Kami bisa menjadi mitra yang Hebat ^_^'); 
         //KIRIM EMAIL
   //set up email
   $config = array(
@@ -105,7 +106,7 @@ $message =  "
 <body>
 <p>
 Selamat datang <b>".$nama_lengkap."</b>,
-<br><br>Terima kasih telah bergabung dengan <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
+<br><br>Terima kasih telah bergabung bersama kami, <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
 klik link dibawah ini untuk mengaktifkannya:<br><br>
 
 <a href='".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."'>".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."</a>
@@ -114,7 +115,7 @@ Jika anda tidak merasa melakukan registrasi, silahkan abaikan email ini.
 <br>Terima kasih
 <br><br><br>
 Best Regards,
-<br>Warung Koperasi Team</p>
+<br><b>WarungKoperasi Team</b></p>
 </body>
 </html>
 ";
@@ -133,7 +134,8 @@ Best Regards,
    else{
     $this->session->set_flashdata('message', $this->email->print_debugger());
     
-   }
+   }  
+        $this->session->set_flashdata('message', 'sepertinya ada sesuatu yang salah saat mengirim email');
         redirect('dashboard');
       } else {
         $this->session->set_flashdata('message', 'sepertinya ada sesuatu yang salah saat mengirim email'); 
@@ -142,6 +144,8 @@ Best Regards,
   }
 }
 
+
+//aktivasi email
 
 public function aktivasi(){
   $this->load->model('users_detail_m');

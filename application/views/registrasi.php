@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      background-image: url("http://localhost/warkop/assets/img/background.jpg");
+      background-image: url("<?= base_url('assets/img/background.jpg')?>");
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -129,7 +129,7 @@ a {
               </form>      
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
-            Don't have an account? <a href="<?php echo base_url('auth')?>" class="ml-2">Already have an account? Login!</a>
+          Already have an account?<a href="<?php echo base_url('auth')?>" class="ml-2"> Login!</a>
           </div>
         </div>
       </div>

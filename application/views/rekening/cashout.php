@@ -1,11 +1,3 @@
-<?php 
-  if($this->session->flashdata('pesan_cashout')){ // Jika ada
-    echo "
-    <div class='alert alert-info alert-dismissible' small>
-    <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-    .$this->session->flashdata('pesan_cashout')."</div>";
-    }
-?>                  
 <div class="row">
   <div class="col-lg-4 mb-4">
     <div class="card shadow mb-4">    
@@ -19,7 +11,7 @@
         <button value="250000" class="btn btn-secondary" onClick="getCashOut(this)">250.000</button>
         <button value="500000" class="btn btn-secondary" onClick="getCashOut(this)">500.000</button>
         <br><br>       
-        <form method="POST" action="<?php echo base_url('rekening/cashout/proses')?>" class="form-group" id="formCashOut">
+        <form method="POST" action="<?= base_url('rekening/cashout/proses')?>" class="form-group" id="formCashOut">
           <div class="form-group">
             <input readonly required type="number" id="nominalCashout" name="nominalCashout" min="50000" max="<?= $saldo->saldo_akhir ?>" class="form-control" placeholder="Minimal Rp50.000">
           </div>

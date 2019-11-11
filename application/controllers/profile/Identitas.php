@@ -46,7 +46,7 @@ class Identitas extends MY_Controller {
             'alamat' => $alamat, 'about' => $about, 'nomor_rekening' => $nomor_rekening, 'nama_bank' => $nama_bank
         );
         $this->users_detail_m->save($data, $user_id);  
-        $this->session->set_flashdata('pesan_data','Profil berhasil diperbarui');       
+        $this->session->set_flashdata('update_identitas','Profil berhasil diperbarui');       
         redirect ('user/'.$user_id);   
     }
 }

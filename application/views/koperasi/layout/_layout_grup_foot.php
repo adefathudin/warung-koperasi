@@ -52,7 +52,6 @@
       if (!empty($user_grup)){  
           if (strpos($user_grup->basic_grup, $grup_id) !== false or $data_grup_tmp->admin != $user_id){
             //jika ada, maka akan ditampilkan tombol join
-
     ?>  
         <div class=" shadow mb-4 small">
           <button width="100%" class="btn btn-primary btn-md btn-block" id="joinGrup" onclick="joinGrup()"><i class="fas fa-fw fa-<?= $ikon ?>"></i> <?= $status ?></button>

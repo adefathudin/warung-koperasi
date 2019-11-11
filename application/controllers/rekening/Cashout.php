@@ -34,7 +34,7 @@ class Cashout extends MY_Controller {
         if (md5($this->input->post('password')) == $this->session->userdata('password')){
             $this->rekening_m->save($update_saldo, $user_id);
             $this->mutasi_rekening_m->save($insert_mutasi);
-            $this->session->set_flashdata('pesan_cashout','Penarikan saldo rekening sebesar Rp<b>'.number_format($nominal_cashout).'</b> telah berhasil. Dana akan masuk ke rekening anda paling lambat 1x24 jam');
+            $this->session->set_flashdata('pesan_cashout','Penarikan saldo rekening sebesar Rp'.number_format($nominal_cashout).' telah berhasil. Dana akan masuk ke rekening anda paling lambat 1x24 jam');
             //panggil function mail_cashout untuk kirim email
             $this->mail_cashout($email,$nominal_cashout);
                 } 
@@ -51,7 +51,7 @@ class Cashout extends MY_Controller {
             );
             $message =  "<html><head><title>Penarikan Saldo Rekening WarungKoperasi</title></head><body>
                     <p>Yang terhormat,<br><br>
-                    Anda baru saja melakukan penarikan saldo rekening <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a> sebesar Rp<b>".number_format($nominal_cashout)."</b>.<br>Jika anda tidak merasa melakukannya, silahkan hubungi kami melalui email <a href='mailto:support@warungkoperasi.my.id'>support@warungkoperasi.my.id</a>.<br>Terima kasih<br><br><br>Best Regards,<br><b>Warung Koperasi Team<b></p></body></html>";
+                    Anda baru saja melakukan penarikan saldo rekening <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a> sebesar Rp<b>".number_format($nominal_cashout)."</b>.<br>Jika anda tidak merasa melakukannya, silahkan hubungi kami melalui email <a href='mailto:support@warungkoperasi.my.id'>support@warungkoperasi.my.id</a>.<br>Terima kasih<br><br><br>Best Regards,<br><b>WarungKoperasi Team<b></p></body></html>";
                     $this->load->library('email', $config);
                     $this->email->set_newline("\r\n");
                     $this->email->from($config['smtp_user'], 'WarungKoperasi');
