@@ -370,7 +370,8 @@ function joinGrup() {
             id: 1
         },
         success: function (data) {
-            $("#joinGrup").html("<i class='fas fa-fw fa-clock'></i> Requested");
+            $('#joinGrup').html("<i class='fas fa-fw fa-clock'></i> Requested");
+            $('#joinGrup').prop('disabled', true)
         },
         error: function (data) {
             $("#joinGrup").html("Error");

@@ -30,6 +30,7 @@ class Grup extends MY_Controller {
         $this->load->model('grup_m');
         $this->load->model('users_detail_m');
         $this->load->model('rekening_m');
+        $this->load->model('user_grup_m');
         $user_id = $this->session->userdata('user_id');
 
         //JIKA HALAMAN SIMPAN DI GRUP DIBUKA
@@ -41,7 +42,6 @@ class Grup extends MY_Controller {
             $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
             $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
         }
-        //
         $this->data['grup_id'] = $this->uri->segment(2);
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
         $this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();

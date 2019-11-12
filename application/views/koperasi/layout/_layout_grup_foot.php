@@ -12,7 +12,7 @@
       <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" width="100%" height="180px"> 
   </div>
     <?php } ?>
-
+  
 
     <!--JIKA HALAMAN LAPAK DIBUKA-->
     <?php 
@@ -48,24 +48,27 @@
     </div>
     <?php } 
     
-      //mengecek data grup, apakah user ini sudah masuk grup atau belum
-      if (!empty($user_grup)){  
-          if (strpos($user_grup->basic_grup, $grup_id) !== false or $data_grup_tmp->admin != $user_id){
-            //jika ada, maka akan ditampilkan tombol join
-    ?>  
-        <div class=" shadow mb-4 small">
-          <button width="100%" class="btn btn-primary btn-md btn-block" id="joinGrup" onclick="joinGrup()"><i class="fas fa-fw fa-<?= $ikon ?>"></i> <?= $status ?></button>
-        </div>
-        <?php
-        }
-      } else {
-        echo "
-        <div class=' shadow mb-4 small'>
-          <button width='100%' class='btn btn-primary btn-md btn-block' id='joinGrup' onclick='joinGrup()'><i class='fas fa-fw fa-plus'></i> Join grup</button>
-        </div>
-        ";
+    if (strpos($data_grup_tmp->admin, $user_id) !== false){
+      //
+    } else {
+      if (strpos($data_grup_tmp->member, $user_id) !== false){
+        //
+        } else {
+          if (strpos($data_grup_tmp->request, $user_id) !== false){
+          echo 
+          "<div class=' shadow mb-4 small'>
+            <button width='100%' class='btn btn-primary btn-md btn-block' id='joinGrup' onclick='joinGrup()' disabled><i class='fas fa-fw fa-clock'></i> Requested</button>
+          </div>";
+      } else {        
+        echo 
+        "<div class=' shadow mb-4 small'>
+            <button width='100%' class='btn btn-primary btn-md btn-block' id='joinGrup' onclick='joinGrup()'><i class='fas fa-fw fa-plus'></i> Join grup</button>
+        </div>";
       }
-       ?>
+    }
+    }
+//echo $status_member_grup;
+?>
 
  <!--JIKA HALAMAN ANGGOTA DIBUKA-->
  <?php 

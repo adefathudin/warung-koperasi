@@ -40,11 +40,11 @@
         </a>
       </div>
       <?php
-      //mengecek data grup, apakah user ini sudah masuk grup atau belum
-      if (!empty($user_grup)){       
-          if (strpos($user_grup->basic_grup, $grup_id) !== false or $data_grup_tmp->admin == $user_id){
-            //jika ada, maka akan ditampilkan menu
-            ?>
+      
+      if (strpos($data_grup_tmp->admin, $user_id) !== true or strpos($data_grup_tmp->admin, $user_id) !== true){
+        //
+      } else {
+        ?>
       
       <div class="btn-group">
         <a href="lapak" class="btn btn-sm btn-light">
@@ -77,7 +77,7 @@
       </div>
   
       <?php
-          } 
+           
       //cek apakah user tersebut sebagai admin
       if ($data_grup_tmp->admin == $user_id){?>
       <div class="btn-group">
