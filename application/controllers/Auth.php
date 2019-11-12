@@ -177,8 +177,4 @@ public function aktivasi(){
   redirect('dashboard');
  }
 
- function test(){
-   echo "<script>alert('ok')</script>";
- }
-
 }

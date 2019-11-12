@@ -41,9 +41,10 @@
       </div>
       <?php
       
-      if (strpos($data_grup_tmp->admin, $user_id) !== true or strpos($data_grup_tmp->admin, $user_id) !== true){
-        //
-      } else {
+      //jika user menjadi admin atau member, maka akan ditampilkan menu
+
+      if (strpos($data_grup_tmp->admin, $user_id) !== false or strpos($data_grup_tmp->member, $user_id) !== false){
+     
         ?>
       
       <div class="btn-group">
@@ -79,7 +80,7 @@
       <?php
            
       //cek apakah user tersebut sebagai admin
-      if ($data_grup_tmp->admin == $user_id){?>
+      if (strpos($data_grup_tmp->admin, $user_id) !== false){?>
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i> Pengaturan
@@ -102,5 +103,8 @@
           <a class="dropdown-item text-danger" href="#">Leave Grup</a>
         </div>
       </div>
-      <?php } ?>
+      <?php }
+       else {
+
+       } ?>
     </div>

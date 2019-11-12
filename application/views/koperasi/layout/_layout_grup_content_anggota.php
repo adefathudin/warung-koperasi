@@ -19,7 +19,7 @@
           if ($data_grup_tmp->admin == $user->user_id){ ?>
       <div class="col-md-1">
           <a href='<?= base_url('user/'.$user->user_id)?>'>
-            <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">
+            <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;">
           </a>                   
       </div>
       <div class="col-md-8">
@@ -39,18 +39,18 @@
   <hr align="left" width="10%">
     <div class="row">
       <?php 
-        if (!empty($data_grup_tmp)){
-          if (strpos($data_grup_tmp->member,"|")){
+        if (!empty($data_grup_tmp->member)){
+          if (strpos($data_grup_tmp->member,"|") !== false){
             $member = explode("|", $data_grup_tmp->member);
             $count_member = count($member);
             $i = 0;
             while ($i < $count_member){              
               foreach ($list_data_all_user as $user){
-              if ($user->user_id == $member[$i]){ 
+                if ($user->user_id == $member[$i]){ 
                 ?>
               <div class="col-md-1">
                 <a href='<?= base_url('user/'.$user->user_id)?>'>
-                  <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive img-thumbnail" style="max-height: 50px; max-width: 50px;">
+                  <img src='<?= base_url('assets/img/user/profile/'.$user->profil)?>' alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;">
                 </a>                   
               </div>
               <div class="col-md-8">

@@ -57,12 +57,12 @@
           if (strpos($data_grup_tmp->request, $user_id) !== false){
           echo 
           "<div class=' shadow mb-4 small'>
-            <button width='100%' class='btn btn-primary btn-md btn-block' id='joinGrup' onclick='joinGrup()' disabled><i class='fas fa-fw fa-clock'></i> Requested</button>
+            <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' disabled><i class='fas fa-fw fa-clock'></i> Requested</button>
           </div>";
       } else {        
         echo 
         "<div class=' shadow mb-4 small'>
-            <button width='100%' class='btn btn-primary btn-md btn-block' id='joinGrup' onclick='joinGrup()'><i class='fas fa-fw fa-plus'></i> Join grup</button>
+            <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' ><i class='fas fa-fw fa-plus'></i> Join grup</button>
         </div>";
       }
     }
@@ -101,7 +101,7 @@
   <div class="card shadow mb-4">
     <div class="card-body small">
     <div class=" font-weight-bold text-capitalize"><i class="fas fa-fw fa-map-marker-alt"></i> <?= $data_grup_tmp->wilayah ?></div><br>
-    <div class="mapouter"><div class="gmap_canvas"><iframe id="gmap_canvas" src="https://maps.google.com/maps?q=<?= $data_grup_tmp->wilayah ?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{position:relative;text-align:right;height:auto;width:auto;}.gmap_canvas {overflow:hidden;background:none!important;height:auto;width:auto;}</style></div>
+    <!--<div class="mapouter"><div class="gmap_canvas"><iframe id="gmap_canvas" src="https://maps.google.com/maps?q=<?= $data_grup_tmp->wilayah ?>&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div><style>.mapouter{position:relative;text-align:right;height:auto;width:auto;}.gmap_canvas {overflow:hidden;background:none!important;height:auto;width:auto;}</style></div>-->
     </div>    
   </div>
 

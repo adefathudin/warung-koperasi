@@ -153,7 +153,7 @@
                 </div>      
                     <input type="hidden" id="value_ktp" name="value_ktp">  
                     <input type="hidden" id="value_profile" name="value_profile">  
-                    <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload" disabled/>
+                    <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload"/>
                 </div>
                 </form>
           </div>
@@ -326,8 +326,35 @@
           text: '<?= $this->session->flashdata('update_identitas') ?>',
           showConfirmButton: false,
           timer: 1900
-        });
+        }),
       <?php } ?>
+
+      //jika tombol join grup diklik
+      $('#join_grup').click(function(){        
+        $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/join")?>',
+          data: {
+              user_id: '<?= $user_id ?>',
+              grup_id: '<?= $data_grup_tmp->grup_id ?>',
+              request_grup: '<?= $data_grup_tmp->request ?>'
+          },
+          success: function (data) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              text: 'Permintaan join grup telah terkirim',
+              showConfirmButton: false,
+              timer: 1300
+            }),
+              $('#join_grup').html("<i class='fas fa-fw fa-clock'></i> Requested");
+              $('#join_grup').prop('disabled', true)
+          },
+          error: function (data) {
+            alert("ada sesuatu yang salah");
+          }
+        })      
+      }),
 
       //jika range bintang dipilih
       $("#filterstar").on('input', function(){
@@ -360,24 +387,6 @@ function getCashOut(objButton){
 function getTopup(objButton){  
   document.getElementById("nominalTopup").value = objButton.value;
 }   
-</script>
-<script>
-function joinGrup() {
-    $.ajax({
-        type: 'POST',
-        url: '<?= base_url("auth/test")?>',
-        data: {
-            id: 1
-        },
-        success: function (data) {
-            $('#joinGrup').html("<i class='fas fa-fw fa-clock'></i> Requested");
-            $('#joinGrup').prop('disabled', true)
-        },
-        error: function (data) {
-            $("#joinGrup").html("Error");
-        }
-    });
-}
 </script>
 <script>
 function verifikasi_email(){

@@ -194,4 +194,21 @@ class Grup extends MY_Controller {
         }
         redirect ('grup/'.$grup_id.'/simpan');
     }
+
+    // join grup
+
+    public function join(){
+        $this->load->model('grup_m');
+        $user_id = $this->input->post('user_id');
+        $grup_id = $this->input->post('grup_id');
+        $request = $this->input->post('request');
+        $update_grup = array (
+            'request' => $request.'|'.$user_id
+        );
+
+        if ($this->grup_m->save($update_grup, $grup_id)){
+            echo "<script>console.log('data berhasil diupdate')</script>";
+        }
+
+    }
 }
