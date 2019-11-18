@@ -21,6 +21,11 @@ class Grup_m extends MY_Model {
         return $result;
     }
 
+    function hapus($grup_id,$nama_grup){
+        $hasil=$this->db->query("DELETE grup WHERE grup_id='$grup_id'");
+        return $hasil;
+    }
+
     public function get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$maksimal_pinjaman,$rate){
         
         if (!empty($this->input->get('nama_grup'))){
@@ -30,10 +35,10 @@ class Grup_m extends MY_Model {
         $this->db->like('wilayah', $wilayah);
         }
         if (!empty($this->input->get('minimal_pokok'))){
-        $this->db->where('minimal_pokok >=', $minimal_pokok);
+        $this->db->where('minimal_pokok <=', $minimal_pokok);
         }
         if (!empty($this->input->get('minimal_wajib'))){
-        $this->db->where('minimal_wajib >=', $minimal_wajib);
+        $this->db->where('minimal_wajib <=', $minimal_wajib);
         }
         if (!empty($this->input->get('maksimal_pinjaman'))){
         $this->db->where('maksimal_pinjaman >=', $maksimal_pinjaman);

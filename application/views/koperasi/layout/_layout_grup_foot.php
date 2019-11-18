@@ -46,28 +46,23 @@
       </form>
       </div>
     </div>
-    <?php } 
-    
-    if (strpos($data_grup_tmp->admin, $user_id) !== false){
-      //
-    } else {
-      if (strpos($data_grup_tmp->member, $user_id) !== false){
-        //
-        } else {
-          if (strpos($data_grup_tmp->request, $user_id) !== false){
-          echo 
-          "<div class=' shadow mb-4 small'>
-            <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' disabled><i class='fas fa-fw fa-clock'></i> Requested</button>
-          </div>";
-      } else {        
-        echo 
-        "<div class=' shadow mb-4 small'>
-            <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' ><i class='fas fa-fw fa-plus'></i> Join grup</button>
+    <?php }
+      if (!empty($status_member)){
+            if ($status_member->status_user == 'request'){
+              echo "
+                <div class=' shadow mb-4 small'>
+                  <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' disabled><i class='fas fa-fw fa-clock'></i> Requested</button>
+                </div>";
+            }
+            else if ($status_member->status_user == 'member' or $status_member->status_user == 'admin'){
+            }
+    }
+    else {
+      echo"
+        <div class=' shadow mb-4 small'>
+          <button width='100%' class='btn btn-primary btn-md btn-block' id='join_grup' ><i class='fas fa-fw fa-plus'></i> Join grup</button>
         </div>";
-      }
     }
-    }
-//echo $status_member_grup;
 ?>
 
  <!--JIKA HALAMAN ANGGOTA DIBUKA-->

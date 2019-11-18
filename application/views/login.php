@@ -56,8 +56,6 @@
     }
     .login_btn {
       width: 100%;
-      background: #4d4d4d !important;
-      color: white !important;
     }
     .login_btn:focus {
       box-shadow: none !important;
@@ -127,10 +125,10 @@ a {
                           ?>
             </div>
         </div>
-        <div class="d-flex justify-content-center mt-3 login_container">
-          <button type="submit" name="button" id="btn-login" class="btn login_btn">Login <i class="fas fa-fw fa-sign-in-alt"></i></button>
+        <div class="justify-content-center mt-3 login_container">
+          <button type="submit" name="button" id="btn-login" class="btn btn-secondary login_btn">Login <i class="fas fa-fw fa-sign-in-alt"></i></button>
         </div>
-          </form>        
+          </form> 
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
             Don't have an account? <a href="<?php echo base_url('auth/registrasi')?>" class="ml-2">Sign Up</a>

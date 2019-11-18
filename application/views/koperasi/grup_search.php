@@ -55,10 +55,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                 <b><?= number_format($grup->minimal_pokok) ?></b>
                 </td></tr>
                 <tr><td>Simpanan Wajib</td><td>:</td><td>
-                <b><?= number_format($grup->minimal_pokok) ?></b>
+                <b><?= number_format($grup->minimal_wajib) ?></b>
                 </td></tr>
                 <tr><td>Maksimal Pinjaman</td><td>:</td><td>
-                <b><?= number_format($grup->minimal_pokok) ?></b>
+                <b><?= number_format($grup->maksimal_pinjaman) ?></b>
                 </td></tr>
                 </table>                
                 </p>
@@ -97,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
             <input type="number" value="<?= $this->input->get('maksimal_pinjaman')?>" name="maksimal_pinjaman" min="1" max="100" class="form-control form-control-sm" placeholder="Masukan nominal">
             <small>bentuk % dari total pinjaman
           <hr>
-          <div class="font-weight-bold" id="total_rate">Bintang <span id="star">1</span></div><br>
+          <div class="font-weight-bold" id="total_rate">Bintang <span id="star"><?= $this->input->get('rate')?></span></div><br>
           <div class="text-warning d-flex flex-row align-items-center justify-content-between" id="bintang">
             <i class="fas fa-fw fa-star"></i>
             <i class="fas fa-fw fa-star"></i>

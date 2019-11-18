@@ -17,12 +17,18 @@ class Grup extends MY_Controller {
         $wilayah = $this->input->get('wilayah');      
         $minimal_pokok = $this->input->get('minimal_pokok');      
         $minimal_wajib = $this->input->get('minimal_wajib');      
-        $minimal_pinjaman = $this->input->get('minimal_pinjaman');   
+        $maksimal_pinjaman = $this->input->get('maksimal_pinjaman');   
         $rate = $this->input->get('rate'); 
-        $this->data['list_grup_search'] = $this->grup_m->get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$minimal_pinjaman,$rate);
+        $this->data['list_grup_search'] = $this->grup_m->get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$maksimal_pinjaman,$rate);
         $this->data['title'] = 'Koperasi Saloome';
         $this->data['subview'] = 'koperasi/grup_search';
         $this->load->view('_layout_main', $this->data);
+    }
+
+    public function delete(){
+        $grup_id=$this->input->post('grup_id');
+        $data=$this->grup_m->hapus($grup_id);
+        echo json_encode($data);
     }
 
     public function id($grup_id = null )
@@ -31,18 +37,21 @@ class Grup extends MY_Controller {
         $this->load->model('users_detail_m');
         $this->load->model('rekening_m');
         $this->load->model('user_grup_m');
+        $this->load->model('grup_user_m');
         $user_id = $this->session->userdata('user_id');
+        $grup_id = $this->uri->segment(2);
 
         //JIKA HALAMAN SIMPAN DI GRUP DIBUKA
         if ($this->uri->segment(3) == 'simpan'){
-            $grup_id = $this->uri->segment(2);
             $this->load->model('simpan_grup_m');
             $this->data['simpanan_grup'] = $this->simpan_grup_m->get_simpanan_grup($user_id,$grup_id);
             //cek periode pinjaman
             $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
             $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
         }
-        $this->data['grup_id'] = $this->uri->segment(2);
+        
+        $this->data['status_member'] = $this->grup_user_m->get_status_member($user_id,$grup_id);
+        $this->data['grup_id'] = $grup_id;
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
         $this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();
         $this->data['data_grup_tmp'] = $this->grup_m->get($grup_id); 
@@ -70,6 +79,9 @@ class Grup extends MY_Controller {
             'grup_id'=>$grup_id, 'nama_grup' => $nama_grup, 'wilayah' => $wilayah, 'about' => $about, 'admin' => $user_id, 'kategori' => $kategori, 'deskripsi' => $deskripsi
             );  
         $insert_user_grup =array (
+            'user_id' => $user_id, 'admin_grup' => $grup_id
+        );        
+        $insert_grup_grup =array (
             'user_id' => $user_id, 'admin_grup' => $grup_id
         );
         if ($this->grup_m->save($insert_data_grup)){
@@ -196,19 +208,52 @@ class Grup extends MY_Controller {
     }
 
     // join grup
-
     public function join(){
-        $this->load->model('grup_m');
+        $this->load->model('grup_user_m');
         $user_id = $this->input->post('user_id');
         $grup_id = $this->input->post('grup_id');
-        $request = $this->input->post('request');
-        $update_grup = array (
-            'request' => $request.'|'.$user_id
+        $request = $this->input->post('request_grup');
+        $insert_grup_user = array (
+            'grup_id' => $grup_id, 'user_id' => $user_id, 'status_user' => 'request'
         );
+        $this->grup_user_m->save($insert_grup_user);    
+    }
 
-        if ($this->grup_m->save($update_grup, $grup_id)){
+    // join grup
+    public function accept(){
+        $this->load->model('grup_user_m');
+        $id = $this->input->post('id');
+        $update_grup_user = array (
+            'status_user' => 'member'
+        );
+        if ($this->grup_user_m->save($update_grup_user, $id)){            
             echo "<script>console.log('data berhasil diupdate')</script>";
+        } else {
+                       
+            echo "<script>console.log('data berhasil diupdate123')</script>";
         }
 
+    }
+    
+    public function list_request(){
+        $this->load->model('grup_user_m');
+        $grup_id=$this->input->get('grup_id');
+        $data = $this->grup_user_m->get_list_request($grup_id);
+        echo json_encode($data);
+    }
+
+    //Kick Member Grup
+
+    public function kick(){
+        $this->load->model('grup_user_m');
+        $id = $this->input->post('id');
+        $this->grup_user_m->delete($id);
+    }
+
+    public function list_member(){
+        $this->load->model('grup_user_m');
+        $grup_id=$this->input->get('grup_id');
+        $data = $this->grup_user_m->get_list_member($grup_id);
+        echo json_encode($data);
     }
 }

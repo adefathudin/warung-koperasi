@@ -35,7 +35,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Syarat dan ketentuan pengajuan pinjaman <?= $data_grup_tmp->nama_grup ?></h5>
+          <h5 class="modal-title" id="exampleModalLabel">Syarat dan ketentuan pengajuan pinjaman <?php  if(isset($data_grup_tmp->nama_grup)){ echo $data_grup_tmp->nama_grup;} ?></h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -263,7 +263,8 @@
   <script>
   var JS = {
     init: function(){
-
+      request_grup();
+      member_grup();
       //jika tombol cashout diklik
       $('#formCashOut').on('submit',function(e) { 
         var nominal = $('#nominalCashout').val();
@@ -336,8 +337,8 @@
           url: '<?= base_url("koperasi/grup/join")?>',
           data: {
               user_id: '<?= $user_id ?>',
-              grup_id: '<?= $data_grup_tmp->grup_id ?>',
-              request_grup: '<?= $data_grup_tmp->request ?>'
+              grup_id: '<?php if(isset($data_grup_tmp->grup_id)){ echo $data_grup_tmp->grup_id;} ?>',
+              request_grup: '<?php if(isset($data_grup_tmp->request)){ echo $data_grup_tmp->request;} ?>'
           },
           success: function (data) {
             Swal.fire({
@@ -360,13 +361,12 @@
       $("#filterstar").on('input', function(){
         $("#star").html($(this).val());
       });
-
     }
   }
   $(document).ready(function(){
     JS.init();
   });
-  </script>
+</script>
 
 <script>
   function upload(){
@@ -374,62 +374,139 @@
     var foto_profile = document.getElementById("imageprevProfile").src;
     document.getElementById("value_ktp").value = foto_ktp;
     document.getElementById("value_profile").value = foto_profile;
-}
+  }
+  
   function closeKamera(){
     Webcam.reset();
-    }
+  }
 
-function getCashOut(objButton){  
-  $('#konfirmasiCashout').show();
-  document.getElementById("nominalCashout").value = objButton.value;  
-  $('#btnKonfirmasiCashout').prop("disabled", false);
-}   
-function getTopup(objButton){  
-  document.getElementById("nominalTopup").value = objButton.value;
-}   
-</script>
-<script>
-function verifikasi_email(){
-  Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: 'Your work has been saved',
-  showConfirmButton: false,
-  timer: 1500
+  function getCashOut(objButton){  
+    $('#konfirmasiCashout').show();
+      document.getElementById("nominalCashout").value = objButton.value;  
+    $('#btnKonfirmasiCashout').prop("disabled", false);
+  }   
+  
+  function getTopup(objButton){  
+    document.getElementById("nominalTopup").value = objButton.value;
+  }   
+
+  function verifikasi_email(){
+    Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Your work has been saved',
+    showConfirmButton: false,
+    timer: 1500
+      });
+    };
+   
+  //tampil anggota grup request
+  function request_grup(){
+    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_request',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td style="text-align:right;">'+
+                '<button class="btn btn-default text-primary" id="accept_grup" data="'+data[i].id+'"><i class="far fa-fw fa-check-circle"></i> Accept</button>'+' '+
+                '<button class="btn btn-default text-danger"><i class="far fa-fw fa-times-circle"></i> Reject</button>'
+            '</td>'+
+            '</tr>';
+        }
+        $('#show_data').html(html);
+      }
     });
   };
 
-function upgrade_member(){
-  Swal.mixin({
-  input: 'html',
-  confirmButtonText: 'Next &rarr;',
-  showCancelButton: false,
-  progressSteps: ['1', '2']
-}).queue([
-  {
-    title: 'Update Data Identitas',
-    html: ''
-  },
-  'Question 2'
-]).then((result) => {
-  if (result.value) {
-    Swal.fire({
-      title: 'All done!',
-      html:
-        'Your answers: <pre><code>' +
-          JSON.stringify(result.value) +
-        '</code></pre>',
-      confirmButtonText: 'Lovely!'
-    })
-  }
-})
-};
+  //PROSES ACC MEMBER KE GRUP 
+  $(document).on('click', '#accept_grup', function() {
+    var id = $(this).attr('data');
+    $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/accept")?>',
+          data: {id:id},
+          success: function (data) {
+            request_grup();
+            member_grup();
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat acc member',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }          
+        })
+        return false;
+  });
 
-function welcome_message(){
-  Swal.fire({
-  title: 'Selamat Datang di WarungKoperasi'
-})
+  
+  //tampil anggota grup
+  function member_grup(){
+    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_member',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td style="text-align:right;">'+
+                '<button class="btn btn-default text-danger" id="kick_member" data="'+data[i].id+'"><i class="fas fa-fw fa-sign-out-alt"></i> Kick Out</button>'+
+                '<button class="btn btn-default text-danger" id="block_member" data="'+data[i].id+'"><i class="fas fa-fw fa-ban"></i> Block</button>'
+            '</td>'+
+            '</tr>';
+        }
+        $('#data-member').html(html);
+      }
+    });
   };
+
+  
+  //PROSES KICK OUT MEMBER 
+  $(document).on('click', '#kick_member', function() {
+    var id = $(this).attr('data');
+    $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/kick")?>',
+          data: {id:id},
+          success: function (data) {
+            member_grup();
+            request_grup();
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat kick out member',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }          
+        })
+        return false;
+  });
 
 </script>
 </body> 
