@@ -30,6 +30,24 @@
     </div>
   </div>
 
+  <!-- Notifikasi Modal-->
+  <div class="modal fade" id="notifikasi_modal" tabindex="-1" role="dialog" aria-labelledby="judul_notifikasi_modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary font-weight-bold" id="judul_notifikasi_modal"></h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <span class="small modal-header" id="tanggal_notifikasi_modal"></span>
+        <div class="modal-body" id="isi_notifikasi_modal"></div>
+        <div class="modal-footer" id="link_notifikasi_modal">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Syarat dan ketentuan pinjaman-->
   <div class="modal fade" id="syaratPinjaman" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -42,7 +60,7 @@
         </div>
         <div class="modal-body">
           1. 1% dari total nominal pengajuan pinjaman digunakan untuk kas koperasi<br>
-          2. Limit kredit pinjaman <?= $data_grup_tmp->maksimal_pinjaman ?> dari total simpanan koperasi aktif<br>
+          2. Limit kredit pinjaman <?php isset($data_grup_tmp->maksimal_pinjaman) ? $data_grup_tmp->maksimal_pinjaman : '' ?> dari total simpanan koperasi aktif<br>
           3. Pengajuan pinjaman akan diverifikasi terlebih dahulu oleh pengurus koperasi dan selanjutnya bila disetujui, akan masuk ke saldo rekening
         </div>
         <div class="modal-footer">
@@ -182,7 +200,7 @@
         <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" value="<?= $data_user->tempat_lahir ?>" required >
       </div>
       <div class="col-sm-6">
-        <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" value="<?= $data_user->tanggal_lahir ?>" required >
+        <input type="date" name='tanggal_lahir' class="form-control form-control-user" id="tanggal_lahir" placeholder="Tanggal Lahir" required >
       </div>
       </div>
       <div class="form-group">
@@ -223,14 +241,9 @@
     </div>
   </div>
   
-  <script>
-   $(function(){
-     $('.stars').stars();
-    });
-  </script>
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
-  <script src="<?php echo base_url('assets/vendor/jquery/jquery.rating.js')?>"></script>
+  <!--<script src="<?php echo base_url('assets/vendor/jquery/jquery.rating.js')?>"></script>-->
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.validate.min.js')?>"></script>
 
@@ -241,11 +254,11 @@
   <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
 
   <!-- Page level plugins -->
-  <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>
+  <!--<script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>-->
 
-  <!-- Page level custom scripts -->
+  <!-- Page level custom scripts 
   <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>
+  <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>-->
 
   <!-- Page level plugins -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -263,9 +276,12 @@
   <script>
   var JS = {
     init: function(){
+      setInterval(function(){ notifikasi(); }, 6000);
+      //notifikasi();
       request_grup();
       member_grup();
       admin_grup();
+      saldo();
       //jika tombol cashout diklik
       $('#formCashOut').on('submit',function(e) { 
         var nominal = $('#nominalCashout').val();
@@ -338,8 +354,8 @@
           url: '<?= base_url("koperasi/grup/join")?>',
           data: {
               user_id: '<?= $user_id ?>',
-              grup_id: '<?php if(isset($data_grup_tmp->grup_id)){ echo $data_grup_tmp->grup_id;} ?>',
-              request_grup: '<?php if(isset($data_grup_tmp->request)){ echo $data_grup_tmp->request;} ?>'
+              grup_id: '<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>',
+              request_grup: '<?php if (isset($data_grup_tmp->request)){echo ($data_grup_tmp->request);} ?>'
           },
           success: function (data) {
             Swal.fire({
@@ -356,6 +372,10 @@
             alert("ada sesuatu yang salah");
           }
         })      
+      }),
+
+      $('#notifikasi_id').click(function(){
+        alert("assu");
       }),
 
       //jika range bintang dipilih
@@ -403,7 +423,7 @@
    
   //tampil anggota grup request
   function request_grup(){
-    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
     $.ajax({
     type  : 'GET',
     url   : '<?php echo base_url()?>koperasi/grup/list_request',
@@ -457,7 +477,7 @@
   
   //tampil anggota grup
   function member_grup(){
-    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
     $.ajax({
     type  : 'GET',
     url   : '<?php echo base_url()?>koperasi/grup/list_member',
@@ -477,12 +497,14 @@
             /*
             Jika statusnya adalah admin, maka tampilkan action untuk kick member
             */
-            <?php if ($status_member->status_user == 'admin'){ ?>
+            <?php            
+            if (!empty($status_member)){
+            if ($status_member->status_user == 'admin'){ ?>
             '<td style="text-align:right;">'+
                 '<button class="btn btn-default text-danger" id="kick_member" data="'+data[i].id+'"><i class="fas fa-fw fa-sign-out-alt"></i> Kick Out</button>'+
                 '<button class="btn btn-default text-danger" id="block_member" data="'+data[i].id+'"><i class="fas fa-fw fa-ban"></i> Block</button>'
             '</td>'+
-            <?php } ?>
+            <?php }} ?>
 
             '</tr>';
         }
@@ -519,7 +541,7 @@
   
   //tampil admin grup
   function admin_grup(){
-    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
     $.ajax({
     type  : 'GET',
     url   : '<?php echo base_url()?>koperasi/grup/list_admin',
@@ -543,32 +565,72 @@
     });
   };
 
-  //tampil admin grup
+  //tampil notifikasi
   function notifikasi(){
     var user_id =  "<?= $user_id ?>";
     $.ajax({
     type  : 'GET',
-    url   : '<?php echo base_url()?>koperasi/grup/list_admin',
-    data  : {grup_id:grup_id},
+    url   : '<?php echo base_url()?>dashboard/notifikasi',
+    data  : {user_id:user_id},
     async : true,
     dataType : 'json',
     success : function(data){
-        var html = '';
-        var i;
-        for(i=0; i<data.length; i++){
-          html += '<tr>'+
-            '<td>'+
-              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
-              '</a></td>'+
-            '<td>'+data[i].joined+' days ago</td>'+
-            '</tr>';
+
+      $('#count_notifikasi').text(data.length);
+      
+      var html = '';
+      var i;
+        for(i=0; i < data.length; i++){
+          html += 
+            '<a class="dropdown-item d-flex align-items-center detail_notifikasi" data="'+data[i].notifikasi_id+'" href="javascript:;">'+
+              '<div>'+
+                '<div class="small text-gray-500">'+data[i].tanggal+'</div>'+
+                '<span class="font-weight-bold">'+data[i].judul+'</span>'+
+              '</div>'+
+            '</a>';
         }
-        $('#notifikasi').html(html);
+        $('.notifikasi').html(html);
       }
     });
   };
 
+
+  //detail notifikasi modal
+  $('.notifikasi').on('click','.detail_notifikasi',function(){
+      var id=$(this).attr('data');
+          $.ajax({
+          type  : 'GET',
+          url   : '<?php echo base_url()?>dashboard/notifikasi_by_id',
+          data  : {id:id},
+          async : true,
+          dataType : 'json',
+          success : function(data){
+              $('#judul_notifikasi_modal').text(data.judul);
+              $('#tanggal_notifikasi_modal').text(data.tanggal);
+              $('#isi_notifikasi_modal').text(data.isi);
+              $('#link_notifikasi_modal').html('<a class="btn btn-light" href="'+data.link+'">Check <i class="fas fa-fw fa-sign-in-alt"></i></a>');
+            }
+          });
+      $('#notifikasi_modal').modal('show');
+  });
+
+
+  //tampil saldo user
+  function saldo(){
+    var user_id =  "<?= $user_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>dashboard/saldo',
+    data  : {user_id:user_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        $('#saldo_akhir').text(data.saldo_akhir);
+        $('#saldo_koperasi').text(data.saldo_koperasi);
+      }
+    });
+  };
+  
 </script>
 </body> 
 </html>

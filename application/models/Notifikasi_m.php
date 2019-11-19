@@ -10,6 +10,12 @@ class Notifikasi_m extends MY_Model {
 
     public function cek_notifikasi($user_id){
         $this->db->where('user_id', $user_id);
-        $result = $this->db->cek_user('notifikasi')->row();
+        $this->db->order_by('notifikasi_id','desc');
+        $result = $this->db->get('notifikasi')->result();
+        return $result;    }
+
+    public function cek_notifikasi_by_id($id){
+        $this->db->where('notifikasi_id', $id);
+        $result = $this->db->get('notifikasi')->row();
         return $result;    }
 }

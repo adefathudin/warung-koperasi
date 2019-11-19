@@ -205,18 +205,20 @@ class Grup extends MY_Controller {
         $this->grup_user_m->save($insert_grup_user);    
     }
 
-    // join grup
+    //join grup
     public function accept(){
         $this->load->model('grup_user_m');
+        $this->load->model('notifikasi_m');
         $id = $this->input->post('id');
         $update_grup_user = array (
             'status_user' => 'member'
         );
-        if ($this->grup_user_m->save($update_grup_user, $id)){            
-            echo "<script>console.log('data berhasil diupdate')</script>";
-        } else {
-                       
-            echo "<script>console.log('data berhasil diupdate123')</script>";
+        $insert_notifikasi = array (
+            'user_id' => 'c3480b0792a9d47c55152094055782ce', 'judul' => 'Status Join Grup', 'isi'=> 'Anda telah distujui bergabung dengan grup koperasi',
+            'link' => 'grup'
+        );
+        if ($this->grup_user_m->save($update_grup_user, $id)){
+            $this->notifikasi_m->save($insert_notifikasi);
         }
 
     }

@@ -11,7 +11,6 @@
     </div>
   </nav>
   <br>
-  
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade" id="nav-admin" role="tabpanel" aria-labelledby="nav-admin-tab">      
       <div class="table-responsive">

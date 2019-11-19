@@ -19,7 +19,7 @@ class Migration_add_table_notifikasi extends MY_Migration {
         ),
         'user_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 20
+            'constraint' => 32
         ),
         'tanggal' => array(
             'type' => 'TIMESTAMP'

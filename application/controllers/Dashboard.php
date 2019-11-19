@@ -13,5 +13,25 @@ class Dashboard extends MY_Controller {
         $this->data['subview'] = 'dashboard/index';
         $this->load->view('_layout_main', $this->data);
     }
+    public function saldo(){
+        $this->load->model('rekening_m');
+        $user_id = $this->input->get('user_id');
+        $data = $this->rekening_m->get_saldo($user_id);
+        echo json_encode($data);
+    }
+
+    public function notifikasi(){
+        $this->load->model('notifikasi_m');
+        $user_id = $this->input->get('user_id');
+        $data = $this->notifikasi_m->cek_notifikasi($user_id);
+        echo json_encode($data);
+    }
+
+    public function notifikasi_by_id(){
+        $this->load->model('notifikasi_m');
+        $id = $this->input->get('id');
+        $data = $this->notifikasi_m->cek_notifikasi_by_id($id);
+        echo json_encode($data);
+    }
 
 }
