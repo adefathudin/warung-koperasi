@@ -57,58 +57,23 @@
       </a>
       <!-- ADMIN GROUP -->
       <?php 
-      if (!empty($user_grup)){
-      if (!empty($user_grup->admin_grup)){
-      echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i> Groups you manage</div>";
-      
-      if (strpos($user_grup->admin_grup, "|")){
-      $detail_grup = explode("|", $user_grup->admin_grup);
-      $count = count($detail_grup);
-      $i = 0;
-      while ($i < $count){
+      $i = 1;
+      if (!empty($list_grup)){
         foreach ($list_grup as $grup){
-          if ($grup->grup_id == $detail_grup[$i]){
-            echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$detail_grup[$i]."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
-            $i++;
+          if ($grup->status_user == 'admin'){          
+            if ($i++ == 1) {                
+              echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i> Groups you manage</div>";
+            }
+              echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
           }
-        }  
-      }
-    } else {
-      foreach ($list_grup as $grup){
-        if ($grup->grup_id == $user_grup->admin_grup){
-          echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$user_grup->admin_grup."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
-          //echo $grup->nama_grup;
+          else if ($grup->status_user == 'member'){       
+            if ($i++ == 1) {                           
+              echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i>  Groups you're in</div>";
+            }
+            echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
+          }
         }
       }
-    }
-  }
-    ?>
-      <!-- BASIC GROUP -->
-      <?php
-      if ($user_grup->basic_grup != null){
-      echo "<div class='collapse-header'><i class='fas fa-fw fa-users'></i> Groups you're in</div>";
-      
-      if (strpos($user_grup->basic_grup, "|")){
-      $detail_grup = explode("|", $user_grup->basic_grup);
-      $count = count($detail_grup);
-      $i = 0;
-      while ($i < $count){
-        foreach ($list_grup as $grup){
-          if ($grup->grup_id == $detail_grup[$i]){
-            echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$detail_grup[$i]."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
-            $i++;
-          }
-        }  
-      }
-    } else {
-      foreach ($list_grup as $grup){
-        if ($grup->grup_id == $user_grup->basic_grup){
-          echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$user_grup->basic_grup."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
-        }
-      }
-    }
-  }
-}
     ?>
     </div>
   </div>

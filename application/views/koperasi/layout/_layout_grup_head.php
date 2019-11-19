@@ -42,9 +42,8 @@
       <?php
       
       //jika user menjadi admin atau member, maka akan ditampilkan menu
-
-      if (strpos($data_grup_tmp->admin, $user_id) !== false or strpos($data_grup_tmp->member, $user_id) !== false){
-     
+      if (!empty($status_member)){
+        if ($status_member->status_user == 'admin' or $status_member->status_user == 'member'){     
         ?>
       
       <div class="btn-group">
@@ -80,7 +79,7 @@
       <?php
            
       //cek apakah user tersebut sebagai admin
-      if (strpos($data_grup_tmp->admin, $user_id) !== false){?>
+      if ($status_member->status_user == 'admin'){?>
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i> Pengaturan
@@ -104,6 +103,7 @@
         </div>
       </div>
       <?php }
+      }
        else {
 
        } ?>

@@ -265,6 +265,7 @@
     init: function(){
       request_grup();
       member_grup();
+      admin_grup();
       //jika tombol cashout diklik
       $('#formCashOut').on('submit',function(e) { 
         var nominal = $('#nominalCashout').val();
@@ -472,10 +473,17 @@
               '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
                   '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
               '</a></td>'+
+            '<td>'+data[i].joined+' days ago</td>'+
+            /*
+            Jika statusnya adalah admin, maka tampilkan action untuk kick member
+            */
+            <?php if ($status_member->status_user == 'admin'){ ?>
             '<td style="text-align:right;">'+
                 '<button class="btn btn-default text-danger" id="kick_member" data="'+data[i].id+'"><i class="fas fa-fw fa-sign-out-alt"></i> Kick Out</button>'+
                 '<button class="btn btn-default text-danger" id="block_member" data="'+data[i].id+'"><i class="fas fa-fw fa-ban"></i> Block</button>'
             '</td>'+
+            <?php } ?>
+
             '</tr>';
         }
         $('#data-member').html(html);
@@ -507,6 +515,59 @@
         })
         return false;
   });
+
+  
+  //tampil admin grup
+  function admin_grup(){
+    var grup_id =  "<?= $data_grup_tmp->grup_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_admin',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td>'+data[i].joined+' days ago</td>'+
+            '</tr>';
+        }
+        $('#data-admin').html(html);
+      }
+    });
+  };
+
+  //tampil admin grup
+  function notifikasi(){
+    var user_id =  "<?= $user_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_admin',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td>'+data[i].joined+' days ago</td>'+
+            '</tr>';
+        }
+        $('#notifikasi').html(html);
+      }
+    });
+  };
 
 </script>
 </body> 

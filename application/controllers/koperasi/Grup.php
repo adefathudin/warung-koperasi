@@ -53,8 +53,9 @@ class Grup extends MY_Controller {
         $this->data['status_member'] = $this->grup_user_m->get_status_member($user_id,$grup_id);
         $this->data['grup_id'] = $grup_id;
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
-        $this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();
+        //$this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();
         $this->data['data_grup_tmp'] = $this->grup_m->get($grup_id); 
+        
         $this->data['title'] = ucwords($this->grup_m->get($grup_id)->nama_grup);
         $this->data['subview'] = 'koperasi/grup';
         $this->load->view('_layout_main', $this->data);
@@ -65,6 +66,7 @@ class Grup extends MY_Controller {
     public function new(){
         $this->load->model('grup_m');
         $this->load->model('user_grup_m');
+        $this->load->model('grup_user_m');
         $user_id = $this->session->userdata('user_id');
         $grup_id = md5(uniqid());
         $nama_grup = ucwords($this->input->post('nama_grup'));  
@@ -72,39 +74,23 @@ class Grup extends MY_Controller {
         $kategori = $this->input->post('kategori');       
         $about = $this->input->post('tentang');    
         $deskripsi = 'Deskripsi grup '.$nama_grup;
-        if ($this->user_grup_m->get_count(array('user_id'=>$user_id))==0){
-        
         if ($nama_grup != "" and $about != ""){
+        
+        /*
+        insert data ke table grup_user
+        */
         $insert_data_grup =  array(
-            'grup_id'=>$grup_id, 'nama_grup' => $nama_grup, 'wilayah' => $wilayah, 'about' => $about, 'admin' => $user_id, 'kategori' => $kategori, 'deskripsi' => $deskripsi
-            );  
-        $insert_user_grup =array (
-            'user_id' => $user_id, 'admin_grup' => $grup_id
-        );        
-        $insert_grup_grup =array (
-            'user_id' => $user_id, 'admin_grup' => $grup_id
+            'grup_id'=>$grup_id, 'nama_grup' => $nama_grup, 'wilayah' => $wilayah, 'about' => $about,
+             'kategori' => $kategori
+        );  
+        
+        $insert_grup_user =array (
+            'grup_id' => $grup_id, 'user_id' => $user_id, 'status_user' => 'admin'
         );
-        if ($this->grup_m->save($insert_data_grup)){
-            $this->user_grup_m->save($insert_user_grup);
+        if ($this->grup_user_m->save($insert_grup_user)){
+            $this->grup_m->save($insert_data_grup);
             $this->session->set_flashdata('pesan_new','Grup baru berhasil dibuat');
             }
-        }
-    } else {
-        $list_admin = $this->user_grup_m->get_list_admin($user_id)->admin_grup."|".$grup_id;
-        if ($nama_grup != "" and $about != ""){
-            $insert_data_grup =  array(
-                'grup_id'=>$grup_id, 'nama_grup' => $nama_grup, 'wilayah' => $wilayah, 'about' => $about, 'admin' => $user_id, 'kategori' => $kategori
-                );  
-            $insert_user_grup = array (
-                'admin_grup' => $list_admin
-            );
-            if ($this->grup_m->save($insert_data_grup)){
-                if ($this->user_grup_m->save($insert_user_grup, $user_id)){
-                    
-                }
-                $this->session->set_flashdata('grup_exist','Grup berhasil dibuat');
-                }
-            }            
         }
         redirect ('grup/'.$grup_id.'/index');
     }
@@ -254,6 +240,13 @@ class Grup extends MY_Controller {
         $this->load->model('grup_user_m');
         $grup_id=$this->input->get('grup_id');
         $data = $this->grup_user_m->get_list_member($grup_id);
+        echo json_encode($data);
+    }
+
+    public function list_admin(){
+        $this->load->model('grup_user_m');
+        $grup_id=$this->input->get('grup_id');
+        $data = $this->grup_user_m->get_list_admin($grup_id);
         echo json_encode($data);
     }
 }

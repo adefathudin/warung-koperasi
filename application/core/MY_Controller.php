@@ -6,20 +6,18 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
         
         $this->load->model('users_detail_m');
-        $this->load->model('user_grup_m');
-        $this->load->model('grup_m');
+        $this->load->model('grup_user_m');
         $this->load->library('session');
         date_default_timezone_set("Asia/Jakarta");
         $user_id = $this->session->userdata('user_id');
-        //AMBIL USER YANG MEMEPUNYAI GRUP
-        $this->data['user_grup'] = $this->user_grup_m->get_user_grup($user_id);
         //AMBIL DATA USER
         $this->data['data_user'] = $this->users_detail_m->get_user($user_id); 
+
         //TAMPILKAN GRUP BESERTA DATANYA
-        $this->data['list_grup'] = $this->grup_m->get_list_grup();
+        $this->data['list_grup'] = $this->grup_user_m->get_list_grup($user_id);
 
         $this->data['user_id'] = $user_id;
-        
+                
         if(!$this->session){
             $this->load->library('session');
         }
