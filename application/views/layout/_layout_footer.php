@@ -276,7 +276,7 @@
   <script>
   var JS = {
     init: function(){
-      setInterval(function(){ notifikasi(); }, 6000);
+      setInterval(function(){ notifikasi(); }, 3000);
       //notifikasi();
       request_grup();
       member_grup();
