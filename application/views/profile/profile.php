@@ -3,7 +3,7 @@
               <div class="row">
                 <div class="col-lg-4">
                   <div class="border-bottom text-center pb-4">
-                    <img src="<?php echo base_url('assets/img/user/profile/'.$data_user_tmp->profil) ?>" alt="profile" class="img-responsive">
+                    <img src="<?php echo base_url('assets/img/user/profile/'.$data_user_tmp->profil) ?>" alt="profile" class="img-responsive rounded">
                     <div class="mb-3"><br>
                       <h4>
                         <?php echo $data_user_tmp->nama_lengkap;
@@ -15,8 +15,8 @@
                         <h5 class="mb-0 mr-2 text-muted">
                         <?php 
                         echo "<div class='small'>".$data_user_tmp->type."</div>";
-                        if ($data_user->status_approve == '0' and $data_user_tmp->user_id == $user_id) {
-                        echo "<br><a href='#' data-toggle='modal' data-target='#upgrade'><u>Click here to upgrade</u></a>";}
+                        if ($data_user->status_approve == '0' and $data_user_tmp->user_id == $user_id) {                          
+                        echo "<br><a class='btn btn-light' href='#' data-toggle='modal' data-target='#upgrade'><u>Click here to upgrade</u></a>";}
                         elseif ($data_user->status_approve == '2' and $data_user_tmp->user_id == $user_id){
                           echo "<br><i>(Menunggu Persetujuan)</i>";}
                         ?>

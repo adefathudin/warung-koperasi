@@ -50,51 +50,15 @@
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw"></i>
           <!-- Counter - Alerts -->
-          <span class="badge badge-danger badge-counter" id="count_notifikasi">0</span>
+          <span class="badge badge-danger badge-counter" id="count_notifikasi"></span>
         </a>
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-          <h6 class="dropdown-header">
+          <h5 class="dropdown-header">
             Pemberitahuan
-          </h6>
+          </h5>
           <div class="notifikasi"></div>
-          <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-        </div>
-      </li>
-
-      <!-- Nav Item - Messages -->
-      <li class="nav-item dropdown no-arrow mx-1">
-        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-envelope fa-fw"></i>
-          <!-- Counter - Messages -->
-          <span class="badge badge-danger badge-counter">7</span>
-        </a>
-        <!-- Dropdown - Messages -->
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-          <h6 class="dropdown-header">
-            Pesan
-          </h6>
-          <a class="dropdown-item d-flex align-items-center" href="#">
-            <div class="dropdown-list-image mr-3">
-              <img class="rounded-circle" src="" alt="">
-              <div class="status-indicator bg-success"></div>
-            </div>
-            <div class="font-weight-bold">
-              <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
-              <div class="small text-gray-500">Emily Fowler · 58m</div>
-            </div>
-          </a>
-          <a class="dropdown-item d-flex align-items-center" href="#">
-            <div class="dropdown-list-image mr-3">
-              <img class="rounded-circle" src="" alt="">
-              <div class="status-indicator"></div>
-            </div>
-            <div>
-              <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
-              <div class="small text-gray-500">Jae Chun · 1d</div>
-            </div>
-          </a>
-          <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+          <a class="dropdown-item text-center text-gray-500" href="#">Tampilkan semua pemberitahuan</a>
         </div>
       </li>
 
@@ -158,7 +122,7 @@ if ($data_user->verifikasi_email == 0){
         </div>";
         }
 
-if ($data_user->verifikasi_nomor_hp != 0){
+if ($data_user->verifikasi_nomor_hp == 0){
   echo "<div class='alert alert-warning alert-dismissible'>
         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
         <strong>Peringatan!</strong> Nomor HP anda belum diverifikasi. 

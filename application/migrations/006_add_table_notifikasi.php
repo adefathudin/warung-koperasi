@@ -26,7 +26,7 @@ class Migration_add_table_notifikasi extends MY_Migration {
         ),
         'judul' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 50
         ),
         'isi' => array(
             'type' => 'VARCHAR',

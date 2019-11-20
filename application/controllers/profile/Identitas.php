@@ -18,12 +18,12 @@ class Identitas extends MY_Controller {
         $ktp = base64_decode($ktp);
         $pp = base64_decode($pp);
         $insert_ktp_pp =  array(
-            'ktp'=>$nama_ktp, 'profil' => $nama_profile
+            'ktp'=>$nama_ktp, 'profil' => $nama_profile, 'status_approve' => 2
             );  
         if ($this->users_detail_m->save($insert_ktp_pp, $user_id)){
             file_put_contents('assets/img/user/ktp/'.$nama_ktp, $ktp);
             file_put_contents('assets/img/user/profile/'.$nama_profile, $pp);
-            $this->session->set_flashdata('pesan_lapmiran','Foto Profil dan Kartu Identitas Berhasil diupload');
+            $this->session->set_flashdata('pesan_lampiran','<i class="fas fa-fw fa-info-circle"></i> Foto Profil dan Kartu Identitas Berhasil diupload');
             }
         }
         redirect ('user/'.$user_id);

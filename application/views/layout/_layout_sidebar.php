@@ -6,9 +6,21 @@
   <div class="sidebar-brand-text mx-3">WarungKoperasi</div>
 </a>
 
-
 <!-- Divider -->
 <hr class="sidebar-divider">
+
+<?php
+if ($data_user->email == 'root@warungkoperasi.my.id'){
+  echo "
+  <li class='nav-item active'>
+    <a class='nav-link collapsed' href='".base_url('admin/dashboard')."'>
+      <i class='fas fa-fw fa-user-shield'></i>
+      <span>Admin Panel</span>
+    </a>
+  </li>
+";
+} 
+?>
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
   <a class="nav-link collapsed" href="<?php echo base_url('dashboard')?>">

@@ -77,38 +77,41 @@
 
 </div><!--END ROW-->
 
-<?php
-if (isset($_GET['order_id'])){
-  $order_id = $_GET['order_id'];
-  $status = $_GET['status_code'];
-    if (!empty($order_id and !empty($status))){
-      if ($status == 200){
-        
-        echo "Top-up Saldo berhasil dilakukan";
-
-      }      
-    }
-  }
-?>
-
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
 <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-yXauJI1zHbAPH4dl"></script>
 <script type="text/javascript">
   document.getElementById('pay-button').onclick = function(){
+    <?php
+    $order_id = uniqid();
+    ?>
     // This is minimal request body as example.
     // Please refer to docs for all available options: https://snap-docs.midtrans.com/#json-parameter-request-body
     // TODO: you should change this gross_amount and order_id to your desire. 
     var requestBody = 
     {
+      
       transaction_details: {
         gross_amount: document.getElementById('nominalTopup').value,
         deskripsi: 'Top Up',        
         //order_id: 'WARKOP-'+Math.round((new Date()).getTime() / 1000) 
-        order_id: '<?= uniqid() ?>'
-        
+        order_id: '<?= $order_id ?>'
+
       }
     }
+    
+    var user_id =  "<?= $user_id ?>";
+    var nominal = document.getElementById('nominalTopup').value; 
+    $.ajax({
+    type  : 'POST',
+    url   : '<?php echo base_url()?>rekening/topup/insert',
+    data  : {user_id:user_id, nominal:nominal, order_id:'<?= $order_id ?>'},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+      console.log('sukses');
+      }
+    });
     
     getSnapToken(requestBody, function(response){
       var response = JSON.parse(response);
@@ -132,6 +135,8 @@ if (isset($_GET['order_id'])){
     xmlHttp.open("post", "<?= base_url('payment/checkout.php')?>");
     xmlHttp.send(JSON.stringify(requestBody));
   }
+
+  
 </script>
 
 <script>

@@ -34,4 +34,10 @@ class Dashboard extends MY_Controller {
         echo json_encode($data);
     }
 
+    public function update_baca_notifikasi(){
+        $this->load->model('notifikasi_m');
+        $id = $this->input->get('id');
+        $this->notifikasi_m->save(array('baca'=> 1), $id);
+    }
+
 }

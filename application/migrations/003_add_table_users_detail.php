@@ -99,4 +99,32 @@ class Migration_add_table_users_detail extends MY_Migration {
         )
     );
 
+    function up(){
+        parent::up();
+        
+        $insert = array(
+            array(
+                'user_id' => 'a1bdc221d56fddfba202bd448fe4dbfb',
+                'nama_lengkap'  => 'Admin',
+                'tempat_lahir'  => 'Ciamis',
+                'tanggal_lahir' => '2019-03-27 00:00:00',
+                'jenis_kelamin' => 'L',
+                'email'         => 'root@warungkoperasi.my.id',
+                'nomor_hp'      => '(021)27030327',
+                'alamat'        => 'Jl. Raya Kampung Sawah Gg. Kenanga Indah, Jatimurni, Kota Bekasi',
+                'about'         => 'Hai, saya adalah admin WarungKoperasi :)',
+                'ktp'           => 'a1bdc221d56fddfba202bd448fe4dbfb_KTP.jpeg',
+                'nomor_rekening'=> '2703010203',
+                'nama_bank'     => 'BRI Syariah',
+                'profil'        => 'a1bdc221d56fddfba202bd448fe4dbfb_PP.png',
+                'type'          => 'Full Service',
+                'status_approve'=> '1',
+                'verifikasi_email'      => '1',
+                'verifikasi_nomor_hp'   => '1'
+            )
+        );
+        
+        $this->_seed($insert);
+    }
+
 }

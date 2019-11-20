@@ -3,7 +3,7 @@
 class Mutasi_rekening_m extends MY_Model {
 
     protected $_table_name = 'mutasi_rekening';
-    protected $_primary_key = 'trx_id';
+    protected $_primary_key = 'order_id';
     protected $_primary_filter = 'strval';
     protected $_order_by = '';
     protected $_timestamps = FALSE;

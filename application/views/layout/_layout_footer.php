@@ -292,7 +292,7 @@
           $('#btnKonfirmasiCashout').prop('disabled', true);   
         }),
         
-      //Jika telah selesai topup
+      //Jika telah selesai cashout
       <?php if($this->session->flashdata('pesan_cashout')){ ?>
         Swal.fire({
           position: 'center',
@@ -300,6 +300,17 @@
           icon: 'success',
           showConfirmButton: true,
           text: '<?= $this->session->flashdata('pesan_cashout') ?>'
+        }),
+      <?php } ?>
+
+      //Jika telah selesai topup
+      <?php if($this->session->flashdata('pesan_cash_in')){ ?>
+        Swal.fire({
+          position: 'center',
+          title: 'Top Up Berhasil!',
+          icon: 'success',
+          showConfirmButton: true,
+          text: '<?= $this->session->flashdata('pesan_cash_in') ?>'
         }),
       <?php } ?>
 
@@ -575,9 +586,14 @@
     async : true,
     dataType : 'json',
     success : function(data){
-
-      $('#count_notifikasi').text(data.length);
       
+      //jika notifikasi yang belum dibaca lebih dari 0
+
+      if (data.length > 0){
+      $('#count_notifikasi').text(data.length);
+      } else {
+        $('#count_notifikasi').text("");
+      }
       var html = '';
       var i;
         for(i=0; i < data.length; i++){
@@ -609,6 +625,15 @@
               $('#tanggal_notifikasi_modal').text(data.tanggal);
               $('#isi_notifikasi_modal').text(data.isi);
               $('#link_notifikasi_modal').html('<a class="btn btn-light" href="'+data.link+'">Check <i class="fas fa-fw fa-sign-in-alt"></i></a>');
+                  $.ajax({
+                  type  : 'GET',
+                  url   : '<?php echo base_url()?>dashboard/update_baca_notifikasi',
+                  data  : {id:id},
+                  async : true,
+                  dataType : 'json',
+                  success : function(data){
+                    }
+                  });
             }
           });
       $('#notifikasi_modal').modal('show');
@@ -632,5 +657,40 @@
   };
   
 </script>
+
+
+<?php
+if (!empty($_GET['order_id'])){
+  $order_id = $_GET['order_id'];
+  $status = $_GET['status_code'];
+    if (!empty($order_id and !empty($status))){
+      if ($status == 200){ ?>
+      <script>
+        $.ajax({
+        type  : 'POST',
+        url   : '<?php echo base_url()?>rekening/topup/update',
+        data  : {order_id:'<?= $order_id ?>'},
+        success : function(data){          
+          <?php
+            $this->session->set_flashdata('pesan_cash_in', 'Topup saldo berhasil dilakukan'); 
+            header("Location:".base_url('rekening/topup'));
+          ?>
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat topup saldo',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }  
+        });
+      </script>
+        <?php
+      }      
+    }
+  }
+?>
 </body> 
 </html>

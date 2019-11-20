@@ -9,14 +9,9 @@
 class Migration_add_table_mutasi_rekening extends MY_Migration {
 
     protected $_table_name = 'mutasi_rekening';
-    protected $_primary_key = 'trx_id';
+    protected $_primary_key = 'order_id';
     //protected $_index_keys = array('user_name');
     protected $_fields = array(
-        'trx_id' => array(
-            'type' => 'INT',
-            'constraint' => 15,
-            'auto_increment' => TRUE
-        ),
         'user_id' => array(
             'type' => 'VARCHAR',
             'constraint' => 32
