@@ -28,6 +28,12 @@ class Users_detail_m extends MY_Model {
         $result = $this->db->get('users_detail')->result();
         return $result;
     }
+
+    public function get_detail_member_request_full_service($user_id){
+        $this->db->where('user_id', $user_id);
+        $result = $this->db->get('users_detail')->row();
+        return $result;
+    }
     
     public function get_data_all_user(){
         $result = $this->db->get('users_detail')->result();

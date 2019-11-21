@@ -13,8 +13,7 @@ class User extends MY_Controller {
         $this->load->view('_layout_main', $this->data,$user_id);
     }
     
-    public function id($user_id = null )
-    { 
+    public function id($user_id = null ){ 
         $this->load->model('users_detail_m');
         $user_id =  $this->uri->segment(2);
         $this->data['data_user_tmp'] = $this->users_detail_m->get_user($user_id); 
@@ -23,10 +22,23 @@ class User extends MY_Controller {
         $this->load->view('_layout_main', $this->data);
     }
 
-    public function member_request_full_service()
-    { 
+    public function member_request_full_service(){ 
         $this->load->model('users_detail_m');
         $data = $this->users_detail_m->get_member_request_full_service();
+        echo json_encode($data);
+    }
+
+    public function detail_member_request_full_service(){ 
+        $this->load->model('users_detail_m');
+        $user_id = $this->input->GET('user_id');
+        $data = $this->users_detail_m->get_detail_member_request_full_service($user_id);
+        echo json_encode($data);
+    }
+
+    public function approve_member_full_service(){ 
+        $this->load->model('users_detail_m');
+        $user_id = $this->input->GET('user_id');
+        $this->users_detail_m->save(array('status_approve'=> 1, 'type' => 'Full Service'), $user_id);
         echo json_encode($data);
     }
 }
