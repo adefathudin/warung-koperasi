@@ -37,9 +37,16 @@ class User extends MY_Controller {
 
     public function approve_member_full_service(){ 
         $this->load->model('users_detail_m');
+        $this->load->model('notifikasi_m');
         $user_id = $this->input->GET('user_id');
+        $this->notifikasi_m->save(array('user_id'=>$user_id, 'judul'=>'Status Upgrade Member','isi'=>'Permohonan upgrade member Full Service anda telah disetujui'));
         $this->users_detail_m->save(array('status_approve'=> 1, 'type' => 'Full Service'), $user_id);
-        echo json_encode($data);
+    }
+
+    public function reject_member_full_service(){ 
+        $this->load->model('users_detail_m');
+        $user_id = $this->input->GET('user_id');
+        $this->users_detail_m->save(array('status_approve'=> 0, 'type' => 'Basic Service'), $user_id);
     }
 }
 

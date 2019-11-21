@@ -70,6 +70,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
+        <div class="modal-body">
         <form id="updateIdentitas" method="POST" action="<?php echo base_url('koperasi/grup/new')?>">
           <div class="form-group mx-sm-3 mb-2">
             <div class="form-group">
@@ -89,6 +90,7 @@
             <div class="form-group">
               <textarea class="form-control" maxlength="75" name="tentang" placeholder="Deskripsi singkat."></textarea>
             </div>
+        </div>
         </div>
         <div class="modal-footer">
             <div class="form-group text-right">         
@@ -177,9 +179,10 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-
-        <div id="detail_member_full"></div>
         
+        <div id="detail_member_full">test</div>
+
+        </div>
       </div>
     </div>
   </div>

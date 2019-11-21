@@ -84,7 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
 
           <a class="nav-link active" id="report" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Report</a>
 
-          <a class="nav-link" id="member" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Approval Member Full Service</a>
+          <a class="nav-link" id="member" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">User</a>
 
           <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
 

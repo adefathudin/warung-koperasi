@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 <?php $this->load->view('layout/module/_layout_dashboard'); ?>
-
+<!--
 <div class="row">
   <div class="col-lg-9 mb-4">
     <div class="card shadow mb-4">
@@ -146,7 +146,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
   </div>
 </div>
 
-</div><!--END ROW-->
+</div>
+END ROW-->
 
 
 

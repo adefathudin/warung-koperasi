@@ -421,6 +421,61 @@
       }
     });
   };
+
+  //jika tombol approve full service ditekan
+        
+  $(document).on('click', '#btn_approve_full_service', function(){
+          var user_id=$(this).attr('data');
+          if (!confirm("User kan diupgrade menjadi member Full Service?")){
+            return false;
+          }
+          $.ajax({
+          type  : 'GET',
+          url   : '<?php echo base_url()?>profile/user/approve_member_full_service',
+          data  : {user_id:user_id},
+          success : function(data){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Upgrade Member Berhasil',
+              showConfirmButton: false,
+              timer: 1300
+            })
+            }
+          });
+          
+          $('#approve_member_full_modal .close').click();
+          $('#member').click();
+
+        });
+
+
+        //jika tombol reject full service ditekan
+        
+        $(document).on('click', '#btn_reject_full_service', function(){
+          var user_id=$(this).attr('data');
+          if (!confirm("Pengajuan upgrade user ini akan ditolak?")){
+            return false;
+          }
+          $.ajax({
+          type  : 'GET',
+          url   : '<?php echo base_url()?>profile/user/reject_member_full_service',
+          data  : {user_id:user_id},
+          success : function(data){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Pengajuan Upgrade Member Berhasil Ditolak',
+              showConfirmButton: false,
+              timer: 1300
+            })
+            }
+          });
+          
+          $('#approve_member_full_modal .close').click();
+          $('#member').click();
+
+        });
   
 </script>
 
@@ -465,16 +520,13 @@ if (!empty($_GET['order_id'])){
   if ($user_id == 'a1bdc221d56fddfba202bd448fe4dbfb'){ ?>
 
     <script>
-    var JS = {
-      init: function(){
+
         $("#report").click(function(){
         $(".konten_admin").load("<?= base_url('admin/dashboard/report')?>");
           }),
       
         $("#member").click(function(){
         $(".konten_admin").load("<?= base_url('admin/dashboard/member')?>");
-        
-        $('#member_request_full').empty();
         
             $.ajax({
             type  : 'POST',
@@ -495,6 +547,7 @@ if (!empty($_GET['order_id'])){
                     '</tr>';
                 }
               $('#member_request_full').html(html);
+              return false;
             }
           });
         }),         
@@ -527,9 +580,9 @@ if (!empty($_GET['order_id'])){
                         '</tbody>'+
                       '</table>'+
                     '</div>'+
-                    '<div class="modal-footer">'+
-                      '<button class="btn btn-danger" data="'+data.user_id+'" id="reject_full_service"><i class="fas fa-fw fa-times-circle"></i> Reject</button>'+
-                      '<button class="btn btn-primary" data="'+data.user_id+'" id="approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Upgrade</button>'+
+                    '<div class="modal-footer btn_approve_reject">'+
+                      '<button class="btn btn-danger" data="'+data.user_id+'" id="btn_reject_full_service"><i class="fas fa-fw fa-times-circle"></i> Reject</button>'+
+                      '<button class="btn btn-primary" data="'+data.user_id+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Upgrade</button>'+
                     '</div>'  
                           ;
                     
@@ -537,45 +590,14 @@ if (!empty($_GET['order_id'])){
                   }
                 });
             $('#approve_member_full_modal').modal('show');
-        }),
-
-        //jika tombol approve full service ditekan
-
-        $(document).on('click','#approve_full_service', function(){
-          $('#approve_member_full_modal .close').click();
-          $('#member').click();
-          var user_id=$(this).attr('data');
-          $.ajax({
-          type  : 'GET',
-          url   : '<?php echo base_url()?>profile/user/approve_member_full_service',
-          data  : {user_id:user_id},
-          async : true,
-          dataType : 'json',
-          success : function(data){
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              text: 'Berhasil upgrade member',
-              showConfirmButton: false,
-              timer: 1300
-            })
-            }
-          });
-
         });
 
-
-
-      }
-    }
-    
-    $(document).ready(function(){
-      JS.init();
-    });
-    
-      
     </script>
     
 <?php } ?>
-</body> 
+
+    <script>        
+        
+    </script>
+  </body> 
 </html>

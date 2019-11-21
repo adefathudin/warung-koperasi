@@ -1,12 +1,13 @@
 
     <div class="card shadow mb-4">
+    
       <div class="card-header">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="true">Request</a>
-            <a class="nav-item nav-link" id="nav-rekening-tab" data-toggle="tab" href="#nav-rekening" role="tab" aria-controls="nav-rekening" aria-selected="false">Saldo Rekening</a>
-            <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">User</a>
-            <a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-group" aria-selected="false">Group</a>
+            <a class="nav-item nav-link nav_request active" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="true">Request Upgrade</a>
+            <a class="nav-item nav-link" id="nav-rekening-tab" data-toggle="tab" href="#nav-rekening" role="tab" aria-controls="nav-rekening" aria-selected="false">Full Service</a>
+            <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">Basic Service</a>
+            <a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-group" aria-selected="false">All User</a>
           </div>
         </nav>
       </div>      
@@ -14,7 +15,7 @@
           <div class="tab-pane fade show active" id="nav-request" role="tabpanel" aria-labelledby="nav-request-tab">          
             <div class="card-body">                  
                 <div class="table-responsive">
-                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-striped" id="datatable_member_upgrade" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                             <th width="80%">Nama</th>
@@ -37,7 +38,7 @@
                             <th>Joined</th>
                             </tr>
                         </thead>          
-                        <tbody id="data-admin">                 
+                        <tbody id="member_request_full">                 
                         </tbody>
                     </table>
                 </div>

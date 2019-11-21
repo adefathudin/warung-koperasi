@@ -20,7 +20,7 @@ class Grup extends MY_Controller {
         $maksimal_pinjaman = $this->input->get('maksimal_pinjaman');   
         $rate = $this->input->get('rate'); 
         $this->data['list_grup_search'] = $this->grup_m->get_grup_search($nama_grup,$wilayah,$minimal_pokok,$minimal_wajib,$maksimal_pinjaman,$rate);
-        $this->data['title'] = 'Koperasi Saloome';
+        $this->data['title'] = 'Explore Grup Koperasi';
         $this->data['subview'] = 'koperasi/grup_search';
         $this->load->view('_layout_main', $this->data);
     }

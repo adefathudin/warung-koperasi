@@ -28,6 +28,9 @@ class Migration_add_table_grup_user extends MY_Migration {
         'status_user' => array(
             'type' => 'VARCHAR',
             'constraint' => 15
+        ),
+        'joined' => array(
+            'type' => 'TIMESTAMP'
         )
     );
 

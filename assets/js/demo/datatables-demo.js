@@ -7,4 +7,5 @@ $(document).ready(function() {
   $('#dataTable4').DataTable();
   $('#dataTable5').DataTable();
   $('#dataTable6').DataTable();
+
 });
