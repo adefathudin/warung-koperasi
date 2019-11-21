@@ -254,13 +254,6 @@
   <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
 
   <!-- Page level plugins -->
-  <!--<script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js')?>"></script>-->
-
-  <!-- Page level custom scripts 
-  <script src="<?php echo base_url('assets/js/demo/chart-area-demo.js')?>"></script>
-  <script src="<?php echo base_url('assets/js/demo/chart-pie-demo.js')?>"></script>-->
-
-  <!-- Page level plugins -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/jquery.dataTables.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
@@ -692,5 +685,55 @@ if (!empty($_GET['order_id'])){
     }
   }
 ?>
+
+<!-- Jika login sebagai admin, maka fungsi ini akan diaktifkan -->
+<?php 
+  if ($user_id == 'a1bdc221d56fddfba202bd448fe4dbfb'){ ?>
+
+    <script>
+    var JS = {
+      init: function(){
+        $("#report").click(function(){
+        $(".konten_admin").load("<?= base_url('admin/dashboard/report')?>");
+          }),
+      
+        $("#member").click(function(){
+        $(".konten_admin").load("<?= base_url('admin/dashboard/member')?>");
+        
+        $('#member_request_full').empty();
+        
+            $.ajax({
+            type  : 'POST',
+            url   : '<?php echo base_url()?>profile/user/member_request_full_service',
+            async : true,
+            dataType : 'json',
+            success : function(data){
+                var html = '';
+                var i;
+                for(i=0; i<data.length; i++){
+                  html += '<tr>'+
+                    '<td>'
+                      +data[i].nama_lengkap+
+                    '</td>'+
+                    '<td>'+
+                    '<a href="'+data[i].user_id+'" class="btn btn-info"><i class="fas fa-fw fa-info-circle"></i> Detail</a>'+
+                    '</td>'+
+                    '</tr>';
+                }
+                $('#member_request_full').html(html);
+              }
+            });
+          });        
+      }
+    }
+    
+    $(document).ready(function(){
+      JS.init();
+    });
+    
+      
+    </script>
+    
+<?php } ?>
 </body> 
 </html>

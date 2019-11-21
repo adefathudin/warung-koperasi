@@ -13,4 +13,11 @@ class Dashboard extends MY_Controller {
         $this->data['subview'] = 'admin/dashboard';
         $this->load->view('_layout_main', $this->data);
     }
+
+    public function report(){
+        $this->load->view('admin/layout/report');
+    }
+    public function member(){
+        $this->load->view('admin/layout/member');
+    }
 }

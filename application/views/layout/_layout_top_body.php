@@ -57,7 +57,10 @@
           <h5 class="dropdown-header">
             Pemberitahuan
           </h5>
+          
+          <!-- ambil data notifikasi dari jquery -->
           <div class="notifikasi"></div>
+          
           <a class="dropdown-item text-center text-gray-500" href="#">Tampilkan semua pemberitahuan</a>
         </div>
       </li>

@@ -19,7 +19,7 @@ if ($data_user->email == 'root@warungkoperasi.my.id'){
     </a>
   </li>
 ";
-} 
+} else {
 ?>
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
@@ -90,7 +90,7 @@ if ($data_user->email == 'root@warungkoperasi.my.id'){
     </div>
   </div>
 </li>
-
+    <?php } ?>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 

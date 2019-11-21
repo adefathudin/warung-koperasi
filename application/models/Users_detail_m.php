@@ -22,6 +22,12 @@ class Users_detail_m extends MY_Model {
         return $result;
     }
 
+    public function get_member_request_full_service(){
+        $this->db->select('user_id,nama_lengkap');
+        $this->db->where('status_approve', '2');
+        $result = $this->db->get('users_detail')->result();
+        return $result;
+    }
     
     public function get_data_all_user(){
         $result = $this->db->get('users_detail')->result();

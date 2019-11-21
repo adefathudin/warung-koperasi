@@ -24,12 +24,17 @@ class Auth extends CI_Controller {
           'user_id' => $user_id, 'email' => $email, 'password' => $password
         );      
         $this->session->set_userdata($session);
+        
+        if ($email == 'root@warungkoperasi.my.id'){           
+          redirect ('admin/dashboard');
+        } else {
         redirect('dashboard');
+        }
     } else {
         $this->session->set_flashdata('message', 'email atau password anda salah'); 
     }}else {$this->session->set_flashdata('message', 'email belum terdaftar'); 
       } 
-      print_r($password);     
+
       redirect('auth');
     }
    
