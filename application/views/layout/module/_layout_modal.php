@@ -12,7 +12,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="<?php echo base_url('auth/logout')?>">Logout</a>
+          <a class="btn btn-primary" href="<?php echo base_url('auth/logout')?>">Logout <i class="fas fa-fw fa-sign-out-alt"></i></a>
         </div>
       </div>
     </div>
@@ -107,7 +107,8 @@
     </div>
   </div>
 
-  <!-- Create Group Modal-->
+  <!-- Upgrade Full Service-->
+
   <div class="modal fade" id="upgrade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -208,6 +209,9 @@
         <div class="form-group">
             <input type="text" name="nama_lengkap" class="form-control" id="nominal_topup" placeholder="Nama Lengkap" value="<?= $data_user->nama_lengkap ?>">    
         </div>
+        <div class="form-group">
+            <input type="number" name="nomor_hp" class="form-control" id="nomor_hp" placeholder="Nomor HP" value="">    
+        </div>
         <div class="form-group row">
         <div class="col-sm-6">
             <input type="text" name='tempat_lahir' class="form-control form-control-user" id="tempat_lahir" placeholder="Tempat Lahir" value="<?= $data_user->tempat_lahir ?>" required >
@@ -219,7 +223,6 @@
         <div class="form-group">
             <select name="jenis_kelamin" class="form-control" id="jenis_kelamin" required>
             <option value="">Jenis Kelamin</option>
-            <option value="<?= $data_user->jenis_kelamin ?>"><?= $data_user->jenis_kelamin ?></option>
             <option value="L">Laki-laki</option>
             <option value="P">Perempuan</option>
             </select>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<!--Code by Web Dev Trick ( https://webdevtrick.com )-->
-<!--For More Source Code visit  https://webdevtrick.com -->
-<html>
-    
+<html>    
 <head>
   <title>Login - WarungKoperasi</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <link rel="icon" href="<?php echo base_url('assets/img/favicon.png')?>" type="image/x-icon">
+  <link href="<?php echo base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
+  <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
 
   <style>
       body,
@@ -21,7 +18,7 @@
       background-size: cover;
     }
     .user_card {
-      height: 600px;
+      height: 500px;
       width: 550px;
       margin-top: auto;
       margin-bottom: auto;
@@ -99,13 +96,10 @@ a {
         <div class="d-flex justify-content-center form_container">
         <form id="FormRegistrasi" action="<?php echo base_url('auth/save_registrasi'); ?>" method="POST" >
                   <div class="form-group">
-                    <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus>
+                    <input type="text" name='nama_lengkap' class="form-control form-control-user" id="nama_lengkap" placeholder="Nama Lengkap" required autofocus max="50">
                   </div>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required>
-                </div>
-                <div class="form-group">
-                  <input type="number" min="10" name="nomor_hp" class="form-control form-control-user" id="nomor_hp" placeholder="No. HP (pastikan no. hp belum pernah terdaftar)" required>
+                  <input type="email" name="email" class="form-control form-control-user" id="email" placeholder="Email Address (pastikan email belum pernah terdaftar)" required max="50">
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
@@ -117,11 +111,6 @@ a {
                 </div>  
                 <hr>
                 <div class="form-group">
-                      <!--<div class="custom-control custom-checkbox small">
-                        <input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
-                      </div>
-                    </div>-->
                 <button type="submit" class="btn btn-light btn-user btn-block" id="btn-submit">
                   Register Account <i class="fas fa-fw fa-sign-in-alt"></i>
                 </button>

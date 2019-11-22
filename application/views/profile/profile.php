@@ -131,7 +131,7 @@
                       <?php echo $data_user_tmp->alamat ?>
                       </span>
                     </p>
-                  <p class="clearfix">
+                    <p class="clearfix">
                       <span class="float-left">
                         <i class="fas fa-fw fa-money-check-alt"></i>
                         Nomor Rekening
@@ -140,6 +140,11 @@
                       <?= $data_user->nomor_rekening." (". $data_user->nama_bank.")"; ?>
                       </span>
                     </p>
+                    
+                    <p class="clearfix text-center">
+                    <img src="<?= base_url('assets/img/user/qrcode/'.$data_user_tmp->qrcode)?>" class="img-responsive" height="40%" width="40%"/>
+                    </p>
+                    
                     <?php 
                         }
                   ?>                  

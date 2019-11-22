@@ -39,6 +39,7 @@ class Identitas extends MY_Controller {
     public function data($user_id = null){
         
         $user_id = $this->input->post('user_id');
+        $nomor_hp = $this->input->post('nomor_hp');
         $nama_lengkap = $this->input->post('nama_lengkap');
         $tempat_lahir = $this->input->post('tempat_lahir');
         $tanggal_lahir = $this->input->post('tanggal_lahir');
@@ -48,7 +49,7 @@ class Identitas extends MY_Controller {
         $nomor_rekening = $this->input->post('nomor_rekening');
         $nama_bank = $this->input->post('nama_bank');
         $data = array(
-            'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir,
+            'nama_lengkap' => $nama_lengkap, 'tempat_lahir' => $tempat_lahir, 'nomor_hp' => $nomor_hp,
             'tanggal_lahir' => $tanggal_lahir, 'jenis_kelamin' => $jenis_kelamin,
             'alamat' => $alamat, 'about' => $about, 'nomor_rekening' => $nomor_rekening, 'nama_bank' => $nama_bank
         );

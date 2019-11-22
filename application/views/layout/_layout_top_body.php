@@ -120,7 +120,7 @@ if ($data_user->verifikasi_email == 0){
   $email = $this->session->userdata('email');
   echo "<div class='alert alert-warning alert-dismissible'>
   <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-        <strong>Peringatan!</strong> Email anda belum diverifikasi, link verifikasi sudah terkirim ke email <strong>".
+        <strong><i class='fas fa-fw fa-exclamation-triangle'></i></strong> Email anda belum diverifikasi, link verifikasi sudah terkirim ke email <strong>".
         str_repeat("*", strlen($email)-15) . substr($email, -15)." </strong>
         </div>";
         }
@@ -128,17 +128,17 @@ if ($data_user->verifikasi_email == 0){
 if ($data_user->verifikasi_nomor_hp == 0){
   echo "<div class='alert alert-warning alert-dismissible'>
         <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-        <strong>Peringatan!</strong> Nomor HP anda belum diverifikasi. 
+        <strong><i class='fas fa-fw fa-exclamation-triangle'></i></strong> Nomor HP anda belum diverifikasi. 
         <a href='verifikasi_hp' class='alert-link'>Klik disini</a> untuk mengirim kode verifikasi ke nomor <strong>".
         str_repeat("*", strlen($data_user->nomor_hp)-4) . substr($data_user->nomor_hp, -4)." </strong>
         </div>";
         }
 
-        if ($data_user->type != 'Full Service') {
+        if ($data_user->status_approve == '0') {
           echo "<div class='alert alert-info alert-dismissible'>
           <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
           <a href='".base_url('user/'.$user_id)."'><li class='fas fa-fw fa-trophy faa-tada animated'></li>
-          Upgrade akun anda menjadi akun premium dan dapatkan saldo sebesar <strong>Rp. 100.000</strong></a>
+          Upgrade akun anda menjadi akun premium dan dapatkan saldo sebesar <strong>Rp. 50.000</strong></a>
           </div>";
         } 
 ?>

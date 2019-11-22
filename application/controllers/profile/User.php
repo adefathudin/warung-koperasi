@@ -7,6 +7,8 @@ class User extends MY_Controller {
         $this->load->model('users_detail_m');
         $this->load->model('notifikasi_m');
         $this->load->model('rekening_m');
+        $this->load->model('mutasi_rekening_m');
+        
     }
     
     public function index($user_id = null )
@@ -43,8 +45,10 @@ class User extends MY_Controller {
         $user_id = $this->input->GET('user_id');
         $saldo = $this->rekening_m->get($user_id);
         
+        $this->rekening_m->save(array('saldo_akhir' => 50000), $user_id);        
         $this->notifikasi_m->save(array('user_id'=>$user_id, 'judul'=>'Status Upgrade Member','isi'=>'Permohonan upgrade member Full Service anda telah disetujui'));
-        $this->rekening_m->save(array('saldo_akhir' => 50000), $user_id);
+        $this->notifikasi_m->save(array('user_id'=>$user_id, 'judul'=>'Penambahan Saldo Rekening','isi'=>'Selamat... Anda mendapatkan saldo rekening sebesar 50.000 dari WarungKoperasi'));
+        $this->mutasi_rekening_m->save(array('user_id'=>$user_id, 'jenis_trx' => 1, 'nominal' => 50000, 'merchant_trx'=> 'WarungKoperasi', 'keterangan_trx' => 'Bonus Upgrade Full Service'));
         $this->users_detail_m->save(array('status_approve'=> 1, 'type' => 'Full Service'), $user_id);
     }
 

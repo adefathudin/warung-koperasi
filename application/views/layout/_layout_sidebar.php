@@ -77,12 +77,14 @@ if ($data_user->email == 'root@warungkoperasi.my.id'){
               echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i> Groups you manage</div>";
             }
               echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
+              $i++;
           }
           else if ($grup->status_user == 'member'){       
             if ($i++ == 1) {                           
               echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i>  Groups you're in</div>";
             }
             echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
+            $i++;
           }
         }
       }

@@ -80,6 +80,16 @@
         }),
       <?php } ?>
 
+       //Jika berhasil membuat grup
+       <?php if($this->session->flashdata('new_grup')){ ?>
+        Swal.fire({
+          position: 'center',
+          title: '<?= $this->session->flashdata('new_grup') ?>',
+          icon: 'success',
+          showConfirmButton: true
+        }),
+      <?php } ?>
+
       //----------------------------------------
       
       //jika checkbox pinjam dicentang

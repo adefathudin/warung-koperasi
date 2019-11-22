@@ -10,7 +10,6 @@ class Migration_add_table_rekening extends MY_Migration {
 
     protected $_table_name = 'rekening';
     protected $_primary_key = 'id';
-    //protected $_index_keys = array('user_name');
     protected $_fields = array(
         'id' => array(
             'type' => 'INT',
@@ -62,5 +61,17 @@ class Migration_add_table_rekening extends MY_Migration {
             'default'   => 0
         )
     );
+
+    function up(){
+        parent::up();
+        
+        $insert = array(
+            array(
+                'user_id' => 'a1bdc221d56fddfba202bd448fe4dbfb'
+            )
+        );
+        
+        $this->_seed($insert);
+    }
 
 }

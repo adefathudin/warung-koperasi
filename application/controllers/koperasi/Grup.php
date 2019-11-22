@@ -91,7 +91,7 @@ class Grup extends MY_Controller {
         );
         if ($this->grup_user_m->save($insert_grup_user)){
             $this->grup_m->save($insert_data_grup);
-            $this->session->set_flashdata('pesan_new','Grup baru berhasil dibuat');
+            $this->session->set_flashdata('new_grup','Grup baru berhasil dibuat');
             }
         }
         redirect ('grup/'.$grup_id.'/index');

@@ -23,7 +23,7 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'nama_lengkap' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 50
         ),
         'tempat_lahir' => array(
             'type' => 'VARCHAR',
@@ -38,7 +38,7 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'email' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 50
         ),
         'nomor_hp' => array(
             'type' => 'VARCHAR',
@@ -46,29 +46,32 @@ class Migration_add_table_users_detail extends MY_Migration {
         ),
         'alamat' => array(
             'type' => 'VARCHAR',
-            'constraint' => 100
+            'constraint' => 150
         ),
         'about' => array(
             'type' => 'VARCHAR',
             'constraint' => '100',
             'default' => 'Hai, saya telah bergabung dengan WarungKoperasi :)'
         ),
+        'nomor_rekening' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50
+        ),
+        'nama_bank' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50
+        ),
         'ktp' => array(
             'type' => 'VARCHAR',
             'constraint' => 50,
             'default' => 'default.png'
         ),
-        'nomor_rekening' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 50,
-            'default' => '-'
-        ),
-        'nama_bank' => array(
-            'type' => 'VARCHAR',
-            'constraint' => 50,
-            'default' => '-'
-        ),
         'profil' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 50,
+            'default' => 'default.png'
+        ),
+        'qrcode' => array(
             'type' => 'VARCHAR',
             'constraint' => 50,
             'default' => 'default.png'
