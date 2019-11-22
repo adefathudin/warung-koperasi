@@ -2,8 +2,15 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Identitas extends MY_Controller {
-    public function lampiran(){
+
+    function __construct(){
+        parent::__construct();
+
         $this->load->model('users_detail_m');
+
+    }
+    public function lampiran(){
+
         $user_id = $this->session->userdata('user_id');
         $nama_ktp = $user_id.'_KTP.jpeg';
         $nama_profile = $user_id.'_PP.jpeg';
@@ -30,7 +37,7 @@ class Identitas extends MY_Controller {
     }
 
     public function data($user_id = null){
-        $this->load->model('users_detail_m');
+        
         $user_id = $this->input->post('user_id');
         $nama_lengkap = $this->input->post('nama_lengkap');
         $tempat_lahir = $this->input->post('tempat_lahir');

@@ -2,6 +2,17 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Grup extends MY_Controller {
+
+    function __construct() {
+        parent::__construct();
+        $this->load->model('grup_m');
+        $this->load->model('users_detail_m');
+        $this->load->model('notifikasi_m');
+        $this->load->model('rekening_m');
+        $this->load->model('grup_user_m');
+        $this->load->model('simpan_grup_m');
+    }
+    
     public function index1()
     {
         $this->data['title'] = 'Koperasi Saloome';
@@ -11,7 +22,6 @@ class Grup extends MY_Controller {
     
     public function index()
     {
-        $this->load->model('grup_m');
         
         $nama_grup = $this->input->get('nama_grup');  
         $wilayah = $this->input->get('wilayah');      
@@ -33,11 +43,6 @@ class Grup extends MY_Controller {
 
     public function id($grup_id = null )
     {         
-        $this->load->model('grup_m');
-        $this->load->model('users_detail_m');
-        $this->load->model('rekening_m');
-        $this->load->model('user_grup_m');
-        $this->load->model('grup_user_m');
         $user_id = $this->session->userdata('user_id');
         $grup_id = $this->uri->segment(2);
 
@@ -64,9 +69,6 @@ class Grup extends MY_Controller {
 
     //BUAT GRUP BARU
     public function new(){
-        $this->load->model('grup_m');
-        $this->load->model('user_grup_m');
-        $this->load->model('grup_user_m');
         $user_id = $this->session->userdata('user_id');
         $grup_id = md5(uniqid());
         $nama_grup = ucwords($this->input->post('nama_grup'));  
@@ -97,7 +99,7 @@ class Grup extends MY_Controller {
     
     //UPDATE  DATA PROFIL
     public function update_identitas(){
-        $this->load->model('grup_m');
+        
         $grup_id = $this->input->post('grup_id');  
         $nama_grup = ucwords($this->input->post('nama_grup'));  
         $wilayah = $this->input->post('wilayah');      
@@ -121,7 +123,7 @@ class Grup extends MY_Controller {
 
     //Setting nominal minimal pinjaman dan simpanan
     public function update_finance(){
-        $this->load->model('grup_m');         
+          
         $grup_id = $this->input->post('grup_id');  
         $minimal_pokok = ucwords($this->input->post('minimal_pokok'));  
         $minimal_wajib = $this->input->post('minimal_wajib');      
@@ -136,9 +138,7 @@ class Grup extends MY_Controller {
 
 
     public function proses_pembayaran_simpan(){
-        $this->load->model('simpan_grup_m');
-        $this->load->model('rekening_m');
-        $this->load->model('mutasi_rekening_m');
+        
         $user_id = $this->session->userdata('user_id');
         $grup_id = $this->input->post('grup_id');
         $grup_name = $this->input->post('grup_name');
@@ -195,7 +195,7 @@ class Grup extends MY_Controller {
 
     // join grup
     public function join(){
-        $this->load->model('grup_user_m');
+        
         $user_id = $this->input->post('user_id');
         $grup_id = $this->input->post('grup_id');
         $request = $this->input->post('request_grup');
@@ -207,8 +207,7 @@ class Grup extends MY_Controller {
 
     //join grup
     public function accept(){
-        $this->load->model('grup_user_m');
-        $this->load->model('notifikasi_m');
+        
         $id = $this->input->post('id');
         $update_grup_user = array (
             'status_user' => 'member'
@@ -224,7 +223,7 @@ class Grup extends MY_Controller {
     }
     
     public function list_request(){
-        $this->load->model('grup_user_m');
+        
         $grup_id=$this->input->get('grup_id');
         $data = $this->grup_user_m->get_list_request($grup_id);
         echo json_encode($data);
@@ -233,20 +232,20 @@ class Grup extends MY_Controller {
     //Kick Member Grup
 
     public function kick(){
-        $this->load->model('grup_user_m');
+        
         $id = $this->input->post('id');
         $this->grup_user_m->delete($id);
     }
 
     public function list_member(){
-        $this->load->model('grup_user_m');
+        
         $grup_id=$this->input->get('grup_id');
         $data = $this->grup_user_m->get_list_member($grup_id);
         echo json_encode($data);
     }
 
     public function list_admin(){
-        $this->load->model('grup_user_m');
+        
         $grup_id=$this->input->get('grup_id');
         $data = $this->grup_user_m->get_list_admin($grup_id);
         echo json_encode($data);

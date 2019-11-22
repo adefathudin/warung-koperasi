@@ -1,10 +1,17 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Auth extends CI_Controller {
-  public function __construct(){
+  
+  function __construct(){
     parent::__construct();
-   // $this->load->model('users_detail_m','users_login_m');
+   
+    $this->load->model('users_login_m');
+    $this->load->model('users_detail_m');
+    $this->load->model('rekening_m');
+    $this->load->model('notifikasi_m');
+
   }
+
   public function index(){
     if(!empty($this->session->userdata('user_id'))){
       redirect('dashboard'); }
@@ -13,8 +20,7 @@ class Auth extends CI_Controller {
   }}
 
   public function cek_login(){
-    $this->load->model('users_login_m');
-    $this->load->model('users_detail_m');
+
     $email = $this->input->post('email');
     $user_id = md5($this->input->post('email'));
     $password = md5($this->input->post('password'));
@@ -53,11 +59,6 @@ class Auth extends CI_Controller {
 
   public function save_registrasi(){
     
-    $this->load->model('users_detail_m');
-    $this->load->model('users_login_m');
-    $this->load->model('rekening_m');
-    $this->load->model('notifikasi_m');
-
     $user_id = md5($this->input->post('email'));
     $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
     $email = $this->input->post('email');
@@ -169,7 +170,7 @@ class Auth extends CI_Controller {
 //aktivasi email
 
 public function aktivasi(){
-  $this->load->model('users_detail_m');
+  
   $user_id =  $this->uri->segment(3);
   $code = $this->uri->segment(4);
 

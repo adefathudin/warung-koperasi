@@ -117,6 +117,7 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
+        <div class="modal-body">
           <div class="form-group mx-sm-3 mb-2">
                 <div id="frm_UploadKTP" class="form-group">             
                     <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadKTP" value="Upload Foto Identitas"/>
@@ -165,6 +166,7 @@
                 </div>
                 </form>
           </div>
+        </div>
       </div>
     </div>
   </div>

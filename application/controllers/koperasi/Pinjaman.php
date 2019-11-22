@@ -2,6 +2,15 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Pinjaman extends MY_Controller {
+
+    function __construct(){
+        parent::__construct();
+                
+        $this->load->model('pinjam_grup_m');
+        $this->load->model('rekening_m');
+        $this->load->model('mutasi_rekening_m');
+    }
+
     public function index()
     {
         $this->data['title'] = 'Koperasi Saloome';
@@ -11,10 +20,6 @@ class Pinjaman extends MY_Controller {
     
     //PROSES PENGAJUAN PINJAMAN
     public function proses_pengajuan_pinjaman(){
-
-        $this->load->model('pinjam_grup_m');
-        $this->load->model('rekening_m');
-        $this->load->model('mutasi_rekening_m');
 
         $user_id = $this->session->userdata('user_id');
         $grup_id = $this->input->post('grup_id');

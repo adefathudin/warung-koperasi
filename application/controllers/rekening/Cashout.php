@@ -2,9 +2,16 @@
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Cashout extends MY_Controller {
+
+    function __construct(){
+        parent::__construct();        
+        $this->load->model('rekening_m');
+        $this->load->model('rekening_m');
+        $this->load->model('mutasi_rekening_m');
+    }
+
     public function index()
     {
-        $this->load->model('rekening_m');
         $user_id = $this->session->userdata('user_id');
         $this->data['curdate'] = date('d-m-Y h:i:sa');
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
@@ -14,9 +21,7 @@ class Cashout extends MY_Controller {
     }
 
     public function proses($user_id = null){
-        $this->load->library('session');
-        $this->load->model('rekening_m');
-        $this->load->model('mutasi_rekening_m');
+
         $user_id = $this->session->userdata('user_id');
         $email = $this->session->userdata('email');
         $nominal_cashout = $this->input->post('nominalCashout');
