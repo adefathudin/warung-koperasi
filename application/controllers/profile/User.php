@@ -35,6 +35,7 @@ class User extends MY_Controller {
     }
 
     public function detail_member_request_full_service(){ 
+        
         $user_id = $this->input->GET('user_id');
         $data = $this->users_detail_m->get_detail_member_request_full_service($user_id);
         echo json_encode($data);

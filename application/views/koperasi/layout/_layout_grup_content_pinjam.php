@@ -7,7 +7,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-capitalize mb-1">Sisa Limit Pinjaman</div>
-                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format(($saldo->saldo_koperasi * $data_grup_tmp->maksimal_pinjaman)/100, 0, ".", ".") ?>                                              
+                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($grup_user->limit_pinjaman, 0, ".", ".") ?>                                              
                   <small>(<?= $data_grup_tmp->maksimal_pinjaman ?>% dr total simpanan)</small>
                 </div>
               </div>
@@ -26,7 +26,7 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col">
                     <div class="progress">
-                      <div class="progress-bar small" role="progressbar" style="width: 25%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="12">3/12
+                      <div class="progress-bar small" role="progressbar" style="width: 75%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="12">3/12
                       </div>
                     </div>
                   </div>
@@ -54,6 +54,15 @@
 
   <div class="card mb-4">    
     <div class="card-body">
+    <?php
+    // Cek apakah terdapat session simpanan
+    //if($this->pi  session->flashdata('status_simpanan')){ // Jika ada
+      echo "
+      <div class='alert alert-danger alert-dismissible'>
+        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+        .$this->session->flashdata('status_simpanan')."tee</div>";
+      //}
+  ?>
       <form method="POST" action="<?= base_url('koperasi/pinjaman/proses_pengajuan_pinjaman') ?>">
         <div class="form-row align-items-center d-flex flex-row justify-content-between">        
           <div class="col my-1">
@@ -71,12 +80,12 @@
             </select>
           </div>
           <div class="col my-1">
-            <input type="text" class="form-control" id="kalkulasi_cicilan" value="Akumulasi cicilan perbulan" readonly>
+            <input type="text" class="form-control" id="kalkulasi_cicilan" value="Akumulasi cicilan perbulan" readonly required>
           </div>
         </div>                   
         <div class="form-row">          
           <div class="col my-1">
-            <textarea name="tujuan_pinjaman" class="form-control" placeholder="Tujuan mengajukan pinjaman"></textarea>
+            <textarea name="tujuan_pinjaman" class="form-control" placeholder="Tujuan mengajukan pinjaman" required></textarea>
           </div>
         </div>   
         <div class="form-check form-row">          
@@ -97,45 +106,33 @@
   </div>
   <div class="card mb-4">    
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>Tgl</th>
-              <th>Keterangan</th>
-              <th>Cash In</th>
-              <th>Cash Out</th>
-              <th>Saldo</th>
+              <th>Tanggal Simpan</th>
+              <th>Nominal</th>
+              <th>Tenor</th>
+              <th>Tujuan Pinjaman</th>
+              <th>Progress</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th colspan='2' class="text-center">Total</th>
-              <th>12.500.000</th>
-              <th>1.700.000</th>
-              <th>10.000.000</th>
-            </tr>
-          </tfoot>
           <tbody>
-            
-                  <tr>
-                    <td>2019-01-04 </td>
-                    <td><i class='far fa-fw fa-arrow-alt-circle-up text-success'></i>
-                    Top-Up Saldo Rekening via Gopay</td>
-                    <td>500.000</td>
-                    <td></td>
-                    <td>4.500.000</td>
+          <?php
+            foreach ($pinjaman_grup as $pinjam){ ?>
+                 <tr>
+                    <td><?= $pinjam->tanggal_pinjam ?></td>
+                    <td><?= number_format($pinjam->nominal,0, ".", ".") ?></td>
+                    <td><?= $pinjam->tenor ?></td>
+                    <td><?= $pinjam->tujuan ?></td>
+                    <td>
+                    <div class="progress">
+                      <div class="progress-bar small" role="progressbar" style="width: <?php echo ($pinjam->sisa_tenor/$pinjam->tenor)*100 ?>%;" aria-valuenow="<?= $pinjam->sisa_tenor ?>" aria-valuemin="0" aria-valuemax="<?= $pinjam->tenor ?>"><?= $pinjam->sisa_tenor ?>/<?= $pinjam->tenor ?>
+                      </div>
+                    </div>
+                    </td>
                   </tr>
-                  
-                  <tr>
-                    <td>2019-01-04</td>
-                    <td><i class='far fa-fw fa-arrow-alt-circle-down text-danger'></i>
-                    Tarik Tunai</td>
-                    <td></td>
-                    <td>250.000</td>
-                    <td>4.250.000</td>
-                  </tr>
-                      
+            <?php } ?>
           </tbody>
         </table>
       </div>

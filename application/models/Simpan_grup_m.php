@@ -12,7 +12,7 @@ class Simpan_grup_m extends MY_Model {
         public function get_simpanan_grup($user_id,$grup_id){
             $this->db->where('user_id', $user_id);
             $this->db->where('grup_id', $grup_id);
-            $this->db->order_by('tanggal_simpan', 'desc');
+            $this->db->order_by('id', 'desc');
             $result = $this->db->get('simpan_grup')->result();
             return $result;
         }

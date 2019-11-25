@@ -69,24 +69,14 @@
         }),
       <?php } ?>
 
-      //Jika telah selesai topup
-      <?php if($this->session->flashdata('pesan_cash_in')){ ?>
-        Swal.fire({
-          position: 'center',
-          title: 'Top Up Berhasil!',
-          icon: 'success',
-          showConfirmButton: true,
-          text: '<?= $this->session->flashdata('pesan_cash_in') ?>'
-        }),
-      <?php } ?>
-
        //Jika berhasil membuat grup
        <?php if($this->session->flashdata('new_grup')){ ?>
         Swal.fire({
           position: 'center',
           title: '<?= $this->session->flashdata('new_grup') ?>',
           icon: 'success',
-          showConfirmButton: true
+          showConfirmButton: false,          
+          timer: 1900
         }),
       <?php } ?>
 
@@ -161,8 +151,20 @@
         })      
       }),
 
-      $('#notifikasi_id').click(function(){
-        alert("assu");
+      //jika tombol simpan grup diklik 
+
+      $('#simpan_simpanan_grup').click(function(){
+        if (!confirm("Apakah anda menyimpan simpanan?")){
+          return false;
+        }
+      }),
+
+      //jika tombol pinjam grup diklik 
+      
+      $('#btn-pinjam').click(function(){
+        if (!confirm("Apakah anda menyimpan pinjaman?")){
+          return false;
+        }
       }),
 
       //jika range bintang dipilih
@@ -498,14 +500,20 @@ if (!empty($_GET['order_id'])){
       if ($status == 200){ ?>
       <script>
         $.ajax({
-        type  : 'POST',
+        type  : 'GET',
         url   : '<?php echo base_url()?>rekening/topup/update',
         data  : {order_id:'<?= $order_id ?>'},
         success : function(data){          
-          <?php
-            $this->session->set_flashdata('pesan_cash_in', 'Topup saldo berhasil dilakukan'); 
-            header("Location:".base_url('rekening/topup'));
-          ?>
+          //header("Location:".base_url('rekening/topup'));
+          Swal.fire({
+          position: 'center',
+          title: 'Top Up Berhasil!',
+          icon: 'success',
+          showConfirmButton: true,
+          })
+          window.setTimeout(function(){
+        window.location.href = "http://localhost/warkop/rekening/topup";
+        }, 5000);
           },
           error: function (data) {
             Swal.fire({

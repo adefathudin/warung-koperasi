@@ -47,9 +47,10 @@
           </button>
         </div>
         <div class="modal-body">
-          1. 1% dari total nominal pengajuan pinjaman digunakan untuk kas koperasi<br>
-          2. Limit kredit pinjaman <?php isset($data_grup_tmp->maksimal_pinjaman) ? $data_grup_tmp->maksimal_pinjaman : '' ?> dari total simpanan koperasi aktif<br>
-          3. Pengajuan pinjaman akan diverifikasi terlebih dahulu oleh pengurus koperasi dan selanjutnya bila disetujui, akan masuk ke saldo rekening
+          1. Peminjaman hanya dapat dilakukan 1x selama ada masa pinjaman yang sedang berjalan<br><br>
+          2. 1% dari total nominal pengajuan pinjaman digunakan untuk kas koperasi<br><br>
+          3. Limit kredit pinjaman <?php isset($data_grup_tmp->maksimal_pinjaman) ? $data_grup_tmp->maksimal_pinjaman : '' ?> dari total simpanan koperasi aktif<br><br>
+          4. Pengajuan pinjaman akan diverifikasi terlebih dahulu oleh pengurus koperasi dan selanjutnya bila disetujui, akan masuk ke saldo rekening
         </div>
         <div class="modal-footer">
           <button class="btn btn-primary" type="button" data-dismiss="modal">Saya setuju</button>

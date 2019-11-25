@@ -103,13 +103,15 @@
     var user_id =  "<?= $user_id ?>";
     var nominal = document.getElementById('nominalTopup').value; 
     $.ajax({
-    type  : 'POST',
+    type  : 'GET',
     url   : '<?php echo base_url()?>rekening/topup/insert',
     data  : {user_id:user_id, nominal:nominal, order_id:'<?= $order_id ?>'},
     async : true,
-    dataType : 'json',
     success : function(data){
-      console.log('sukses');
+      console.log('sukses insert topup');
+      }, 
+      error : function(data){
+        console.log('gagal insert topup');
       }
     });
     

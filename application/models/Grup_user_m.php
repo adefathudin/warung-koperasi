@@ -18,7 +18,7 @@ class Grup_user_m extends MY_Model {
         return $result;
     }
 
-    public function get_status_member($user_id,$grup_id){
+    public function grup_user($user_id,$grup_id){
         $this->db->where('grup_id', $grup_id);
         $this->db->where('user_id', $user_id);
         $result = $this->db->get('grup_user')->row();

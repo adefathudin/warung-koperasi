@@ -11,6 +11,8 @@ class Grup extends MY_Controller {
         $this->load->model('rekening_m');
         $this->load->model('grup_user_m');
         $this->load->model('simpan_grup_m');
+        $this->load->model('pinjam_grup_m');
+        $this->load->model('mutasi_rekening_m');
     }
     
     public function index1()
@@ -54,8 +56,17 @@ class Grup extends MY_Controller {
             $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
             $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
         }
+
+        //JIKA HALAMAN SIMPAN DI GRUP DIBUKA
+        if ($this->uri->segment(3) == 'pinjam'){
+            $this->load->model('pinjam_grup_m');
+            $this->data['pinjaman_grup'] = $this->pinjam_grup_m->get_pinjaman_grup($user_id,$grup_id);
+            //cek periode pinjaman
+            $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
+            $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
+        }
         
-        $this->data['status_member'] = $this->grup_user_m->get_status_member($user_id,$grup_id);
+        $this->data['grup_user'] = $this->grup_user_m->grup_user($user_id,$grup_id);
         $this->data['grup_id'] = $grup_id;
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
         //$this->data['list_data_all_user'] = $this->users_detail_m->get_data_all_user();
@@ -137,61 +148,6 @@ class Grup extends MY_Controller {
     }
 
 
-    public function proses_pembayaran_simpan(){
-        
-        $user_id = $this->session->userdata('user_id');
-        $grup_id = $this->input->post('grup_id');
-        $grup_name = $this->input->post('grup_name');
-        $jenis_simpanan = $this->input->post('jenis_simpanan');
-        $nominal_simpanan = $this->input->post('nominal_simpanan');
-        $periode = $this->input->post('periode_simpanan');        
-        $minimal_pokok = $this->input->post('minimal_pokok');        
-        $minimal_wajib = $this->input->post('minimal_wajib');        
-        $rek = $this->rekening_m->get($user_id);
-        //jika simpanan pokok, maka mengecek apakah simpanan pokok sudah pernah dibayar atau tidak
-        if ($jenis_simpanan == "Pokok"){
-            if ($minimal_pokok != $nominal_simpanan){
-                $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Nominal simpanan pokok yang diinput Rp<b>'.number_format($nominal_simpanan).'</b> tidak sama dengan nominal pokok yang telah ditentukan Rp<b>'.number_format($minimal_pokok).'</b>');
-                redirect ('grup/'.$grup_id.'/simpan');
-            } else {
-            $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
-            $periode = "-";}
-        //jika simpanan wajib
-        } elseif ($jenis_simpanan == "Wajib"){
-            if ($minimal_wajib != $nominal_simpanan){
-                $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Nominal simpanan wajib yang diinput Rp<b>'.number_format($nominal_simpanan).'</b> tidak sama dengan nominal wajib yang telah ditentukan Rp<b>'.number_format($minimal_wajib).'</b>');
-                redirect ('grup/'.$grup_id.'/simpan');
-            } else {
-            $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);}
-        } elseif ($jenis_simpanan == "Sukarela"){           
-            $periode = "-";
-        } elseif ($jenis_simpanan == "null"){            
-            $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b> Silahkan pilih jenis simpanan');
-            redirect ('grup/'.$grup_id.'/simpan');
-        }
-        if ($cek_simpanan == 0){
-        $update_saldo = array (
-            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir - $nominal_simpanan),
-            'saldo_koperasi' => ($rek->saldo_koperasi + $nominal_simpanan)
-        );
-        $data_simpanan = array(
-            'user_id' => $user_id, 'grup_id' => $grup_id,
-            'jenis_simpanan' => $jenis_simpanan, 'periode' => $periode, 'nominal' => $nominal_simpanan
-        );
-        $insert_mutasi = array (
-            'user_id' => $user_id, 'jenis_trx' => '4', 'nominal' => $nominal_simpanan,
-            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir + $nominal_simpanan),
-            'keterangan_trx' => 'Simpanan '.$jenis_simpanan.' '.$grup_name
-        );
-        if ($this->simpan_grup_m->save($data_simpanan)){     
-            $this->rekening_m->save($update_saldo,$user_id);
-            $this->mutasi_rekening_m->save($insert_mutasi);
-            }
-        } else {
-            $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
-        }
-        redirect ('grup/'.$grup_id.'/simpan');
-    }
 
     // join grup
     public function join(){

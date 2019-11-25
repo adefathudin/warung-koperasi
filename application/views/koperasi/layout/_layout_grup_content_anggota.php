@@ -4,7 +4,7 @@
       <a class="nav-item nav-link" id="nav-admin-tab" data-toggle="tab" href="#nav-admin" role="tab" aria-controls="nav-admin" aria-selected="true">Admin</a>
       <a class="nav-item nav-link active" id="nav-member-tab" data-toggle="tab" href="#nav-member" role="tab" aria-controls="nav-member" aria-selected="false">Member</a>
       <?php
-      if ($status_member->status_user == 'admin'){ ?>
+      if ($grup_user->status_user == 'admin'){ ?>
       <a class="nav-item nav-link" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="false">Request</a>
       <a class="nav-item nav-link" id="nav-banned-tab" data-toggle="tab" href="#nav-banned" role="tab" aria-controls="nav-banned" aria-selected="false">Banned</a>
       <?php } ?>
@@ -33,7 +33,7 @@
             <tr>
               <th width="50%">User</th>
               <th>Joined</th>
-              <?php if ($status_member->status_user == 'admin'){
+              <?php if ($grup_user->status_user == 'admin'){
               echo "<th class='text-right'>Action</th>";} ?>
             </tr>
           </thead>          

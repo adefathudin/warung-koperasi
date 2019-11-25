@@ -9,11 +9,19 @@ class Pinjam_grup_m extends MY_Model {
     protected $_timestamps = FALSE;
     protected $_timestamps_field = [];
 
-        public function get_simpanan_grup($user_id,$grup_id){
+        public function get_pinjaman_grup($user_id,$grup_id){
             $this->db->where('user_id', $user_id);
             $this->db->where('grup_id', $grup_id);
-            $this->db->order_by('tanggal_simpan', 'desc');
-            $result = $this->db->get('simpan_grup')->result();
+            $this->db->order_by('tanggal_pinjam', 'desc');
+            $result = $this->db->get('pinjam_grup')->result();
+            return $result;
+        }
+
+        function cek_total_simpanan($user_id,$grup_id){      
+            $this->db->select('sum(tenor),sum(sisa_tenor)');      
+            $this->db->where('user_id', $user_id);
+            $this->db->where('grup_id', $grup_id);
+            $result = $this->db->get('pinjam_grup')->result();
             return $result;
         }
         

@@ -9,6 +9,7 @@ class Pinjaman extends MY_Controller {
         $this->load->model('pinjam_grup_m');
         $this->load->model('rekening_m');
         $this->load->model('mutasi_rekening_m');
+        $this->load->model('grup_user_m');
     }
 
     public function index()
@@ -16,6 +17,11 @@ class Pinjaman extends MY_Controller {
         $this->data['title'] = 'Koperasi Saloome';
         $this->data['subview'] = 'koperasi/group';
         $this->load->view('_layout_main', $this->data);
+    }
+    
+    public function total_simpanan()
+    {
+        
     }
     
     //PROSES PENGAJUAN PINJAMAN
@@ -26,8 +32,10 @@ class Pinjaman extends MY_Controller {
         $grup_name = $this->input->post('grup_name');
         $nominal_pinjaman = $this->input->post('nominal_pinjaman');
         $tenor = $this->input->post('tenor');
-        $tujuan = $this->input->post('tujuan_pinjaman');        
+        $tujuan = $this->input->post('tujuan_pinjaman');   
+             
         $rek = $this->rekening_m->get($user_id);
+        $grup_user = $this->grup_user_m->grup_user($user_id);
         
         $update_saldo = array (
             'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir + $nominal_pinjaman),

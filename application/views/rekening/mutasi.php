@@ -39,7 +39,7 @@
                     <td>".$no++."</td>
                     <td>".$mutasi->tanggal_trx."</td>
                     <td><i class='far fa-fw fa-arrow-alt-circle-up text-success'></i>
-                    ".$mutasi->keterangan_trx." via ".$mutasi->merchant_trx."</td>
+                    ".$mutasi->keterangan_trx."</td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
                     <td></td>
                     <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>

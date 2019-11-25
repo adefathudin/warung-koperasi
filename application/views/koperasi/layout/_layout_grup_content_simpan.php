@@ -48,7 +48,7 @@
             <div class="row no-gutters align-items-center">
               <div class="col mr-2">
                 <div class="text-xs font-weight-bold text-capitalize mb-1">Total Simpanan Koperasi</div>
-                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($saldo->saldo_koperasi,0,".", "."); ?></div>
+                <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($grup_user->saldo_koperasi,0,".", "."); ?></div>
               </div>
             </div>
           </div>
@@ -61,14 +61,17 @@
       <?php if ($saldo->saldo_akhir < $data_grup_tmp->minimal_pokok or $saldo->saldo_akhir < $data_grup_tmp->minimal_wajib or $saldo->saldo_akhir == 0){
         echo "<div class='text-danger text-center'>Saldo Rekening anda tidak mencukupi untuk melakukan pembayaran</div><br>";
       }?>
-      <form method="POST" action="<?= base_url('koperasi/grup/proses_pembayaran_simpan') ?>">
+      <form method="POST" action="<?= base_url('koperasi/simpanan/proses_pembayaran_simpan') ?>">
         <div class="form-row align-items-center d-flex flex-row justify-content-between">        
           <div class="col my-1">
             <input type="hidden" name="grup_name" value="<?= $data_grup_tmp->nama_grup ?>">
             <input type="hidden" name="grup_id" value="<?= $grup_id ?>">
+            <input type="hidden" name="grup_user_id" value="<?= $grup_user->id ?>">
+            <input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">
+            <input type="hidden" name="saldo_koperasi" value="<?= $saldo->saldo_koperasi ?>">
             <input type="hidden" name="minimal_pokok" value="<?= $data_grup_tmp->minimal_pokok ?>">
             <input type="hidden" name="minimal_wajib" value="<?= $data_grup_tmp->minimal_wajib ?>">
-            <input type="hidden" name="periode" value="<?= date('Y-m') ?>">
+            <input type="hidden" name="periode_simpanan" value="<?= date('Y-m') ?>">
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="jenis_simpanan" required>
               <option value="null" selected required>Pilih Jenis Simpanan</option>              
               <?php if ($cek_periode_pinjaman_pokok == 0){ ?>
@@ -85,7 +88,7 @@
             <input type="number" class="form-control" name="nominal_simpanan" placeholder="Nominal" required>
           </div>
           <div class="col-auto my-1">
-            <button type="submit" class="btn btn-primary" <?php if ($saldo->saldo_akhir < $data_grup_tmp->minimal_pokok or $saldo->saldo_akhir < $data_grup_tmp->minimal_wajib or $saldo->saldo_akhir == 0){ echo"disabled";} ?>><i class="fas fa-fw fa-wallet"></i> Simpan</button>
+            <button type="submit" id="simpan_simpanan_grup" class="btn btn-primary" <?php if ($saldo->saldo_akhir < $data_grup_tmp->minimal_pokok or $saldo->saldo_akhir < $data_grup_tmp->minimal_wajib or $saldo->saldo_akhir == 0){ echo"disabled";} ?>><i class="fas fa-fw fa-wallet"></i> Simpan</button>
           </div>
         </div>
       </form>

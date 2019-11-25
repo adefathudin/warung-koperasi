@@ -29,6 +29,14 @@ class Migration_add_table_grup_user extends MY_Migration {
             'type' => 'VARCHAR',
             'constraint' => 15
         ),
+        'limit_pinjaman' => array(
+            'type' => 'INT',
+            'constraint' => 15
+        ),
+        'rate' => array(
+            'type' => 'INT',
+            'constraint' => 15
+        ),
         'joined' => array(
             'type' => 'TIMESTAMP'
         )

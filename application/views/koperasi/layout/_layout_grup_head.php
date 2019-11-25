@@ -9,7 +9,7 @@
       <div class="m-0 font-weight-bold text-capitalize text-primary"><?= $data_grup_tmp->nama_grup ?>
       </div>      
       <div class="small text-warning">
-      <a href="" class="text-secondary">(<?= $data_grup_tmp->rate_akumulatif."/".$data_grup_tmp->rate_person?>)</a>
+      <a href="" class="text-warning">(<?= $data_grup_tmp->rate_akumulatif."/".$data_grup_tmp->rate_person?>)
       <?php 
                 $starNumber = $data_grup_tmp->rate_akumulatif;                
                 for( $x = 0; $x < 5; $x++ ){
@@ -26,6 +26,7 @@
                   }
                 }
                 ?>
+                </a>
       </div>
     </div>
       <img src="<?= base_url('assets/img/grup_koperasi/'.$data_grup_tmp->banner)?>"  alt="profile" class="img-responsive" height="350px" width="100%"> 
@@ -42,8 +43,8 @@
       <?php
       
       //jika user menjadi admin atau member, maka akan ditampilkan menu
-      if (!empty($status_member)){
-        if ($status_member->status_user == 'admin' or $status_member->status_user == 'member'){     
+      if (!empty($grup_user)){
+        if ($grup_user->status_user == 'admin' or $grup_user->status_user == 'member'){     
         ?>
       
       <div class="btn-group">
@@ -79,7 +80,7 @@
       <?php
            
       //cek apakah user tersebut sebagai admin
-      if ($status_member->status_user == 'admin'){?>
+      if ($grup_user->status_user == 'admin'){?>
       <div class="btn-group">
         <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i> Pengaturan
