@@ -2,7 +2,17 @@ $(function() {
   // basic use comes with defaults values
   $(".my-rating").starRating({
     initialRating: 0,
-    starSize: 20 
+    starSize: 30,
+    disableAfterRate: false,
+    onHover: function(currentIndex, currentRating, $el){
+      $('.live-rating').text(currentIndex);
+    },
+    onLeave: function(currentIndex, currentRating, $el){
+      $('.live-rating').text(currentRating);
+    },
+    callback: function(currentRating, $el){
+      $('#rating').val(currentRating);
+    }
   });
 
   $(".my-rating-2").starRating({

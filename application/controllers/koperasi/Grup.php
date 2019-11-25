@@ -116,7 +116,7 @@ class Grup extends MY_Controller {
         $wilayah = $this->input->post('wilayah');      
         $kategori = $this->input->post('kategori');       
         $about = $this->input->post('about');          
-        $deskripsi = $this->input->post('deskripsi'); 
+        $deskripsi = nl2br($this->input->post('deskripsi')); 
         $config_banner = array(
             'upload_path' => './assets/img/grup_koperasi/', 'allowed_types' => 'jpg|jpeg', 
             'file_name' => $grup_id.'.jpg', 'overwrite' => TRUE
@@ -159,6 +159,31 @@ class Grup extends MY_Controller {
             'grup_id' => $grup_id, 'user_id' => $user_id, 'status_user' => 'request'
         );
         $this->grup_user_m->save($insert_grup_user);    
+    }
+
+    //simpan rate grup
+    public function rate_grup(){
+        
+        $grup_id = $this->input->post('grup_id');
+        $id = $this->input->post('id_grup_user');
+        $rating = $this->input->post('rating');
+        $comment_rate = $this->input->post('comment_rate');
+
+        $get_rating = $this->grup_m->get_info_grup($grup_id);
+        if ($get_rating->rate_total == 0){
+            $rate_akumulatif = $rating; 
+        } else {
+            $rate_akumulatif = ($get_rating->rate_total) / $get_rating->rate_person;
+        }
+
+        $update_rating = array (
+            'rate_total' => $get_rating->rate_total + $rating, 'rate_person' => $get_rating->rate_person + 1,
+            'rate_akumulatif' => $rate_akumulatif
+        );
+        if ($this->grup_user_m->save(array('rate' => $rating, 'komentar' => $comment_rate), $id)){
+            $this->grup_m->save($update_rating, $grup_id);
+        };
+        redirect ('grup/'.$grup_id.'/index');
     }
 
     //join grup

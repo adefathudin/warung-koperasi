@@ -18,6 +18,91 @@
     </div>
   </div>
 
+  <!-- Rate Modal-->
+  <div class="modal fade" id="rate_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="exampleModalLabel">Rating Grup <?= $data_grup_tmp->nama_grup ?></h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <?php
+        if ($grup_user->status_user == 'member' or $grup_user->status_user == 'admin'){
+         if ($grup_user->rate != 0){?>
+           <div class='modal-body' width="100%"> 
+            <table class="table table-borderless">
+              <tr>
+                <td colspan="2">
+                  <span class='small font-italic'>
+                    <i class='fas fa-fw fa-info-circle'></i>
+                     Anda sudah memberikan rating untuk grup ini
+                  </span>                                 
+                </td>
+              <tr>
+                <td>Rating anda
+                </td>
+                <td class="text-right text-warning">
+                    <?php
+                        $starNumber = $grup_user->rate;                
+                          for( $x = 0; $x < 5; $x++ ){
+                            if(floor( $starNumber )-$x >= 1 )
+                            { 
+                              echo '<i class="fas fa-fw fa-star"></i>'; 
+                            }
+                            elseif( $starNumber-$x > 0 )
+                            { 
+                              echo '<i class="fas fa-fw fa-star-half-alt"></i>';
+                            }
+                            else { 
+                              echo '<i class="far fa-fw fa-star"></i>'; 
+                            }
+                          } 
+                    ?>
+                </td>
+              </tr>
+              <tr>
+                <td>Komentar anda
+                </td>
+                <td class="text-right">
+                <?= $grup_user->komentar ?>
+                </td>
+              </tr>
+              </table>
+            </div>
+            <?php 
+                  } else {
+                    ?>
+        <form class="form-group" method="POST" action="<?= base_url('koperasi/grup/rate_grup')?>">
+        <div class="modal-body">
+            <div class="form-group text-center">
+            <div class="my-rating"></div>
+            <div class="live-rating">0</div>
+            </div>
+            <input type="hidden" id="rating" name="rating">
+            <input type="hidden" name="id_grup_user" value="<?= $grup_user->id?>">
+            <input type="hidden" name="grup_id" value="<?= $data_grup_tmp->grup_id?>">
+            <textarea name="comment_rate" id="comment_rate" placeholder="Komentar..." class="form-control"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit <i class="fas fa-fw fa-sign-out-alt"></i></button>
+        </div>
+        
+        </form>
+        <?php }
+      } else {
+        echo "<div class='modal-body'><i class='fas fa-fw fa-info-circle'></i> Anda harus join terlebih dahulu untuk memberikan rating</div>";
+      } ?>
+        <div class="modal-header">
+          <span class="font-weight-bold">Ratings and Reviews</span>
+        </div>
+        <div class="modal-body">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Notifikasi Modal-->
   <div class="modal fade" id="notifikasi_modal" tabindex="-1" role="dialog" aria-labelledby="judul_notifikasi_modal" aria-hidden="true">
     <div class="modal-dialog" role="document">

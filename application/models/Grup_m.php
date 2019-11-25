@@ -63,4 +63,10 @@ class Grup_m extends MY_Model {
         $result = $this->db->get()->result();
         return $result;
     }
+
+    public function get_info_grup($grup_id){        
+        $this->db->where('grup_id', $grup_id);
+        $result = $this->db->get('grup')->row();
+        return $result;
+    }
 }

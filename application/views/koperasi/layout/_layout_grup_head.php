@@ -9,7 +9,8 @@
       <div class="m-0 font-weight-bold text-capitalize text-primary"><?= $data_grup_tmp->nama_grup ?>
       </div>      
       <div class="small text-warning">
-      <a href="" class="text-warning">(<?= $data_grup_tmp->rate_akumulatif."/".$data_grup_tmp->rate_person?>)
+      (<?= $data_grup_tmp->rate_akumulatif."/".$data_grup_tmp->rate_person?>)
+      <a href="#" data-toggle="modal" data-target="#rate_modal" class="text-warning">
       <?php 
                 $starNumber = $data_grup_tmp->rate_akumulatif;                
                 for( $x = 0; $x < 5; $x++ ){
