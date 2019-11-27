@@ -73,7 +73,7 @@
       </div>
 
       <div class="btn-group">
-        <a href="anggota" class="btn btn-sm btn-light">
+        <a href="laporan" class="btn btn-sm btn-light">
           <i class="fas fa-fw fa-chart-line"></i> Laporan
         </a>
       </div>

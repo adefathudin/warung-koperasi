@@ -51,24 +51,19 @@
         </div>
       </div>
     </div>
-
+<?= $grup_user->saldo_koperasi ?>
   <div class="card mb-4">    
     <div class="card-body">
-    <?php
-    // Cek apakah terdapat session simpanan
-    //if($this->pi  session->flashdata('status_simpanan')){ // Jika ada
-      echo "
-      <div class='alert alert-danger alert-dismissible'>
-        <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-        .$this->session->flashdata('status_simpanan')."tee</div>";
-      //}
-  ?>
       <form method="POST" action="<?= base_url('koperasi/pinjaman/proses_pengajuan_pinjaman') ?>">
         <div class="form-row align-items-center d-flex flex-row justify-content-between">        
           <div class="col my-1">
             <input type="hidden" name="grup_name" value="<?= $data_grup_tmp->nama_grup ?>">
             <input type="hidden" name="grup_id" value="<?= $grup_id ?>">
-            <input type="number" name="nominal_pinjaman" id="nominal_pinjaman" class="form-control" placeholder="Nominal" max="<?= ($saldo->saldo_koperasi * $data_grup_tmp->maksimal_pinjaman)/100?>" required>
+            <input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">
+            <input type="hidden" name="grup_user_id" value="<?= $grup_user->id ?>">
+            <input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">
+            <input type="hidden" name="saldo_koperasi" value="<?= $grup_user->saldo_koperasi ?>">
+            <input type="number" name="nominal_pinjaman" id="nominal_pinjaman" class="form-control" placeholder="Nominal" max="<?= $grup_user->limit_pinjaman?>" required>
           </div>
           <div class="col-auto my-1">
             <select class="custom-select mr-sm-2" name="tenor" id="tenor" required>

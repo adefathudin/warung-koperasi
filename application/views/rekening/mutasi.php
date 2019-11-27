@@ -12,7 +12,6 @@
               <th>Keterangan</th>
               <th>Cash In</th>
               <th>Cash Out</th>
-              <th>Saldo Akhir</th>
             </tr>
           </thead>
           <tfoot>
@@ -42,7 +41,6 @@
                     ".$mutasi->keterangan_trx."</td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
                     <td></td>
-                    <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>
                   </tr>
                   ";}
                   elseif ($mutasi->jenis_trx == 2){
@@ -54,7 +52,6 @@
                     Tarik Tunai</td>
                     <td></td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
-                    <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>
                   </tr>
                     ";}
                   elseif ($mutasi->jenis_trx == 3){
@@ -66,7 +63,6 @@
                     ".$mutasi->keterangan_trx."</td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
                     <td></td>
-                    <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>
                   </tr>
                     ";}
                     elseif ($mutasi->jenis_trx == 4){
@@ -78,13 +74,11 @@
                     ".$mutasi->keterangan_trx."</td>
                     <td></td>
                     <td>".number_format($mutasi->nominal, 0, ".", ".")."</td>
-                    <td>".number_format($mutasi->saldo_akhir, 0, ".", ".")."</td>
                   </tr>
                     ";}
                     else {
                       echo "
                     <tr>
-                      <td>Err.</td>
                       <td>Err.</td>
                       <td>Err.</td>
                       <td>Err.</td>

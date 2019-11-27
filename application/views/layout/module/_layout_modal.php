@@ -94,11 +94,6 @@
       } else {
         echo "<div class='modal-body'><i class='fas fa-fw fa-info-circle'></i> Anda harus join terlebih dahulu untuk memberikan rating</div>";
       } ?>
-        <div class="modal-header">
-          <span class="font-weight-bold">Ratings and Reviews</span>
-        </div>
-        <div class="modal-body">
-        </div>
       </div>
     </div>
   </div>

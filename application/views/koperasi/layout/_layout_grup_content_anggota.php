@@ -6,7 +6,6 @@
       <?php
       if ($grup_user->status_user == 'admin'){ ?>
       <a class="nav-item nav-link" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="false">Request</a>
-      <a class="nav-item nav-link" id="nav-banned-tab" data-toggle="tab" href="#nav-banned" role="tab" aria-controls="nav-banned" aria-selected="false">Banned</a>
       <?php } ?>
     </div>
   </nav>
@@ -80,3 +79,209 @@
     </div>
   </div>
 </div>
+
+<script>
+      request_grup();
+      member_grup();
+      admin_grup();      
+   
+  //tampil anggota grup request
+  function request_grup(){
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_request',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td style="text-align:right;">'+
+                '<button class="btn btn-default text-primary" id="accept_grup" data-user="'+data[i].user_id+'" data="'+data[i].id+'"><i class="far fa-fw fa-check-circle"></i> Accept</button>'+' '+
+                '<button class="btn btn-default text-danger" id="reject_grup" data-user="'+data[i].user_id+'" data="'+data[i].id+'"><i class="far fa-fw fa-times-circle"></i> Reject</button>'
+            '</td>'+
+            '</tr>';
+        }
+        $('#show_data').html(html);
+      }
+    });
+  };
+
+  //PROSES ACC MEMBER KE GRUP 
+  $(document).on('click', '#accept_grup', function() {
+    if (!confirm("Anda akan menyetujui user bergabung?")){
+      return false;
+    }
+    var id = $(this).attr('data');
+    var user_id = $(this).attr('data-user');
+    var nama_grup = "<?php if(isset($data_grup_tmp->nama_grup)){echo ($data_grup_tmp->nama_grup);} ?>";
+    $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/accept")?>',
+          data: {id:id,user_id:user_id,nama_grup:nama_grup},
+          success: function (data) {
+            request_grup();
+            member_grup();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              text: 'Berhasil menyetujui menjadi anggota grup',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat acc member',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }          
+        })
+        return false;
+  });
+
+  //PROSES REJECT MEMBER
+  $(document).on('click', '#reject_grup', function() {
+    if (!confirm("Anda akan menolak user untuk bergabung?")){
+      return false;
+    }
+    var id = $(this).attr('data');
+    $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/reject")?>',
+          data: {id:id},
+          success: function (data) {
+            request_grup();
+            member_grup();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              text: 'Permintaan gabung ke grup berhasil direject',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat acc member',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }          
+        })
+        return false;
+  });
+
+  
+  //tampil anggota grup
+  function member_grup(){
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_member',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td>'+data[i].joined+' days ago</td>'+
+            /*
+            Jika statusnya adalah admin, maka tampilkan action untuk kick member
+            */
+            <?php            
+            if (!empty($grup_user)){
+            if ($grup_user->status_user == 'admin'){ ?>
+            '<td style="text-align:right;">'+
+                '<button class="btn btn-default text-danger" id="kick_member" data="'+data[i].id+'"><i class="fas fa-fw fa-ban"></i> Kick Out</button>'+
+            '</td>'+
+            <?php }} ?>
+
+            '</tr>';
+        }
+        $('#data-member').html(html);
+      }
+    });
+  };
+
+  
+  //PROSES KICK OUT MEMBER 
+  $(document).on('click', '#kick_member', function() {
+    if (!confirm("Anda yakin akan mengeluarkan anggota dari grup ini?")){
+      return false;
+    }
+    var id = $(this).attr('data');
+    $.ajax({
+          type: 'POST',
+          url: '<?= base_url("koperasi/grup/kick")?>',
+          data: {id:id},
+          success: function (data) {
+            member_grup();
+            request_grup();
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              text: 'User berhasil dikeluarkan dari grup',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          },
+          error: function (data) {
+            Swal.fire({
+              position: 'center',
+              icon: 'warning',
+              text: 'Ada sesuatu yang salah saat kick out member',
+              showConfirmButton: false,
+              timer: 1300
+            })
+          }          
+        })
+        return false;
+  });
+
+  
+  //tampil admin grup
+  function admin_grup(){
+    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>koperasi/grup/list_admin',
+    data  : {grup_id:grup_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'+
+              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+              '</a></td>'+
+            '<td>'+data[i].joined+' days ago</td>'+
+            '</tr>';
+        }
+        $('#data-admin').html(html);
+      }
+    });
+  };
+
+</script>

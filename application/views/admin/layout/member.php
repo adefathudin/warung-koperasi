@@ -57,3 +57,65 @@
           </div>
         </div>
     </div>
+
+<script>
+  var JS = {
+    init: function(){
+        //jika tombol approve full service ditekan        
+      $(document).on('click', '#btn_approve_full_service', function(){
+        var user_id=$(this).attr('data');
+        if (!confirm("User kan diupgrade menjadi member Full Service?")){
+          return false;
+        }
+        $.ajax({
+        type  : 'GET',
+        url   : '<?php echo base_url()?>profile/user/approve_member_full_service',
+        data  : {user_id:user_id},
+        success : function(data){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Upgrade Member Berhasil',
+            showConfirmButton: false,
+            timer: 1300
+          })
+          }
+        });
+        
+        $('#approve_member_full_modal .close').click();
+        $('#member').click();
+
+      });
+
+      //jika tombol reject full service ditekan
+      
+      $(document).on('click', '#btn_reject_full_service', function(){
+        var user_id=$(this).attr('data');
+        if (!confirm("Pengajuan upgrade user ini akan ditolak?")){
+          return false;
+        }
+        $.ajax({
+        type  : 'GET',
+        url   : '<?php echo base_url()?>profile/user/reject_member_full_service',
+        data  : {user_id:user_id},
+        success : function(data){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Pengajuan Upgrade Member Berhasil Ditolak',
+            showConfirmButton: false,
+            timer: 1300
+          })
+          }
+        });
+        
+        $('#approve_member_full_modal .close').click();
+        $('#member').click();
+
+      });
+      }
+    }
+  $(document).ready(function(){
+    JS.init();
+  });
+</script>

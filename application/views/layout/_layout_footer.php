@@ -15,7 +15,6 @@
   <?php $this->load->view('layout/module/_layout_modal'); ?>
   
   <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js')?>"></script>
   <!--<script src="<?php echo base_url('assets/vendor/jquery/jquery.rating.js')?>"></script>-->
   <script src="<?php echo base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
   <script src="<?php echo base_url('assets/vendor/jquery/jquery.validate.min.js')?>"></script>
@@ -44,9 +43,6 @@
     init: function(){
       setInterval(function(){ notifikasi(); }, 3000);
       //notifikasi();
-      request_grup();
-      member_grup();
-      admin_grup();
       saldo();
       //jika tombol cashout diklik
       $('#formCashOut').on('submit',function(e) { 
@@ -209,151 +205,7 @@
     timer: 1500
       });
     };
-   
-  //tampil anggota grup request
-  function request_grup(){
-    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
-    $.ajax({
-    type  : 'GET',
-    url   : '<?php echo base_url()?>koperasi/grup/list_request',
-    data  : {grup_id:grup_id},
-    async : true,
-    dataType : 'json',
-    success : function(data){
-        var html = '';
-        var i;
-        for(i=0; i<data.length; i++){
-          html += '<tr>'+
-            '<td>'+
-              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
-              '</a></td>'+
-            '<td style="text-align:right;">'+
-                '<button class="btn btn-default text-primary" id="accept_grup" data="'+data[i].id+'"><i class="far fa-fw fa-check-circle"></i> Accept</button>'+' '+
-                '<button class="btn btn-default text-danger"><i class="far fa-fw fa-times-circle"></i> Reject</button>'
-            '</td>'+
-            '</tr>';
-        }
-        $('#show_data').html(html);
-      }
-    });
-  };
-
-  //PROSES ACC MEMBER KE GRUP 
-  $(document).on('click', '#accept_grup', function() {
-    var id = $(this).attr('data');
-    $.ajax({
-          type: 'POST',
-          url: '<?= base_url("koperasi/grup/accept")?>',
-          data: {id:id},
-          success: function (data) {
-            request_grup();
-            member_grup();
-          },
-          error: function (data) {
-            Swal.fire({
-              position: 'center',
-              icon: 'warning',
-              text: 'Ada sesuatu yang salah saat acc member',
-              showConfirmButton: false,
-              timer: 1300
-            })
-          }          
-        })
-        return false;
-  });
-
   
-  //tampil anggota grup
-  function member_grup(){
-    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
-    $.ajax({
-    type  : 'GET',
-    url   : '<?php echo base_url()?>koperasi/grup/list_member',
-    data  : {grup_id:grup_id},
-    async : true,
-    dataType : 'json',
-    success : function(data){
-        var html = '';
-        var i;
-        for(i=0; i<data.length; i++){
-          html += '<tr>'+
-            '<td>'+
-              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
-              '</a></td>'+
-            '<td>'+data[i].joined+' days ago</td>'+
-            /*
-            Jika statusnya adalah admin, maka tampilkan action untuk kick member
-            */
-            <?php            
-            if (!empty($status_member)){
-            if ($status_member->status_user == 'admin'){ ?>
-            '<td style="text-align:right;">'+
-                '<button class="btn btn-default text-danger" id="kick_member" data="'+data[i].id+'"><i class="fas fa-fw fa-sign-out-alt"></i> Kick Out</button>'+
-                '<button class="btn btn-default text-danger" id="block_member" data="'+data[i].id+'"><i class="fas fa-fw fa-ban"></i> Block</button>'
-            '</td>'+
-            <?php }} ?>
-
-            '</tr>';
-        }
-        $('#data-member').html(html);
-      }
-    });
-  };
-
-  
-  //PROSES KICK OUT MEMBER 
-  $(document).on('click', '#kick_member', function() {
-    var id = $(this).attr('data');
-    $.ajax({
-          type: 'POST',
-          url: '<?= base_url("koperasi/grup/kick")?>',
-          data: {id:id},
-          success: function (data) {
-            member_grup();
-            request_grup();
-          },
-          error: function (data) {
-            Swal.fire({
-              position: 'center',
-              icon: 'warning',
-              text: 'Ada sesuatu yang salah saat kick out member',
-              showConfirmButton: false,
-              timer: 1300
-            })
-          }          
-        })
-        return false;
-  });
-
-  
-  //tampil admin grup
-  function admin_grup(){
-    var grup_id =  "<?php if(isset($data_grup_tmp->grup_id)){echo ($data_grup_tmp->grup_id);} ?>";
-    $.ajax({
-    type  : 'GET',
-    url   : '<?php echo base_url()?>koperasi/grup/list_admin',
-    data  : {grup_id:grup_id},
-    async : true,
-    dataType : 'json',
-    success : function(data){
-        var html = '';
-        var i;
-        for(i=0; i<data.length; i++){
-          html += '<tr>'+
-            '<td>'+
-              '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
-              '</a></td>'+
-            '<td>'+data[i].joined+' days ago</td>'+
-            '</tr>';
-        }
-        $('#data-admin').html(html);
-      }
-    });
-  };
-
   //tampil notifikasi
   function notifikasi(){
     var user_id =  "<?= $user_id ?>";
@@ -433,62 +285,6 @@
       }
     });
   };
-
-  //jika tombol approve full service ditekan
-        
-  $(document).on('click', '#btn_approve_full_service', function(){
-          var user_id=$(this).attr('data');
-          if (!confirm("User kan diupgrade menjadi member Full Service?")){
-            return false;
-          }
-          $.ajax({
-          type  : 'GET',
-          url   : '<?php echo base_url()?>profile/user/approve_member_full_service',
-          data  : {user_id:user_id},
-          success : function(data){
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Upgrade Member Berhasil',
-              showConfirmButton: false,
-              timer: 1300
-            })
-            }
-          });
-          
-          $('#approve_member_full_modal .close').click();
-          $('#member').click();
-
-        });
-
-
-        //jika tombol reject full service ditekan
-        
-        $(document).on('click', '#btn_reject_full_service', function(){
-          var user_id=$(this).attr('data');
-          if (!confirm("Pengajuan upgrade user ini akan ditolak?")){
-            return false;
-          }
-          $.ajax({
-          type  : 'GET',
-          url   : '<?php echo base_url()?>profile/user/reject_member_full_service',
-          data  : {user_id:user_id},
-          success : function(data){
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Pengajuan Upgrade Member Berhasil Ditolak',
-              showConfirmButton: false,
-              timer: 1300
-            })
-            }
-          });
-          
-          $('#approve_member_full_modal .close').click();
-          $('#member').click();
-
-        });
-  
 </script>
 
 
@@ -531,91 +327,5 @@ if (!empty($_GET['order_id'])){
     }
   }
 ?>
-
-<!-- Jika login sebagai admin, maka fungsi ini akan diaktifkan -->
-
-<?php 
-  if ($user_id == 'a1bdc221d56fddfba202bd448fe4dbfb'){ ?>
-
-    <script>
-
-        $("#report").click(function(){
-        $(".konten_admin").load("<?= base_url('admin/dashboard/report')?>");
-          }),
-      
-        $("#member").click(function(){
-        $(".konten_admin").load("<?= base_url('admin/dashboard/member')?>");
-        
-            $.ajax({
-            type  : 'POST',
-            url   : '<?php echo base_url()?>profile/user/member_request_full_service',
-            async : true,
-            dataType : 'json',
-            success : function(data){
-                var html = '';
-                var i;
-                for(i=0; i<data.length; i++){
-                  html += '<tr>'+
-                    '<td>'
-                      +data[i].nama_lengkap+
-                    '</td>'+
-                    '<td>'+
-                    '<a href="javascript:;" data="'+data[i].user_id+'" class="btn btn-info approve_member_full"><i class="fas fa-fw fa-info-circle"></i> Detail</a>'+
-                    '</td>'+
-                    '</tr>';
-                }
-              $('#member_request_full').html(html);
-              return false;
-            }
-          });
-        }),         
-
-        //detail detail user
-        $(document).on('click','.approve_member_full',function(){
-            var user_id=$(this).attr('data');
-                $.ajax({
-                type  : 'GET',
-                url   : '<?php echo base_url()?>profile/user/detail_member_request_full_service',
-                data  : {user_id:user_id},
-                async : true,
-                dataType : 'json',
-                success : function(data){
-                  var html = '';
-                    html += 
-                    '<div class="modal-body">'+
-                      '<table class="table table-responsive">'+
-                        '<tbody>'+
-                          '<tr><td><i class="fas fa-fw fa-fingerprint"></i></td><td>'+data.user_id+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-signature"></i></td><td>'+data.nama_lengkap+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-baby"></i></td><td>'+data.tempat_lahir+', '+data.tanggal_lahir+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-venus-mars"></i></td><td>'+data.jenis_kelamin+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-at"></i></td><td>'+data.email+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-phone"></i></td><td>'+data.nomor_hp+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-map-marker-alt"></i></td><td>'+data.alamat+'</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-dollar-sign"></i></td><td>'+data.nomor_rekening+' ('+data.nama_bank+')</td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-address-card"></i></td><td><img src="<?= base_url('assets/img/user/ktp/')?>'+data.ktp+'"/></td></tr>'+
-                          '<tr><td><i class="fas fa-fw fa-user"></i></td><td><img src="<?= base_url('assets/img/user/profile/')?>'+data.profil+'"/></td></tr>'+
-                        '</tbody>'+
-                      '</table>'+
-                    '</div>'+
-                    '<div class="modal-footer btn_approve_reject">'+
-                      '<button class="btn btn-danger" data="'+data.user_id+'" id="btn_reject_full_service"><i class="fas fa-fw fa-times-circle"></i> Reject</button>'+
-                      '<button class="btn btn-primary" data="'+data.user_id+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Upgrade</button>'+
-                    '</div>'  
-                          ;
-                    
-                    $('#detail_member_full').html(html);
-                  }
-                });
-            $('#approve_member_full_modal').modal('show');
-        });
-
-    </script>
-    
-<?php } ?>
-
-    <script>        
-        
-    </script>
   </body> 
 </html>

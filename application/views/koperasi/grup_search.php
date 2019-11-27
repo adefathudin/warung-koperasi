@@ -57,8 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
                 <tr><td>Simpanan Wajib</td><td>:</td><td>
                 <b><?= number_format($grup->minimal_wajib) ?></b>
                 </td></tr>
-                <tr><td>Maksimal Pinjaman</td><td>:</td><td>
-                <b><?= number_format($grup->maksimal_pinjaman) ?></b>
+                <tr><td>Limit Pinjaman</td><td>:</td><td>
+                <b><?= number_format($grup->maksimal_pinjaman) ?>%</b>
                 </td></tr>
                 </table>                
                 </p>

@@ -56,7 +56,11 @@ class Simpanan extends MY_Controller {
             if ($minimal_pokok != $nominal_simpanan){
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Nominal simpanan pokok yang diinput Rp<b>'.number_format($nominal_simpanan).'</b> tidak sama dengan nominal pokok yang telah ditentukan Rp<b>'.number_format($minimal_pokok).'</b>');
                 redirect ('grup/'.$grup_id.'/simpan');
-            } else {
+            } else if ($rek->saldo_akhir < $nominal_simpanan) {
+                $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Saldo anda tidak mencukupi untuk membayar Simpanan Pokok');
+                redirect ('grup/'.$grup_id.'/simpan');
+            } 
+            else {
             $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
             $periode = "-";}
 
@@ -66,7 +70,12 @@ class Simpanan extends MY_Controller {
             if ($minimal_wajib != $nominal_simpanan){
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Nominal simpanan wajib yang diinput Rp<b>'.number_format($nominal_simpanan).'</b> tidak sama dengan nominal wajib yang telah ditentukan Rp<b>'.number_format($minimal_wajib).'</b>');
                 redirect ('grup/'.$grup_id.'/simpan');
-            } else {                
+
+            } else if ($rek->saldo_akhir < $nominal_simpanan) {
+                $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Saldo anda tidak mencukupi untuk membayar Simpanan Wajib');
+                redirect ('grup/'.$grup_id.'/simpan');
+            }
+            else {                
             $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);}
         } elseif ($jenis_simpanan == "Sukarela"){           
             $periode = "-";
@@ -93,7 +102,7 @@ class Simpanan extends MY_Controller {
         );
 
         $update_grup_user =  array (
-            'saldo_koperasi' => $saldo_koperasi + $nominal_simpanan, 'limit_pinjaman' => (($saldo_koperasi * $maksimal_pinjaman)/100) 
+            'saldo_koperasi' => $saldo_koperasi + $nominal_simpanan, 'limit_pinjaman' => ((($saldo_koperasi + $nominal_simpanan) * $maksimal_pinjaman)/100) 
         );
         if ($this->simpan_grup_m->save($data_simpanan)){     
             $this->rekening_m->save($update_saldo,$user_id);
@@ -104,6 +113,16 @@ class Simpanan extends MY_Controller {
             $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
         }
         redirect ('grup/'.$grup_id.'/simpan');
+    }
+
+    /*
+    fungsi untuk menampilkan mutasi simpanan satu grup
+    */
+    
+    public function list_simpanan_by_grup(){        
+        $grup_id=$this->input->get('grup_id');
+        $data = $this->simpan_grup_m->get_simpanan_by_grup($grup_id);
+        echo json_encode($data);
     }
     
 }

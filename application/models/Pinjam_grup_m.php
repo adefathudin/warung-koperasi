@@ -42,5 +42,17 @@ class Pinjam_grup_m extends MY_Model {
             return $result;
         }
 
+        public function get_pinjaman_by_grup($grup_id){
+            $this->db->select("a.nama_lengkap,a.profil,a.user_id,b.tujuan,b.nominal,b.tenor,b.nominal,b.tanggal_pinjam");
+            $this->db->from('users_detail a');
+            $this->db->join('pinjam_grup b', 'b.user_id = b.user_id');
+            $this->db->where('a.user_id = b.user_id');
+            $this->db->where('b.grup_id', $grup_id);
+            $this->db->order_by('b.id', 'desc');
+            $result = $this->db->get()->result();
+            return $result;
+        }
+
+
 
 }

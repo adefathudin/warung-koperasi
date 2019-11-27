@@ -190,21 +190,29 @@ class Grup extends MY_Controller {
     public function accept(){
         
         $id = $this->input->post('id');
+        $user_id = $this->input->post('user_id');
+        $nama_grup = $this->input->post('nama_grup');
         $update_grup_user = array (
             'status_user' => 'member'
         );
         $insert_notifikasi = array (
-            'user_id' => 'c3480b0792a9d47c55152094055782ce', 'judul' => 'Status Join Grup', 'isi'=> 'Anda telah distujui bergabung dengan grup koperasi',
-            'link' => 'grup'
+            'user_id' => $user_id, 'judul' => 'Status Join Grup', 'isi'=> 'Anda telah disetujui bergabung dengan grup koperasi '.$nama_grup
         );
         if ($this->grup_user_m->save($update_grup_user, $id)){
             $this->notifikasi_m->save($insert_notifikasi);
         }
 
     }
-    
-    public function list_request(){
-        
+
+    //reject grup
+    public function reject(){
+
+        $id = $this->input->post('id');
+        $this->grup_user_m->delete($id);
+
+    }
+
+    public function list_request(){        
         $grup_id=$this->input->get('grup_id');
         $data = $this->grup_user_m->get_list_request($grup_id);
         echo json_encode($data);

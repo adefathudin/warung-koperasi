@@ -34,5 +34,16 @@ class Simpan_grup_m extends MY_Model {
             return $result;
         }
 
+        public function get_simpanan_by_grup($grup_id){
+            $this->db->select("a.nama_lengkap,a.profil,a.user_id,b.jenis_simpanan,b.periode,b.nominal,b.tanggal_simpan");
+            $this->db->from('users_detail a');
+            $this->db->join('simpan_grup b', 'b.user_id = b.user_id');
+            $this->db->where('a.user_id = b.user_id');
+            $this->db->where('b.grup_id', $grup_id);
+            $this->db->order_by('b.id', 'desc');
+            $result = $this->db->get()->result();
+            return $result;
+        }
+
 
 }

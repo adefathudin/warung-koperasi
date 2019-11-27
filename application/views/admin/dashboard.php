@@ -96,3 +96,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');?>
   </div>
 
 </div><!--END ROW-->
+
+<!-- Jika login sebagai admin, maka fungsi ini akan diaktifkan -->
+
+<script>
+
+$("#report").click(function(){
+$(".konten_admin").load("<?= base_url('admin/dashboard/report')?>");
+  }),
+
+$("#member").click(function(){
+$(".konten_admin").load("<?= base_url('admin/dashboard/member')?>");
+
+    $.ajax({
+    type  : 'POST',
+    url   : '<?php echo base_url()?>profile/user/member_request_full_service',
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        var html = '';
+        var i;
+        for(i=0; i<data.length; i++){
+          html += '<tr>'+
+            '<td>'
+              +data[i].nama_lengkap+
+            '</td>'+
+            '<td>'+
+            '<a href="javascript:;" data="'+data[i].user_id+'" class="btn btn-info approve_member_full"><i class="fas fa-fw fa-info-circle"></i> Detail</a>'+
+            '</td>'+
+            '</tr>';
+        }
+      $('#member_request_full').html(html);
+      return false;
+    }
+  });
+}),         
+
+//detail detail user
+$(document).on('click','.approve_member_full',function(){
+    var user_id=$(this).attr('data');
+        $.ajax({
+        type  : 'GET',
+        url   : '<?php echo base_url()?>profile/user/detail_member_request_full_service',
+        data  : {user_id:user_id},
+        async : true,
+        dataType : 'json',
+        success : function(data){
+          var html = '';
+            html += 
+            '<div class="modal-body">'+
+              '<table class="table table-responsive">'+
+                '<tbody>'+
+                  '<tr><td><i class="fas fa-fw fa-fingerprint"></i></td><td>'+data.user_id+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-signature"></i></td><td>'+data.nama_lengkap+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-baby"></i></td><td>'+data.tempat_lahir+', '+data.tanggal_lahir+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-venus-mars"></i></td><td>'+data.jenis_kelamin+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-at"></i></td><td>'+data.email+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-phone"></i></td><td>'+data.nomor_hp+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-map-marker-alt"></i></td><td>'+data.alamat+'</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-dollar-sign"></i></td><td>'+data.nomor_rekening+' ('+data.nama_bank+')</td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-address-card"></i></td><td><img src="<?= base_url('assets/img/user/ktp/')?>'+data.ktp+'"/></td></tr>'+
+                  '<tr><td><i class="fas fa-fw fa-user"></i></td><td><img src="<?= base_url('assets/img/user/profile/')?>'+data.profil+'"/></td></tr>'+
+                '</tbody>'+
+              '</table>'+
+            '</div>'+
+            '<div class="modal-footer btn_approve_reject">'+
+              '<button class="btn btn-danger" data="'+data.user_id+'" id="btn_reject_full_service"><i class="fas fa-fw fa-times-circle"></i> Reject</button>'+
+              '<button class="btn btn-primary" data="'+data.user_id+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Upgrade</button>'+
+            '</div>'  
+                  ;
+            
+            $('#detail_member_full').html(html);
+          }
+        });
+    $('#approve_member_full_modal').modal('show');
+});
+
+</script>
