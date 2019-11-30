@@ -35,6 +35,12 @@ class Users_detail_m extends MY_Model {
         return $result;
     }
     
+    public function get_user_by_qr($qrcode){
+        $this->db->where('qrcode', $qrcode);
+        $result = $this->db->get('users_detail')->row();
+        return $result;
+    }
+    
     public function get_data_all_user(){
         $result = $this->db->get('users_detail')->result();
         return $result;

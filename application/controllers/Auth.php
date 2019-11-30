@@ -24,6 +24,24 @@ class Auth extends CI_Controller {
     $email = $this->input->post('email');
     $user_id = md5($this->input->post('email'));
     $password = md5($this->input->post('password'));
+    $qrcode = $this->input->get('qrcode');
+
+    if (!empty($qrcode)){
+      if ($this->users_detail_m->get_count(array('qrcode'=>$qrcode)) > 0){
+        $user = $this->users_detail_m->get_user_by_qr($qrcode);
+        $session = array(
+          'user_id' => $user->user_id, 'email' => $user->email
+        );      
+        $this->session->set_userdata($session);
+        
+        $arr['success'] = true;
+      } else {
+        $arr['success'] = false;
+      }
+      echo json_encode($arr);
+      exit;
+    }
+
     if ($this->users_login_m->get_count(array('email'=>$email)) > 0){
       if ($this->users_login_m->get_count(array('password'=>$password)) >0){
         $session = array(
@@ -78,10 +96,7 @@ class Auth extends CI_Controller {
       $this->session->set_flashdata('message', 'No. HP <strong>'.$nomor_hp.'</strong> sudah terdaftar'); 
       redirect('auth/registrasi');
     } else {
-      $data_login = array(
-        'user_id' => $user_id, 'password' => md5($password), 'email' => $email
-      );
-
+      
       //membuat qr code
 
       $this->load->library('qrcode/ciqrcode'); //pemanggilan library QR CODE
@@ -95,31 +110,34 @@ class Auth extends CI_Controller {
         $config['black']        = array(224,255,255); // array, default is array(255,255,255)
         $config['white']        = array(70,130,180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
+
+        $qrcode = md5(uniqid().$user_id.$email.$password);
+        $image_name=$qrcode.'.png'; //buat name dari qr code sesuai dengan user_id
  
-        $image_name=$user_id.'.png'; //buat name dari qr code sesuai dengan user_id
- 
-        $params['data'] = $user_id; //data yang akan di jadikan QR CODE
+        $params['data'] = $qrcode; //data yang akan di jadikan QR CODE
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;
         $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
-
        
         //generate simple random code
       $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $code = substr(str_shuffle($set), 0, 12);
       
+
+      $data_login = array(
+        'user_id' => $user_id, 'password' => md5($password), 'email' => $email, 'qrcode' => $qrcode
+      );
+
       $data_user_detail =  array(
         'user_id'=>$user_id, 'nama_lengkap' => $nama_lengkap, 
         'email' => $email, 'type'=> 'Basic Member', 'verifikasi_email' => 0, 'verifikasi_nomor_hp' => 1,'kode_unik'=>$code,
-        'qrcode' => $image_name
+        'qrcode' => $qrcode
       );
       
       $insert_notifikasi = array (
         'user_id' => $user_id, 'judul' => 'Selamat Datang di WarungKoperasi', 'isi' => 'Kami berharap, Anda dan Kami bisa menjadi mitra yang Hebat ^_^'
-      );
-
-      
+      );     
 
       
       if ($this->users_detail_m->save($data_user_detail)){        
@@ -188,7 +206,7 @@ class Auth extends CI_Controller {
           if($this->email->send()){
           }
           else{
-            $this->session->set_flashdata('message', $this->email->print_debugger());    
+            //$this->session->set_flashdata('message', $this->email->print_debugger());    
           }  
 }
 

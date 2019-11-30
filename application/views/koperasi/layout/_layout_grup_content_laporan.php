@@ -10,7 +10,7 @@
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-simpanan" role="tabpanel" aria-labelledby="nav-simpanan-tab">      
       <div class="table table-striped">
-        <table class="table" id="dataTable" width="100%" cellspacing="0">
+        <table class="table" id="" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>Nama Anggota</th>
@@ -28,7 +28,7 @@
 
     <div class="tab-pane fade" id="nav-pinjaman" role="tabpanel" aria-labelledby="nav-pinjaman-tab">      
       <div class="table table-striped">
-        <table class="table" id="dataTable" width="100%" cellspacing="0">
+        <table class="table" id="" width="100%" cellspacing="0">
           <thead>
             <tr>
               <th>Nama Anggota</th>
@@ -67,7 +67,7 @@
           html += '<tr>'+
             '<td width="35%">'+
               '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="rounded-circle img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
               '</a>'+
             '</td>'+
 
@@ -109,7 +109,7 @@
           html += '<tr>'+
             '<td width="35%">'+
               '<a href="<?= base_url()?>user/'+data[i].user_id+'">'+
-                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
+                  '<img src="<?= base_url()?>assets/img/user/profile/'+data[i].profil+'" alt="Profile Picture" class="rounded-circle img-responsive" style="max-height: 50px; max-width: 50px;"/> '+data[i].nama_lengkap+
               '</a>'+
             '</td>'+
 

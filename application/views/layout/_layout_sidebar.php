@@ -72,17 +72,10 @@ if ($data_user->email == 'root@warungkoperasi.my.id'){
       $i = 1;
       if (!empty($list_grup)){
         foreach ($list_grup as $grup){
-          if ($grup->status_user == 'admin'){          
-            if ($i++ == 1) {                
-              echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i> Groups you manage</div>";
-            }
-              echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
-              $i++;
+          if ($grup->status_user == 'admin'){    
+            echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='text-info fas fa-fw fa-user-cog'></i> <i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
           }
-          else if ($grup->status_user == 'member'){       
-            if ($i++ == 1) {                           
-              echo "<div class='collapse-header'><i class='fas fa-fw fa-users-cog'></i>  Groups you're in</div>";
-            }
+          else if ($grup->status_user == 'member'){    
             echo "<a class='collapse-item text-capitalize' href='".base_url('grup')."/".$grup->grup_id."/index'><i class='fas fa-fw fa-".$grup->kategori."'></i>". $grup->nama_grup."</a>";
             $i++;
           }

@@ -169,7 +169,7 @@
             if ($data_user->type != "Full Service"){
               echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile";
               } else { ?>
-            <button type="submit" class="btn btn-primary mb-2">Update</button>
+            <button type="submit" id="btn_identitas_grup" class="btn btn-primary mb-2">Update</button>
               <?php } ?>
             </div>
           </div>   
@@ -210,7 +210,7 @@
             
             <div class="modal-footer">
               <div class="form-group text-right"> 
-                  <button type="submit" class="btn btn-primary mb-2">Update
+                  <button type="submit" id="btn_finance" class="btn btn-primary mb-2">Update
                   </button>
               </div>
             </div>   

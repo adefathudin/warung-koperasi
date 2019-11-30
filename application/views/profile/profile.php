@@ -142,7 +142,7 @@
                     </p>
                     
                     <p class="clearfix text-center">
-                    <img src="<?= base_url('assets/img/user/qrcode/'.$data_user_tmp->qrcode)?>" class="img-responsive" height="40%" width="40%"/>
+                    <img src="<?= base_url('assets/img/user/qrcode/'.$data_user_tmp->qrcode)?>.png" class="img-responsive" height="40%" width="40%"/>
                     </p>
                     
                     <?php 

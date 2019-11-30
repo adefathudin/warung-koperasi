@@ -17,6 +17,10 @@ class Migration_add_table_pinjam_grup extends MY_Migration {
             'constraint' => 15,
             'auto_increment' => TRUE
         ),
+        'id_pinjaman' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 15
+        ),
         'user_id' => array(
             'type' => 'VARCHAR',
             'constraint' => 32

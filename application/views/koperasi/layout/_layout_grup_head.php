@@ -55,14 +55,8 @@
       </div>
       
       <div class="btn-group">
-        <a href="simpan" class="btn btn-sm btn-light">
-          <i class="fas fa-fw fa-money-check"></i> Simpan
-        </a>
-      </div>
-
-      <div class="btn-group">
-        <a href="pinjam" class="btn btn-sm btn-light">
-          <i class="fas fa-fw fa-money-bill-wave-alt"></i> Pinjam
+        <a href="simpan_pinjam" class="btn btn-sm btn-light">
+          <i class="fas fa-fw fa-money-check"></i> Simpan Pinjam
         </a>
       </div>
       
@@ -110,3 +104,23 @@
 
        } ?>
     </div>
+
+<script>
+  $(document).on('click', '#btn_rate', function() {
+  if (!confirm("Anda ingin memberikan rating dan review untuk grup ini?")){
+    return false;
+    }
+  });
+
+$(document).on('click', '#btn_finance', function() {
+if (!confirm("Anda ingin mengupdate nominal simpanan dan pinjaman?")){
+  return false;
+  }
+});
+
+$(document).on('click', '#btn_identitas_grup', function() {
+if (!confirm("Anda ingin mengupdate deskripsi grup?")){
+  return false;
+  }
+});
+</script>

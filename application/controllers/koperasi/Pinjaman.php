@@ -34,7 +34,8 @@ class Pinjaman extends MY_Controller {
         $nominal_pinjaman = $this->input->post('nominal_pinjaman');
         $tenor = $this->input->post('tenor');
         $tujuan = $this->input->post('tujuan_pinjaman');   
-        $maksimal_pinjaman = $this->input->post('maksimal_pinjaman');     
+        $maksimal_pinjaman = $this->input->post('maksimal_pinjaman');  
+        $limit_pinjaman = $this->input->post('limit_pinjaman');   
         $saldo_koperasi = $this->input->post('saldo_koperasi');
              
         $rek = $this->rekening_m->get($user_id);
@@ -46,11 +47,11 @@ class Pinjaman extends MY_Controller {
         );
 
         $update_grup_user = array (
-            'limit_pinjaman' => (($saldo_koperasi * $maksimal_pinjaman)/100) , 'saldo_koperasi' => $saldo_koperasi - $nominal_pinjaman
+            'limit_pinjaman' => $limit_pinjaman - $nominal_pinjaman , 'saldo_koperasi' => $saldo_koperasi - $nominal_pinjaman
         );
 
         $data_pinjaman = array(
-            'user_id' => $user_id, 'grup_id' => $grup_id,
+            'id_pinjaman' => uniqid(), 'user_id' => $user_id, 'grup_id' => $grup_id,
             'nominal' => $nominal_pinjaman, 'tenor' => $tenor, 'tujuan' => $tujuan
         );
         $insert_mutasi = array (
@@ -63,8 +64,8 @@ class Pinjaman extends MY_Controller {
             $this->mutasi_rekening_m->save($insert_mutasi);
             $this->grup_user_m->save($update_grup_user,$grup_user_id);
             }
-            $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
-            redirect ('grup/'.$grup_id.'/pinjam');
+            $this->session->set_flashdata('status_pinjaman','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
+            redirect ('grup/'.$grup_id.'/simpan_pinjam');
     }
     
     /*

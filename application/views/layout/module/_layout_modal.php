@@ -86,7 +86,7 @@
             <textarea name="comment_rate" id="comment_rate" placeholder="Komentar..." class="form-control"></textarea>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Submit <i class="fas fa-fw fa-sign-out-alt"></i></button>
+          <button type="submit" id="btn_rate" class="btn btn-primary">Submit <i class="fas fa-fw fa-sign-out-alt"></i></button>
         </div>
         
         </form>
@@ -201,8 +201,12 @@
         </div>
         <div class="modal-body">
           <div class="form-group mx-sm-3 mb-2">
+                <div class="form-group">
+                  <a href='#' data-toggle='modal' data-target='#settingUserModal'>
+                    <button class='btn btn-info form-control'><i class='fas fa-fw fa-user-edit'></i> Update Identitas Pribadi</button></a>
+                </div>
                 <div id="frm_UploadKTP" class="form-group">             
-                    <input type="button" class="btn btn-info btn-user btn-block" id="btn_UploadKTP" value="Upload Foto Identitas"/>
+                    <input type="button" class="btn btn-info form-control" id="btn_UploadKTP" value="Upload Foto Identitas"/>
                 </div>
                 <div id="frm_OpenKamera" class="form-group" align="center">
                     <div id="kamera"></div>

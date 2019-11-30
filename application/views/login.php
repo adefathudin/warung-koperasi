@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<!--Code by Web Dev Trick ( https://webdevtrick.com )-->
-<!--For More Source Code visit  https://webdevtrick.com -->
 <html>
     
 <head>
@@ -8,7 +6,6 @@
   <link rel="icon" href="<?php echo base_url('assets/img/favicon.png')?>" type="image/x-icon">
   <link href="<?php echo base_url('assets/css/sb-admin-2.min.css')?>" rel="stylesheet">
   <link href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
-
  <style>
       body,
     html {
@@ -129,9 +126,65 @@ a {
           <button type="submit" name="button" id="btn-login" class="btn btn-light login_btn">Login <i class="fas fa-fw fa-sign-in-alt"></i></button>
         </div>
           </form> 
+        <div class="justify-content-center mt-3 login_container">
+          <a class="btn btn-light login_btn" href="#" data-toggle="modal" data-target="#btn_login_qrcode">
+            <i class="fas fa-fw fa-qrcode"></i>  
+            QRCode
+          </a>
+        </div>
         <div class="mt-4">
           <div class="d-flex justify-content-center links">
             Don't have an account? <a href="<?php echo base_url('auth/registrasi')?>" class="ml-2">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- QRCODE Modal-->
+  <div class="modal fade" id="btn_login_qrcode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close"  onclick="stop()" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body text-center" id="QR-Code">
+          <div class="hide_perm">          
+            <select class="form-control" id="camera-select"></select>
+            <button title="Decode Image" class="btn btn-default btn-sm" id="decode-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-upload"></span></button>
+            <button title="Image shoot" class="btn btn-info btn-sm disabled" id="grab-img" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-picture"></span></button>
+            <button title="Pause" class="btn btn-warning btn-sm" id="pause" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-pause"></span></button>
+            <button title="Stop streams" class="btn btn-danger btn-sm" id="stop" type="button" data-toggle="tooltip"><span class="glyphicon glyphicon-stop"></span></button>
+          </div>
+
+          <button title="Play" class="btn btn-info form-control btn-sm" id="play" type="button" data-toggle="tooltip"><i class="fas fa-fw fa-camera"></i> Scan QRCode</button>
+          <div class="well hide" style="position: relative;display: inline-block;">
+            <canvas class="webcodecam-canvas" id="webcodecam-canvas"></canvas>
+            <div class="scanner-laser laser-rightBottom" style="opacity: 0.5;"></div>
+            <div class="scanner-laser laser-rightTop" style="opacity: 0.5;"></div>
+            <div class="scanner-laser laser-leftBottom" style="opacity: 0.5;"></div>
+            <div class="scanner-laser laser-leftTop" style="opacity: 0.5;"></div>
+          </div>
+
+          <div class="form-group hide" style="width: 100%;">
+            <label id="zoom-value"  for="zoom">Zoom: 2</label>
+            <input id="zoom" class="custom-range" onchange="Page.changeZoom();" type="range" min="10" max="30" value="2">
+            <label id="brightness-value" width="100">Brightness: 0</label>
+            <input id="brightness"class="custom-range" onchange="Page.changeBrightness();" type="range" min="0" max="128" value="0">
+          </div>
+                  
+          <div class="thumbnail hide_perm" id="result">
+            <div class="well" style="overflow: hidden;">
+                <img width="320" height="240" id="scanned-img" src="">
+            </div>
+            <div class="caption">
+                <h3>Scanned result</h3>
+                <p id="scanned-QR"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -147,11 +200,25 @@ a {
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('assets/js/sb-admin-2.min.js')?>"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/vendor/qrcode/js/filereader.js')?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/vendor/qrcode/js/qrcodelib.js')?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/vendor/qrcode/js/webcodecamjs.js')?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/vendor/qrcode/js/main.js')?>"></script>
   <script>
   var JS = {
     init: function(){
 
-     $('form').submit(function(){
+      $('.hide_perm').hide();
+      $('.hide').hide();
+
+    $('#play').on('click', function(){
+      $('.hide').show();
+      $('#play').hide();
+    }),
+
+    $('form').submit(function(){
       var $submit = $('#btn-login');   
         $submit.find('i').removeClass('fa-sign-in-alt').addClass('fa-circle-notch fa-spin');  
         $submit.attr('disabled', 'true');     

@@ -58,7 +58,7 @@ class Simpanan extends MY_Controller {
                 redirect ('grup/'.$grup_id.'/simpan');
             } else if ($rek->saldo_akhir < $nominal_simpanan) {
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Saldo anda tidak mencukupi untuk membayar Simpanan Pokok');
-                redirect ('grup/'.$grup_id.'/simpan');
+                redirect ('grup/'.$grup_id.'/simpan_pinjam');
             } 
             else {
             $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
@@ -73,7 +73,7 @@ class Simpanan extends MY_Controller {
 
             } else if ($rek->saldo_akhir < $nominal_simpanan) {
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Saldo anda tidak mencukupi untuk membayar Simpanan Wajib');
-                redirect ('grup/'.$grup_id.'/simpan');
+                redirect ('grup/'.$grup_id.'/simpan_pinjam');
             }
             else {                
             $cek_simpanan = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);}
@@ -81,7 +81,7 @@ class Simpanan extends MY_Controller {
             $periode = "-";
         } elseif ($jenis_simpanan == "null"){            
             $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b> Silahkan pilih jenis simpanan');
-            redirect ('grup/'.$grup_id.'/simpan');
+            redirect ('grup/'.$grup_id.'/simpan_pinjam');
         }
         if ($cek_simpanan == 0){
 
@@ -112,7 +112,7 @@ class Simpanan extends MY_Controller {
         } else {
             $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
         }
-        redirect ('grup/'.$grup_id.'/simpan');
+        redirect ('grup/'.$grup_id.'/simpan_pinjam');
     }
 
     /*
