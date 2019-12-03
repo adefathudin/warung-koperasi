@@ -146,7 +146,7 @@
               <div class="small">Kategori
               </div>
               <select class="form-control" name="kategori">
-                <option value="utensils"">Keluarga</option>
+                <option value="utensils">Keluarga</option>
                 <option value="briefcase">Tempat Kerja</option>
                 <option value="graduation-cap">Sekolah</option>
                 <option value="people-carry">Lingkungan</option>
@@ -201,11 +201,11 @@
             </div>
             <div class="form-group"> 
               <small>Minimal simpanan wajib</small>
-              <input type="number" name="minimal_wajib" class="form-control" id="nominal_topup" placeholder="Minimal Simpanan Wajib"value="<?= $data_grup_tmp->minimal_wajib ?>">
+              <input type="number" name="minimal_wajib" class="form-control" id="nominal_topup" placeholder="Minimal Simpanan Wajib" value="<?= $data_grup_tmp->minimal_wajib ?>">
             </div>
             <div class="form-group"> 
               <small>Maksimal pinjaman</small>
-              <input type="number" name="maksimal_pinjaman" class="form-control" max="100" id="nominal_topup" placeholder="%"value="<?= $data_grup_tmp->maksimal_pinjaman ?>"><small> <i class="fas fa-fw fa-info-circle"></i> Maksmimal pinjaman dalam bentuk % dari total pinjaman</small>
+              <input type="number" name="maksimal_pinjaman" class="form-control" max="100" id="nominal_topup" placeholder="%" value="<?= $data_grup_tmp->maksimal_pinjaman ?>"><small> <i class="fas fa-fw fa-info-circle"></i> Maksmimal pinjaman dalam bentuk % dari total pinjaman</small>
             </div>
             
             <div class="modal-footer">

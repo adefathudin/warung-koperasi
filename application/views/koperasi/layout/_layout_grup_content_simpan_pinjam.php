@@ -1,16 +1,15 @@
 <div class="card-body">  
   <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link" id="nav-simpan-tab" data-toggle="tab" href="#nav-simpan" role="tab" aria-controls="nav-simpan" aria-selected="true">Simpan</a>
+      <a class="nav-item nav-link active" id="nav-simpan-tab" data-toggle="tab" href="#nav-simpan" role="tab" aria-controls="nav-simpan" aria-selected="true">Simpan</a>
       <a class="nav-item nav-link" id="nav-pinjam-tab" data-toggle="tab" href="#nav-pinjam" role="tab" aria-controls="nav-pinjam" aria-selected="false">Pinjam</a>
-      <a class="nav-item nav-link" id="nav-member-tab" data-toggle="tab" href="#nav-member" role="tab" aria-controls="nav-member" aria-selected="false">Pembayaran</a>
     </div>
   </nav>
   <br>
   
   <div class="tab-content" id="nav-tabContent">
   
-    <div class="tab-pane fade" id="nav-simpan" role="tabpanel" aria-labelledby="nav-simpan-tab">
+    <div class="tab-pane fade show active" id="nav-simpan" role="tabpanel" aria-labelledby="nav-simpan-tab">
       <div class="row">
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
@@ -107,7 +106,7 @@
               </select>
             </div>
             <div class="col my-1">
-              <input type="number" class="form-control" name="nominal_simpanan" placeholder="Nominal" required>
+              <input type="number" class="form-control" name="nominal_simpanan" placeholder="Nominal" required min="1" max="<?= $saldo->saldo_akhir ?>">
             </div>
             <div class="col-auto my-1">
               <button type="submit" id="simpan_simpanan_grup" class="btn btn-primary" <?php if ($saldo->saldo_akhir == 0){ echo"disabled";} ?>><i class="fas fa-fw fa-wallet"></i> Simpan</button>
@@ -221,6 +220,7 @@
               <input type="hidden" name="grup_user_id" value="<?= $grup_user->id ?>">
               <input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">
               <input type="hidden" name="saldo_koperasi" value="<?= $grup_user->saldo_koperasi ?>">
+              <input type="hidden" name="nominal_cicilan" id="nominal_cicilan" value="">
               <input type="number" name="nominal_pinjaman" id="nominal_pinjaman" class="form-control" placeholder="Nominal" max="<?= $grup_user->limit_pinjaman?>" required>
             </div>
             <div class="col-auto my-1">
@@ -257,22 +257,14 @@
         </form>
       </div>
     </div>
-    <?php
-      // Cek apakah terdapat session simpanan
-      if($this->session->flashdata('status_pinjaman')){ // Jika ada
-        echo "
-        <div class='alert alert-danger alert-dismissible'>
-          <a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
-          .$this->session->flashdata('status_pinjaman')."</div>";
-        }
-    ?>
       <div class="card mb-4">    
         <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-striped" id="dataTable1" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Tanggal Simpan</th>
+                  <th>ID</th>
+                  <th>Tanggal Pinjam</th>
                   <th>Nominal</th>
                   <th>Tenor</th>
                   <th>Tujuan Pinjaman</th>
@@ -283,6 +275,11 @@
               <?php
                 foreach ($pinjaman_grup as $pinjam){ ?>
                     <tr>
+                        <td>
+                          <a href='#' data-toggle='modal' id="btn_bayar_cicilan" data-id-pinjaman="<?= $pinjam->id_pinjaman ?>" data-target='#bayar_cicilan'>
+                            <?= $pinjam->id_pinjaman ?>
+                          </a>
+                        </td>
                         <td><?= $pinjam->tanggal_pinjam ?></td>
                         <td><?= number_format($pinjam->nominal,0, ".", ".") ?></td>
                         <td><?= $pinjam->tenor ?></td>
@@ -303,11 +300,78 @@
     </div>
   </div>
 
+<!-- Pembayaran Cicilan -->
+<div class="modal fade" id="bayar_cicilan" tabindex="-1" role="dialog" ia-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detail Pembayaran</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>        
+        <div id="detail_cicilan_pembayaran"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+  $(document).on('click','#btn_bayar_cicilan',function(){
+    var id_pinjaman = $(this).attr('data-id-pinjaman');
+        $.ajax({
+        type  : 'GET',
+        url   : '<?php echo base_url()?>koperasi/pinjaman/list_pinjaman_by_id_pinjaman',
+        data  : {id_pinjaman:id_pinjaman},
+        async : true,
+        dataType : 'json',
+        success : function(data){
+          var html = '';
+            html += 
+            '<div class="modal-body">'+
+              '<table class="table table-responsive">'+
+                '<tbody>'+
+                  '<tr><td>Kode Pembayaran</td><td>'+data.id_pinjaman+'</td></tr>'+
+                  '<tr><td>Nominal</td><td>'+data.nominal+'</td></tr>'+
+                  '<tr><td>Tenor</i></td><td>'+data.tenor+'</td></tr>'+
+                  '<tr><td>Sisa Cicilan</td><td>'+data.sisa_cicilan+'</td></tr>'+
+                  '<tr><td>Sisa Tenor</td><td>'+data.sisa_tenor+'</td></tr>'+
+                  '<tr><td>Periode</td><td>'+data.periode+'</td></tr>'+
+                  '<tr><td>Status Bayar</i></td><td>'+data.status_bayar+'</td></tr>'+
+                '</tbody>'+
+              '</table>'+
+            '</div>'+
+            '<div class="modal-body">'+
+               '<form>'+
+                '<div class="form-row form-group">'+
+                 '<div class="col">'+
+                   '<label for="periode">Periode</label>'+
+                   '<input type="text" class="form-control" id="periode" name="periode" readonly value="'+data.periode+'">'+
+                  '</div>'+
+                  '<div class="col">'+
+                   '<label for="nominal">Nominal</label>'+
+                   '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.nominal+'">'+
+                  '</div>'+
+                '</div>'+
+              '</form>'+
+            '</div>'+
+            '<div class="modal-footer btn_approve_reject">'+
+              '<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>'+
+              '<button class="btn btn-primary" data="'+data.id_pinjaman+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Bayar</button>'+
+            '</div>'  
+                  ;
+            
+            $('#detail_cicilan_pembayaran').html(html);
+          },
+          error : function(data){
+            alert("error");
+          }
+        });
+});
 
 
 
+</script>
 
 
 
-
-</div> 

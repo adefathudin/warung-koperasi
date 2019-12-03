@@ -166,52 +166,52 @@ END ROW-->
       <div class="card-body">
         <div class="row">
 
-        <?php
-        foreach ($list_grup_limit_3 as $grup){  
-        ?>
-        <div class="col-lg-4 col-md-6 mb-4">
-          <div class="card h-70">          
-            <div class="card-header">
-              <div class="card-title">
-                <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><?= $grup->nama_grup;?>
-                </a>
+          <?php
+          foreach ($list_grup_limit_3 as $grup){  
+          ?>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-70">          
+              <div class="card-header">
+                <div class="card-title">
+                  <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><?= $grup->nama_grup;?>
+                  </a>
+                </div>
               </div>
-            </div>
-            <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="150px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
-            </a>
-            <div class="card-body">
+              <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="150px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
+              </a>
+              <div class="card-body">
                 <p class="card-text"><?= $grup->about;?></p>
                 <div class="small text-warning">
-                <?php 
-                $starNumber = $grup->rate_akumulatif;                
-                for( $x = 0; $x < 5; $x++ ){
-                  if( floor( $starNumber )-$x >= 1 )
-                  { 
-                    echo '<i class="fas fa-fw fa-star"></i>'; 
+                  <?php 
+                  $starNumber = $grup->rate_akumulatif;                
+                  for( $x = 0; $x < 5; $x++ ){
+                    if( floor( $starNumber )-$x >= 1 )
+                    { 
+                      echo '<i class="fas fa-fw fa-star"></i>'; 
+                    }
+                    elseif( $starNumber-$x > 0 )
+                    { 
+                      echo '<i class="fas fa-fw fa-star-half-alt"></i>';
+                    }
+                    else { 
+                      echo '<i class="far fa-fw fa-star"></i>'; 
+                    }
                   }
-                  elseif( $starNumber-$x > 0 )
-                  { 
-                    echo '<i class="fas fa-fw fa-star-half-alt"></i>';
-                  }
-                  else { 
-                    echo '<i class="far fa-fw fa-star"></i>'; 
-                  }
-                }
-                ?>
+                  ?>
                 </div>
+              </div>
             </div>
           </div>
-        </div>
-        <?php 
-        } ?>
+          <?php 
+          } ?>
 
+        </div>
       </div>
       <div class="card-footer">
         <a href="<?= base_url('koperasi/grup') ?>" class="btn btn-light btn-block"><i class="fas fa-fw fa-users"></i> Lihat semua grup</a>
       </div>
     </div> 
   </div>
-</div>
 
 
 <div class="col-lg-3 mb-4">
@@ -223,46 +223,44 @@ END ROW-->
       <div class="card-body">
         <div class="row">
 
-        <?php
-        foreach ($list_grup_limit_3 as $grup){  
-        ?>
-        <div class="col-lg-12 col-md-6 mb-4">
-          <div class="card h-70">  
-            <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="120px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
-            </a>
-            <div class="card-body">
-              <div class="card-title">
-                <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><?= $grup->nama_grup;?>
-                </a>
-              </div>
-              <div class="small text-warning">
-                <?php 
-                $starNumber = $grup->rate_akumulatif;                
-                for( $x = 0; $x < 5; $x++ ){
-                  if( floor( $starNumber )-$x >= 1 )
-                  { 
-                    echo '<i class="fas fa-fw fa-star"></i>'; 
+          <?php
+          foreach ($list_grup_limit_3 as $grup){  
+          ?>
+          <div class="col-lg-12 col-md-6 mb-4">
+            <div class="card h-70">  
+              <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><img class="card-img-top" height="120px" src="<?= base_url('assets/img/grup_koperasi/'.$grup->banner)?>" alt="">
+              </a>
+              <div class="card-body">
+                <div class="card-title">
+                  <a href="<?= base_url('grup/'.$grup->grup_id.'/index') ?>"><?= $grup->nama_grup;?>
+                  </a>
+                </div>
+                <div class="small text-warning">
+                  <?php 
+                  $starNumber = $grup->rate_akumulatif;                
+                  for( $x = 0; $x < 5; $x++ ){
+                    if( floor( $starNumber )-$x >= 1 )
+                    { 
+                      echo '<i class="fas fa-fw fa-star"></i>'; 
+                    }
+                    elseif( $starNumber-$x > 0 )
+                    { 
+                      echo '<i class="fas fa-fw fa-star-half-alt"></i>';
+                    }
+                    else { 
+                      echo '<i class="far fa-fw fa-star"></i>'; 
+                    }
                   }
-                  elseif( $starNumber-$x > 0 )
-                  { 
-                    echo '<i class="fas fa-fw fa-star-half-alt"></i>';
-                  }
-                  else { 
-                    echo '<i class="far fa-fw fa-star"></i>'; 
-                  }
-                }
-                ?>
+                  ?>
+                </div>
               </div>
             </div>
           </div>
+          <?php 
+          } ?>
+
         </div>
-        <?php 
-        } ?>
-
-      </div>
-    </div> 
+      </div> 
+    </div>
   </div>
-</div>
-
-
 </div><!--END ROW-->

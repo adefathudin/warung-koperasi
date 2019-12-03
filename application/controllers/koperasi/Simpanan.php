@@ -108,6 +108,8 @@ class Simpanan extends MY_Controller {
             $this->rekening_m->save($update_saldo,$user_id);
             $this->mutasi_rekening_m->save($insert_mutasi);
             $this->grup_user_m->save($update_grup_user,$grup_user_id);
+            $this->session->set_flashdata('simpan_berhasil','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Berhasil</b><br> Anda berhasil melakukan pembayaran simpanan grup '.$grup_name);
+                redirect ('grup/'.$grup_id.'/simpan_pinjam');
             }
         } else {
             $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');

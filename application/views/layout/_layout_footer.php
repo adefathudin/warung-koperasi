@@ -64,6 +64,28 @@
           text: '<?= $this->session->flashdata('pesan_cashout') ?>'
         }),
       <?php } ?>
+      
+      // Cek apakah terdapat session simpanan
+      <?php if($this->session->flashdata('simpan_berhasil')){ ?>
+          Swal.fire({
+            position: 'center',
+            title: '<?= $this->session->flashdata('simpan_berhasil') ?>',
+            icon: 'success',
+            showConfirmButton: false,          
+            timer: 1900
+          }),
+      <?php } ?>
+  
+      //Perubahan berhasil disimpan
+      <?php if($this->session->flashdata('pesan_perubahan')){ ?>
+        Swal.fire({
+          position: 'center',
+          title: '<?= $this->session->flashdata('pesan_perubahan') ?>',
+          icon: 'success',
+          showConfirmButton: false,          
+          timer: 1900
+        }),
+      <?php } ?>
 
        //Jika berhasil membuat grup
        <?php if($this->session->flashdata('new_grup')){ ?>
@@ -94,6 +116,7 @@
         var $tenor = $("#tenor option:selected").val();
         var $nominal = $("#nominal_pinjaman").val();
         var $cicilan = $nominal / $tenor;
+          $("#nominal_cicilan").val(Math.ceil($cicilan));
           $("#kalkulasi_cicilan").val("Rp. "+Math.ceil($cicilan)+ " per bulan");
       }),
 

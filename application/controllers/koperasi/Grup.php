@@ -125,6 +125,7 @@ class Grup extends MY_Controller {
         $this->load->library('upload', $config_banner);
         if ($this->grup_m->save($update_data_grup, $grup_id)){
             $this->upload->do_upload('banner');
+            $this->session->set_flashdata('pesan_perubahan','Perubahan berhasil disimpan');
            redirect ('grup/'.$grup_id.'/index');
         }
     }
@@ -140,6 +141,7 @@ class Grup extends MY_Controller {
             'minimal_pokok' => $minimal_pokok, 'minimal_wajib' => $minimal_wajib, 'maksimal_pinjaman' => $maksimal_pinjaman
             );  
         if ($this->grup_m->save($update_finance_grup, $grup_id)){
+            $this->session->set_flashdata('pesan_perubahan','Perubahan berhasil disimpan');
             redirect ('grup/'.$grup_id.'/index');
         }
     }

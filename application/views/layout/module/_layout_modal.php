@@ -139,6 +139,7 @@
     </div>
   </div>
  
+
   <!-- Create Group Modal-->
   
   <div class="modal fade" id="createGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -175,9 +176,12 @@
         </div>
         <div class="modal-footer">
             <div class="form-group text-right">         
-              <?php 
-              if ($data_user->type != "Full Service"){
-              echo "<div class='text-danger'>Harap upgrade member menjadi full service terlebih dahulu, melalui menu profile</div>";
+              <?php
+              if (count($list_grup) >= 4){
+                echo "<div class='text-danger'><i class='fas fa-fw fa-info-circle'></i> Anda telah mencapai batas limit pembuatan grup (4)</div>";
+              }
+              else if ($data_user->type != "Full Service"){
+              echo "<div class='text-danger'><i class='fas fa-fw fa-info-circle'></i> Harap upgrade member menjadi full service terlebih dahulu. <a href='#' data-toggle='modal' data-target='#upgrade'><u>Click here to upgrade</u></a></div>";
               } else { ?>
               <button type="submit" class="btn btn-primary mb-2">Buat Grup</button>
               <?php } ?>
@@ -201,9 +205,15 @@
         </div>
         <div class="modal-body">
           <div class="form-group mx-sm-3 mb-2">
+                <?php
+                if ($data_user->status_approve == '2' and $data_user->user_id == $user_id){
+                  echo "<div class='text-info'><i class='fas fa-fw fa-info-circle'></i> Pengajuan upgrade anda sedang diverifikasi oleh tim WarungKoperasi</div>";
+                }
+                ?>
                 <div class="form-group">
                   <a href='#' data-toggle='modal' data-target='#settingUserModal'>
-                    <button class='btn btn-info form-control'><i class='fas fa-fw fa-user-edit'></i> Update Identitas Pribadi</button></a>
+                    <button class='btn btn-info form-control'><i class='fas fa-fw fa-user-edit'></i> Update Identitas Pribadi</button>
+                  </a>
                 </div>
                 <div id="frm_UploadKTP" class="form-group">             
                     <input type="button" class="btn btn-info form-control" id="btn_UploadKTP" value="Upload Foto Identitas"/>

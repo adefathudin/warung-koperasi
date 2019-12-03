@@ -17,6 +17,17 @@ class Pinjam_grup_m extends MY_Model {
             return $result;
         }
 
+        public function get_pinjaman_by_id_pinjaman($id_pinjaman){
+            $this->db->select("a.id_pinjaman,a.nominal,a.tenor,a.sisa_cicilan,a.sisa_tenor,b.periode,b.nominal,b.status_bayar");
+            $this->db->from('pinjam_grup a');
+            $this->db->join('cicilan_pinjaman b', 'a.id_pinjaman = b.id_pinjaman');
+            $this->db->where('b.id_pinjaman', $id_pinjaman);
+            $this->db->where('b.status_bayar', '0');
+            $this->db->limit('1');
+            $result = $this->db->get()->row();
+            return $result;
+        }
+
         function cek_total_simpanan($user_id,$grup_id){      
             $this->db->select('sum(tenor),sum(sisa_tenor)');      
             $this->db->where('user_id', $user_id);
