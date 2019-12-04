@@ -14,20 +14,6 @@
               <th>Cash Out</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <td colspan="2">Total Top Up</td>
-              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_in, 0, ".", "."); ?></td>
-            </tr>
-            <tr>
-              <td colspan="2">Total Tarik Tunai</td>
-              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_out, 0, ".", "."); ?></td>
-            </tr>
-            <tr>
-              <th colspan="2">Sisa Saldo</th>
-              <th colspan="4">Rp<?= number_format($saldo->saldo_akhir, 0, ".", "."); ?></th>
-            </tr>
-          </tfoot>
           <tbody>
             <?php 
               $no = 1;
@@ -89,6 +75,20 @@
               }
             ?>  
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2">Total Top Up</td>
+              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_in, 0, ".", "."); ?></td>
+            </tr>
+            <tr>
+              <td colspan="2">Total Tarik Tunai</td>
+              <td colspan="4">Rp<?= number_format($saldo->total_nominal_cash_out, 0, ".", "."); ?></td>
+            </tr>
+            <tr>
+              <th colspan="2">Sisa Saldo</th>
+              <th colspan="4">Rp<?= number_format($saldo->saldo_akhir, 0, ".", "."); ?></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>

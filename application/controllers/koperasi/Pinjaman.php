@@ -40,7 +40,7 @@ class Pinjaman extends MY_Controller {
         $saldo_koperasi = $this->input->post('saldo_koperasi');
         $nominal_cicilan = $this->input->post('nominal_cicilan');
 
-        $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $set = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $id_pinjaman = substr(str_shuffle($set), 0, 12);
              
         $rek = $this->rekening_m->get($user_id);
@@ -57,7 +57,7 @@ class Pinjaman extends MY_Controller {
 
         $data_pinjaman = array(
             'id_pinjaman' => $id_pinjaman, 'user_id' => $user_id, 'grup_id' => $grup_id,
-            'nominal' => $nominal_pinjaman, 'tenor' => $tenor, 'tujuan' => $tujuan
+            'nominal' => $nominal_pinjaman, 'tenor' => $tenor, 'sisa_tenor' => $tenor, 'sisa_cicilan' => $nominal_pinjaman, 'tujuan' => $tujuan
         );
         $insert_mutasi = array (
             'user_id' => $user_id, 'jenis_trx' => '3', 'nominal' => $nominal_pinjaman,
@@ -83,9 +83,10 @@ class Pinjaman extends MY_Controller {
 
             $this->mutasi_rekening_m->save($insert_mutasi);
             $this->grup_user_m->save($update_grup_user,$grup_user_id);
-            }
-            $this->session->set_flashdata('status_pinjaman','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Simpanan '.$jenis_simpanan.' periode '.substr($periode,0,7).' sudah pernah dilakukan sebelumnya');
-            redirect ('grup/'.$grup_id.'/simpan_pinjam');
+            }            
+            $this->session->set_flashdata('simpan_berhasil','Anda berhasil mengajukan pinjaman sebesar Rp.'.$nominal_pinjaman);
+
+        redirect ('grup/'.$grup_id.'/simpan_pinjam');
     }
     
     /*

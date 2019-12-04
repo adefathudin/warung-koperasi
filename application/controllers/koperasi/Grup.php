@@ -58,9 +58,6 @@ class Grup extends MY_Controller {
 
             $this->load->model('pinjam_grup_m');
             $this->data['pinjaman_grup'] = $this->pinjam_grup_m->get_pinjaman_grup($user_id,$grup_id);
-            //cek periode pinjaman
-            $this->data['cek_periode_pinjaman_pokok'] = $this->simpan_grup_m->get_cek_belum_simpanan_pokok($user_id,$grup_id);
-            $this->data['cek_periode_pinjaman_wajib'] = $this->simpan_grup_m->get_cek_belum_simpanan($user_id,$grup_id);
         }
         
         $this->data['grup_user'] = $this->grup_user_m->grup_user($user_id,$grup_id);

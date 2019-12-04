@@ -23,12 +23,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-primary" id="exampleModalLabel">Rating Grup <?= $data_grup_tmp->nama_grup ?></h5>
+          <h5 class="modal-title text-primary" id="exampleModalLabel">Rating Grup 
+          <?php if (isset($data_grup_tmp->nama_grup)){ echo $data_grup_tmp->nama_grup; } ?></h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
         <?php
+        if (isset ($grup_user)){
         if ($grup_user->status_user == 'member' or $grup_user->status_user == 'admin'){
          if ($grup_user->rate != 0){?>
            <div class='modal-body' width="100%"> 
@@ -93,7 +95,8 @@
         <?php }
       } else {
         echo "<div class='modal-body'><i class='fas fa-fw fa-info-circle'></i> Anda harus join terlebih dahulu untuk memberikan rating</div>";
-      } ?>
+      }
+     } ?>
       </div>
     </div>
   </div>
@@ -206,6 +209,9 @@
         <div class="modal-body">
           <div class="form-group mx-sm-3 mb-2">
                 <?php
+                if ($data_user->verifikasi_email == 0){
+                  echo "<span class='text-primary'><i class='fas fa-fw fa-info-circle'></i> Harap verifikasi email terlebih dahulu. Silahkan cek email anda</span>";
+                } else {
                 if ($data_user->status_approve == '2' and $data_user->user_id == $user_id){
                   echo "<div class='text-info'><i class='fas fa-fw fa-info-circle'></i> Pengajuan upgrade anda sedang diverifikasi oleh tim WarungKoperasi</div>";
                 }
@@ -261,6 +267,7 @@
                     <input type="submit" class="btn btn-primary btn-user btn-block"  onClick="upload()" id="btn_UploadKTP" value="Upload"/>
                 </div>
                 </form>
+                <?php } ?>
           </div>
         </div>
       </div>

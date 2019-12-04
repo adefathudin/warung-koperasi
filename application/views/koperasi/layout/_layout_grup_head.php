@@ -48,11 +48,13 @@
         if ($grup_user->status_user == 'admin' or $grup_user->status_user == 'member'){     
         ?>
       
+      <!--
       <div class="btn-group">
         <a href="lapak" class="btn btn-sm btn-light">
           <i class="fas fa-fw fa-shopping-cart"></i> Lapak
         </a>
       </div>
+      -->
       
       <div class="btn-group">
         <a href="simpan_pinjam" class="btn btn-sm btn-light">

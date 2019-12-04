@@ -69,7 +69,18 @@
       <?php if($this->session->flashdata('simpan_berhasil')){ ?>
           Swal.fire({
             position: 'center',
-            title: '<?= $this->session->flashdata('simpan_berhasil') ?>',
+            text: '<?= $this->session->flashdata('simpan_berhasil') ?>',
+            icon: 'success',
+            showConfirmButton: false,          
+            timer: 1900
+          }),
+      <?php } ?>
+      
+      // Cek apakah terdapat session pinjaman
+      <?php if($this->session->flashdata('pinjam_berhasil')){ ?>
+          Swal.fire({
+            position: 'center',
+            text: '<?= $this->session->flashdata('pinjam_berhasil') ?>',
             icon: 'success',
             showConfirmButton: false,          
             timer: 1900

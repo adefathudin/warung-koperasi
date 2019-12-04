@@ -182,10 +182,20 @@
                   <div class="text-xs font-weight-bold text-capitalize mb-1">Total Pinjaman</div>
                   <div class="row no-gutters align-items-center">
                     <div class="col">
+                    <?php 
+                        if (empty($pinjaman_grup)){
+                          echo "<span class='small'><i class='fas fa-fw fa-check'></i> Anda belum pernah melakukan pinjaman</span>";
+                        } else { ?>
                       <div class="progress">
-                        <div class="progress-bar small" role="progressbar" style="width: 75%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="12">3/12
+                        <div class="progress-bar small" role="progressbar" style="width: 75%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="12">                        
+                        <?php foreach ($pinjaman_grup as $pinjam){
+                          echo count($pinjam->tenor);
+                        } ?>
+                        /
+                        <?= count($pinjaman_grup) ?>
                         </div>
                       </div>
+                        <?php } ?>
                     </div>
                   </div>
                 </div>
@@ -305,7 +315,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Detail Pembayaran</h5>
+          <h5 class="modal-title text-primary" id="exampleModalLabel">Detail Cicilan Pinjaman</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -331,18 +341,16 @@
             '<div class="modal-body">'+
               '<table class="table table-responsive">'+
                 '<tbody>'+
-                  '<tr><td>Kode Pembayaran</td><td>'+data.id_pinjaman+'</td></tr>'+
-                  '<tr><td>Nominal</td><td>'+data.nominal+'</td></tr>'+
-                  '<tr><td>Tenor</i></td><td>'+data.tenor+'</td></tr>'+
-                  '<tr><td>Sisa Cicilan</td><td>'+data.sisa_cicilan+'</td></tr>'+
-                  '<tr><td>Sisa Tenor</td><td>'+data.sisa_tenor+'</td></tr>'+
-                  '<tr><td>Periode</td><td>'+data.periode+'</td></tr>'+
-                  '<tr><td>Status Bayar</i></td><td>'+data.status_bayar+'</td></tr>'+
+                  '<tr><td>Kode Cicilan</td><td>'+data.id_pinjaman+'</td></tr>'+
+                  '<tr><td>Nominal</td><td>Rp. '+data.nominal+'</td></tr>'+
+                  '<tr><td>Tenor</i></td><td>'+data.tenor+' bulan</td></tr>'+
+                  '<tr><td>Sisa Cicilan</td><td>Rp. '+data.sisa_cicilan+'</td></tr>'+
+                  '<tr><td>Sisa Tenor</td><td>'+data.sisa_tenor+' bulan</td></tr>'+
                 '</tbody>'+
               '</table>'+
             '</div>'+
             '<div class="modal-body">'+
-               '<form>'+
+               '<form method="POST" action="">'+
                 '<div class="form-row form-group">'+
                  '<div class="col">'+
                    '<label for="periode">Periode</label>'+
@@ -350,7 +358,7 @@
                   '</div>'+
                   '<div class="col">'+
                    '<label for="nominal">Nominal</label>'+
-                   '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.nominal+'">'+
+                   '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.cicilan+'">'+
                   '</div>'+
                 '</div>'+
               '</form>'+

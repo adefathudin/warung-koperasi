@@ -88,14 +88,7 @@ class Auth extends CI_Controller {
       $this->session->set_flashdata('message', 'email <strong>'.$email.'</strong> sudah terdaftar'); 
       redirect('auth/registrasi');
 
-    /*
-    cek no hp terdaftar
-    */
-
-    } elseif ($this->users_detail_m->get_count(array('nomor_hp'=>$nomor_hp))>0){
-      $this->session->set_flashdata('message', 'No. HP <strong>'.$nomor_hp.'</strong> sudah terdaftar'); 
-      redirect('auth/registrasi');
-    } else {
+    }else {
       
       //membuat qr code
 
@@ -146,69 +139,57 @@ class Auth extends CI_Controller {
         $this->notifikasi_m->save($insert_notifikasi);  
         $this->session->set_userdata($data_login);        
         $this->session->set_flashdata('welcome_new_member', 'Kami berharap, Anda dan Kami bisa menjadi mitra yang Hebat ^_^'); 
-        
-        //KIRIM EMAIL
-        $this->send_mail($code);
-        redirect ('dashboard');
-      }
-    }
-  }
-  
+           
+        $config = array(
+          'protocol' => 'smtp',
+            'smtp_host' => 'mail.warungkoperasi.my.id',
+            'smtp_port' => 587,
+            'smtp_user' => 'no-reply@warungkoperasi.my.id',
+            'smtp_pass' => 'hancamacul',
+            'smtp_username' => 'no-reply@warungkoperasi.my.id',
+            'mailtype' => 'html',
+            'charset' => 'iso-8859-1',
+            'wordwrap' => TRUE
+          );
+          $message =  "
+          <html>
+          <head>
+          <title>Verifikasi E-Mail WarungKoperasi</title>
+          </head>
+          <body>
+          <p>
+          Selamat datang <b>".$nama_lengkap."</b>,
+          <br><br>Terima kasih telah bergabung bersama kami, <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
+          klik link dibawah ini untuk mengaktifkannya:<br><br>
 
+          <a href='".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."'>".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."</a>
+          <br><br>
+          Jika anda tidak merasa melakukan registrasi, silahkan abaikan email ini.
+          <br>Terima kasih
+          <br><br><br>
+          Best Regards,
+          <br><b>WarungKoperasi Team</b></p>
+          </body>
+          </html>
+          ";
+            
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from($config['smtp_user'], 'WarungKoperasi');
+            $this->email->to($email);
+            $this->email->subject('Selamat Datang di WarungKoperasi');
+            $this->email->message($message);
 
-    public function send_mail($code){      
-      $nama_lengkap = strtoupper($this->input->post('nama_lengkap'));
-      $email = $this->input->post('email');
-      $set = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      $code = substr(str_shuffle($set), 0, 12);
-
-      $config = array(
-        'protocol' => 'smtp',
-          'smtp_host' => 'mail.warungkoperasi.my.id',
-          'smtp_port' => 587,
-          'smtp_user' => 'no-reply@warungkoperasi.my.id',
-          'smtp_pass' => 'hancamacul',
-          'smtp_username' => 'no-reply@warungkoperasi.my.id',
-          'mailtype' => 'html',
-          'charset' => 'iso-8859-1',
-          'wordwrap' => TRUE
-        );
-        $message =  "
-        <html>
-        <head>
-        <title>Verifikasi E-Mail WarungKoperasi</title>
-        </head>
-        <body>
-        <p>
-        Selamat datang <b>".$nama_lengkap."</b>,
-        <br><br>Terima kasih telah bergabung bersama kami, <a href='".base_url()."' target='_blank'><strong>WarungKoperasi</strong></a>. Akun anda saat ini belum sepenuhnya aktif, silahkan
-        klik link dibawah ini untuk mengaktifkannya:<br><br>
-
-        <a href='".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."'>".base_url()."auth/aktivasi/".$this->session->userdata('user_id')."/".$code."</a>
-        <br><br>
-        Jika anda tidak merasa melakukan registrasi, silahkan abaikan email ini.
-        <br>Terima kasih
-        <br><br><br>
-        Best Regards,
-        <br><b>WarungKoperasi Team</b></p>
-        </body>
-        </html>
-        ";
-          
-          $this->load->library('email', $config);
-          $this->email->set_newline("\r\n");
-          $this->email->from($config['smtp_user'], 'WarungKoperasi');
-          $this->email->to($email);
-          $this->email->subject('Selamat Datang di WarungKoperasi');
-          $this->email->message($message);
-
-              //sending email
-          if($this->email->send()){
+                //sending email
+            if($this->email->send()){
+            }
+            else{
+              //$this->session->set_flashdata('message', $this->email->print_debugger());    
+            }  
           }
-          else{
-            //$this->session->set_flashdata('message', $this->email->print_debugger());    
-          }  
-}
+        }       
+    }
+
 
 
 //aktivasi email

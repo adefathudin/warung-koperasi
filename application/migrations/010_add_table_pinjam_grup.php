@@ -27,15 +27,28 @@ class Migration_add_table_pinjam_grup extends MY_Migration {
         ),
         'grup_id' => array(
             'type' => 'VARCHAR',
-            'constraint' => 32
+            'constraint' => 32,
+            'default' => 0
         ),
         'nominal' => array(
             'type' => 'VARCHAR',
-            'constraint' => 15
+            'constraint' => 15,
+            'default' => 0
         ),
         'tenor' => array(
             'type' => 'VARCHAR',
-            'constraint' => 7
+            'constraint' => 15,
+            'default' => 0
+        ),
+        'sisa_cicilan' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 7,
+            'default' => 0
+        ),
+        'sisa_tenor' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 7,
+            'default' => 0
         ),
         'tujuan' => array(
             'type' => 'VARCHAR',

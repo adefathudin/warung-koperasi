@@ -31,11 +31,21 @@ class Migration_add_table_grup_user extends MY_Migration {
         ),
         'limit_pinjaman' => array(
             'type' => 'INT',
-            'constraint' => 15
+            'constraint' => 15,
+            'default' => 0
+        ),
+        'saldo_koperasi' => array(
+            'type' => 'INT',
+            'constraint' => 15,
+            'default' => 0
         ),
         'rate' => array(
             'type' => 'INT',
             'constraint' => 15
+        ),
+        'komentar' => array(
+            'type' => 'VARCHAR',
+            'constraint' => 75
         ),
         'joined' => array(
             'type' => 'TIMESTAMP'
