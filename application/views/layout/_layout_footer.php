@@ -43,7 +43,9 @@
     init: function(){
       setInterval(function(){ notifikasi(); }, 3000);
       //notifikasi();
-      saldo();
+      setTimeout(() => { saldo(); }, 3000);
+      setTimeout(() => { total_grup(); }, 3000);
+      
       //jika tombol cashout diklik
       $('#formCashOut').on('submit',function(e) { 
         var nominal = $('#nominalCashout').val();
@@ -319,6 +321,22 @@
       }
     });
   };
+
+  //tampil jumlah grup
+  function total_grup(){
+    var user_id =  "<?= $user_id ?>";
+    $.ajax({
+    type  : 'GET',
+    url   : '<?php echo base_url()?>dashboard/total_grup',
+    data  : {user_id:user_id},
+    async : true,
+    dataType : 'json',
+    success : function(data){
+        $('#total_grup').text(data.total_grup);
+      }
+    });
+  };
+
 </script>
 
 

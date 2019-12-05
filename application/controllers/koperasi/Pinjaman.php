@@ -52,16 +52,15 @@ class Pinjaman extends MY_Controller {
         );
 
         $update_grup_user = array (
-            'limit_pinjaman' => $limit_pinjaman - $nominal_pinjaman , 'saldo_koperasi' => $saldo_koperasi - $nominal_pinjaman
+            'limit_pinjaman' => $limit_pinjaman - $nominal_pinjaman
         );
 
         $data_pinjaman = array(
             'id_pinjaman' => $id_pinjaman, 'user_id' => $user_id, 'grup_id' => $grup_id,
-            'nominal' => $nominal_pinjaman, 'tenor' => $tenor, 'sisa_tenor' => $tenor, 'sisa_cicilan' => $nominal_pinjaman, 'tujuan' => $tujuan
+            'nominal' => $nominal_pinjaman, 'tenor' => $tenor, 'tujuan' => $tujuan
         );
         $insert_mutasi = array (
             'user_id' => $user_id, 'jenis_trx' => '3', 'nominal' => $nominal_pinjaman,
-            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir + $nominal_pinjaman),
             'keterangan_trx' => 'Pinjaman dari '.$grup_name
         );
         if ($this->pinjam_grup_m->save($data_pinjaman)){     
@@ -103,6 +102,50 @@ class Pinjaman extends MY_Controller {
         $id_pinjaman=$this->input->get('id_pinjaman');
         $data = $this->pinjam_grup_m->get_pinjaman_by_id_pinjaman($id_pinjaman);
         echo json_encode($data);
+    }
+
+    /*
+    fungsi bayar pinjaman
+    */
+    public function bayar_pinjaman(){
+        $id = $this->input->post('cicilan_pinjaman_id');
+        $user_id = $this->session->userdata('user_id');
+        $id_pinjaman = $this->input->post('id_pinjaman');    
+        $grup_id=$this->input->post('grup_id'); 
+        $grup_user_id=$this->input->post('grup_user_id');
+        $periode = $this->input->post('periode');
+        $nominal_cicilan = $this->input->post('nominal_cicilan');
+        $cicilan_berjalan = $this->input->post('cicilan_berjalan');
+        $sisa_cicilan = $this->input->post('sisa_cicilan');
+        $limit_pinjaman = $this->input->post('limit_pinjaman');
+        $saldo_awal = $this->input->post('saldo_awal');
+        $saldo_akhir = $this->input->post('saldo_akhir');
+        
+        //update table pinjam_grup
+        $pinjam_grup =  array (
+            'cicilan_berjalan' => $cicilan_berjalan + 1,
+            'sisa_cicilan' => $sisa_cicilan - $nominal_cicilan
+        );
+
+        //update table grup_user
+        $grup_user = array ('limit_pinjaman' => $limit_pinjaman);
+
+        //update rekening
+        $rekening = array (
+            'saldo_awal' => $saldo_akhir, 'saldo_akhir' => $saldo_awal - $nominal_cicilan
+        );
+
+        //update mutasi_rekening 
+
+
+        
+        //update status pinjaman
+        $this->pinjam_grup_m->save($pinjam_grup, $id_pinjaman);
+        $this->grup_user_m->save($grup_user, grup_user_id);
+        $this->rekening_m->save($rekening, $user_id);
+        $this->cicilan_pinjaman_m->save(array('status_bayar' => '1'), $id);
+        redirect ('grup/'.$grup_id.'/simpan_pinjam');
+
     }
     
 }

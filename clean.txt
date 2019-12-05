@@ -6,6 +6,7 @@ delete from topup;
 delete from grup;
 delete from grup_user;
 delete from notifikasi;
+delete from cicilan_pinjaman;
 update rekening set saldo_awal=0,saldo_akhir=0,saldo_koperasi=0,saldo_beku=0,total_nominal_cash_in=0,total_cash_in=0,total_nominal_cash_out=0,total_cash_out=0;
 update users_detail set type="Basic Service", status_approve="0";
 

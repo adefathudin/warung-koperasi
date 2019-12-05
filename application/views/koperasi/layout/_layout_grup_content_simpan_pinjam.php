@@ -179,7 +179,7 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-capitalize mb-1">Total Pinjaman</div>
+                  <div class="text-xs font-weight-bold text-capitalize mb-1">Progres Pinjaman</div>
                   <div class="row no-gutters align-items-center">
                     <div class="col">
                     <?php 
@@ -187,12 +187,10 @@
                           echo "<span class='small'><i class='fas fa-fw fa-check'></i> Anda belum pernah melakukan pinjaman</span>";
                         } else { ?>
                       <div class="progress">
-                        <div class="progress-bar small" role="progressbar" style="width: 75%;" aria-valuenow="3" aria-valuemin="0" aria-valuemax="12">                        
-                        <?php foreach ($pinjaman_grup as $pinjam){
-                          echo count($pinjam->tenor);
-                        } ?>
+                        <div class="progress-bar small" role="progressbar" style="width: <?php echo ($pinjaman_berjalan->total/$semua_pinjaman->total)*100 ?>%;" aria-valuenow="<?= $pinjaman_berjalan->total ?>" aria-valuemin="0" aria-valuemax="<?= $semua_pinjaman->total ?>">                        
+                        <?= $pinjaman_berjalan->total ?>
                         /
-                        <?= count($pinjaman_grup) ?>
+                        <?= $semua_pinjaman->total ?>
                         </div>
                       </div>
                         <?php } ?>
@@ -210,8 +208,8 @@
             <div class="card-body">
               <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-capitalize mb-1">Angsuran bulan ini</div>
-                  <div class="mb-0 font-weight-bold text-gray-800"><?php if (empty($user_grup->total_grup) or empty($user_grup)) { echo 0;} else echo $user_grup->total_grup; ?></div>
+                  <div class="text-xs font-weight-bold text-capitalize mb-1">Total Pinjaman</div>
+                  <div class="mb-0 font-weight-bold text-gray-800"><?= number_format($total_pinjaman->total,0,".", "."); ?></div>
                 </div>
               </div>
             </div>
@@ -296,7 +294,7 @@
                         <td><?= $pinjam->tujuan ?></td>
                         <td>
                         <div class="progress">
-                          <div class="progress-bar small" role="progressbar" style="width: <?php echo ($pinjam->sisa_tenor/$pinjam->tenor)*100 ?>%;" aria-valuenow="<?= $pinjam->sisa_tenor ?>" aria-valuemin="0" aria-valuemax="<?= $pinjam->tenor ?>"><?= $pinjam->sisa_tenor ?>/<?= $pinjam->tenor ?>
+                          <div class="progress-bar small" role="progressbar" style="width: <?php echo ($pinjam->cicilan_berjalan/$pinjam->tenor)*100 ?>%;" aria-valuenow="<?= $pinjam->cicilan_berjalan ?>" aria-valuemin="0" aria-valuemax="<?= $pinjam->tenor ?>"><?= $pinjam->cicilan_berjalan ?>/<?= $pinjam->tenor ?>
                           </div>
                         </div>
                         </td>
@@ -320,7 +318,10 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>        
-        <div id="detail_cicilan_pembayaran"></div>
+        <div id="detail_cicilan_pembayaran"></div>        
+          <form method="POST" action="<?= base_url('koperasi/pinjaman/bayar_pinjaman')?>">
+            <div id="form_cicilan_pembayaran"></div>
+          </form>
         </div>
       </div>
     </div>
@@ -328,6 +329,9 @@
 
 <script>
   $(document).on('click','#btn_bayar_cicilan',function(){
+    $('#detail_cicilan_pembayaran').empty();
+    $('#form_cicilan_pembayaran').empty();
+
     var id_pinjaman = $(this).attr('data-id-pinjaman');
         $.ajax({
         type  : 'GET',
@@ -345,31 +349,46 @@
                   '<tr><td>Nominal</td><td>Rp. '+data.nominal+'</td></tr>'+
                   '<tr><td>Tenor</i></td><td>'+data.tenor+' bulan</td></tr>'+
                   '<tr><td>Sisa Cicilan</td><td>Rp. '+data.sisa_cicilan+'</td></tr>'+
-                  '<tr><td>Sisa Tenor</td><td>'+data.sisa_tenor+' bulan</td></tr>'+
+                  '<tr><td>Periode Cicilan</td><td>'+data.cicilan_berjalan+'</td></tr>'+
                 '</tbody>'+
               '</table>'+
-            '</div>'+
-            '<div class="modal-body">'+
-               '<form method="POST" action="">'+
-                '<div class="form-row form-group">'+
-                 '<div class="col">'+
-                   '<label for="periode">Periode</label>'+
-                   '<input type="text" class="form-control" id="periode" name="periode" readonly value="'+data.periode+'">'+
-                  '</div>'+
-                  '<div class="col">'+
-                   '<label for="nominal">Nominal</label>'+
-                   '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.cicilan+'">'+
-                  '</div>'+
-                '</div>'+
-              '</form>'+
-            '</div>'+
-            '<div class="modal-footer btn_approve_reject">'+
-              '<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>'+
-              '<button class="btn btn-primary" data="'+data.id_pinjaman+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Bayar</button>'+
-            '</div>'  
+            '</div>' 
                   ;
             
             $('#detail_cicilan_pembayaran').html(html);
+
+            var form = '';
+              form +=
+                '<div class="modal-body">'+
+                  '<div class="form-row form-group">'+
+                  '<div class="col">'+
+                    '<label for="periode">Periode</label>'+
+                    '<input type="hidden" name="id" value="'+data.cicilan_pinjaman_id+'">'+
+                    '<input type="hidden" name="id_pinjaman" value="'+data.id_pinjaman+'">'+
+                    '<input type="hidden" name="grup_id" value="<?= $data_grup_tmp->grup_id ?>">'+
+                    '<input type="hidden" name="grup_user_id" value="<?= $grup_user->id ?>">'+
+                    '<input type="hidden" name="limit_pinjaman" value=<?= $grup_user->limit_pinjaman ?>">'+
+                    '<input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">'+
+                    '<input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">'+
+                    '<input type="hidden" name="saldo_koperasi" value="<?= $grup_user->saldo_koperasi ?>">'+
+                    '<input type="hidden" name="cicilan_berjalan" value="'+data.cicilan_berjalan+'">'+
+                    '<input type="hidden" name="sisa_cicilan" value="'+data.sisa_cicilan+'">'+
+                    '<input type="hidden" name="saldo_awal" value="<?= $saldo->saldo_awal ?>">'+
+                    '<input type="hidden" name="saldo_akhir" value="<?= $saldo->saldo_akhir ?>">'+
+                    '<input type="text" class="form-control" id="periode" name="periode" readonly value="'+data.periode+'">'+
+                    '</div>'+
+                    '<div class="col">'+
+                    '<label for="nominal">Nominal</label>'+
+                    '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.cicilan+'">'+
+                    '</div>'+
+                  '</div>'+
+                '</div>'+
+                '<div class="modal-footer btn_approve_reject">'+
+                  '<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>'+
+                  '<button class="btn btn-primary" data="'+data.cicilan_pinjaman_id+'" id="btn_approve_full_service"><i class="fas fa-fw fa-check-circle"></i> Bayar</button>'+
+                '</div>'
+                ;
+            $('#form_cicilan_pembayaran').html(form);
           },
           error : function(data){
             alert("error");

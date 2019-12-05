@@ -18,7 +18,7 @@ class Pinjam_grup_m extends MY_Model {
         }
 
         public function get_pinjaman_by_id_pinjaman($id_pinjaman){
-            $this->db->select("a.id_pinjaman,a.nominal,a.tenor,a.sisa_cicilan,a.sisa_tenor,b.periode,b.nominal as cicilan,b.status_bayar");
+            $this->db->select("b.cicilan_pinjaman_id,a.id_pinjaman,a.nominal,a.tenor,a.cicilan_berjalan,a.sisa_cicilan,b.periode,b.nominal as cicilan,b.status_bayar");
             $this->db->from('pinjam_grup a');
             $this->db->join('cicilan_pinjaman b', 'a.id_pinjaman = b.id_pinjaman');
             $this->db->where('b.id_pinjaman', $id_pinjaman);

@@ -66,4 +66,11 @@ class Grup_user_m extends MY_Model {
         $result = $this->db->get('users_detail')->row();
         return $result;
     }
+    
+    public function get_total_grup($user_id){
+        $this->db->select('count(*) as total_grup');
+        $this->db->where('user_id', $user_id);
+        $result = $this->db->get('grup_user')->row();
+        return $result;
+    }
 }

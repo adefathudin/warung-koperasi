@@ -13,6 +13,7 @@ class Grup extends MY_Controller {
         $this->load->model('simpan_grup_m');
         $this->load->model('pinjam_grup_m');
         $this->load->model('mutasi_rekening_m');
+        $this->load->model('cicilan_pinjaman_m');
     }
     
     public function index1()
@@ -58,6 +59,9 @@ class Grup extends MY_Controller {
 
             $this->load->model('pinjam_grup_m');
             $this->data['pinjaman_grup'] = $this->pinjam_grup_m->get_pinjaman_grup($user_id,$grup_id);
+            $this->data['pinjaman_berjalan'] = $this->cicilan_pinjaman_m->get_hitung_belum_bayar($user_id,$grup_id);
+            $this->data['semua_pinjaman'] = $this->cicilan_pinjaman_m->get_hitung_sudah_bayar($user_id,$grup_id);
+            $this->data['total_pinjaman'] = $this->cicilan_pinjaman_m->get_hitung_total_pinjaman($user_id,$grup_id);
         }
         
         $this->data['grup_user'] = $this->grup_user_m->grup_user($user_id,$grup_id);

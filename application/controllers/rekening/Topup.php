@@ -50,8 +50,7 @@ class Topup extends MY_Controller {
         );
 
         $insert_mutasi_rekening = array (
-            'user_id' => $user_id, 'jenis_trx' => 1, 'nominal' => $last_topup->nominal, 'saldo_awal' => $saldo->saldo_akhir, 'saldo_akhir' => $saldo->saldo_akhir + $last_topup->nominal,
-            'keterangan_trx' => 'Top Up'
+            'user_id' => $user_id, 'jenis_trx' => 1, 'nominal' => $last_topup->nominal, 'keterangan_trx' => 'Top Up'
         );
 
         if ($this->topup_m->save(array ('status' => 1),$order_id)){

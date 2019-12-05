@@ -20,10 +20,16 @@ class Dashboard extends MY_Controller {
         $this->data['subview'] = 'dashboard/index';
         $this->load->view('_layout_main', $this->data);
     }
+    
     public function saldo(){
-
         $user_id = $this->input->get('user_id');
         $data = $this->rekening_m->get_saldo($user_id);
+        echo json_encode($data);
+    }
+    
+    public function total_grup(){
+        $user_id = $this->input->get('user_id');
+        $data = $this->grup_user_m->get_total_grup($user_id);
         echo json_encode($data);
     }
 

@@ -16,6 +16,42 @@ class Cicilan_pinjaman_m extends MY_Model {
         return $result;
     }*/
 
+    /*
+    fungsi menghitung jumlah cicilan tenor di grup yang belum terbayar
+    */
+    public function get_hitung_belum_bayar($user_id,$grup_id){
+        $this->db->select('count(*) as total');
+        $this->db->where ('user_id', $user_id);
+        $this->db->where ('grup_id', $grup_id);
+        $this->db->where ('status_bayar', 1);
+        $result = $this->db->get('cicilan_pinjaman')->row();
+        return $result;
+    }
+
+    /*
+    fungsi menghitung jumlah cicilan tenor di grup yang sudah terbayar
+    */
+    public function get_hitung_sudah_bayar($user_id,$grup_id){
+        $this->db->select('count(*) as total');
+        $this->db->where ('user_id', $user_id);
+        $this->db->where ('grup_id', $grup_id);
+        $result = $this->db->get('cicilan_pinjaman')->row();
+        return $result;
+    }
+
+    
+    /*
+    fungsi menghitung jumlah cicilan tenor di grup yang sudah terbayar
+    */
+    public function get_hitung_total_pinjaman($user_id,$grup_id){
+        $this->db->select('sum(nominal) as total');
+        $this->db->where ('user_id', $user_id);
+        $this->db->where ('grup_id', $grup_id);
+        $this->db->where ('status_bayar', 0);
+        $result = $this->db->get('cicilan_pinjaman')->row();
+        return $result;
+    }
+
     public function get_list_grup(){
         $result = $this->db->get('grup')->result();
         return $result;

@@ -97,7 +97,6 @@ class Simpanan extends MY_Controller {
 
         $insert_mutasi = array (
             'user_id' => $user_id, 'jenis_trx' => '4', 'nominal' => $nominal_simpanan,
-            'saldo_awal' => $rek->saldo_akhir, 'saldo_akhir' => ($rek->saldo_akhir + $nominal_simpanan),
             'keterangan_trx' => 'Simpanan '.$jenis_simpanan.' '.$grup_name
         );
 

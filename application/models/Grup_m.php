@@ -57,8 +57,8 @@ class Grup_m extends MY_Model {
         $this->db->select('a.*');
         $this->db->from('grup a');
         $this->db->join('grup_user b', 'a.grup_id = b.grup_id');
-        $this->db->where('b.user_id !=', $user_id);
-        $this->db->limit(3);
+        //$this->db->where('b.user_id !=', $user_id);
+        $this->db->limit(6);
         $this->db->order_by('a.nama_grup','RANDOM');
         $result = $this->db->get()->result();
         return $result;
