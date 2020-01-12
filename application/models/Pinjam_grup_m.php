@@ -3,7 +3,7 @@
 class Pinjam_grup_m extends MY_Model {
 
     protected $_table_name = 'pinjam_grup';
-    protected $_primary_key = 'user_id';
+    protected $_primary_key = 'id';
     protected $_primary_filter = 'strval';
     protected $_order_by = '';
     protected $_timestamps = FALSE;
@@ -18,7 +18,7 @@ class Pinjam_grup_m extends MY_Model {
         }
 
         public function get_pinjaman_by_id_pinjaman($id_pinjaman){
-            $this->db->select("b.cicilan_pinjaman_id,a.id_pinjaman,a.nominal,a.tenor,a.cicilan_berjalan,a.sisa_cicilan,b.periode,b.nominal as cicilan,b.status_bayar");
+            $this->db->select("b.cicilan_pinjaman_id,a.id as id_field,a.id_pinjaman,a.nominal,a.tenor,a.cicilan_berjalan,a.sisa_cicilan,b.periode,b.nominal as cicilan,b.status_bayar");
             $this->db->from('pinjam_grup a');
             $this->db->join('cicilan_pinjaman b', 'a.id_pinjaman = b.id_pinjaman');
             $this->db->where('b.id_pinjaman', $id_pinjaman);

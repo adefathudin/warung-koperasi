@@ -104,7 +104,7 @@ class Auth extends CI_Controller {
         $config['white']        = array(70,130,180); // array, default is array(0,0,0)
         $this->ciqrcode->initialize($config);
 
-        $qrcode = md5(uniqid().$user_id.$email.$password);
+        $qrcode = $user_id;
         $image_name=$qrcode.'.png'; //buat name dari qr code sesuai dengan user_id
  
         $params['data'] = $qrcode; //data yang akan di jadikan QR CODE
@@ -187,6 +187,7 @@ class Auth extends CI_Controller {
               //$this->session->set_flashdata('message', $this->email->print_debugger());    
             }  
           }
+          redirect('dashboard');
         }       
     }
 

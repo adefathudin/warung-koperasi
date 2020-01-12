@@ -348,8 +348,7 @@
                   '<tr><td>Kode Cicilan</td><td>'+data.id_pinjaman+'</td></tr>'+
                   '<tr><td>Nominal</td><td>Rp. '+data.nominal+'</td></tr>'+
                   '<tr><td>Tenor</i></td><td>'+data.tenor+' bulan</td></tr>'+
-                  '<tr><td>Sisa Cicilan</td><td>Rp. '+data.sisa_cicilan+'</td></tr>'+
-                  '<tr><td>Periode Cicilan</td><td>'+data.cicilan_berjalan+'</td></tr>'+
+                  '<tr><td>Periode Cicilan</td><td>'+data.periode+'</td></tr>'+
                 '</tbody>'+
               '</table>'+
             '</div>' 
@@ -363,13 +362,12 @@
                   '<div class="form-row form-group">'+
                   '<div class="col">'+
                     '<label for="periode">Periode</label>'+
-                    '<input type="hidden" name="id" value="'+data.cicilan_pinjaman_id+'">'+
+                    '<input type="hidden" name="cicilan_pinjaman_id" value="'+data.cicilan_pinjaman_id+'">'+
                     '<input type="hidden" name="id_pinjaman" value="'+data.id_pinjaman+'">'+
+                    '<input type="hidden" name="id_pinjam_grup" value="'+data.id_field+'">'+
                     '<input type="hidden" name="grup_id" value="<?= $data_grup_tmp->grup_id ?>">'+
                     '<input type="hidden" name="grup_user_id" value="<?= $grup_user->id ?>">'+
                     '<input type="hidden" name="limit_pinjaman" value=<?= $grup_user->limit_pinjaman ?>">'+
-                    '<input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">'+
-                    '<input type="hidden" name="maksimal_pinjaman" value="<?= $data_grup_tmp->maksimal_pinjaman ?>">'+
                     '<input type="hidden" name="saldo_koperasi" value="<?= $grup_user->saldo_koperasi ?>">'+
                     '<input type="hidden" name="cicilan_berjalan" value="'+data.cicilan_berjalan+'">'+
                     '<input type="hidden" name="sisa_cicilan" value="'+data.sisa_cicilan+'">'+
@@ -379,7 +377,7 @@
                     '</div>'+
                     '<div class="col">'+
                     '<label for="nominal">Nominal</label>'+
-                    '<input type="text" class="form-control" id="nominal" name="nominal" readonly value="'+data.cicilan+'">'+
+                    '<input type="text" class="form-control" id="nominal" name="nominal_cicilan" readonly value="'+data.cicilan+'">'+
                     '</div>'+
                   '</div>'+
                 '</div>'+

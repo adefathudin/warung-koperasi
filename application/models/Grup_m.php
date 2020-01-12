@@ -69,4 +69,10 @@ class Grup_m extends MY_Model {
         $result = $this->db->get('grup')->row();
         return $result;
     }
+
+    public function count(){     
+        $this->db->select('count(*) as grup_all');
+        $result = $this->db->get('grup')->row();
+        return $result;
+    }
 }

@@ -15,6 +15,7 @@ class Dashboard extends MY_Controller {
         
         $user_id = $this->session->userdata('user_id');
         $this->data['saldo'] = $this->rekening_m->get_saldo($user_id);
+        //$this->data['list_grup_search'] = $this->grup_m->get_grup_search();
         $this->data['list_grup_limit_3'] = $this->grup_m->get_list_grup_limit_3();
         $this->data['title'] = 'Warung Koperasi Solusi Masyarakat Sejahtera';
         $this->data['subview'] = 'dashboard/index';
@@ -24,6 +25,16 @@ class Dashboard extends MY_Controller {
     public function saldo(){
         $user_id = $this->input->get('user_id');
         $data = $this->rekening_m->get_saldo($user_id);
+        echo json_encode($data);
+    }
+    
+    public function saldo_all(){
+        $data = $this->rekening_m->get_saldo_all();
+        echo json_encode($data);
+    }
+    
+    public function grup_all(){
+        $data = $this->grup_m->count();
         echo json_encode($data);
     }
     

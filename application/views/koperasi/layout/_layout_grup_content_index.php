@@ -15,7 +15,7 @@
             <tr>
                 <td>Limit Pinjaman</td>
                 <td>:</td>
-                <td><?= $data_grup_tmp->maksimal_pinjaman ?></td>
+                <td><?= $data_grup_tmp->maksimal_pinjaman ?>% dari total simpanan</td>
             </tr>
         </table>
     </p>

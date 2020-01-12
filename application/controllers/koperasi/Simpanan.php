@@ -69,7 +69,7 @@ class Simpanan extends MY_Controller {
         } elseif ($jenis_simpanan == "Wajib"){
             if ($minimal_wajib != $nominal_simpanan){
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Nominal simpanan wajib yang diinput Rp<b>'.number_format($nominal_simpanan).'</b> tidak sama dengan nominal wajib yang telah ditentukan Rp<b>'.number_format($minimal_wajib).'</b>');
-                redirect ('grup/'.$grup_id.'/simpan');
+                redirect ('grup/'.$grup_id.'/simpan_pinjam');
 
             } else if ($rek->saldo_akhir < $nominal_simpanan) {
                 $this->session->set_flashdata('status_simpanan','<i class="fas fa-fw fa-info-circle"></i><b>Transaksi Gagal</b><br> Saldo anda tidak mencukupi untuk membayar Simpanan Wajib');

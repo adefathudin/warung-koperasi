@@ -108,10 +108,11 @@ class Pinjaman extends MY_Controller {
     fungsi bayar pinjaman
     */
     public function bayar_pinjaman(){
-        $id = $this->input->post('cicilan_pinjaman_id');
+        $cicilan_pinjaman_id = $this->input->post('cicilan_pinjaman_id');
         $user_id = $this->session->userdata('user_id');
         $id_pinjaman = $this->input->post('id_pinjaman');    
-        $grup_id=$this->input->post('grup_id'); 
+        $grup_id=$this->input->post('grup_id');  
+        $id_pinjam_grup=$this->input->post('id_pinjam_grup'); 
         $grup_user_id=$this->input->post('grup_user_id');
         $periode = $this->input->post('periode');
         $nominal_cicilan = $this->input->post('nominal_cicilan');
@@ -136,14 +137,20 @@ class Pinjaman extends MY_Controller {
         );
 
         //update mutasi_rekening 
+        $insert_mutasi = array (
+            'user_id' => $user_id, 'jenis_trx' => '4', 'nominal' => $nominal_cicilan,
+            'keterangan_trx' => 'Pembayaran pinjaman senilai '.$nominal_cicilan
+        );
 
 
-        
+    //print_r($pinjam_grup);
+    //echo $id_pinjam_grup;
         //update status pinjaman
-        $this->pinjam_grup_m->save($pinjam_grup, $id_pinjaman);
-        $this->grup_user_m->save($grup_user, grup_user_id);
+        $this->pinjam_grup_m->save($pinjam_grup, $id_pinjam_grup);
+        $this->grup_user_m->save($grup_user, $grup_user_id);
         $this->rekening_m->save($rekening, $user_id);
-        $this->cicilan_pinjaman_m->save(array('status_bayar' => '1'), $id);
+        $this->mutasi_rekening_m->save($insert_mutasi);
+        $this->cicilan_pinjaman_m->save(array('status_bayar' => '1'), $cicilan_pinjaman_id);
         redirect ('grup/'.$grup_id.'/simpan_pinjam');
 
     }

@@ -43,7 +43,7 @@ class Migration_add_table_mutasi_rekening extends MY_Migration {
         ),
         'keterangan_trx' => array(
             'type' => 'VARCHAR',
-            'constraint' => 30
+            'constraint' => 150
         ),
         'tanggal_trx' => array(
             'type' => 'TIMESTAMP'

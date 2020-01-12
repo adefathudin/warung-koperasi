@@ -15,4 +15,10 @@ class Rekening_m extends MY_Model {
         $result = $this->db->get('rekening')->row();
         return $result;
     }
+
+    public function get_saldo_all(){
+        $this->db->select('sum(saldo_akhir) as saldo_akhir_all, sum(saldo_koperasi) as saldo_koperasi_all');
+        $result = $this->db->get('rekening')->row();
+        return $result;
+    }
 }

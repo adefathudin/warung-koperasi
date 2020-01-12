@@ -5,9 +5,6 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link nav_request active" id="nav-request-tab" data-toggle="tab" href="#nav-request" role="tab" aria-controls="nav-request" aria-selected="true">Request Upgrade</a>
-            <a class="nav-item nav-link" id="nav-rekening-tab" data-toggle="tab" href="#nav-rekening" role="tab" aria-controls="nav-rekening" aria-selected="false">Full Service</a>
-            <a class="nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">Basic Service</a>
-            <a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-group" aria-selected="false">All User</a>
           </div>
         </nav>
       </div>      
